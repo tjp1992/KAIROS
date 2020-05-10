@@ -1,18 +1,20 @@
 * {
+  /* border-line까지 element의 영역이 되는 속성 */
   box-sizing: border-box;
 }
 
 body {
+  /* 상하좌우 기본 마진 제거 */
   margin: 0;
 }
 
 a {
+  /* a 태그 속성 초기화 */
   text-decoration: none;
   color: inherit;
 }
 
 section {
+  margin: 0 auto;
   width: 1200px;
-  height: 100vh;
-  background-color: #dbdbdb;
 }
