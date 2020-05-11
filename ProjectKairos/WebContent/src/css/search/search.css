@@ -4,6 +4,6 @@
   border-bottom: 1px solid #dbdbdb;
 }
 
-.search_menu_wrapper div {
-  display: flex;
+.search_menu_wrapper {
+  background-color: red;
 }

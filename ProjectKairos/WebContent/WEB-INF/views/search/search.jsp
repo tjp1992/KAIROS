@@ -4,7 +4,8 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->    <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
+    <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
+    <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
     <link rel="stylesheet" href="/src/css/search/search.css" />
   </head>
