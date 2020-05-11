@@ -11,7 +11,7 @@ prefix="c"%>
   <c:if test="${empty sessionScope.user }">
     <div class="ld-header_top_wrapper">
       <!-- 로그인 서블릿 /loginFrm 작성 필요 -->
-      <a href="/loginFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
+      <a href="/adminMypage"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <span>
         <!-- 로그인 서블릿 /loginFrm 작성 필요 -->
         <a href="/loginFrm">로그인</a>
@@ -50,7 +50,7 @@ prefix="c"%>
       <!-- 이용권 서블릿 /voucherFrm 작성필요 -->
       <span><a href="/voucherFrm">이용권</a></span>
       <!-- 이용권 서블릿 /myMusicFrm 작성필요 -->
-      <span><a href="/myMusicFrm">My Music</a></span>
+      <span><a href="/playList">My Music</a></span>
     </div>
   </nav>
 </header>
