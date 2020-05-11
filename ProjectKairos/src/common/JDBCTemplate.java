@@ -15,7 +15,7 @@ public class JDBCTemplate {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			conn= DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","KAI_DB","3p2l");
+			conn= DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","KAI_SERVER","1234");
 			
 			conn.setAutoCommit(false); // 오토커밋 방지 설정
 			
