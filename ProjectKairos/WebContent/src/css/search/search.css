@@ -1,0 +1,9 @@
+.search_menu_wrapper {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.search_menu_wrapper div {
+  display: flex;
+}
