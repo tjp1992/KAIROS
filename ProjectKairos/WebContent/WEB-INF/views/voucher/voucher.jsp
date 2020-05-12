@@ -28,9 +28,6 @@ prefix="c"%>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <section class="container">
-		<c:if test="${empty sessionScope.user.expiredDate}">
-<!-- 			로그인 되어 있지 않은 상태라서 로그인 패이지로 이동 -->
-<!-- 				태스트로 경로 임의 지정 했으며 다시 수정해야 함 -->
 			<div class="jumbotron p-0 m-2">
 				<div class="view overlay rounded-top">
 					<img src="/src/imgs/TJImg/voucherImg2.jpg" class="img-fluid" alt="Sample image">
@@ -53,32 +50,41 @@ prefix="c"%>
 			<div class="container">
 			  <div class="row marketing">
 				<div class="col-lg-4">
-					<div class="card" style="width: 18rem;">
-						<img src="..." class="card-img-top" alt="...">
+					<div class="card m-2" style="width: 20rem;">
+						<img src="/src/imgs/TJImg/licensedMusic.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 						  <h5 class="card-title">라이센스 최신 음악</h5>
 						  <p class="card-text">라이센스 음반을 무제한 감상 무료 음반을 넘어선 최신 음악을 감상할 수 있는 추가 기능이 부여 됩니다.</p>
 						</div>
 					  </div>
-				  <h4>라이센스 최신 음악</h4>
-				  <p>라이센스 음반을 무제한 감상 무료 음반을 넘어선 최신 음악을 감상할 수 있는 추가 기능이 부여 됩니다.</p>
-				  <h4>개인 아티스트 지원</h4>
-				  <p>웹사이트에서 수익의 몇프로를 개인 아티스트의 지원금으로 투자되며 개인 아티스트들이 새로운 음원을 만들기 위한 도움에 사용됩니다.</p>
+				  <div class="card m-2" style="width: 20rem;">
+						<img src="/src/imgs/TJImg/event.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">개인 아티스트 지원</h5>
+						  <p class="card-text">웹사이트에서 수익의 몇프로를 개인 아티스트의 지원금으로 투자되며 개인 아티스트들이 새로운 음원을 만들기 위한 도움에 사용됩니다.</p>
+						</div>
+					  </div>
 				</div>
 				<div class="col-lg-4">
-				  <h4>음악 다운로드</h4>
-				  <p>본인이 원하는 개인 아티스트의 무료 음원을 무제한 다운로드. 소장하고 싶은 음원을 오프라인으로 어디서나 감상 가능!</p>
+				<div class="card m-2" style="width: 20rem;">
+						<img src="/src/imgs/TJImg/download.png" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">음악 다운로드</h5>
+						  <p class="card-text">본인이 원하는 개인 아티스트의 무료 음원을 무제한 다운로드. 소장하고 싶은 음원을 오프라인으로 어디서나 감상 가능!</p>
+						</div>
+					  </div>
 				</div>
 				<div class="col-lg-4">
-				  <h4>스트리밍 속도</h4>
-				  <p>이용권 구매시 무제한 고속 스트리밍 이용 가능. 음원을 어디서나 제일 빠른 속도로 감상!</p>
+					<div class="card m-2" style="width: 20rem;">
+						<img src="/src/imgs/TJImg/speed.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">스트리밍 속도</h5>
+						  <p class="card-text">이용권 구매시 무제한 고속 스트리밍 이용 가능. 음원을 어디서나 제일 빠른 속도로 감상!</p>
+						</div>
+					  </div>
 				</div>
 			  </div>
 			</div>
-		</c:if>
-		<c:if test="${not empty sessionScope.userId and not empty sessionScope.user.expiredDate}">
-			<!-- forward to my page -->
-		</c:if>
     </section>
   </body>
 </html>
