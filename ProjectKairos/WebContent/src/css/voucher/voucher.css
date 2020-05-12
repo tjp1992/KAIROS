@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.jumbotron {
+  text-align: center;
+
+}
+.jumbotron a {
+  opacity: 0.8;
+}
+.continer {
+  margin-left: 250px;
+  margin-right: 250px;
+}
+.jumbotron img{
+  
+}
