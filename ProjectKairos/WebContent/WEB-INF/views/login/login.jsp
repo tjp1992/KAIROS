@@ -35,9 +35,9 @@
 					<a href="#"><img src="/src/imgs/logo/main_logo.png" style="width:50%; height:100%;"></a>
 				</div>
 				<div class="pjymid" style="height:45%;">
-					<input type="text" id="id" style="width:300px;height:45px;" placeholder="아이디를 입력하세요">
+					<input type="text" name="id" id="id" style="width:300px;height:45px;" placeholder="아이디를 입력하세요">
 					<input type="checkbox" id="idSave" style="width:15px;height:15px;margin-left:5px;">아이디 저장<br><br>
-					<input type="password" id="pw" style="width:300px;height:45px;" placeholder="비밀번호를 입력하세요"><br><br>
+					<input type="password" name="pw" id="pw" style="width:300px;height:45px;" placeholder="비밀번호를 입력하세요"><br><br>
 					
 				</div>
 				<div style="height:15%; text-align:center;">

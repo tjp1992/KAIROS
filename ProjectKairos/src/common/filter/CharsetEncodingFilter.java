@@ -39,8 +39,6 @@ public class CharsetEncodingFilter implements Filter {
 		
 		// 서블릿 도착 전에 처리할 사전 작업
 		request.setCharacterEncoding("utf-8");
-		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println(req.getRequestURI());
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 		
