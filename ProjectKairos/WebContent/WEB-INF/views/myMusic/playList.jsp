@@ -54,14 +54,43 @@ pageEncoding="UTF-8"%>
                         </td>
                         <th width="10%" class="playimg"><img src="/src/imgs/icons/play.png"></th>
                         <th width="10%" class="removeimg"><img src="/src/imgs/icons/deleteicon.png"></th>
-                        <th width="10%" class="heartimg"><img src="/src/imgs/icons/hearticon.png"></th>
+                        <th width="10%" class="heartimg"><img class="likebtn" src="/src/imgs/icons/hearticon.png"></th>
                     </tr>
                 </table>
             </div>
         </div>
     </section>
     <script>
-    
+        $(function(){
+           $(".allchk").click(function(){
+              var arr = $(".plchk");
+              if($(this).prop("checked")==true){
+                  for(var i=0; i<arr.length; i++){
+                      arr.eq(i).prop("checked",true);
+                  }
+              }else{
+                  for(var i=0; i<arr.length; i++){
+                      arr.eq(i).prop("checked",false);
+                  }
+              }
+           }); 
+            
+           $(".plchk").click(function(){
+              if($(".plchk").length == $(".plchk:checked").length){
+                  $(".allchk").prop("checked",true);
+              }else{
+                  $(".allchk").prop("checked",false);
+              }
+           });
+            
+           $(".likebtn").click(function(){
+              if($(this).attr("src")=="/src/imgs/icons/hearticon.png"){
+                  $(this).attr("src","/src/imgs/icons/heartred.png");
+              }else{
+                  $(this).attr("src","/src/imgs/icons/hearticon.png");
+              }
+           });
+        });
     </script>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
