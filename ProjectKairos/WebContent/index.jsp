@@ -15,7 +15,9 @@ pageEncoding="UTF-8"%>
 
     <!-- 우리 웹의 기본 틀이 될 구조입니다 -->
     <!-- section에 콘텐츠 작성하세요! -->
-    <section></section>
+    <section>
+    
+    </section>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
