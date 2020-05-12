@@ -14,8 +14,7 @@ prefix="c"%>
   <script>
 	  $(function(){
 		$(".purchase").click(function(){
-			// test용으로 empty로 했지만 not empty 로 수정해야 함
-			if(${empty sessionScope.user}){
+			if("${not empty sessionScope.user}"){
 				if(confirm("구매 하시겠습니까?")){
 					location.href= "/buyVoucherFrm";
 				}
