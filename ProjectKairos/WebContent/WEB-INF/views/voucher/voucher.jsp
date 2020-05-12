@@ -7,28 +7,59 @@ prefix="c"%>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
 	<link rel="stylesheet" href="/src/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/src/css/voucher/voucher.css">
+	<script src="/src/js/jquery-3.3.1.js"></script>
     <meta charset="UTF-8" />
 	<title>Voucher</title>
-	
   </head>
-  <style>
-    
-  </style>
+  <script>
+	  $(function(){
+		$(".purchase").click(function(){
+			// test용으로 empty로 했지만 not empty 로 수정해야 함
+			if(${empty sessionScope.user}){
+				if(confirm("구매 하시겠습니까?")){
+					location.href= "/buyVoucherFrm";
+				}
+			}else{
+				location.href= "/login";
+			}
+		});
+	  });
+  </script>
   <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <section class="container">
-		<c:if test="${empty sessionScope.userId}">
-			<div class="jumbotron">
-			  <h1>이용권 구매</h1>
-			  <p class="lead">이용권 구매를 하시면 혜택이 많습니다</p>
-			  <p>
-				<a class="btn btn-lg btn-success">Get Started Today</a>
-			  </p>
+		<c:if test="${empty sessionScope.user.expiredDate}">
+<!-- 			로그인 되어 있지 않은 상태라서 로그인 패이지로 이동 -->
+<!-- 				태스트로 경로 임의 지정 했으며 다시 수정해야 함 -->
+			<div class="jumbotron p-0 m-2">
+				<div class="view overlay rounded-top">
+					<img src="/src/imgs/TJImg/voucherImg2.jpg" class="img-fluid" alt="Sample image">
+					<a href="#">
+					  <div class="mask rgba-white-slight"></div>
+					</a>
+				  </div>
+				  <!-- Card content -->
+				<div class="card-body text-center mb-3">
+
+					<!-- Title -->
+					<h3 class="card-title h3 my-4"><strong>이용권 구매</strong></h3>
+					<!-- Text -->
+					<p class="lead">이용권 구매를 하셔서 다양한 혜택을 같이 이용 가능합니다</p>
+					<!-- Button -->
+					<button class="btn btn-lg btn-success purchase">구매 하기</button>
+				</div>
+			  
 			</div>
 			<div class="container">
 			  <div class="row marketing">
 				<div class="col-lg-4">
-
+					<div class="card" style="width: 18rem;">
+						<img src="..." class="card-img-top" alt="...">
+						<div class="card-body">
+						  <h5 class="card-title">라이센스 최신 음악</h5>
+						  <p class="card-text">라이센스 음반을 무제한 감상 무료 음반을 넘어선 최신 음악을 감상할 수 있는 추가 기능이 부여 됩니다.</p>
+						</div>
+					  </div>
 				  <h4>라이센스 최신 음악</h4>
 				  <p>라이센스 음반을 무제한 감상 무료 음반을 넘어선 최신 음악을 감상할 수 있는 추가 기능이 부여 됩니다.</p>
 				  <h4>개인 아티스트 지원</h4>
@@ -45,8 +76,8 @@ prefix="c"%>
 			  </div>
 			</div>
 		</c:if>
-		<c:if test="${not empty sessionScope.userId}">
-			<!-- forward to my page voucher -->
+		<c:if test="${not empty sessionScope.userId and not empty sessionScope.user.expiredDate}">
+			<!-- forward to my page -->
 		</c:if>
     </section>
   </body>

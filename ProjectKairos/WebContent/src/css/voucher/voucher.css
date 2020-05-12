@@ -2,10 +2,7 @@
 
 .jumbotron {
   text-align: center;
-  background-image: url("/src/imgs/TJImg/rocknroll.jpg");
-  background-position-y: -40px;
-  background-size: cover;
-  background-repeat: no-repeat;
+
 }
 .jumbotron a {
   opacity: 0.8;
@@ -13,4 +10,7 @@
 .continer {
   margin-left: 250px;
   margin-right: 250px;
+}
+.jumbotron img{
+  
 }
