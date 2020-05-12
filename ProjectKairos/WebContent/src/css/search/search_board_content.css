@@ -1,7 +1,3 @@
-.search_board_content_wrapper {
-  /* background-color: lavenderblush; */
-}
-
 table tr:first-of-type {
   color: #535353;
   border-top: 1px solid #dbdbdb;
@@ -32,7 +28,7 @@ tr:last-of-type {
   border-bottom: 1px solid #dbdbdb;
 }
 
-td:not(.btn_container) {
+td:not(.multi_cont) {
   display: flex;
   justify-content: center;
 }
@@ -63,6 +59,20 @@ td:not(.btn_container) {
   width: 100px;
 }
 
+td.like_count span {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+td.like_count {
+  display: flex;
+}
+
+th.like_count {
+  padding-left: 30px;
+}
+
 .result_subject th:nth-child(7) {
   width: 148px;
   display: flex;
@@ -83,5 +93,30 @@ td:not(.btn_container) {
 
 .btn_container {
   width: 120px;
-  background-color: red;
+}
+
+.likeBtn {
+  width: 15px;
+  margin-right: 10px;
+}
+
+i {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.free_song {
+  margin-right: 20px;
+  font-size: 13px;
+  color: #ff1c1c;
+}
+
+.btn_container i {
+  margin-right: 10px;
 }

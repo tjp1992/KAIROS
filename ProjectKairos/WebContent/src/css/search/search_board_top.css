@@ -37,6 +37,10 @@
   align-items: flex-end;
 }
 
+.search_board_top_wrapper div:last-of-type button {
+  margin: 0 5px 5px 0;
+}
+
 .search_board_top_wrapper div:last-of-type select {
   margin-bottom: 5px;
   margin-right: 5px;

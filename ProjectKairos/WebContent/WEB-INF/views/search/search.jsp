@@ -62,6 +62,7 @@ pageEncoding="UTF-8"%>
             </form>
           </div>
           <div>
+            <button>선택곡 추가</button>
             <select name="pageViewNum" id="pageViewNum">
               <option value="25">한 페이지 출력 수</option>
               <option value="25">25</option>
@@ -101,32 +102,55 @@ pageEncoding="UTF-8"%>
                 <input type="checkbox" name="chkAll" id="chkAll" />
               </td>
               <td class="result_no">1</td>
-              <td class="btn_container"></td>
+              <td class="btn_container multi_cont">
+                <span class="free_song"></span>
+                <i class="far fa-play-circle"></i>
+                <i class="far fa-plus-square"></i>
+              </td>
               <td class="title">삐삐</td>
               <td class="artist">아이유</td>
               <td class="album_name">삐삐</td>
-              <td class="like_count">248,468</td>
-              <td class="play_count">0</td>
-              <td class="report_container">
-                <button type="button">!</button>
+              <td class="like_count multi_cont">
+                <i class="far fa-heart likeBtn"></i>
+                <span>248,468</span>
               </td>
+              <td class="play_count">0</td>
+              <td class="report_container"></td>
             </tr>
             <tr class="result">
               <td class="chk_box">
                 <input type="checkbox" name="chkAll" id="chkAll" />
               </td>
               <td class="result_no">1</td>
-              <td class="btn_container"></td>
-              <td class="title">삐삐</td>
-              <td class="artist">아이유</td>
-              <td class="album_name">삐삐</td>
-              <td class="like_count">248,468</td>
+              <td class="btn_container multi_cont">
+                <span class="free_song">Free</span>
+                <i class="far fa-play-circle"></i>
+                <i class="far fa-plus-square"></i>
+              </td>
+              <td class="title">내노래</td>
+              <td class="artist">개인회원임</td>
+              <td class="album_name">으엥</td>
+              <td class="like_count multi_cont">
+                <i class="far fa-heart likeBtn"></i>
+                <span>3</span>
+              </td>
               <td class="play_count">0</td>
               <td class="report_container">
                 <button type="button">!</button>
               </td>
             </tr>
           </table>
+        </div>
+        <div class="page_nav">
+          <button><i class="fas fa-angle-double-left"></i></button>
+          <button><i class="fas fa-angle-left"></i></button>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
+          <button>5</button>
+          <button><i class="fas fa-angle-right"></i></button>
+          <button><i class="fas fa-angle-double-right"></i></button>
         </div>
       </div>
     </section>
