@@ -13,7 +13,7 @@ prefix="c"%>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<c:if test="${not empty sessionScope.user.expiredDate }">
+	
 	
 </body>
 </html>
