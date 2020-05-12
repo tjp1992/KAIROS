@@ -25,22 +25,43 @@ pageEncoding="UTF-8"%>
             <option value="pop">해외</option>
           </select>
         </div>
-        <div>
+        <div class="search_category">
           <a href="#"><span>곡명</span></a>
           <a href="#"><span>아티스트</span></a>
           <a href="#"><span>앨범</span></a>
         </div>
         <div>
           <label>
-            <input type="checkbox" name="setLicensed" value="1" /> 유료
+            <input type="checkbox" name="setLicensed" value="1" />
+            <span>유료</span>
           </label>
           <label>
-            <input type="checkbox" name="setLicensed" value="0" /> 무료
+            <input type="checkbox" name="setLicensed" value="0" />
+            <span>무료</span>
           </label>
         </div>
       </div>
+      <div class="search_board">
+        <div class="search_board_top_wrapper">
+          <div>
+            <span>검색결과 : &#38; </span>
+            <form action="" method="get">
+              <input
+                type="text"
+                name="re_search_keyword"
+                id="re_search"
+                placeholder="결과 내 검색"
+              />
+              <button type="submit" id="ld-search">
+                <img src="/src/imgs/icons/search.png" alt="" />
+              </button>
+            </form>
+          </div>
+          <div>test2</div>
+        </div>
+        <div class="search_board_content_wrapper"></div>
+      </div>
     </section>
-
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>
