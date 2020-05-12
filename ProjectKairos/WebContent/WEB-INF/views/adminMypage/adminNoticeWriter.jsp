@@ -115,7 +115,7 @@ $(function(){
 						<button type="submit" class="btn btn-default bbt" id="insert">등록</button>
 						<button type="submit" class="btn btn-default bbt" id="modify">수정</button>
 						<button type="submit" class="btn btn-default bbt" id="delete">삭제</button>
-						<button class="btn btn-default bbt" id="back">돌아가기</button>
+						<button type="button" class="btn btn-default bbt" id="back">돌아가기</button>
 					</th>
 				</tr>
 			</table>
