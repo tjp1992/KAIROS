@@ -1,0 +1,66 @@
+@import url("search_board.css");
+
+.search_menu_wrapper {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+}
+
+.search_menu_wrapper > span,
+.search_category span,
+.search_menu_wrapper div > span,
+.search_menu_wrapper div:last-of-type span {
+  font-size: 17px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.search_menu_wrapper > span,
+.search_menu_wrapper > div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search_menu_wrapper > span:first-of-type {
+  width: 90px;
+  justify-content: center;
+}
+
+.search_menu_wrapper > div > select {
+  height: 25px;
+  margin-top: 5px;
+  margin-left: 5px;
+  justify-content: center;
+}
+
+.search_menu_wrapper > div:first-of-type {
+  margin-left: 50px;
+}
+
+.search_menu_wrapper > div:last-of-type {
+  margin-left: 15px;
+  width: 150px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.search_category {
+  width: 700px;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 100px;
+}
+
+.search_category a {
+  width: calc(100% / 3);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_category a:hover {
+  opacity: 0.6;
+}
