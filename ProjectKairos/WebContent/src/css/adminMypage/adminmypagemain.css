@@ -6,6 +6,7 @@
 }
 
 .h2{
+	font-size : 30px;
 	margin-top: 30px;
 	margin-bottom: 30px;
 }
@@ -15,7 +16,8 @@
 	border: 2px solid #E2E2E2;
 }
 
-.PHJup>h5 {
+.PHJup>h3 {
+	font-size: 20px;
 	text-indent: 50px;
 	margin-top: 50px;
 	margin-bottom: 30px;
@@ -31,6 +33,16 @@
 	height: 50px;
 }
 
+td>span{
+	padding-top: 35px;
+	padding-bottom: 30px;
+	font-size: 17px;
+}
+
+.move{
+	cursor: pointer;
+}
+
 .div1 {
 	width: 50%;
 	margin: 0 auto;
@@ -41,16 +53,6 @@ label{
 	padding-top: 30px;
 	padding-bottom: 30px;
 	font-size: 17px;
-}
-
-.la1{
-	padding-top: 37px;
-	text-align: right;
-}
-
-.pic1{
-	width: 15px;
-	height: 15px;
 }
 
 .verticalLine {
