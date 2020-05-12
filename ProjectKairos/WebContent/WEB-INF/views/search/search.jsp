@@ -44,7 +44,7 @@ pageEncoding="UTF-8"%>
       <div class="search_board">
         <div class="search_board_top_wrapper">
           <div>
-            <span>검색결과 : &#38; </span>
+            <span>검색결과 :</span>
             <form action="" method="get">
               <input
                 type="text"
@@ -57,9 +57,43 @@ pageEncoding="UTF-8"%>
               </button>
             </form>
           </div>
-          <div>test2</div>
+          <div>
+            <select name="pageViewNum" id="pageViewNum">
+              <option value="25">한 페이지 출력 수</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+              <option value="100">100</option>
+            </select>
+          </div>
         </div>
-        <div class="search_board_content_wrapper"></div>
+        <div class="search_board_content_wrapper">
+          <table class="search_result tbl">
+            <tr class="result_subject">
+              <th>
+                <input type="checkbox" name="chkAll" id="chkAll" />
+              </th>
+              <th>
+                <span>번호</span>
+              </th>
+              <th>
+                <span>제목</span>
+              </th>
+              <th>
+                <span>아티스트</span>
+              </th>
+              <th>
+                <span>앨범명</span>
+              </th>
+              <th>
+                <span>Likes</span>
+              </th>
+              <th>
+                <span>재생횟수</span>
+              </th>
+            </tr>
+          </table>
+        </div>
       </div>
     </section>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->

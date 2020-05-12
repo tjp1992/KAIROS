@@ -1,0 +1,49 @@
+.search_board_content_wrapper {
+  /* background-color: lavenderblush; */
+}
+
+table tr:first-of-type {
+  color: #535353;
+  border-top: 1px solid #dbdbdb;
+}
+
+.result_subject {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.result_subject th:nth-child(1) {
+  width: 30px;
+}
+
+.result_subject th:nth-child(2) {
+  width: 150px;
+  display: flex;
+}
+
+.result_subject th:nth-child(2) span {
+  margin-left: 20px;
+}
+
+.result_subject th:nth-child(3) {
+  width: 370px;
+}
+
+.result_subject th:nth-child(4),
+.result_subject th:nth-child(5) {
+  width: 200px;
+}
+
+.result_subject th:nth-child(6) {
+  width: 100px;
+}
+
+.result_subject th:nth-child(7) {
+  width: 148px;
+  display: flex;
+}
+
+.result_subject th:nth-child(7) span {
+  margin-left: 30px;
+}
