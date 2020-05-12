@@ -49,12 +49,12 @@ td>button{
 	<section class="cantainer">
 	<div class="wrapper">
 		<div id="title"><h1>회원가입</h1></div>
-		<form action="/join">
+		<form action="/join" name="join">
 			<table>
 				<tr>
 					<th>아이디</th>
 					<td>
-						<input type="text" id="id" style="width: 300px; height: 35px;"
+						<input type="text" id="id" name="id" style="width: 300px; height: 35px;"
 							class="border border-warning">
 						<button id="overlapId" class="btn btn-warning px-3"
 							style="height: 35px;">중복확인</button>
@@ -63,7 +63,7 @@ td>button{
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="password" id="pw"
+					<td><input type="password" id="pw" name="pw"
 						style="width: 300px; height: 35px;" class="border border-warning"><span></span></td>
 				</tr>
 				<tr>
@@ -74,9 +74,9 @@ td>button{
 				<tr>
 					<th>이메일</th>
 					<td>
-						</div><input type="text" id="mail1"
+						</div><input type="text" id="mail1" name="mail1"
 						style="width: 150px; height: 35px;" class="border border-warning">
-						@ <input type="text" id="mail2"
+						@ <input type="text" id="mail2" name="mail2"
 						style="width: 150px; height: 35px;" class="border border-warning">
 						<select style="width: 100px; height: 35px;"
 						class="border border-warning">
@@ -93,34 +93,34 @@ td>button{
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><input type="text" id="phone"
+					<td><input type="text" id="phone" name="phone"
 						style="width: 300px; height: 35px;" class="border border-warning">
 						<button id="phoneResult" class="btn btn-warning px-3"
 							style="height: 35px;">인증번호 받기</button> <span></span></td>
 				</tr>
 				<tr>
 					<th>이름</th>
-					<td><input type="text" id="name"
+					<td><input type="text" id="name" name="name"
 						style="width: 200px; height: 35px;" class="border border-warning"><span></span></td>
 				</tr>
 				<tr>
 					<th>닉네임</th>
-					<td><input type="text" id="nickName"
+					<td><input type="text" id="nickName" name="nickName"
 						style="width: 300px; height: 35px;" class="border border-warning">
 						<button id="overlapNick" class="btn btn-warning px-3"
 							style="height: 35px;">중복확인</button> <span></span></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td><input type="text" id="postCode"
+					<td><input type="text" id="postCode" name="postCode"
 						class="border border-warning"
 						style="width: 200px; height: 35px; display: inline-block"
 						placeholder="우편번호" readonly> <input type="text"
-						id="roadCode" class="border border-warning"
+						id="roadCode" name="roadCode" class="border border-warning"
 						style="width: 200px; height: 35px;" placeholder="도로명주소" readonly>
 						<button id="addrSearch" class="btn btn-warning px-3"
 							style="height: 35px;">주소검색</button> <br> 
-						<input id="detailAddr" class="border border-warning"
+						<input id="detailAddr" name="detailAddr" class="border border-warning"
 						style="width: 400px; height: 35px;" type="text" placeholder="상세주소">
 						<span></span></td>
 				</tr>
