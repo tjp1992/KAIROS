@@ -54,11 +54,11 @@ td>button{
 				<tr>
 					<th>아이디</th>
 					<td>
-							<input type="text" id="id" style="width: 300px; height: 35px;"
-								class="border border-warning">
-							<button id="overlapId" class="btn btn-warning px-3"
-								style="height: 35px;">중복확인</button>
-							<span></span>
+						<input type="text" id="id" style="width: 300px; height: 35px;"
+							class="border border-warning">
+						<button id="overlapId" class="btn btn-warning px-3"
+							style="height: 35px;">중복확인</button>
+						<span></span>
 					</td>
 				</tr>
 				<tr>
