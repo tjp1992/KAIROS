@@ -7,6 +7,10 @@ pageEncoding="UTF-8"%>
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
+    <script
+      src="https://kit.fontawesome.com/8bd2671777.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="/src/css/search/search.css" />
   </head>
   <body>
@@ -70,27 +74,57 @@ pageEncoding="UTF-8"%>
         <div class="search_board_content_wrapper">
           <table class="search_result tbl">
             <tr class="result_subject">
-              <th>
+              <th class="chk_box">
                 <input type="checkbox" name="chkAll" id="chkAll" />
               </th>
-              <th>
+              <th class="result_no">
                 <span>번호</span>
               </th>
-              <th>
+              <th class="title">
                 <span>제목</span>
               </th>
-              <th>
+              <th class="artist">
                 <span>아티스트</span>
               </th>
-              <th>
+              <th class="album_name">
                 <span>앨범명</span>
               </th>
-              <th>
+              <th class="like_count">
                 <span>Likes</span>
               </th>
               <th>
                 <span>재생횟수</span>
               </th>
+            </tr>
+            <tr class="result">
+              <td class="chk_box">
+                <input type="checkbox" name="chkAll" id="chkAll" />
+              </td>
+              <td class="result_no">1</td>
+              <td class="btn_container"></td>
+              <td class="title">삐삐</td>
+              <td class="artist">아이유</td>
+              <td class="album_name">삐삐</td>
+              <td class="like_count">248,468</td>
+              <td class="play_count">0</td>
+              <td class="report_container">
+                <button type="button">!</button>
+              </td>
+            </tr>
+            <tr class="result">
+              <td class="chk_box">
+                <input type="checkbox" name="chkAll" id="chkAll" />
+              </td>
+              <td class="result_no">1</td>
+              <td class="btn_container"></td>
+              <td class="title">삐삐</td>
+              <td class="artist">아이유</td>
+              <td class="album_name">삐삐</td>
+              <td class="like_count">248,468</td>
+              <td class="play_count">0</td>
+              <td class="report_container">
+                <button type="button">!</button>
+              </td>
             </tr>
           </table>
         </div>
