@@ -24,6 +24,7 @@ prefix="c"%>
 				고객님께서 저희 서비스를 이용 함 으로써 개인 아티스트를 지원하게 되며 보다 나은 음악을 제공하게 됩니다.
 			</p>
 		</div>
+		<div class="row">
 		<div class="col-md-4 order-md-2 mb-4">
 			<h4 class="d-flex justify-content-between align-items-center mb-3">
 				<span class="text-muted">결제 바구니</span>
@@ -36,6 +37,48 @@ prefix="c"%>
 					</div>
 				</li>
 			</ul>
+			<form class="card p-2">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder = "프로모션 코드">
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-secondary">Redeem</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-8 order-md-1">
+			<h4 class="mb-3">결제 상세</h4>
+			<form class="needs-validation" novalidate>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="성">성 입력</label>
+						<input type="text" class="form-control" id="성" placeholder="성 입력">
+						<div class="invalid-feedback">성 입력 필수</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="이름">이름 입력</label>
+						<input type="text" class="form-control" id="이름" placeholder="이름 입력">
+						<div class="invalid-feedback">이름 입력 필수</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="username">ID</label>
+					<div class="input-group">
+						<div class="input-group-prepend"><span class="input-group-text">@</span></div>
+						<input type="text" class="form-control" id="username" placeholder="아이디 입력" required>
+						<div class="invalid-feedback" style="width:100%;"></div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="email">Email<span class="text-muted">(Optional)</span></label>
+					<input type="email" class="form-control" id="email" placeholder="you@example.com">
+					<div class="invalid-feedback">이메일을 다시 확인해주세요</div>
+				</div>
+				<div class="mb-3">
+					
+				</div>
+			</form>
+		</div>
 		</div>
 	</section>
 </body>

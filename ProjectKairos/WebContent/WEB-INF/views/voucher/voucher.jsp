@@ -14,12 +14,12 @@ prefix="c"%>
   <script>
 	  $(function(){
 		$(".purchase").click(function(){
-			if("${not empty sessionScope.user}"){
+			if(${sessionScope.user.expiredDate}== null){
 				if(confirm("구매 하시겠습니까?")){
 					location.href= "/buyVoucherFrm";
 				}
 			}else{
-				location.href= "/login";
+				location.href= "/mypageFrm";
 			}
 		});
 	  });
