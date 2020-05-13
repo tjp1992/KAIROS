@@ -1,4 +1,4 @@
-package playlist.controller;
+package likelist.controller;
 
 import java.io.IOException;
 
