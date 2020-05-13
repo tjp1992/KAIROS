@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="/src/css/manageMusic/manageMusic.css" />
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
   </head>
@@ -16,9 +16,12 @@ pageEncoding="UTF-8"%>
     <!-- 우리 웹의 기본 틀이 될 구조입니다 -->
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
-    
+      <a href="/insertMusicFrm" class="link_container"><div>음원 등록</div></a>
+      <a href="/manageAlbumFrm" class="link_container"><div>앨범 관리</div></a>
+      <a href="/myMusicListFrm" class="link_container"
+        ><div>음원 수정/삭제</div></a
+      >
     </section>
-
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>

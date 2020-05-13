@@ -1,0 +1,114 @@
+@charset "UTF-8";
+.likelistoutline{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.llistname {
+    padding: 30px;
+    padding-left: 0;
+    font-size: 28px;
+    font-weight: 700;
+    border: 1px solid white;
+   
+    padding-bottom: 25px;
+}
+
+.llistname > span {
+
+    padding: 30px;
+    font-size: 20px;
+    color: darkgrey;
+    font-weight: 500;
+}
+
+
+
+.tototo {
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+    background-color: #C5D5DD;
+    margin-bottom: 20px;
+}
+
+.tototo > table {
+
+    width: 100%;
+    height: 100%;
+}
+.toto{
+    width: 100%;
+    margin: 0 auto;
+}
+.toto>table{
+    width: 100%;
+    margin-bottom: 10px;
+    color: darkgray;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.table {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+
+}
+
+.table > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lltr1 > th {
+
+    border-top: 2px solid #dbdbdb;
+    border-bottom: 2px solid #dbdbdb;
+    border-spacing: 0;
+}
+.iconplay{
+    font-size: 25px;
+}
+.iconplus{
+    font-size: 25px;
+}
+.iconheart{
+    font-size: 28px;
+    color: red;
+}
+.lltr1 > td {
+    height: 50px;
+    border-top: 2px solid #dbdbdb;
+    border-bottom: 2px solid #dbdbdb;
+    border-spacing: 0;
+}
+
+.stitle_dhg {
+    font-size: 18px;
+}
+.subtitle{
+    font-size: 13px;
+    color: darkgray;
+}
+.plsongNo{
+    font-size: 27px;
+    color: darkgray;
+}
+.llll button{
+    margin-left: 10px;
+    border-radius: 3px;
+    height: 27px;
+    border: 0.5px solid gray;
+    background-color: #f7f8f7;
+    
+}
+
+.pledit{
+    margin-left: 50px;
+}
+input[type=checkbox]{
+    width: 20px;
+    height: 20px;
+}

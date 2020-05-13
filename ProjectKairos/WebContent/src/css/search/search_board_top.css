@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
-  background-color: beige;
 }
 
 .search_board_top_wrapper div {
@@ -30,5 +29,22 @@
 .search_board_top_wrapper div:first-of-type input {
   width: 100px;
   margin-right: 5px;
+  border-radius: 3px;
+}
+
+.search_board_top_wrapper div:last-of-type {
+  display: flex;
+  align-items: flex-end;
+}
+
+.search_board_top_wrapper div:last-of-type button {
+  margin: 0 5px 5px 0;
+}
+
+.search_board_top_wrapper div:last-of-type select {
+  margin-bottom: 5px;
+  margin-right: 5px;
+  height: 25px;
+  color: #818181;
   border-radius: 3px;
 }

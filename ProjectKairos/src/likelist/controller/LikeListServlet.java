@@ -1,4 +1,4 @@
-package search;
+package likelist.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SearchFrmServlet
+ * Servlet implementation class LikeListServlet
  */
-@WebServlet(name = "SearchFrm", urlPatterns = { "/searchFrm" })
-public class SearchFrmServlet extends HttpServlet {
+@WebServlet(name = "LikeList", urlPatterns = { "/likeList" })
+public class LikeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchFrmServlet() {
+    public LikeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +28,8 @@ public class SearchFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("/WEB-INF/views/search/search.jsp").forward(request, response);
-		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/likeList.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
