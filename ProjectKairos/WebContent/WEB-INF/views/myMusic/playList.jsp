@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
     <link rel="stylesheet" href="/src/css/playList/playList.css" />
-    <sctipt src="https://kit.fontawesome.com/8bd2671777.js" crossorigin="anonymous"></sctipt>
+    <sctipt src="/src/js/8bd2671777.js" crossorigin="anonymous"></sctipt>
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
     
