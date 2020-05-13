@@ -21,6 +21,17 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return userId;
 	}
-
+	public int buyVoucher(User u) {
+		int result =0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UserDao().buyVoucher(conn, u);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 }
