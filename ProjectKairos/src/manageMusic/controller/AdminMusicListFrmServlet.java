@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ManageAlbumFrmServlet
+ * Servlet implementation class AdminMusicListFrmServlet
  */
-@WebServlet(name = "ManageAlbumFrm", urlPatterns = { "/manageAlbumFrm" })
-public class ManageAlbumFrmServlet extends HttpServlet {
+@WebServlet(name = "AdminMusicListFrm", urlPatterns = { "/adminMusicListFrm" })
+public class AdminMusicListFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManageAlbumFrmServlet() {
+    public AdminMusicListFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,8 @@ public class ManageAlbumFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/manageMusic/adminMusicList.jsp").forward(request, response);
 		
-		request.getRequestDispatcher("/WEB-INF/views/manageMusic/manageAlbumAdmin.jsp").forward(request, response);
 	}
 
 	/**
