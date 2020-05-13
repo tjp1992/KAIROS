@@ -9,19 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.service.UserService;
-
 /**
- * Servlet implementation class JoinFrmServlet
+ * Servlet implementation class MypageFrmServlet
  */
-@WebServlet(name = "JoinFrm", urlPatterns = { "/joinFrm" })
-public class JoinFrmServlet extends HttpServlet {
+@WebServlet(name = "MypageFrm", urlPatterns = { "/mypageFrm" })
+public class MypageFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinFrmServlet() {
+    public MypageFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +28,8 @@ public class JoinFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/join/join.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
+		request.setAttribute("play", null);
 		rd.forward(request, response);
 	}
 

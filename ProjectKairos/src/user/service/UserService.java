@@ -15,4 +15,12 @@ public class UserService {
 		return login;
 	}
 
+	public String overLapId(String id) {
+		Connection conn = JDBCTemplate.getConnection();
+		String userId = new UserDao().overLapId(conn,id);
+		JDBCTemplate.close(conn);
+		return userId;
+	}
+
+
 }
