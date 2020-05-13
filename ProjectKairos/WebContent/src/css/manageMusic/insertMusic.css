@@ -1,0 +1,52 @@
+.insert_wrapper {
+  margin: 0 auto;
+  width: 65%;
+}
+
+.insert_wrapper form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+}
+
+.container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.container > span {
+  width: 120px;
+  background-color: red;
+}
+
+#albums {
+  height: 80%;
+}
+
+.insert_album {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.container fieldset {
+  border: none;
+  padding: 0;
+  /* background-color: red; */
+  width: 300px;
+}
+
+#input_album {
+  height: 25px;
+}
+
+.select_album > button {
+  margin-left: 3px;
+}
+
+fieldset {
+  margin-left: 100px;
+}
