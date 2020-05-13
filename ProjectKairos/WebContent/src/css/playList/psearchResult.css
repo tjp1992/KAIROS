@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+.psearchoutline {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.psearchname {
+
+    width: 35%;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+    font-size: 25px;
+    font-weight: 700;
+    
+
+}
+
+.plsearch {
+    
+    box-sizing: border-box;
+    width: 47%;
+    border-bottom: 2px solid darkgray;
+}
+.plsearch input{
+    width: 400px;
+    height: 25px;
+    border: none;
+}
+.psearchBtn {
+    border: none;
+    margin-top: 10px;
+    background-color: white;
+}
+
+
+
+
+
+.toto {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.toto > table {
+    width: 100%;
+    margin-bottom: 10px;
+    color: darkgray;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.table {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+
+}
+
+.table > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pltr1 > th {
+
+    border-top: 2px solid #dbdbdb;
+    border-bottom: 2px solid #dbdbdb;
+    border-spacing: 0;
+}
+
+.pltr1 > td {
+    height: 50px;
+    border-top: 2px solid #dbdbdb;
+    border-bottom: 2px solid #dbdbdb;
+    border-spacing: 0;
+}
+.iconplay{
+    font-size: 25px;
+}
+.icondelete{
+    font-size: 25px;
+}
+.iconheart{
+    font-size: 28px;
+    color: black;
+}
+.stitle_dhg {
+    font-size: 18px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: darkgray;
+}
+
+.plsongNo {
+    font-size: 27px;
+    color: darkgray;
+}
+
+.iconsearch {
+    font-size: 25px;
+}
+
+input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+}
+
+.psearch_wrapper {
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-bottom: 50px; 
+   
+}

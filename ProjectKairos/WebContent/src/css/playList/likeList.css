@@ -62,25 +62,23 @@
     border-collapse: collapse;
 }
 
-.pltr1 > th {
+.lltr1 > th {
 
     border-top: 2px solid #dbdbdb;
     border-bottom: 2px solid #dbdbdb;
     border-spacing: 0;
 }
-.heartimg>img{
-    width: 40%;
-    height: 35px;
+.iconplay{
+    font-size: 25px;
 }
-.plusimg>img{
-    width: 47%;
-    height: 47px;
+.iconplus{
+    font-size: 25px;
 }
-.playimg>img{
-    width: 25%;
-    height: 25px;
+.iconheart{
+    font-size: 28px;
+    color: red;
 }
-.pltr1 > td {
+.lltr1 > td {
     height: 50px;
     border-top: 2px solid #dbdbdb;
     border-bottom: 2px solid #dbdbdb;

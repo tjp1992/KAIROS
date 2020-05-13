@@ -44,16 +44,16 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="table">
                 <table>
-                    <tr class="pltr1">
+                    <tr class="lltr1">
                         <th width="5%"><input class="llchk" type="checkbox"></th>
                         <th width="5%" class="plsongNo">1</th>
                         <td width="60%">
                             <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
                             <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
                         </td>
-                        <th width="10%" class="playimg"><img src="/src/imgs/icons/play.png"></th>
-                        <th width="10%" class="plusimg"><img src="/src/imgs/icons/plus.png"></th>
-                        <th width="10%" class="heartimg"><img class="likebtn" src="/src/imgs/icons/heartred.png"></th>
+                        <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
+                        <th width="10%" class="plusimg"><i class="iconplus fas fa-plus"></i></th>
+                        <th width="10%" class="heartimg"><i class="iconheart fas fa-heart"></i></th>
                     </tr>
                 </table>
             </div>
@@ -82,11 +82,13 @@ pageEncoding="UTF-8"%>
               }
            });
             
-           $(".likebtn").click(function(){
-              if($(this).attr("src")=="/src/imgs/icons/heartred.png"){
-                  $(this).attr("src","/src/imgs/icons/hearticon.png");
+           $(".heartimg").children().click(function(){
+              if($(this).attr("class")=="iconheart fas fa-heart"){
+                  $(this).attr("class","iconheart far fa-heart");
+                  $(this).css("color","black");
               }else{
-                  $(this).attr("src","/src/imgs/icons/heartred.png");
+                  $(this).attr("class","iconheart fas fa-heart");
+                  $(this).css("color","red");
               }
            });
         });
