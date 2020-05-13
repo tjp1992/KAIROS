@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
       <a href="/insertMusicFrm" class="link_container"><div>음원 등록</div></a>
-      <a href="#" class="link_container"><div>앨범 관리</div></a>
+      <a href="/manageAlbumFrm" class="link_container"><div>앨범 관리</div></a>
       <a href="#" class="link_container"><div>음원 수정/삭제</div></a>
     </section>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->

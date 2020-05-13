@@ -5,6 +5,7 @@ pageEncoding="UTF-8"%>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
+    <link rel="stylesheet" href="/src/css/bootstrap.css" />
     <link rel="stylesheet" href="/src/css/manageMusic/insertMusic.css" />
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
@@ -18,30 +19,35 @@ pageEncoding="UTF-8"%>
     <section>
       <div class="insert_wrapper">
         <form action="#" method="POST">
-          <div class="input_title container">
+          <div class="input_title cont">
             <span>곡명</span>
             <input type="text" name="title" id="title" />
           </div>
-          <div class="select_album container">
+          <div class="select_album cont">
             <span>앨범명</span>
             <select name="albums" id="albums">
               <option value="default">앨범 선택</option>
             </select>
             <button>+</button>
             <div class="insert_album">
-              <fieldset>
-                <input type="text" name="input_album" id="input_album" />
-                <button type="button">앨범 추가</button>
-              </fieldset>
+              <input type="text" name="input_album" id="input_album" />
+              <button type="button">앨범 추가</button>
             </div>
           </div>
-          <div class="upload_albumImg container">
+          <div class="upload_albumImg cont">
             <span>앨범 이미지</span>
             <input type="file" name="album_img_file" id="album_img_file" />
+            <div class="img_container">
+              <img src="/src/imgs/albumImg/아이유-Love poem.jpg" alt="" />
+            </div>
           </div>
-          <div class="upload_music container">
+          <div class="upload_music cont">
             <span>음원</span>
             <input type="file" name="input_music" id="input_music" />
+          </div>
+          <div class="btn_wrapper">
+            <button type="submit" class="btn btn-primary">작성 완료</button>
+            <button type="button" class="btn btn-secondary">취소</button>
           </div>
         </form>
       </div>

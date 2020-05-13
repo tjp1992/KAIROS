@@ -42,7 +42,7 @@
 }
 
 .select_album select {
-  width: 300px;
+  width: 250px;
 }
 
 #title {
@@ -70,8 +70,12 @@
   margin-left: 3px;
 }
 
+.select_album > button:not(:first-of-type) {
+  margin-left: 10px;
+}
+
 .insert_album {
-  margin-left: 107px;
+  margin-left: 50px;
 }
 
 .insert_album > button {
@@ -87,14 +91,8 @@
   margin-top: 5px;
 }
 
-.upload_albumImg {
-  position: relative;
-}
-
 .img_container {
-  position: absolute;
-  left: 586px;
-  top: 10px;
+  margin-left: 150px;
 }
 
 .img_container img {
@@ -102,10 +100,49 @@
 }
 
 .btn_wrapper {
-  margin-left: 150px;
-  margin-top: 110px;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
 
 .btn-secondary {
   margin-left: 100px;
+}
+
+.mid_wrapper {
+  display: flex;
+}
+
+.mid_cont span {
+  margin: 0;
+}
+
+.mid_cont {
+  margin-left: 100px;
+}
+
+.album_desc {
+  width: 385px;
+  height: 335px;
+  margin-left: 60px;
+  overflow-y: scroll;
+}
+
+.desc {
+  padding: 5px 0;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+}
+
+.desc_btn {
+  margin-left: 120px;
+}
+
+.desc button {
+  padding: 0 5px;
+  height: 25px;
+}
+
+.desc_name {
+  margin-left: 20px;
 }
