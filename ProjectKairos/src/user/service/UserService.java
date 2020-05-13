@@ -15,4 +15,23 @@ public class UserService {
 		return login;
 	}
 
+	public String overLapId(String id) {
+		Connection conn = JDBCTemplate.getConnection();
+		String userId = new UserDao().overLapId(conn,id);
+		JDBCTemplate.close(conn);
+		return userId;
+	}
+	public int buyVoucher(User u) {
+		int result =0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UserDao().buyVoucher(conn, u);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

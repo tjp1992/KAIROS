@@ -1,0 +1,29 @@
+@charset "UTF-8";
+input {
+	border: 1px solid black;
+	outline: none;
+	font-size: 15pt;
+}
+
+table {
+	border : 1px solid #FFC107;
+	width: 780px;
+	margin: 0 auto;
+}
+th {
+	text-align: right;
+	padding-right: 30px;
+	width: 200px;
+	height: 80px;
+}
+td>div{
+	height: 35px;
+	line-height: 35px;
+}
+td>button{
+	margin-top: -8px;
+}
+#title{
+	margin-top : 20px;
+	text-align : center;
+}
