@@ -39,7 +39,13 @@ prefix="c"%>
 							<th width="10%">듣기</th>
 						</tr>
 						<c:forEach items="${list }" var="m">
-							
+							<tr><input type="checkbox" id="select"></tr>
+							<tr>m.getRankNo</tr>
+							<tr>m.getSongTitle</tr>
+							<tr>m.getAlbumNo</tr>
+							<tr>m.getLikeCount</tr>
+							<tr>m.getPlayCount</tr>
+							<tr><input type="checkbox"></tr>
 						</c:forEach>
 					</thead>
 					<tbody></tbody>
