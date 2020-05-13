@@ -1,0 +1,33 @@
+.insert_wrapper {
+  margin: 0 auto;
+  width: 80%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  border: 4px solid #f7f7f9;
+  margin-top: 50px;
+}
+
+.cont {
+  display: flex;
+  align-items: center;
+  height: 95px;
+  width: 60%;
+}
+
+.cont > span {
+  margin-left: 30px;
+  width: 120px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #696969;
+}
+
+.input_artist input {
+  height: 35px;
+  font-size: 20px;
+  color: #696969;
+}
+
+.cont > input {
+  width: 300px;
+}
