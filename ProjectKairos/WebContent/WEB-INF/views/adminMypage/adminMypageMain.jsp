@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -31,8 +32,10 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
+	<c:if test="${sessionScope.user.userId == 'admin' }">
 	<h2 class="h2">
 		내 정보 <span class="span1">로그인계정 : </span>
+			<span class="span1">${sessionScope.user.userId }</span>
 	</h2>
 	<div class="PHJup">
 		<h3>관리자 정보수정</h3>
@@ -63,6 +66,7 @@
 			</table>
 		</div>
 	</div>
+	</c:if>
 	</section>
 </body>
 </html>
