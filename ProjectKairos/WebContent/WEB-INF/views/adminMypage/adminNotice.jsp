@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="/src/css/bootstrap.css" />
-<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/src/js/bootstrap.js"></script>
 <link href="/src/css/adminMypage/adminNotice.css" rel="stylesheet" type="text/css">
 <script>
 	$(function(){
@@ -16,6 +16,9 @@
 		});
 		$("#write").click(function(){
 			location.href="/adminNoticeWriteFrm";
+		});
+		$("#move").click(function(){
+			location.href="/adminNoticeDetailFrm";
 		});
 	})
 </script>
@@ -30,38 +33,38 @@
 	<table class="table table-hover">
       <thead>
         <tr>
-          <th>번호</th>
+          <th class="num">번호</th>
           <th class="th2">제목</th>
-          <th class="th1" colspan="2"">등록일</th>
+          <th class="th1" colspan="2">등록일</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="move">
-          <th scope="row">1</th>
+        <tr class="move" id="move">
+          <th scope="row" class="num">1</th>
           <td>Mark</td>
           <td class="td3">2020-04-05</td>
           <td class="td3"><button>삭제</button></td>
         </tr>
         <tr>
-          <th scope="row">2</th>
+          <th scope="row" class="num">2</th>
           <td>Jacob</td>
           <td class="td3">2020-04-05</td>
           <td class="td3"><button>삭제</button></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th scope="row" class="num">3</th>
           <td>Larry</td>
           <td class="td3">2020-04-05</td>
           <td class="td3"><button>삭제</button></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th scope="row" class="num">3</th>
           <td>Larry</td>
           <td class="td3">2020-04-05</td>
           <td class="td3"><button>삭제</button></td>
         </tr>
         <tr>
-          <th scope="row">3</th>
+          <th scope="row" class="num">3</th>
           <td>Larry</td>
           <td class="td3">2020-04-05</td>
           <td class="td3"><button>삭제</button></td>

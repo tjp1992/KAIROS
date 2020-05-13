@@ -20,7 +20,7 @@
 	font-size: 20px;
 	text-indent: 50px;
 	margin-top: 50px;
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 	font-weight: bold;
 }
 
@@ -28,6 +28,8 @@
 	width: 500px;
 	margin: 0 auto;
 }
+
+
 
 .t1>tr>td{
 	height: 50px;
@@ -53,6 +55,7 @@ label{
 	padding-top: 30px;
 	padding-bottom: 30px;
 	font-size: 17px;
+	cursor: pointer;
 }
 
 .verticalLine {

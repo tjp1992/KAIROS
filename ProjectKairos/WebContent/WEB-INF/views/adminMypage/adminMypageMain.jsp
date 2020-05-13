@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/src/js/bootstrap.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -19,7 +19,12 @@
 		$("#goNotice").click(function(){
 			location.href = "/adminNotice";
 		});
-		
+		$("#goQuesion").click(function(){
+			location.href="/adminQuestion";
+		});
+		$("#goTicket").click(function(){
+			location.href="/adminTicket";
+		});
 	})
 </script>
 </head>
@@ -54,8 +59,7 @@
 						<td scope="row"><label>고객문의 관리</label></td>
 						<td><span class="glyphicon glyphicon-chevron-right"></span></td>
 					</tr>
-					<tr>
-					</tr>
+					
 			</table>
 		</div>
 	</div>
