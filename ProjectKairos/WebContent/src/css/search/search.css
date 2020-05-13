@@ -1,5 +1,6 @@
-@import url("search_board.css");
-
+@import url("search_board_top.css");
+@import url("search_board_content.css");
+@import url("page_nav.css");
 .search_menu_wrapper {
   width: 100%;
   height: 40px;

@@ -7,8 +7,9 @@ pageEncoding="UTF-8"%>
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
+    <link rel="stylesheet" href="/src/css/bootstrap.css" />
     <script src="/src/js/8bd2671777.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/src/css/search/search.css" />
+    <link rel="stylesheet" href="/src/css/manageMusic/myMusicList.css" />
   </head>
   <body>
     <!-- header.jsp에 jquery와 jstl이 이미 추가되어 있습니다! -->
@@ -16,36 +17,9 @@ pageEncoding="UTF-8"%>
     <!-- 우리 웹의 기본 틀이 될 구조입니다 -->
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
-      <div class="search_menu_wrapper">
-        <span>결과 선택</span>
-        <div>
-          <span>국가</span>
-          <select name="setCountry" id="setCountry">
-            <option value="all">전체</option>
-            <option value="k-pop">국내</option>
-            <option value="pop">해외</option>
-          </select>
-        </div>
-        <div class="search_category">
-          <a href="#"><span>곡명</span></a>
-          <a href="#"><span>아티스트</span></a>
-          <a href="#"><span>앨범</span></a>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="setLicensed" value="1" />
-            <span>유료</span>
-          </label>
-          <label>
-            <input type="checkbox" name="setLicensed" value="0" />
-            <span>무료</span>
-          </label>
-        </div>
-      </div>
       <div class="search_board">
         <div class="search_board_top_wrapper">
           <div>
-            <span>검색결과 :</span>
             <form action="" method="get">
               <input
                 type="text"
@@ -59,7 +33,7 @@ pageEncoding="UTF-8"%>
             </form>
           </div>
           <div>
-            <button>선택곡 추가</button>
+            <button>선택 삭제</button>
             <select name="pageViewNum" id="pageViewNum">
               <option value="25">한 페이지 출력 수</option>
               <option value="25">25</option>
@@ -100,41 +74,17 @@ pageEncoding="UTF-8"%>
               </td>
               <td class="result_no">1</td>
               <td class="btn_container multi_cont">
-                <span class="free_song"></span>
-                <i class="far fa-play-circle"></i>
-                <i class="far fa-plus-square"></i>
+                <button class="btn btn-sm btn-primary">삭제</button>
+                <button class="btn btn-sm btn-danger">수정</button>
               </td>
               <td class="title">삐삐</td>
               <td class="artist">아이유</td>
               <td class="album_name">삐삐</td>
               <td class="like_count multi_cont">
-                <i class="far fa-heart likeBtn"></i>
                 <span>248,468</span>
               </td>
               <td class="play_count">0</td>
               <td class="report_container"></td>
-            </tr>
-            <tr class="result">
-              <td class="chk_box">
-                <input type="checkbox" name="chkAll" id="chkAll" />
-              </td>
-              <td class="result_no">1</td>
-              <td class="btn_container multi_cont">
-                <span class="free_song">Free</span>
-                <i class="far fa-play-circle"></i>
-                <i class="far fa-plus-square"></i>
-              </td>
-              <td class="title">내노래</td>
-              <td class="artist">개인회원임</td>
-              <td class="album_name">으엥</td>
-              <td class="like_count multi_cont">
-                <i class="far fa-heart likeBtn"></i>
-                <span>3</span>
-              </td>
-              <td class="play_count">0</td>
-              <td class="report_container">
-                <button type="button">!</button>
-              </td>
             </tr>
           </table>
         </div>
