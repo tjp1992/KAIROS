@@ -7,24 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/src/css/bootstrap.css">
+<link href="/src/css/login/idsearch.css" rel="stylesheet" type="text/css">
 </head>
-	<style>
-		.wrapper{
-			width : 500px;
-			height : 400px;
-			border : 1px solid black;
-			margin : 0 auto;
-			margin-top:100px;
-		}
-		.pjymid{
-			padding-top :30px;
-			text-align: center;
-		}
-		.pjybottom>button{
-			width:150px;
-			height:50px;
-		}
-	</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<section class="cantainer">

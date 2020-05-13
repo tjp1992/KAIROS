@@ -9,19 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.service.UserService;
-
 /**
- * Servlet implementation class JoinFrmServlet
+ * Servlet implementation class UserInquiryFrmServlet
  */
-@WebServlet(name = "JoinFrm", urlPatterns = { "/joinFrm" })
-public class JoinFrmServlet extends HttpServlet {
+@WebServlet(name = "UserInquiryFrm", urlPatterns = { "/userInquiryFrm" })
+public class UserInquiryFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinFrmServlet() {
+    public UserInquiryFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +28,7 @@ public class JoinFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/join/join.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inquiry/userInquiry.jsp");
 		rd.forward(request, response);
 	}
 
