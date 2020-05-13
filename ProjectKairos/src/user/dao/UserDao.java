@@ -41,5 +41,27 @@ public class UserDao {
 		}
 		return login;
 	}
+
+	public String overLapId(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String userId = null;
+		String query = "select user_id from web_user where user_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				userId = rset.getString("user_id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return userId;
+	}
 	
 }

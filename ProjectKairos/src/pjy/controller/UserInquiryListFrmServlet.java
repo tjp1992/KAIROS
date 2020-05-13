@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MypageFrmServlet
+ * Servlet implementation class UserInquiryListFrmServlet
  */
-@WebServlet(name = "MypageFrm", urlPatterns = { "/mypageFrm" })
-public class MypageFrmServlet extends HttpServlet {
+@WebServlet(name = "UserInquiryListFrm", urlPatterns = { "/userInquiryListFrm" })
+public class UserInquiryListFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageFrmServlet() {
+    public UserInquiryListFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +28,8 @@ public class MypageFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
-		request.setAttribute("play", null);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inquiry/userInquiryList.jsp");
+		request.setAttribute("list", "hi");
 		rd.forward(request, response);
 	}
 

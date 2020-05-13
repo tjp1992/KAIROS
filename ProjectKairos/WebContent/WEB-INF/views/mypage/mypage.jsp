@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -25,8 +26,14 @@
 
 <script>
 	$(function() {
-		$("#userContactList").click(function() {
-			location.href = "/userContactListFrm";
+		$("#userInquiryList").click(function() {
+			location.href = "/userInquiryListFrm";
+		});
+		$("#userInquiry").click(function() {
+			location.href = "/userInquiryFrm";
+		});
+		$("#userModify").click(function(){
+			location.href = "/userModifyFrm";
 		});
 	});
 </script>
@@ -35,8 +42,13 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
 	<h2 class="h2">
-		마이페이지 <span class="span1">로그인계정 : </span>
-	</h2>
+		마이페이지 <span class="span1">로그인계정 : </span></h2>
+		<c:if test="${empty play }">
+			<span>이용권이 없습니다.<a href="#">이용권 구매</a></span>
+		</c:if>
+		<c:if test="${not empty play }">
+			<span>일 남았습니다.</span>
+		</c:if>
 	<div class="PHJup">
 		<h3>메뉴</h3>
 		<div class="div1">
@@ -45,7 +57,7 @@
 					<td scope="row"><label>개인정보 수정</label></td>
 					<td><span class="glyphicon glyphicon-chevron-right"></span></td>
 				</tr>
-				<tr class="move" id="userContact">
+				<tr class="move" id="userInquiry">
 					<td scope="row"><label>1:1문의하기</label></td>
 					<td><span class="glyphicon glyphicon-chevron-right"></span></td>
 				</tr>
@@ -54,7 +66,7 @@
 		<div class="verticalLine"></div>
 		<div class="div1">
 			<table class="table t1 table-hover">
-				<tr class="move" id="userContactList">
+				<tr class="move" id="userInquiryList">
 					<td scope="row"><label>내 문의내역</label></td>
 					<td><span class="glyphicon glyphicon-chevron-right"></span></td>
 				</tr>
