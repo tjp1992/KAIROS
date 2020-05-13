@@ -87,17 +87,15 @@
     border-bottom: 2px solid #dbdbdb;
     border-spacing: 0;
 }
-.heartimg>img{
-    width: 40%;
-    height: 35px;
+.iconplay{
+    font-size: 25px;
 }
-.removeimg>img{
-    width: 20%;
-    height: 25px;
+.icondelete{
+    font-size: 25px;
 }
-.playimg>img{
-    width: 25%;
-    height: 25px;
+.iconheart{
+    font-size: 28px;
+    color: black;
 }
 .pltr1 > td {
     height: 50px;

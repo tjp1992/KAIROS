@@ -7,8 +7,10 @@ pageEncoding="UTF-8"%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
     <link rel="stylesheet" href="/src/css/playList/playList.css" />
+    <sctipt src="https://kit.fontawesome.com/8bd2671777.js" crossorigin="anonymous"></sctipt>
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
+    
 </head>
 <body>
     <!-- header.jsp에 jquery와 jstl이 이미 추가되어 있습니다! -->
@@ -52,9 +54,9 @@ pageEncoding="UTF-8"%>
                         <td width="60%">
                             <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div><div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
                         </td>
-                        <th width="10%" class="playimg"><img src="/src/imgs/icons/play.png"></th>
-                        <th width="10%" class="removeimg"><img src="/src/imgs/icons/deleteicon.png"></th>
-                        <th width="10%" class="heartimg"><img class="likebtn" src="/src/imgs/icons/hearticon.png"></th>
+                        <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
+                        <th width="10%" class="deleteimg"><i class="icondelete far fa-trash-alt"></i></th>
+                        <th width="10%" class="heartimg"><i class="iconheart far fa-heart"></i></th>
                     </tr>
                 </table>
             </div>
@@ -83,13 +85,20 @@ pageEncoding="UTF-8"%>
               }
            });
             
-           $(".likebtn").click(function(){
-              if($(this).attr("src")=="/src/imgs/icons/hearticon.png"){
-                  $(this).attr("src","/src/imgs/icons/heartred.png");
+           $(".heartimg").children().click(function(){
+              if($(this).attr("class")=="iconheart far fa-heart"){
+                  $(this).attr("class","iconheart fas fa-heart");
+                  $(this).css("color","red");
               }else{
-                  $(this).attr("src","/src/imgs/icons/hearticon.png");
+                  $(this).attr("class","iconheart far fa-heart");
+                  $(this).css("color","black");
               }
            });
+           $(".pltr1").hover(function(){
+               $(this).css("background-color","#F2F6FC");
+           },function(){
+               $(this).css("background-color","white");
+           });  
         });
     </script>
 
