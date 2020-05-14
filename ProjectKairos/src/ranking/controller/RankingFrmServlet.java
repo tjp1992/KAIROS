@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ranking.service.RankingService;
+import song.vo.RankingPageData;
 import song.vo.RankingSong;
 import song.vo.Song;
 
@@ -32,8 +33,9 @@ public class RankingFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<RankingSong> list = new RankingService().getRankBySong();
-		request.setAttribute("list", list);
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		RankingPageData pd = new RankingService().getRankBySong(reqPage);
+		request.setAttribute("list", pd);
 		request.getRequestDispatcher("/WEB-INF/views/ranking/rank.jsp").forward(request, response);
 	}
 
