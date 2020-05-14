@@ -1,6 +1,8 @@
-package voucher.controller;
+package pjy.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BuyVoucherFrmServlet
+ * Servlet implementation class UserInquiryListFrmServlet
  */
-@WebServlet(name = "BuyVoucherFrm", urlPatterns = { "/buyVoucherFrm" })
-public class BuyVoucherFrmServlet extends HttpServlet {
+@WebServlet(name = "UserInquiryListFrm", urlPatterns = { "/userInquiryListFrm" })
+public class UserInquiryListFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyVoucherFrmServlet() {
+    public UserInquiryListFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +28,9 @@ public class BuyVoucherFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/voucher/buyVoucher.jsp").forward(request, response);	
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inquiry/userInquiryList.jsp");
+		request.setAttribute("list", "hi");
+		rd.forward(request, response);
 	}
 
 	/**

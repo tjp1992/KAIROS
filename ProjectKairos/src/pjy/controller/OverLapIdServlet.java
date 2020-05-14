@@ -1,23 +1,28 @@
-package voucher.controller;
+package pjy.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.service.UserService;
+import user.vo.User;
+
 /**
- * Servlet implementation class BuyVoucherFrmServlet
+ * Servlet implementation class OverLapIdServlet
  */
-@WebServlet(name = "BuyVoucherFrm", urlPatterns = { "/buyVoucherFrm" })
-public class BuyVoucherFrmServlet extends HttpServlet {
+@WebServlet(name = "OverLapId", urlPatterns = { "/overLapId" })
+public class OverLapIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyVoucherFrmServlet() {
+    public OverLapIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +31,18 @@ public class BuyVoucherFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/voucher/buyVoucher.jsp").forward(request, response);	
+		String id = request.getParameter("id");
+		String userId = new UserService().overLapId(id);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/join/overLapId.jsp");
+		if(userId==null) {
+			request.setAttribute("userId", null);
+		}else {
+			request.setAttribute("userId", userId);
+			System.out.println("userId : "+userId);
+		}
+		request.setAttribute("joinId", id);
+		System.out.println("joinId : "+id);
+		rd.forward(request, response);
 	}
 
 	/**

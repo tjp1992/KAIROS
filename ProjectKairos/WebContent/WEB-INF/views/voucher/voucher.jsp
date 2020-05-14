@@ -4,7 +4,7 @@ prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/src/js/bootstrap.js"></script>
 	<link rel="stylesheet" href="/src/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/src/css/voucher/voucher.css">
 	<script src="/src/js/jquery-3.3.1.js"></script>
@@ -14,12 +14,16 @@ prefix="c"%>
   <script>
 	  $(function(){
 		$(".purchase").click(function(){
-			if("${not empty sessionScope.user}"){
+			if(${not empty sessionScope.user}){
 				if(confirm("구매 하시겠습니까?")){
-					location.href= "/buyVoucherFrm";
+					if(${sessionScope.user.expiredDate eq null}){
+						location.href= "/buyVoucherFrm";
+					}else{
+						location.href="/mypageFrm"
+					}
 				}
 			}else{
-				location.href= "/login";
+				location.href= "/loginFrm";
 			}
 		});
 	  });
