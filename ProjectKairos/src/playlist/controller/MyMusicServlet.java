@@ -1,29 +1,26 @@
-package search.controller;
+package playlist.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import search.model.service.SearchSongService;
-import search.model.vo.SearchResult;
-import song.vo.SearchSong;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class SearchSongServlet
+ * Servlet implementation class MyMusicServlet
  */
-@WebServlet(name = "SearchSong", urlPatterns = { "/searchSong" })
-public class SearchSongServlet extends HttpServlet {
+@WebServlet(name = "MyMusic", urlPatterns = { "/myMusic" })
+public class MyMusicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchSongServlet() {
+    public MyMusicServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +29,15 @@ public class SearchSongServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String keyword = request.getParameter("keyword");
+		RequestDispatcher rd=null;
+		HttpSession session = request.getSession(false);
 		
-		SearchResult sResult = new SearchSongService().searchByKeword(keyword);
-						
-		request.setAttribute("list", sResult.getList());
-		request.setAttribute("totalNum", sResult.getTotalResult());
-		
-		request.getRequestDispatcher("/WEB-INF/views/search/search.jsp").forward(request, response);
+		if(session.getAttribute("user")==null) {//로그인 안되어있을때
+			rd =request.getRequestDispatcher("/loginFrm");
+		} else {//로그인 되어있을때
+			 rd = request.getRequestDispatcher("/playList");
+		}
+		rd.forward(request, response);
 	}
 
 	/**
