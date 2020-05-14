@@ -103,7 +103,7 @@ pageEncoding="UTF-8"%>
                 </select>
             </div>
             <div class="sub">
-                <input class="submit" type="submit" name="lineupsong" value="수정 완료">
+                <input class="plsubmit" type="submit" name="lineupsong" value="수정 완료">
                 <input class="cancel" type="button" name="cancel" value="취소">
             </div>
         </div>
@@ -116,7 +116,6 @@ pageEncoding="UTF-8"%>
                 var prev = arr.eq(0).prev();
                 for (var i = 0; i < arr.length; i++) {
                     prev.before(arr[i]);
-                    console.log(arr[i]);
                 }
             });
             $(".downimg").click(function() {
@@ -126,8 +125,13 @@ pageEncoding="UTF-8"%>
                     next.after(arr[i]);
                 }
             });
+            $(".plsubmit").click(function() {
+                var arr = $(".pltr1");
+                $.each(arr, function(index, item) {
+                    $(item).children().eq(1).html(index + 1);
+                });
 
-
+            });
         });
 
     </script>
