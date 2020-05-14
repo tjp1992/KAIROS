@@ -27,7 +27,7 @@
 				$("span").html("중복된 아이디 입니다.");
 				$("span").css("color","red");
 				$("#joinId").css("border","1px solid red");
-				$("#overLapChk").click(function(){
+				$("#joinId").change(function(){
 					id = $("#joinId").val();
 					if(id== userId){
 						$("span").html("중복된 아이디 입니다.");
