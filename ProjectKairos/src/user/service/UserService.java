@@ -34,4 +34,23 @@ public class UserService {
 		return result;
 	}
 
+	public String overLapNick(String nick) {
+		Connection conn = JDBCTemplate.getConnection();
+		String userNick = new UserDao().overLapNick(conn,nick);
+		JDBCTemplate.close(conn);
+		return userNick;
+	}
+
+	public int insertUser(User u) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().insertUser(conn,u);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

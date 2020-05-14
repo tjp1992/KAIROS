@@ -26,7 +26,10 @@ CREATE TABLE WEB_USER(
     EXPIRED_DATE DATE,
     CON_AGREE NUMBER
 );
-
+insert into web_user values ('pjyub1379','@@pkyu0662','¹ÚÁ¾¿±','¿±1','01022222222','pjyub1379@naver.com','·¿ÀÕ°í',sysdate,'1');
+select * from web_user;
+delete from web_user where user_id='pjyub13792';
+commit;
 ----------------------------------------
 -- ¾Ù¹ü Å×ÀÌºí »ý¼º
 ----------------------------------------

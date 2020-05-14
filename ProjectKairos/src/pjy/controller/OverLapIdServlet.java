@@ -1,6 +1,7 @@
 package pjy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.service.UserService;
-import user.vo.User;
 
 /**
  * Servlet implementation class OverLapIdServlet
@@ -33,16 +33,12 @@ public class OverLapIdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String userId = new UserService().overLapId(id);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/join/overLapId.jsp");
+		PrintWriter out = response.getWriter();
 		if(userId==null) {
-			request.setAttribute("userId", null);
+			out.print(1);
 		}else {
-			request.setAttribute("userId", userId);
-			System.out.println("userId : "+userId);
+			out.print(0);
 		}
-		request.setAttribute("joinId", id);
-		System.out.println("joinId : "+id);
-		rd.forward(request, response);
 	}
 
 	/**

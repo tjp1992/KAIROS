@@ -79,5 +79,50 @@ public class UserDao {
 		}
 		return result;
 	}
+
+	public String overLapNick(Connection conn, String nick) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String userNick = null;
+		String query = "select user_nickname from web_user where user_nickname=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, nick);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				userNick = rset.getString("user_nickname");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return userNick;
+	}
+
+	public int insertUser(Connection conn, User u) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into web_user values (?,?,?,?,?,?,?,sysdate,'1')";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u.getUserId());
+			pstmt.setString(2, u.getUserPw());
+			pstmt.setString(3, u.getUserName());
+			pstmt.setString(4, u.getUserNick());
+			pstmt.setString(5, u.getPhone());
+			pstmt.setString(6, u.getEmail());
+			pstmt.setString(7, u.getAddr());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 }
