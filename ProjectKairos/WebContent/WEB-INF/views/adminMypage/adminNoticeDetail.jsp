@@ -13,9 +13,16 @@
 <script>
 	$(function(){
 		$("#back").click(function(){
-			location.href = "/adminNotice";
+			location.href = "/adminNotice?reqPage="+${req };
 		});
 	});
+	function deleteNotice(no,event,req){
+		if (confirm("삭제하시겠습니까?")) {
+			event.stopPropagation();
+			location.href = "/deleteNotice?noticeNo="+no+"&reqPage="+req;
+			
+		}
+	}
 </script>
 </head>
 <body>
@@ -23,53 +30,18 @@
 	<section>
 	
 	<div class="top">
-		<span class="inner1">제목  </span><span>${ }</span>
-		<span class="inner2">작성일   </span>
+		<span class="inner1">제목  : ${n.noticeTitle }</span>
+		<span class="inner2">작성일  : ${n.noticeDate } </span>
 	</div>
 	<div class="middle">
 		<p class="content">
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
+			${n.noticeContent }
 		</p>
 	</div>
 	
 	<div class="bottom">
 		<button type="button" class="btn btn-default bbt" id="modify">수정</button>
-		<button type="button" class="btn btn-default bbt" id="delete">삭제</button>
+		<button type="button" class="btn btn-default bbt" id="delete" onclick="deleteNotice('${n.noticeNo}',event,${req })">삭제</button>
 		<button type="button" class="btn btn-default bbt" id="back">목록으로</button>
 	</div>
 	<br>

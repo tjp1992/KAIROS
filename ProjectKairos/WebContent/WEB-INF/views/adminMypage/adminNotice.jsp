@@ -31,8 +31,15 @@
 			location.href = "/adminNoticeWriteFrm";
 		});
 	})
-	function detail(no){
-		location.href = "/adminNoticeDetailFrm?noticeNo="+no;
+	function detail(no, req){ // req 는 해당 페이지이다.
+		location.href = "/adminNoticeDetailFrm?noticeNo="+no+"&reqPage="+req;
+	}
+	function deleteNotice(no,event,req){
+		if (confirm("삭제하시겠습니까?")) {
+			event.stopPropagation();
+			location.href = "/deleteNotice?noticeNo="+no+"&reqPage="+req;
+			
+		}
 	}
 </script>
 </head>
@@ -52,12 +59,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list }" var="n">
-				<tr class="move" id="move" onclick="detail(${n.noticeNo})" >
-					<th scope="row" class="num">${n.noticeNo }</th>
+			<c:forEach items="${list }" var="n" varStatus="i">
+				<tr class="move" id="move" onclick="detail(${n.noticeNo},${req })" >
+					<th scope="row" class="num">${(req-1)*10 + i.count }</th>
 					<td>${n.noticeTitle }</td>
 					<td class="td2">${n.noticeDate }</td>
-					<td class="td3"><button id="delete">삭제</button></td>
+					<td class="td3"><button id="delete" onclick="deleteNotice('${n.noticeNo}',event,${req })">삭제</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>

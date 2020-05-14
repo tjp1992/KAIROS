@@ -56,4 +56,37 @@ public class NoticeService {
 		return pd;
 	}
 
+	public Notice noticeDetail(int noticeNum) {
+		Connection conn = JDBCTemplate.getConnection();
+		Notice n = new NoticeDao().noticeDetail(conn,noticeNum);
+		JDBCTemplate.close(conn);
+		
+		return n;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().deleteNotice(conn, noticeNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int insertNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new NoticeDao().insertNotice(conn,n);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+
+	}
+
 }

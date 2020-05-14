@@ -1,8 +1,6 @@
 package admin.mypage.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,17 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.service.NoticeService;
+
 /**
- * Servlet implementation class AdminNoticeWriteFrmServlet
+ * Servlet implementation class DeleteNoticeServlet
  */
-@WebServlet(name = "AdminNoticeWriteFrm", urlPatterns = { "/adminNoticeWriteFrm" })
-public class AdminNoticeWriteFrmServlet extends HttpServlet {
+@WebServlet(name = "DeleteNotice", urlPatterns = { "/deleteNotice" })
+public class DeleteNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeWriteFrmServlet() {
+    public DeleteNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +30,17 @@ public class AdminNoticeWriteFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
-		Date time = new Date();
-		
-		String today = format1.format(time);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeWriter.jsp");
-		request.setAttribute("today", today);
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		int req = Integer.parseInt(request.getParameter("reqPage"));
+		int result = new NoticeService().deleteNotice(noticeNo);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("msg", "삭제가 완료되었습니다.");
+			request.setAttribute("loc", "/adminNotice?reqPage="+req);
+		}else {
+			request.setAttribute("msg", "삭제가 취소되었습니다.");
+			request.setAttribute("loc", "/adminNotice?reqPage"+req);
+		}
 		rd.forward(request, response);
 	}
 

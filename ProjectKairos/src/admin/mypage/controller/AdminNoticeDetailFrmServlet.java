@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.dao.NoticeDao;
+import admin.mypage.model.service.NoticeService;
+import admin.mypage.model.vo.Notice;
+
 /**
  * Servlet implementation class AdminNoticeDetailFrmServlet
  */
@@ -29,8 +33,11 @@ public class AdminNoticeDetailFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int noticeNum = Integer.parseInt(request.getParameter("noticeNo"));
-		
+		int req = Integer.parseInt(request.getParameter("reqPage"));
+		Notice n = new NoticeService().noticeDetail(noticeNum);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeDetail.jsp");
+		request.setAttribute("n", n);
+		request.setAttribute("req", req);
 		rd.forward(request, response);
 	}
 
