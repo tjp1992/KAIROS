@@ -1,4 +1,4 @@
-package voucher.controller;
+package search.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BuyVoucherFrmServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet(name = "BuyVoucherFrm", urlPatterns = { "/buyVoucherFrm" })
-public class BuyVoucherFrmServlet extends HttpServlet {
+@WebServlet(name = "Search", urlPatterns = { "/search" })
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyVoucherFrmServlet() {
+    public SearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,10 @@ public class BuyVoucherFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/voucher/buyVoucher.jsp").forward(request, response);	
+		
+		String keyword = request.getParameter("ld-keyword");
+		System.out.println(keyword);
+		
 	}
 
 	/**

@@ -44,7 +44,7 @@ prefix="c"%>
       <!-- 랭킹차트 서블릿 /rankingFrm 작성 필요 -->
       <span><a href="/rankingFrm">차트</a></span>
       <form action="/searchFrm" method="GET" class="ld-search">
-        <input type="text" id="ld-keyword" />
+        <input type="text" name="keyword" id="ld-keyword" />
         <button type="submit" id="ld-search">
           <img src="/src/imgs/icons/search.png" alt="" />
         </button>

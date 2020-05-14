@@ -63,5 +63,21 @@ public class UserDao {
 		}
 		return userId;
 	}
+	public int buyVoucher(Connection conn, User u) {
+		PreparedStatement pstmt =null;
+		int result=0;
+		String query = "update web_user set expired_date = sysdate+30 where user_id = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u.getUserId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 }

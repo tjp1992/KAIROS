@@ -5,6 +5,9 @@
   padding-bottom: 50px;
   border: 4px solid #f7f7f9;
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cont {
@@ -14,9 +17,14 @@
   width: 60%;
 }
 
-.cont > span {
+form {
+  display: flex;
+}
+
+.cont > span,
+form span {
   margin-left: 30px;
-  width: 120px;
+  width: 160px;
   font-weight: bold;
   font-size: 18px;
   color: #696969;
@@ -28,6 +36,11 @@
   color: #696969;
 }
 
-.cont > input {
+.cont > input,
+form > input {
   width: 300px;
+}
+
+.btn_wrapper button:first-of-type {
+  margin-right: 20px;
 }
