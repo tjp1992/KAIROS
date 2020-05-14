@@ -43,11 +43,11 @@ public class PaymentCompleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// update user expire_date
-		HttpSession sessionUp = request.getSession();
+		HttpSession sessionUp = request.getSession(false);
 		User u = (User)(sessionUp.getAttribute("user"));
 		int result = new UserService().buyVoucher(u);
 		User update = new UserService().selectUser(u);
-		sessionUp.setAttribute("user", update);
+		sessionUp.setAttribute("user", update);			
 		
 		// sending e-mail
 		String personalId = request.getParameter("personalId");
