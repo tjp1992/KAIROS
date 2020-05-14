@@ -26,13 +26,30 @@ prefix="c"%>
   </c:if>
   <!-- 유저가 로그인 되었을 경우 표시됨 -->
   <c:if test="${not empty sessionScope.user }">
+  	<c:if test="${sessionScope.user.userId == 'admin' }">
+  		<div class="ld-header_top_wrapper">
+      	<!-- 마이페이지 서블릿 /mypageFrm 작성 필요-->
+      	<a href="/adminMypage"> <img src="/src/imgs/icons/user.png" alt="" /></a>
+      	<span>
+        <a href="/adminMypage">${sessionScope.user.userName }</a>
+      	</span>
+      	<span>
+      	<a href="/logout">로그아웃</a>
+      </span>
+   		 </div>
+ 	</c:if>
+ 	<c:if test="${not sessionScope.user.userId == 'admin' }">
     <div class="ld-header_top_wrapper">
       <!-- 마이페이지 서블릿 /mypageFrm 작성 필요-->
       <a href="/mypageFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <span>
         <a href="/mypageFrm">${sessionScope.user.userName }</a>
       </span>
+      <span>
+      	<a href="/logout">로그아웃</a>
+      </span>
     </div>
+    </c:if>
   </c:if>
   <nav>
     <div class="ld-main_wrapper">

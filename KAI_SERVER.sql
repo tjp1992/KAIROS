@@ -26,8 +26,7 @@ CREATE TABLE WEB_USER(
     EXPIRED_DATE DATE,
     CON_AGREE NUMBER
 );
-SELECT * from web_user where user_id=user01;
-INSERT INTO WEB_USER VALUES('pjyub1297','@@pkyu0661','¹ÚÁ¾¿±','¿±','01011111111','pjyub1297@gmail.com','ºÎÃµ',sysdate,1);
+
 ----------------------------------------
 -- ¾Ù¹ü Å×ÀÌºí »ý¼º
 ----------------------------------------
