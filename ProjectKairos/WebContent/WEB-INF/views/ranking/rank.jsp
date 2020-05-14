@@ -9,7 +9,7 @@ prefix="c"%>
 	<link rel="stylesheet" href="/src/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="/src/css/voucher/voucher.css">
 	<script src="/src/js/jquery-3.3.1.js"></script>
-<title>Insert title here</title>
+<title>Top Chart</title>
 </head>
 <script>
 	
@@ -38,13 +38,23 @@ prefix="c"%>
 							<th width="10%">재생 횟수</th>
 							<th width="10%">듣기</th>
 						</tr>
-						<c:forEach items="${list }" var="m">
-							
-						</c:forEach>
 					</thead>
-					<tbody></tbody>
+					<tbody>
+						<c:forEach items="${list }" var="m">
+							<tr>
+								<td><input type="checkbox" id="select"></td>
+								<td>${m.rankNo }</td>
+								<td>${m.songTitle }</td>
+								<td>${m.albumName }</td>
+								<td>${m.likeCount }</td>
+								<td>${m.playCount }</td>
+								<td><input type="checkbox"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
 				</table>
 			</div>
+				<div id="pageNavi centered">${pageNavi }</div>
 	</section>
 </body>
 </html>
