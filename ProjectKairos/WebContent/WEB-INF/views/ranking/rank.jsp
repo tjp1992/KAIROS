@@ -12,7 +12,13 @@ prefix="c"%>
 <title>Insert title here</title>
 </head>
 <script>
-	
+$('#checkAll').change(function(e) {
+	  if (e.currentTarget.checked) {
+	  $('.rows').find('input[type="checkbox"]').prop('checked', true);
+	} else {
+	    $('.rows').find('input[type="checkbox"]').prop('checked', false);
+	  }
+	});
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -26,11 +32,9 @@ prefix="c"%>
 			<hr>
 			<div class="table-responsive">
 				<table class="table table-striped table-sm text-center">
-					<thead>
+					<tbody>
 						<tr>
-							<th width="10%">
-								<input type="checkbox" id="checkAll">
-							</th>
+							<th width="10%"><input type="checkbox" id="checkAll"></th>
 							<th width="10%">순위</th>
 							<th width="30%">곡 제목</th>
 							<th width="20%">앨범</th>
@@ -38,17 +42,18 @@ prefix="c"%>
 							<th width="10%">재생 횟수</th>
 							<th width="10%">듣기</th>
 						</tr>
-						<c:forEach items="${list }" var="m">
-							<tr><input type="checkbox" id="select"></tr>
-							<tr>m.getRankNo</tr>
-							<tr>m.getSongTitle</tr>
-							<tr>m.getAlbumNo</tr>
-							<tr>m.getLikeCount</tr>
-							<tr>m.getPlayCount</tr>
-							<tr><input type="checkbox"></tr>
+						<c:forEach items="${list}" var="m">
+						<tr>
+							<td><input type="checkbox" id="select" ></td>
+							<td>${m.getRankNo }</td>
+							<td>${m.getSongTitle }</td>
+							<td>${m.getAlbumName }</td>
+							<td>${m.getLikeCount }</td>
+							<td>${m.getPlayCount}</td>
+							<td><input type="checkbox" value="재생"></td>
+						<tr>
 						</c:forEach>
-					</thead>
-					<tbody></tbody>
+					</tbody>
 				</table>
 			</div>
 	</section>
