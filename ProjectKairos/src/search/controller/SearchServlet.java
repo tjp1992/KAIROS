@@ -1,8 +1,6 @@
 package search.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SearchFrmServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet(name = "SearchFrm", urlPatterns = { "/searchFrm" })
-public class SearchFrmServlet extends HttpServlet {
+@WebServlet(name = "Search", urlPatterns = { "/search" })
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchFrmServlet() {
+    public SearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +27,8 @@ public class SearchFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/search").forward(request, response);
+		String keyword = request.getParameter("ld-keyword");
+		System.out.println(keyword);
 		
 	}
 
