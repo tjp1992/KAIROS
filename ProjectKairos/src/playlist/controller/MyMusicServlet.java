@@ -1,30 +1,26 @@
-package ranking.controller;
+package playlist.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import ranking.service.RankingService;
-import song.vo.RankingPageData;
-import song.vo.RankingSong;
-import song.vo.Song;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class RankingFrmServlet
+ * Servlet implementation class MyMusicServlet
  */
-@WebServlet(name = "RankingFrm", urlPatterns = { "/rankingFrm" })
-public class RankingFrmServlet extends HttpServlet {
+@WebServlet(name = "MyMusic", urlPatterns = { "/myMusic" })
+public class MyMusicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RankingFrmServlet() {
+    public MyMusicServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,11 +29,15 @@ public class RankingFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		RankingPageData pd = new RankingService().getRankBySong(reqPage);
-		request.setAttribute("list", pd.getList());
-		request.setAttribute("pageNavi", pd.getPageNavi());
-		request.getRequestDispatcher("/WEB-INF/views/ranking/rank.jsp").forward(request, response);
+		RequestDispatcher rd=null;
+		HttpSession session = request.getSession(false);
+		
+		if(session.getAttribute("user")==null) {//로그인 안되어있을때
+			rd =request.getRequestDispatcher("/loginFrm");
+		} else {//로그인 되어있을때
+			 rd = request.getRequestDispatcher("/playList");
+		}
+		rd.forward(request, response);
 	}
 
 	/**

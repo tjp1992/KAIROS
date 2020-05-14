@@ -54,6 +54,7 @@ prefix="c"%>
 					</tbody>
 				</table>
 			</div>
+				<div id="pageNavi centered">${pageNavi }</div>
 	</section>
 </body>
 </html>
