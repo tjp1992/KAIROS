@@ -27,7 +27,6 @@ public class CharsetEncodingFilter implements Filter {
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		System.out.println("필터 객체 소멸");
 	}
 
 	/**
@@ -50,7 +49,6 @@ public class CharsetEncodingFilter implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("필터 객체 생성");
 	}
 
 }

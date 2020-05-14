@@ -59,7 +59,7 @@ prefix="c"%>
       <!-- 공지사항 서블릿 /noticeFrm 작성 필요 -->
       <span><a href="/noticeFrm">공지사항</a></span>
       <!-- 랭킹차트 서블릿 /rankingFrm 작성 필요 -->
-      <span><a href="/rankingFrm">차트</a></span>
+      <span><a href="/rankingFrm?reqPage=1">차트</a></span>
       <form action="/searchFrm" method="GET" class="ld-search">
         <input type="text" name="keyword" id="ld-keyword" />
         <button type="submit" id="ld-search">
