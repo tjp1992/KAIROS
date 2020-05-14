@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import search.service.SearchSongService;
+import search.model.service.SearchSongService;
+import search.model.vo.SearchResult;
 import song.vo.SearchSong;
 
 /**
@@ -34,10 +35,12 @@ public class SearchSongServlet extends HttpServlet {
 
 		String keyword = request.getParameter("keyword");
 		
-		ArrayList<SearchSong> list = new SearchSongService().searchByKeword(keyword);
+		SearchResult sResult = new SearchSongService().searchByKeword(keyword);
+						
+		request.setAttribute("list", sResult.getList());
+		request.setAttribute("totalNum", sResult.getTotalResult());
 		
-		System.out.println(list.size());
-		
+		request.getRequestDispatcher("/WEB-INF/views/search/search.jsp").forward(request, response);
 	}
 
 	/**
