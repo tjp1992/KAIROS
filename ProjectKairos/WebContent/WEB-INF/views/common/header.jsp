@@ -59,7 +59,12 @@ prefix="c"%>
       <!-- 랭킹차트 서블릿 /rankingFrm 작성 필요 -->
       <span><a href="/rankingFrm?reqPage=1">차트</a></span>
       <form action="/searchFrm" method="GET" class="ld-search">
+      	<c:if test="${empty keyword }">
         <input type="text" name="keyword" id="ld-keyword" />
+        </c:if>
+        <c:if test="${not empty keyword }">
+        <input type="text" name="keyword" id="ld-keyword" value="${keyword }"/>
+        </c:if>
         <button type="submit" id="ld-search">
           <img src="/src/imgs/icons/search.png" alt="" />
         </button>

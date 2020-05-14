@@ -87,7 +87,7 @@ prefix="c"%>
                 <th><span>재생횟수</span></th>
               </tr>
               <c:forEach items="${list }" var="s">
-                <tr class="result" songno="${s.songNo}">
+                <tr class="result">
                   <td class="chk_box">
                     <input
                       type="checkbox"
@@ -101,20 +101,20 @@ prefix="c"%>
                     <span class="free_song">
                       <c:if test="${s.licensed eq 0 }">Free</c:if>
                     </span>
-                    <i class="far fa-play-circle"></i>
-                    <i class="far fa-plus-square"></i>
+                    <i class="far fa-play-circle" songno="${s.songNo}"></i>
+                    <i class="far fa-plus-square" songno="${s.songNo}"></i>
                   </td>
                   <td class="title">${s.songTitle }</td>
                   <td class="artist">${s.songArtist }</td>
                   <td class="album_name">${s.albumName }</td>
                   <td class="like_count multi_cont">
-                    <i class="far fa-heart likeBtn"></i>
+                    <i class="far fa-heart likeBtn" songno="${s.songNo}"></i>
                     <span>${s.likeCount }</span>
                   </td>
                   <td class="play_count">${s.playCount }</td>
                   <td class="report_container">
                     <c:if test="${s.licensed eq 0 }">
-                      <button type="button">!</button>
+                      <button type="button" songno="${s.songNo}">!</button>
                     </c:if>
                   </td>
                 </tr>
@@ -157,9 +157,9 @@ prefix="c"%>
     <c:if test="${not empty sessionScope.user }">
       <script>
         $(".likeBtn").click(function () {
-          const songNo = $(this).parent().parent().attr("songno");
+          const songNo = $(this).attr("songno");
           $.ajax({
-            url: "/songLike",
+            url: "/checkLike",
             data: {
               songNo: songNo,
             },
