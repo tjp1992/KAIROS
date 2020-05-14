@@ -50,8 +50,36 @@ public class RankingDao {
 		ArrayList<RankingSong> list = new ArrayList<RankingSong>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select rownum, n.* from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n";
-		return null;
+		String query = "select rownum, n.* from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n where rownum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				RankingSong s = new RankingSong();
+				s.setRankNo(rset.getInt("rownum"));
+				s.setAlbumName(rset.getString("album_name"));
+				s.setFilename(rset.getString("filename"));
+				s.setFilepath(rset.getString("filepath"));
+				s.setLicensed(rset.getInt("licensed"));
+				s.setLikeCount(rset.getInt("like_count"));
+				s.setPlayCount(rset.getInt("play_count"));
+				s.setSongArtist(rset.getString("song_artist"));
+				s.setSongGenre(rset.getString("song_genre"));
+				s.setSongNo(rset.getInt("song_no"));
+				s.setSongTitle(rset.getString("song_title"));
+				list.add(s);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

@@ -35,7 +35,8 @@ public class RankingFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		RankingPageData pd = new RankingService().getRankBySong(reqPage);
-		request.setAttribute("list", pd);
+		request.setAttribute("list", pd.getList());
+		request.setAttribute("pageNavi", pd.getPageNavi());
 		request.getRequestDispatcher("/WEB-INF/views/ranking/rank.jsp").forward(request, response);
 	}
 
