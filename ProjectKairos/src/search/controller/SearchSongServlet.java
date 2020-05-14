@@ -32,8 +32,12 @@ public class SearchSongServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String category = request.getParameter("category");
 		String keyword = request.getParameter("keyword");
+		
+		if(category == null) {
+			System.out.println("카테고리 없음");
+		}
 		
 		SearchResult sResult = new SearchSongService().searchByKeword(keyword);
 		request.setAttribute("keyword", keyword);
