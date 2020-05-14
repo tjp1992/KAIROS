@@ -29,7 +29,7 @@ public class SearchFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/search").forward(request, response);
+		request.getRequestDispatcher("/searchSong").forward(request, response);
 		
 	}
 
