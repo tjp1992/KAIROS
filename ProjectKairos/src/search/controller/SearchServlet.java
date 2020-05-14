@@ -27,8 +27,8 @@ public class SearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String keyword = request.getParameter("ld-keyword");
-		System.out.println(keyword);
+		String keyword = request.getParameter("keyword");
+		
 		
 	}
 
