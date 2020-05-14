@@ -38,7 +38,7 @@
 		<div class="row m-4">
 			<div
 				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-				<h1 class="h2">Kairos 순위차트</h1>
+				<h1 class="h2"><img src="/src/imgs/logo/main_logo(no).png" width="250px"> 순위차트</h1>
 			</div>
 		</div>
 		<hr>
