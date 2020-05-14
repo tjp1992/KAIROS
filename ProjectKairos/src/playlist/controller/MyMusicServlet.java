@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class PlayListServlet
+ * Servlet implementation class MyMusicServlet
  */
-@WebServlet(name = "PlayList", urlPatterns = { "/playList" })
-public class PlayListServlet extends HttpServlet {
+@WebServlet(name = "MyMusic", urlPatterns = { "/myMusic" })
+public class MyMusicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlayListServlet() {
+    public MyMusicServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +29,15 @@ public class PlayListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.
-		//2.
-		//3.
-		//4.
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/playList.jsp");
-		rd.forward(request, response);
+		RequestDispatcher rd=null;
+		HttpSession session = request.getSession(false);
 		
+		if(session.getAttribute("user")==null) {//로그인 안되어있을때
+			rd =request.getRequestDispatcher("/loginFrm");
+		} else {//로그인 되어있을때
+			 rd = request.getRequestDispatcher("/playList");
+		}
+		rd.forward(request, response);
 	}
 
 	/**

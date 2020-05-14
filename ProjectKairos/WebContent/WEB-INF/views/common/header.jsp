@@ -69,7 +69,7 @@ prefix="c"%>
       <!-- 이용권 서블릿 /voucherFrm 작성필요 -->
       <span><a href="/voucherFrm">이용권</a></span>
       <!-- 이용권 서블릿 /myMusicFrm 작성필요 -->
-      <span><a href="/playList">My Music</a></span>
+      <span><a href="/myMusic">My Music</a></span>
     </div>
   </nav>
 </header>
