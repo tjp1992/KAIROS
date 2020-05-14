@@ -23,7 +23,7 @@
 	<section>
 	
 	<div class="top">
-		<span class="inner1">제목  </span>
+		<span class="inner1">제목  </span><span>${ }</span>
 		<span class="inner2">작성일   </span>
 	</div>
 	<div class="middle">

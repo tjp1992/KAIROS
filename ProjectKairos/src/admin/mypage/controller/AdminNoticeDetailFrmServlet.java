@@ -28,6 +28,8 @@ public class AdminNoticeDetailFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int noticeNum = Integer.parseInt(request.getParameter("noticeNo"));
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeDetail.jsp");
 		rd.forward(request, response);
 	}

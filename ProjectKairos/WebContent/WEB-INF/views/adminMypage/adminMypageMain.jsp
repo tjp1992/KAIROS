@@ -27,7 +27,7 @@
 <script>
 	$(function() {
 		$("#goNotice").click(function() {
-			location.href = "/adminNotice";
+			location.href = "/adminNotice?reqPage=1";
 		});
 		$("#goQuesion").click(function() {
 			location.href = "/adminQuestion";
