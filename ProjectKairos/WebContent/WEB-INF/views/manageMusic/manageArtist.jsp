@@ -20,11 +20,25 @@ pageEncoding="UTF-8"%>
     <section>
       <div class="insert_wrapper">
         <div class="input_artist cont">
-          <span>가수 이름</span>
-          <input type="text" name="artist" id="artist" />
-          <button type="submit" class="btn btn-light">
-            <i class="fas fa-search"></i>
-          </button>
+          <form>
+            <span>가수 이름</span>
+            <input type="text" name="artist" id="artist" />
+            <button type="submit" class="btn btn-light">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <div class="input_company cont">
+          <span>소속사</span>
+          <input type="text" name="company" id="company" />
+        </div>
+        <div class="input_agent cont">
+          <span>담당자</span>
+          <input type="text" name="agent" id="agent" />
+        </div>
+        <div class="input_agent_phone cont">
+          <span>담당자 연락처</span>
+          <input type="text" name="agent_phone" id="agent_phone" />
         </div>
         <div class="btn_wrapper">
           <button type="submit" class="btn btn-primary">작성 완료</button>
