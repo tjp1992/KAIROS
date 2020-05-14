@@ -11,8 +11,6 @@ prefix="c"%>
   <c:if test="${empty sessionScope.user }">
     <div class="ld-header_top_wrapper">
       <!-- 로그인 서블릿 /loginFrm 작성 필요 -->
-      <!-- 임시 마이페이지  -->
-       <a href="/mypageFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <a href="/adminMypage"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <span>
         <!-- 로그인 서블릿 /loginFrm 작성 필요 -->
