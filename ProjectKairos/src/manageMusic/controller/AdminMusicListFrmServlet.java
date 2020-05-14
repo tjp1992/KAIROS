@@ -1,8 +1,6 @@
-package search.controller;
+package manageMusic.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SearchFrmServlet
+ * Servlet implementation class AdminMusicListFrmServlet
  */
-@WebServlet(name = "SearchFrm", urlPatterns = { "/searchFrm" })
-public class SearchFrmServlet extends HttpServlet {
+@WebServlet(name = "AdminMusicListFrm", urlPatterns = { "/adminMusicListFrm" })
+public class AdminMusicListFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchFrmServlet() {
+    public AdminMusicListFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +26,7 @@ public class SearchFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("/search").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/manageMusic/adminMusicList.jsp").forward(request, response);
 		
 	}
 
