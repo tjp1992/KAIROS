@@ -11,6 +11,8 @@ prefix="c"%>
   <c:if test="${empty sessionScope.user }">
     <div class="ld-header_top_wrapper">
       <!-- 로그인 서블릿 /loginFrm 작성 필요 -->
+      <!-- 임시 마이페이지  -->
+       <a href="/mypageFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <a href="/adminMypage"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <span>
         <!-- 로그인 서블릿 /loginFrm 작성 필요 -->
@@ -24,13 +26,30 @@ prefix="c"%>
   </c:if>
   <!-- 유저가 로그인 되었을 경우 표시됨 -->
   <c:if test="${not empty sessionScope.user }">
+  	<c:if test="${sessionScope.user.userId == 'admin' }">
+  		<div class="ld-header_top_wrapper">
+      	<!-- 마이페이지 서블릿 /mypageFrm 작성 필요-->
+      	<a href="/adminMypage"> <img src="/src/imgs/icons/user.png" alt="" /></a>
+      	<span>
+        <a href="/adminMypage">${sessionScope.user.userName }</a>
+      	</span>
+      	<span>
+      	<a href="/logout">로그아웃</a>
+      </span>
+   		 </div>
+ 	</c:if>
+ 	<c:if test="${not sessionScope.user.userId == 'admin' }">
     <div class="ld-header_top_wrapper">
       <!-- 마이페이지 서블릿 /mypageFrm 작성 필요-->
       <a href="/mypageFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
       <span>
         <a href="/mypageFrm">${sessionScope.user.userName }</a>
       </span>
+      <span>
+      	<a href="/logout">로그아웃</a>
+      </span>
     </div>
+    </c:if>
   </c:if>
   <nav>
     <div class="ld-main_wrapper">
@@ -42,7 +61,7 @@ prefix="c"%>
       <!-- 랭킹차트 서블릿 /rankingFrm 작성 필요 -->
       <span><a href="/rankingFrm">차트</a></span>
       <form action="/searchFrm" method="GET" class="ld-search">
-        <input type="text" id="ld-keyword" />
+        <input type="text" name="keyword" id="ld-keyword" />
         <button type="submit" id="ld-search">
           <img src="/src/imgs/icons/search.png" alt="" />
         </button>

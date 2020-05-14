@@ -26,7 +26,7 @@ public class ManageMusicFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/manageMusic/manageMusic.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/manageMusic/manageMusicAdmin.jsp").forward(request, response);
 		
 	}
 
