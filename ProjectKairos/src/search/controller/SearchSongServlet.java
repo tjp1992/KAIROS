@@ -35,11 +35,16 @@ public class SearchSongServlet extends HttpServlet {
 		String category = request.getParameter("category");
 		String keyword = request.getParameter("keyword");
 		
+		SearchResult sResult = null;
+		
 		if(category == null) {
-			System.out.println("카테고리 없음");
+			sResult = new SearchSongService().searchByKeword(keyword);
+		} else {
+					
+			sResult = new SearchSongService().searchByKeword(keyword, category);					
 		}
 		
-		SearchResult sResult = new SearchSongService().searchByKeword(keyword);
+		
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("list", sResult.getList());
 		request.setAttribute("totalNum", sResult.getTotalResult());

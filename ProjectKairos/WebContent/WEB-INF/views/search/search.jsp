@@ -28,9 +28,15 @@ prefix="c"%>
           </select>
         </div>
         <div class="search_category">
-          <a href="#"><span>곡명</span></a>
-          <a href="#"><span>아티스트</span></a>
-          <a href="#"><span>앨범</span></a>
+          <a href="/searchSong?category=1&keyword=${keyword}">
+            <span>곡명</span></a
+          >
+          <a href="/searchSong?category=2&keyword=${keyword}"
+            ><span>아티스트</span></a
+          >
+          <a href="/searchSong?category=3&keyword=${keyword}"
+            ><span>앨범</span></a
+          >
         </div>
         <div>
           <label>
