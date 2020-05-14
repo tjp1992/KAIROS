@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import song.vo.RankingSong;
+import song.vo.Song;
 
 public class RankingDao {
 
@@ -15,15 +16,15 @@ public class RankingDao {
 		ArrayList<RankingSong> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select rownum, n.* from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n";
+		String query = "select rownum as rnum, n.* from (select * from song order by like_count desc)n;";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				RankingSong s = new RankingSong();
 				list = new ArrayList<RankingSong>();
-				s.setRankNo(rset.getInt("rownum"));
-				s.setAlbumName(rset.getString("album_name"));
+				s.setRankNo(rset.getInt("rnum"));
+				s.setAlbumNo(rset.getInt("album_no"));
 				s.setFilename(rset.getString("filename"));
 				s.setFilepath(rset.getString("filepath"));
 				s.setLicensed(rset.getInt("licensed"));

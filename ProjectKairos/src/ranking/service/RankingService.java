@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import ranking.dao.RankingDao;
 import song.vo.RankingSong;
+import song.vo.Song;
 
 public class RankingService {
 
