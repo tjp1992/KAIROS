@@ -38,7 +38,7 @@ prefix="c"%>
         </span>
       </div>
     </c:if>
-    <c:if test="${not sessionScope.user.userId == 'admin' }">
+    <c:if test="${sessionScope.user.userId != 'admin' }">
       <div class="ld-header_top_wrapper">
         <!-- 마이페이지 서블릿 /mypageFrm 작성 필요-->
         <a href="/mypageFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
