@@ -1,4 +1,4 @@
-package pjy.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
 
@@ -8,22 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import user.service.UserService;
-import user.vo.User;
+import admin.mypage.model.service.NoticeService;
+import admin.mypage.model.vo.Notice;
+
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class InsertNoticeServlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "InsertNotice", urlPatterns = { "/insertNotice" })
+public class InsertNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public InsertNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +32,22 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("id");
-		String userPw = request.getParameter("pw");
-		User user = new User();
-		user.setUserId(userId);
-		user.setUserPw(userPw);
-		user = new UserService().selectUser(user);
+		request.setCharacterEncoding("utf-8");
+		Notice n = new Notice();
+		n.setNoticeTitle(request.getParameter("noticeTitle"));
+		n.setNoticeContent(request.getParameter("noticeContent"));
+		System.out.println(request.getParameter("noticeTitle"));
+		int result = new NoticeService().insertNotice(n);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		request.setAttribute("loc", "/");
-		if(user==null) {
-			request.setAttribute("msg", "로그인 실패");
+		if(result>0) {
+			request.setAttribute("msg", "등록이 완료되었습니다.");
+			request.setAttribute("loc", "/adminNotice?reqPage=1");
 		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			request.setAttribute("msg", "로그인 성공");
-			System.out.println(session);
+			request.setAttribute("msg", "등록이 취소되었습니다.");
+			request.setAttribute("loc", "/adminNoticeWriteFrm");
 		}
 		rd.forward(request, response);
+		
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package pjy.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
 
@@ -8,22 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import user.service.UserService;
-import user.vo.User;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class AdminQuestionAnswerServlet
  */
-@WebServlet(name = "Login", urlPatterns = { "/login" })
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "AdminQuestionAnswer", urlPatterns = { "/adminQuestionAnswer" })
+public class AdminQuestionAnswerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public AdminQuestionAnswerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +28,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("id");
-		String userPw = request.getParameter("pw");
-		User user = new User();
-		user.setUserId(userId);
-		user.setUserPw(userPw);
-		user = new UserService().selectUser(user);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		request.setAttribute("loc", "/");
-		if(user==null) {
-			request.setAttribute("msg", "로그인 실패");
-		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
-			request.setAttribute("msg", "로그인 성공");
-			System.out.println(session);
-		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminQuestionAnswer.jsp");
 		rd.forward(request, response);
 	}
 

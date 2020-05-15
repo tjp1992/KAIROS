@@ -38,7 +38,7 @@ prefix="c"%>
         </span>
       </div>
     </c:if>
-    <c:if test="${not sessionScope.user.userId == 'admin' }">
+    <c:if test="${sessionScope.user.userId != 'admin' }">
       <div class="ld-header_top_wrapper">
         <!-- 마이페이지 서블릿 /mypageFrm 작성 필요-->
         <a href="/mypageFrm"> <img src="/src/imgs/icons/user.png" alt="" /></a>
@@ -57,7 +57,7 @@ prefix="c"%>
     </div>
     <div class="ld-menu_wrapper">
       <!-- 공지사항 서블릿 /noticeFrm 작성 필요 -->
-      <span><a href="/noticeFrm">공지사항</a></span>
+      <span><a href="/adminNotice?reqPage=1">공지사항</a></span>
       <!-- 랭킹차트 서블릿 /rankingFrm 작성 필요 -->
       <span><a href="/rankingFrm?reqPage=1&reqType=song">차트</a></span>
       <form action="/searchFrm" method="GET" class="ld-search">

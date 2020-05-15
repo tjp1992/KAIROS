@@ -4,17 +4,18 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import admin.mypage.model.dao.NoticeDao;
+import admin.mypage.model.dao.TicketDao;
 import admin.mypage.model.vo.Notice;
 import admin.mypage.model.vo.NoticePageData;
 import common.JDBCTemplate;
 
-public class NoticeService {
+public class TicketService {
 
 	public NoticePageData selectList(int reqPage) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 10; // 한 페이지당 게시물 수
 		// 총 게시물 수를 구해오는 dao 호출
-		int totalCount = new NoticeDao().totalCount(conn);
+		int totalCount = new TicketDao().totalCount(conn);
 		// 총 페이지 수를 연산
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
@@ -54,60 +55,7 @@ public class NoticeService {
 		NoticePageData pd = new NoticePageData(list, pageNavi);
 		JDBCTemplate.close(conn);
 		return pd;
-	}
-
-	public Notice noticeDetail(int noticeNum) {
-		Connection conn = JDBCTemplate.getConnection();
-		Notice n = new NoticeDao().noticeDetail(conn,noticeNum);
-		JDBCTemplate.close(conn);
-		
-		return n;
-	}
-
-	public int deleteNotice(int noticeNo) {
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new NoticeDao().deleteNotice(conn, noticeNo);
-		if (result > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public int insertNotice(Notice n) {
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new NoticeDao().insertNotice(conn,n);
-		if (result > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
-		return result;
-
-	}
-
-	public Notice updateNotice(int noticeNo) {
-		Connection conn = JDBCTemplate.getConnection();
-		Notice n = new NoticeDao().insertNotice(conn,noticeNo);
-		JDBCTemplate.close(conn);
-		return n;
-	}
-
-	public int modifyNotice(int noticeNo, String title, String content) {
-		Connection conn = JDBCTemplate.getConnection();
-		int result = new NoticeDao().modifyNotice(conn,noticeNo,title,content);
-		if(result>0) {
-			JDBCTemplate.commit(conn);
-		}else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
-		
-		return result;
-		
+		return null;
 	}
 
 }
