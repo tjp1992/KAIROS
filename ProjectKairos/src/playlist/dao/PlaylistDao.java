@@ -17,7 +17,7 @@ public class PlaylistDao {
 		ResultSet rset=null;
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		String query = "select (select order_no from playlist where user_id = ? and listed_song_no=song.song_no) "
-				+ "as order_no, song_title, song_artist, album_name "
+				+ "as order_no,song_no, song_title, song_artist,filepath, album_name "
 				+ "from song join album using (album_no) "
 				+ "where song_no in (select LISTED_SONG_NO from playlist where user_id =?) "
 				+ "order by order_no";
@@ -29,9 +29,11 @@ public class PlaylistDao {
 			while(rset.next()) {
 				Playlist p = new Playlist();
 				p.setOrderNo(rset.getInt("order_no"));
+				p.setSongNo(rset.getInt("song_no"));
 				p.setSongTitle(rset.getString("song_title"));
 				p.setSongArtist(rset.getString("song_artist"));
 				p.setAlbumName(rset.getString("album_name"));
+				p.setFilepath(rset.getString("filepath"));
 				list.add(p);
 			}
 		} catch (SQLException e) {

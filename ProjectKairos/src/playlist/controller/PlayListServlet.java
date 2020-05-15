@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import likelist.dao.LikelistDao;
 import playlist.service.PlaylistService;
 import playlist.vo.Playlist;
 import user.vo.User;
@@ -40,6 +41,7 @@ public class PlayListServlet extends HttpServlet {
 		User u = (User)session.getAttribute("user");
 		//3.
 		ArrayList<Playlist> list=new PlaylistService().myPlaylistView(u);
+		
 		//4.
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/playList.jsp");

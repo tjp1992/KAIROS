@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
             <div class="table">
                 <table>
                 	<c:forEach items="${list }" var="p">
-                    <tr class="pltr1">
+                    <tr class="pltr1" songNo="${p.songNo }">
                         <th width="5%"><input class="plchk" type="checkbox"></th>
                         <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="60%">
@@ -62,7 +62,12 @@ pageEncoding="UTF-8"%>
                         </td>
                         <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
                         <th width="10%" class="deleteimg"><i class="icondelete far fa-trash-alt"></i></th>
-                        <th width="10%" class="heartimg"><i class="iconheart far fa-heart"></i></th>
+                        <c:if test="${p.liked==0 }">
+                        <th width="10%" class="heartimg"><i style="color:black;" class="iconheart far fa-heart"></i></th>
+                        </c:if>
+                        <c:if test="${p.liked==1 }">
+                        <th width="10%" class="heartimg"><i style="color:red;" class="iconheart fas fa-heart"></i></th>
+                        </c:if>
                     </tr>
                     </c:forEach>
                 </table>
@@ -93,13 +98,32 @@ pageEncoding="UTF-8"%>
             });
 
             $(".heartimg").children().click(function() {
-                if ($(this).attr("class") == "iconheart far fa-heart") {
-                    $(this).attr("class", "iconheart fas fa-hearticonheart fas fa-heart");
-                    $(this).css("color", "red");
-                } else {
-                    $(this).attr("class", "iconheart far fa-heart");
-                    $(this).css("color", "black");
-                }
+            	var songNo = $(this).parent().parent().attr("songNo");
+            	var icon = $(this);
+            	$.ajax({
+            		url:"/checkLike",
+            		type:"POST",
+            		data:{songNo:songNo},
+            		success:function(data){
+            			var result = Number(data);
+            			switch(result){
+            			case -1 ://db조작에 실패했을때
+            				break;
+            			case 0 ://0은  빈하트에서 빨간하트로      			
+            				icon.attr("class", "iconheart fas fa-hearticonheart fas fa-heart");
+            				icon.css("color", "red");
+            				break;
+            			case 1 : //빨간하트에서 빈하트로
+            				icon.attr("class", "iconheart far fa-heart");
+            				icon.css("color", "black");
+            				break;
+            			}
+            		},
+            		error:function(){}
+            		
+            	});
+            	
+                
             });
             $(".pltr1").hover(function() {
                 $(this).css("background-color", "#F2F6FC");
