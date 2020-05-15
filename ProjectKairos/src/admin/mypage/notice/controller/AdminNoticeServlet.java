@@ -1,8 +1,6 @@
-package admin.mypage.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,17 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.service.NoticeService;
+import admin.mypage.model.vo.Notice;
+import admin.mypage.model.vo.NoticePageData;
+
 /**
- * Servlet implementation class AdminNoticeWriteFrmServlet
+ * Servlet implementation class AdminNoticeServlet
  */
-@WebServlet(name = "AdminNoticeWriteFrm", urlPatterns = { "/adminNoticeWriteFrm" })
-public class AdminNoticeWriteFrmServlet extends HttpServlet {
+@WebServlet(name = "AdminNotice", urlPatterns = { "/adminNotice" })
+public class AdminNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeWriteFrmServlet() {
+    public AdminNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +32,13 @@ public class AdminNoticeWriteFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
-		Date time = new Date();
-		
-		String today = format1.format(time);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeWriter.jsp");
-		request.setAttribute("today", today);
+		request.setCharacterEncoding("utf-8");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		NoticePageData pd = new NoticeService().selectList(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNotice.jsp");
+		request.setAttribute("list", pd.getList());
+		request.setAttribute("pageNavi", pd.getPageNavi());
+		request.setAttribute("req", reqPage);
 		rd.forward(request, response);
 	}
 

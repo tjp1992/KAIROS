@@ -132,4 +132,51 @@ public class NoticeDao {
 	
 	}
 
+	public Notice insertNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice n = null;
+		String query = "select * from notice where notice_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, noticeNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				n = new Notice();
+				n.setNoticeNo(rset.getInt("notice_no"));
+				n.setNoticeTitle(rset.getString("notice_title"));
+				n.setNoticeDate(rset.getDate("notice_date"));
+				n.setNoticeContent(rset.getString("notice_content"));
+				n.setNoticeFilename(rset.getString("notice_filename"));
+				n.setNoticeFilepath(rset.getString("notice_filepath"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return n;
+	}
+
+	public int modifyNotice(Connection conn, int noticeNo, String title, String content) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update notice set notice_title=?,notice_content=? where notice_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, noticeNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

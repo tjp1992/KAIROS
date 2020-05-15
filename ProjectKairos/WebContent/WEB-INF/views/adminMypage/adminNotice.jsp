@@ -63,8 +63,7 @@
 				<tr class="move" id="move" onclick="detail(${n.noticeNo},${req })" >
 					<th scope="row" class="num">${(req-1)*10 + i.count }</th>
 					<td>${n.noticeTitle }</td>
-					<td class="td2">${n.noticeDate }</td>
-					<td class="td3"><button id="delete" onclick="deleteNotice('${n.noticeNo}',event,${req })">삭제</button></td>
+					<td class="td2" >${n.noticeDate }</td>
 				</tr>
 			</c:forEach>
 		</tbody>

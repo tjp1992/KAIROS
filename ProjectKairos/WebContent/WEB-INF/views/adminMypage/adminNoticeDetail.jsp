@@ -15,12 +15,14 @@
 		$("#back").click(function(){
 			location.href = "/adminNotice?reqPage="+${req };
 		});
+		$("#modify").click(function(){
+			location.href = "/modifyNoticeFrm?noticeNo="+${n.noticeNo}+"&reqPage="+${req };
+		});
 	});
 	function deleteNotice(no,event,req){
 		if (confirm("삭제하시겠습니까?")) {
 			event.stopPropagation();
 			location.href = "/deleteNotice?noticeNo="+no+"&reqPage="+req;
-			
 		}
 	}
 </script>

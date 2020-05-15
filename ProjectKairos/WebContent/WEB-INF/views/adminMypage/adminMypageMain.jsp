@@ -33,7 +33,10 @@
 			location.href = "/adminQuestion";
 		});
 		$("#goTicket").click(function() {
-			location.href = "/adminTicket";
+			location.href = "/adminTicket?reqPage=1";
+		});
+		$("#goMusic").click(function() {
+			location.href = "/manageMusicFrm";
 		});
 	})
 </script>

@@ -1,4 +1,4 @@
-package admin.mypage.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
 

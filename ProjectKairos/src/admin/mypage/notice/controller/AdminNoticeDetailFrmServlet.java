@@ -1,4 +1,4 @@
-package admin.mypage.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
 
@@ -32,6 +32,7 @@ public class AdminNoticeDetailFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("reqPage"));
 		int noticeNum = Integer.parseInt(request.getParameter("noticeNo"));
 		int req = Integer.parseInt(request.getParameter("reqPage"));
 		Notice n = new NoticeService().noticeDetail(noticeNum);
