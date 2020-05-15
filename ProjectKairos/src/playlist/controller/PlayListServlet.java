@@ -39,8 +39,9 @@ public class PlayListServlet extends HttpServlet {
 		//2.
 		HttpSession session =request.getSession(false);
 		User u = (User)session.getAttribute("user");
+		String userId = u.getUserId();
 		//3.
-		ArrayList<Playlist> list=new PlaylistService().myPlaylistView(u);
+		ArrayList<Playlist> list=new PlaylistService().myPlaylistView(userId);
 		
 		//4.
 		

@@ -1,9 +1,12 @@
 package likelist.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import likelist.dao.LikelistDao;
+import playlist.vo.Playlist;
+import user.vo.User;
 
 public class LikelistService {
 
@@ -26,6 +29,13 @@ public class LikelistService {
 		
 		JDBCTemplate.close(conn);
 		return chkResult;
+	}
+
+	public ArrayList<Playlist> likeListView(User u) {
+		Connection conn= JDBCTemplate.getConnection();
+		ArrayList<Playlist> list = new LikelistDao().likeListView(conn, u);
+		JDBCTemplate.close(conn);
+		return list;
 	}
 
 }
