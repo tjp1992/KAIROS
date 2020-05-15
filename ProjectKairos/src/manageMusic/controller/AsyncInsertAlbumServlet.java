@@ -1,26 +1,27 @@
 package manageMusic.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import user.vo.User;
+import manageMusic.model.service.AlbumService;
 
 /**
- * Servlet implementation class InsertMusicFrmServlet
+ * Servlet implementation class AsyncInsertAlbumServlet
  */
-@WebServlet(name = "InsertMusicFrm", urlPatterns = { "/insertMusicFrm" })
-public class InsertMusicFrmServlet extends HttpServlet {
+@WebServlet(name = "AsyncInsertAlbum", urlPatterns = { "/asyncInsertAlbum" })
+public class AsyncInsertAlbumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertMusicFrmServlet() {
+    public AsyncInsertAlbumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,15 @@ public class InsertMusicFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-HttpSession session = request.getSession(false);
+		String albumOwner = request.getParameter("albumOwner");
+		String albumName = request.getParameter("albumName");
 		
-		User user = (User) session.getAttribute("user");
+		int result = new AlbumService().insertAlbum(albumOwner, albumName);
 		
-		if(user == null) {
-			
-			request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
-			
-		} else {
-			
-			request.getRequestDispatcher("/WEB-INF/views/manageMusic/insertMusic.jsp").forward(request, response);
-		}
+		PrintWriter out = response.getWriter();
 		
+		out.print(result);
+		out.flush();
 		
 	}
 

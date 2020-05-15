@@ -18,7 +18,12 @@ pageEncoding="UTF-8"%>
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
       <div class="insert_wrapper">
-        <form action="#" method="POST">
+        <form action="" method="POST" id="form-album">
+          <input
+            type="hidden"
+            name="artist"
+            value="${sessionScope.user.userNick}"
+          />
           <div class="input_title cont">
             <span>곡명</span>
             <input type="text" name="title" id="title" />
@@ -28,10 +33,10 @@ pageEncoding="UTF-8"%>
             <select name="albums" id="albums">
               <option value="default">앨범 선택</option>
             </select>
-            <button>+</button>
+            <button type="button" id="add_input_album">+</button>
             <div class="insert_album">
               <input type="text" name="input_album" id="input_album" />
-              <button type="button">앨범 추가</button>
+              <button type="button" id="add_album_btn">앨범 추가</button>
             </div>
           </div>
           <div class="upload_albumImg cont">
@@ -52,8 +57,55 @@ pageEncoding="UTF-8"%>
         </form>
       </div>
     </section>
-
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
+    <script>
+      $(".insert_album").hide();
+
+      $("#add_input_album").click(function () {
+        $(".insert_album").show();
+      });
+
+      $("#add_album_btn").click(function () {
+        const albumOwner = $("input[name=artist]").val();
+        const albumName = $("input[name=input_album]").val();
+
+        $.ajax({
+          url: "/asyncInsertAlbum",
+          type: "POST",
+          data: {
+            albumOwner: albumOwner,
+            albumName: albumName,
+          },
+          success: function (data) {
+            const result = Number(data);
+
+            switch (result) {
+              case -1: // 같은 이름의 앨범이 있을때
+                alert("이미 같은 이름의 앨범이 있습니다.");
+                break;
+
+              case 0: // 앨범 등록에 실패 했을때
+                alert(
+                  "앨범 등록에 실패하였습니다. 오류가 반복되면 관리자에게 문의하세요."
+                );
+                break;
+
+              case 1: // 앨범 등록에 성공 했을때
+                $("#input_album").val("");
+                $(".insert_album").hide();
+
+                break;
+            }
+
+            console.log(data);
+            console.log(result);
+          },
+          error: function () {
+            alert("앨범 등록에 실패하였습니다.");
+          },
+        });
+      });
+    </script>
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>
 </html>
