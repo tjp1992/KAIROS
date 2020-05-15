@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import song.vo.SearchSong;
+import user.vo.User;
 
 public class SearchSongDao {
 
@@ -17,7 +18,7 @@ public class SearchSongDao {
 		PreparedStatement pst = null;
 		ResultSet rset = null;
 		
-		String query = "select * from (select rownum,t.* from (select s.*,(select album_name from album a where a.album_no = s.album_no and a.album_owner = s.song_artist)as album_name from song s order by S.LIKE_COUNT desc)t where song_title like '%"+keyword+"%' or song_artist like '%"+keyword+"%' or album_name like '%"+keyword+"%') where rownum between ? and ?";
+		String query = "SELECT ROWNUM, T.* FROM(SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO) WHERE song_title like '%"+keyword+"%' or song_artist like '%"+keyword+"%' or album_name like '%"+keyword+"%' ORDER BY S.LIKE_COUNT DESC)T WHERE ROWNUM BETWEEN ? AND ? ORDER BY ROWNUM";
 		
 		
 		try {
@@ -43,6 +44,7 @@ public class SearchSongDao {
 				s.setSongGenre(rset.getString("song_genre"));
 				s.setSongNo(rset.getInt("song_no"));
 				s.setSongTitle(rset.getString("song_title"));
+				s.setLiked(0);
 				
 				list.add(s);
 			}
@@ -64,7 +66,7 @@ public class SearchSongDao {
 		
 		PreparedStatement pst = null;
 		ResultSet rset = null;
-		String query = "select count(*) from (select rownum,t.* from (select s.*,(select album_name from album a where a.album_no = s.album_no and a.album_owner = s.song_artist)as album_name from song s order by S.LIKE_COUNT desc)t where song_title like '%"+keyword+"%' or song_artist like '%"+keyword+"%' or album_name like '%"+keyword+"%')";
+		String query = "select count(*) from (SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO) WHERE song_title like '%"+keyword+"%' or song_artist like '%"+keyword+"%' or album_name like '%"+keyword+"%' ORDER BY S.LIKE_COUNT DESC)";
 		
 		try {
 			pst = conn.prepareStatement(query);
@@ -85,14 +87,30 @@ public class SearchSongDao {
 		return totalResult;
 	}
 
-	public ArrayList<SearchSong> searchByKeword(Connection conn, String keyword, String category, int start, int end) {
+	public ArrayList<SearchSong> searchByKeword(Connection conn, String keyword, String category, User u, int start, int end) {
 
 
 		ArrayList<SearchSong> list = new ArrayList<SearchSong>();
 		PreparedStatement pst = null;
 		ResultSet rset = null;
 		
-		String query = "select * from (select rownum,t.* from (select s.*,(select album_name from album a where a.album_no = s.album_no and a.album_owner = s.song_artist)as album_name from song s order by S.LIKE_COUNT desc)t where "+category+" like '%"+keyword+"%') where rownum between ? and ?";
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("SELECT ROWNUM, T.*");
+		
+		if(u != null) {
+			sb.append(",NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = SONG_NO),0)AS LIKED ");
+		}
+		
+		sb.append("FROM(SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO)");
+		
+		if(category != null) {
+			sb.append("WHERE "+category+" like '%"+keyword+"%' ORDER BY S.LIKE_COUNT DESC)T WHERE ROWNUM BETWEEN ? AND ? ORDER BY ROWNUM");
+		} else {
+			sb.append("WHERE song_title like '%"+keyword+"%' or song_artist like '%"+keyword+"%' or album_name like '%"+keyword+"%' ORDER BY S.LIKE_COUNT DESC)T WHERE ROWNUM BETWEEN ? AND ? ORDER BY ROWNUM");
+		}		
+		
+		String query = sb.toString();
 					
 		try {
 			pst = conn.prepareStatement(query);
@@ -117,6 +135,11 @@ public class SearchSongDao {
 				s.setSongGenre(rset.getString("song_genre"));
 				s.setSongNo(rset.getInt("song_no"));
 				s.setSongTitle(rset.getString("song_title"));
+				if(u!=null) {
+					s.setLiked(rset.getInt("liked"));					
+				} else {
+					s.setLiked(0);
+				}
 				
 				list.add(s);
 			}

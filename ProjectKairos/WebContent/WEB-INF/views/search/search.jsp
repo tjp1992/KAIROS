@@ -114,7 +114,24 @@ prefix="c"%>
                   <td class="artist">${s.songArtist }</td>
                   <td class="album_name">${s.albumName }</td>
                   <td class="like_count multi_cont">
-                    <i class="far fa-heart likeBtn" songno="${s.songNo}"></i>
+                    <c:if test="${not empty sessionScope.user }">
+                      <c:if test="${s.liked == 0}">
+                        <i
+                          class="far fa-heart likeBtn"
+                          songno="${s.songNo}"
+                        ></i>
+                      </c:if>
+                      <c:if test="${s.liked > 0 }">
+                        <i
+                          style="color: red;"
+                          class="fas fa-heart likeBtn"
+                          songno="${s.songNo}"
+                        ></i>
+                      </c:if>
+                    </c:if>
+                    <c:if test="${empty sessionScope.user }">
+                      <i class="far fa-heart likeBtn" songno="${s.songNo}"></i>
+                    </c:if>
                     <span>${s.likeCount }</span>
                   </td>
                   <td class="play_count">${s.playCount }</td>

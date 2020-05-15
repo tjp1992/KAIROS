@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import search.model.service.SearchSongService;
 import search.model.vo.SearchResult;
 import song.vo.SearchSong;
+import user.vo.User;
 
 /**
  * Servlet implementation class SearchSongServlet
@@ -32,17 +34,22 @@ public class SearchSongServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session =request.getSession(false); 
+		
+		
+		User u = (User)session.getAttribute("user");		
+		
 		String category = request.getParameter("category");
 		String keyword = request.getParameter("keyword");
 		
 		SearchResult sResult = null;
 		
-		if(category == null) {
-			sResult = new SearchSongService().searchByKeword(keyword);
-		} else {
-					
-			sResult = new SearchSongService().searchByKeword(keyword, category);					
-		}
+//		if(category == null) {
+//			sResult = new SearchSongService().searchByKeword(keyword,u);
+//		} else {					
+//		}
+		sResult = new SearchSongService().searchByKeword(keyword, category,u);					
 		
 		
 		request.setAttribute("keyword", keyword);
