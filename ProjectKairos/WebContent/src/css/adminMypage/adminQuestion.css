@@ -19,11 +19,11 @@
 	}
 	.insertdate{
 		width: 20%;
-		text-indent: 135px;
+		text-align: center;
 	}
 	.delete{
 		width : 10%;
-		text-align: right;
+		
 	}
 	.move{
 		cursor:pointer;
@@ -53,6 +53,7 @@
 	.table>tbody>tr>td{
 		height: 40px;
 		line-height: 40px;
+		text-align: center;
 	}
 	.table{
 		font-size: 15px;
@@ -74,10 +75,19 @@
 	#search{
 		width: 200px;
 	}
+	#footNav2{
+		border-bottom: none;
+	}
+	#footNav{
+		border-bottom: none;
+	}
 	#sear{
 		font-size: 25px;
 		margin-top: 5px;
 		color:gray;
 		cursor: pointer;
+	}
+	.td{
+		
 	}
 	

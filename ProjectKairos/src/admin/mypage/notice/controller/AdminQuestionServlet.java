@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.service.QuestionService;
+import admin.mypage.model.vo.NoticePageData;
+import admin.mypage.model.vo.QuestionPageData;
+
 /**
  * Servlet implementation class AdminQuestionServlet
  */
@@ -28,7 +32,18 @@ public class AdminQuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int check = Integer.parseInt(request.getParameter("check"));
+		QuestionPageData qd = new QuestionService().selectList(reqPage);
+		QuestionPageData qd2 = new QuestionService().selectList2(reqPage);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminQuestion.jsp");
+		request.setAttribute("check", check);
+		request.setAttribute("list2", qd2.getList());
+		request.setAttribute("pageNavi2", qd2.getPageNavi());
+		request.setAttribute("list", qd.getList());
+		request.setAttribute("pageNavi", qd.getPageNavi());
+		request.setAttribute("req", reqPage);
 		rd.forward(request, response);
 	}
 

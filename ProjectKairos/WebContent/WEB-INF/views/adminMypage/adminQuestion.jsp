@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,16 +49,22 @@
 	<div class="bs-example bs-example-tabs" role="tabpanel"
 		data-example-id="togglable-tabs">
 		<ul id="myTab" class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a href="#home"
-				id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-				aria-expanded="true"><b>답변 대기</b></a></li>
+		<c:if test="${check == 1}">
+			<li role="presentation" class="active">
+			<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><b>답변 대기</b></a></li>
 			<li role="presentation" class=""><a href="#profile" role="tab"
 				id="profile-tab" data-toggle="tab" aria-controls="profile"
 				aria-expanded="false"><b>답변 완료</b></a></li>
+		</c:if>
+		<c:if test="${check == 2}">
+			<li role="presentation" class="">
+			<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false"><b>답변 대기</b></a></li>
+			<li role="presentation" class="active">
+			<a href="#profile"  role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true"><b>답변 완료</b></a></li>
+		</c:if>
 		</ul>
 		<div id="myTabContent" class="tab-content">
-			<div role="tabpanel" class="tab-pane fade active in" id="home"
-				aria-labelledby="home-tab">
+			<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -68,44 +75,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="move" id="move">
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"><button>삭제</button></td>
-						</tr>
-
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"><button>삭제</button></td>
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"><button>삭제</button></td>
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"><button>삭제</button></td>
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"><button>삭제</button></td>
-						</tr>
+						<c:forEach items="${list }" var="p" varStatus="i">
+							<tr class="move" id="move"
+								onclick="detail(${n.noticeNo},${req })">
+								<th scope="row" class="num">${(req-1)*10 + i.count }</th>
+								<td>${p.userId }</td>
+								<td class="title">${p.inqTitle }</td>
+								<td class="insertdate">${p.inqDate }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+				<nav id="footNav">
+					<ul class="pagination">${pageNavi }</ul>
+				</nav>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade" id="profile"
@@ -120,44 +103,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="move" id="move2">
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"></td>
-						</tr>
-
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"></td>
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"></td>
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"></td>
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="title">gd</td>
-							<td class="insertdate">2020-04-05</td>
-							<td class="delete"></td>
-						</tr>
+						<c:forEach items="${list2 }" var="p" varStatus="i">
+							<tr class="move" id="move"
+								onclick="detail(${n.noticeNo},${req })">
+								<th scope="row" class="num">${(req-1)*10 + i.count }</th>
+								<td>${p.userId }</td>
+								<td class="title">${p.inqTitle }</td>
+								<td class="insertdate">${p.inqDate }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
+				<nav id="footNav2">
+					<ul class="pagination">${pageNavi2 }</ul>
+				</nav>
 			</div>
 
 		</div>
@@ -166,25 +125,27 @@
 		<div class="col-lg-6">
 			<div class="input-group">
 				<div class="input-group-btn">
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">id</button>
+					<button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown" aria-expanded="false">id</button>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">id</a></li>
 					</ul>
-					
+
 				</div>
 				<!-- /btn-group -->
-				<input type="text" class="form-control " aria-label="..."id="search"> <span class="glyphicon glyphicon-search" id="sear"></span>
-				
+				<input type="text" class="form-control " aria-label="..."
+					id="search"> <span class="glyphicon glyphicon-search"
+					id="sear"></span>
 			</div>
 			<!-- /input-group -->
-			
+
 		</div>
-		</div>
-		<!-- /.col-lg-6 -->
-		<div style="text-align: right">
-				<button type="button" class="btn btn-default" id="back">돌아가기</button>
-		</div>
-		
+	</div>
+	<!-- /.col-lg-6 -->
+	<div style="text-align: right">
+		<button type="button" class="btn btn-default" id="back">돌아가기</button>
+	</div>
+
 	</section>
 </body>
 </html>

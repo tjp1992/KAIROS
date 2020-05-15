@@ -30,7 +30,7 @@
 			location.href = "/adminNotice?reqPage=1";
 		});
 		$("#goQuesion").click(function() {
-			location.href = "/adminQuestion";
+			location.href = "/adminQuestion?reqPage=1&check=1";
 		});
 		$("#goTicket").click(function() {
 			location.href = "/adminTicket?reqPage=1";
