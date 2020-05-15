@@ -44,12 +44,15 @@
 </script>
 </head>
 <body>
+	 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
 	<h2>공지사항</h2>
+	<c:if test="${sessionScope.user.userId == 'admin' }">
 	<div style="text-align: right">
 		<button type="button" class="btn btn-info" id="write">글쓰기</button>
 	</div>
+	</c:if>
 	<table class="table table-hover">
 		<thead>
 			<tr>
