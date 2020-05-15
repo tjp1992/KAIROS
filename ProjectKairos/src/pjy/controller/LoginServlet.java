@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			request.setAttribute("msg", "로그인 성공");
+			System.out.println(session);
 		}
 		rd.forward(request, response);
 	}
