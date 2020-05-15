@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="/src/css/bootstrap.css" />
@@ -32,9 +31,10 @@ $(function(){
 		});
 	
 	$("#insert").click(function(){
-        oEditors.getById["weditor"].exec("UPDATE_CONTENTS_FIELD", []);
+        oEditors.getById["weditor"].exec("UPDATE_CONTENTS_FIELD", []); 
         $("#insertFrm").submit();
-    });    
+    });
+	
 	
 	// textArea에 이미지 첨부
 	function pasteHTML(filepath){
@@ -47,25 +47,23 @@ $(function(){
 <script>
 $(function(){
 	$("#back").click(function(){
-		location.href = "/adminNotice";
+		location.href = "/adminNoticeDetailFrm?noticeNo="+${n.noticeNo }+"&reqPage="+${req };
 	});	
+	
 });
-
 </script>
-
 </head>
 <body>
-
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <section>
 		<h2 class="h2">공지사항 등록</h2>
 		
-		<form action="/insertNotice" method="post" id="insertFrm">
+		<form action="/modifyNotice" method="post" id="insertFrm">
 			<table class="table table-bordered">
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" class="form-control" name="noticeTitle" id="title">
+						<input type="text" class="form-control" name="noticeTitle" id="title" value="${n.noticeTitle }">
 					</td>
 				</tr>
 				<tr>
@@ -75,18 +73,18 @@ $(function(){
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="noticeContent" rows="5" cols="90" style="width:100%;" id="weditor"></textarea>
+						<textarea name="noticeContent" rows="5" cols="90" style="width:100%;" id="weditor">${n.noticeContent }</textarea>
 					</td>
 				</tr>
 			</table>
 			<div class="bottom">
-				<button type="button" class="btn btn-default bbt" id="insert">등록</button>
-				<button type="button" class="btn btn-default bbt" id="back">돌아가기</button>
+				<input type="hidden" value="${n.noticeNo }" name="noticeNo">
+				<input type="hidden" value="${req }" name="reqPage">
+				<button type="button" class="btn btn-default bbt" id="insert">수정완료</button>
+				<button type="button" class="btn btn-default bbt" id="back">수정취소</button>
 			</div>
 		</form>
 		
 	</section>
-
 </body>
-
 </html>

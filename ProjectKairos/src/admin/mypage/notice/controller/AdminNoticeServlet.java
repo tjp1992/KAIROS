@@ -1,4 +1,4 @@
-package admin.mypage.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
 
@@ -9,17 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.service.NoticeService;
+import admin.mypage.model.vo.Notice;
+import admin.mypage.model.vo.NoticePageData;
+
 /**
- * Servlet implementation class AdminQuestionAnswerServlet
+ * Servlet implementation class AdminNoticeServlet
  */
-@WebServlet(name = "AdminQuestionAnswer", urlPatterns = { "/adminQuestionAnswer" })
-public class AdminQuestionAnswerServlet extends HttpServlet {
+@WebServlet(name = "AdminNotice", urlPatterns = { "/adminNotice" })
+public class AdminNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQuestionAnswerServlet() {
+    public AdminNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +32,13 @@ public class AdminQuestionAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminQuestionAnswer.jsp");
+		request.setCharacterEncoding("utf-8");
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		NoticePageData pd = new NoticeService().selectList(reqPage);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNotice.jsp");
+		request.setAttribute("list", pd.getList());
+		request.setAttribute("pageNavi", pd.getPageNavi());
+		request.setAttribute("req", reqPage);
 		rd.forward(request, response);
 	}
 

@@ -1,25 +1,27 @@
-package admin.mypage.controller;
+package pjy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.service.UserService;
+
 /**
- * Servlet implementation class AdminQuestionDetailFrmServlet
+ * Servlet implementation class OverLapNickServlet
  */
-@WebServlet(name = "AdminQuestionDetailFrm", urlPatterns = { "/adminQuestionDetailFrm" })
-public class AdminQuestionDetailFrmServlet extends HttpServlet {
+@WebServlet(name = "OverLapNick", urlPatterns = { "/overLapNick" })
+public class OverLapNickServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQuestionDetailFrmServlet() {
+    public OverLapNickServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +30,14 @@ public class AdminQuestionDetailFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminQuestionDetail.jsp");
-		rd.forward(request, response);
+		String nick = request.getParameter("nick");
+		String userNick = new UserService().overLapNick(nick);
+		PrintWriter out = response.getWriter();
+		if(userNick==null) {
+			out.print(1);
+		}else {
+			out.print(0);
+		}
 	}
 
 	/**
