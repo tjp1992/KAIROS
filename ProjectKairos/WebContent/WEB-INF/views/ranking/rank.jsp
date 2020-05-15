@@ -127,7 +127,7 @@
 				</c:if>
 			</table>
 		</div>
-		<div class="row">
+		<div class="row page_nav_wrapper">
 			<nav aria-label="navigation" id="pageNavi">
 				<ul class="pagination">${pageNavi}
 				</ul>
