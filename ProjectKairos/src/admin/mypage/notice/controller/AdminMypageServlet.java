@@ -1,4 +1,4 @@
-package admin.mypage.controller;
+package admin.mypage.notice.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminNoticeWriteFrmServlet
+ * Servlet implementation class AdminMypageServlet
  */
-@WebServlet(name = "AdminNoticeWriteFrm", urlPatterns = { "/adminNoticeWriteFrm" })
-public class AdminNoticeWriteFrmServlet extends HttpServlet {
+@WebServlet(name = "AdminMypage", urlPatterns = { "/adminMypage" })
+public class AdminMypageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeWriteFrmServlet() {
+    public AdminMypageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class AdminNoticeWriteFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeWriter.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminMypageMain.jsp");
 		rd.forward(request, response);
 	}
 
