@@ -13,19 +13,19 @@ prefix="c"%>
   </head>
   <script>
 	  $(function(){
-		$(".purchase").click(function(){
-			if(${not empty sessionScope.user}){
-				if(confirm("구매 하시겠습니까?")){
-					if(${sessionScope.user.expiredDate eq null}){
-						location.href= "/buyVoucherFrm";
-					}else{
-						location.href="/mypageFrm"
+		  $(".purchase").click(function(){
+				if(${not empty sessionScope.user}){
+					if(confirm("구매 하시겠습니까?")){
+						if(${sessionScope.user.expiredDate eq null}){
+							location.href= "/buyVoucherFrm";
+						}else{
+							location.href="/mypageFrm"
+						}
 					}
+				}else{
+					location.href= "/loginFrm";
 				}
-			}else{
-				location.href= "/loginFrm";
-			}
-		});
+			});
 	  });
   </script>
   <body>
