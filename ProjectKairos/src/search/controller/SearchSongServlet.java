@@ -36,7 +36,7 @@ public class SearchSongServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		
 		SearchResult sResult = new SearchSongService().searchByKeword(keyword);
-						
+		request.setAttribute("keyword", keyword);
 		request.setAttribute("list", sResult.getList());
 		request.setAttribute("totalNum", sResult.getTotalResult());
 		
