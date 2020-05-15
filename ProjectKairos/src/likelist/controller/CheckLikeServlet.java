@@ -1,6 +1,7 @@
-package admin.mypage.ticket.controller;
+package likelist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,22 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import admin.mypage.model.service.NoticeService;
-import admin.mypage.model.service.TicketService;
-import admin.mypage.model.vo.NoticePageData;
+import likelist.service.LikelistService;
+import playlist.vo.Playlist;
+import user.vo.User;
 
 /**
- * Servlet implementation class AdminTicketServlet
+ * Servlet implementation class CheckLikeServlet
  */
-@WebServlet(name = "AdminTicket", urlPatterns = { "/adminTicket" })
-public class AdminTicketServlet extends HttpServlet {
+@WebServlet(name = "CheckLike", urlPatterns = { "/checkLike" })
+public class CheckLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminTicketServlet() {
+    public CheckLikeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +34,18 @@ public class AdminTicketServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		NoticePageData pd = new TicketService().selectList(reqPage);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNotice.jsp");
-		request.setAttribute("list", pd.getList());
-		request.setAttribute("pageNavi", pd.getPageNavi());
-		request.setAttribute("req", reqPage);
-		rd.forward(request, response);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminTicket.jsp");
-		rd.forward(request, response);
+		
+		HttpSession session =request.getSession(false);
+		User u = (User)session.getAttribute("user");
+		String userId = u.getUserId();
+		int songNo = Integer.parseInt(request.getParameter("songNo"));
+		
+		int chkResult = new LikelistService().addOneLike(userId,songNo);
+		
+		PrintWriter out = response.getWriter();
+		out.print(chkResult);
+		out.flush();
+		
 	}
 
 	/**
