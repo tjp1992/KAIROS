@@ -93,6 +93,7 @@
 	</section>
 	<script>
 		$(function() {
+			
 			$("#delete_btn").click(function(){
 				$("#form_pl").attr("action","/dPlist");
 				$("#form_pl").submit();

@@ -57,4 +57,25 @@ public class PlaylistService {
 		return result;
 	}
 
+	public int updateSongPlist(String[] arr, String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = 0; 
+		int rnum = 0;
+		int count = new PlaylistDao().checkCountPlist(conn,userId);
+		for(String str:arr) {
+			result = new PlaylistDao().updateSongPlist(conn,Integer.parseInt(str),userId,count);
+			if(result>0) {
+				rnum++;
+				count++;
+			}
+		}
+		if(rnum==arr.length) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

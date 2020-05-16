@@ -91,4 +91,48 @@ public class PlaylistDao {
 		return result;
 	}
 
+	public int updateSongPlist(Connection conn, int songNo, String userId, int count) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query ="insert into playlist values (?,?,?)";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, songNo);
+			pstmt.setInt(3, count+1);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int checkCountPlist(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		int count =0;
+		
+		String query="SELECT COUNT(*)AS CNT FROM PLAYLIST WHERE USER_ID =?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				count = rset.getInt("CNT");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return count;
+	}
+
 }

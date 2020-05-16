@@ -22,12 +22,16 @@ pageEncoding="UTF-8"%>
     <section>
         <div class="likelistoutline">
             <div class="llistname">좋아요리스트<span class="plistname"><a href="/playList">플레이리스트</a></span></div>
-           
+           	<form id="form_ll" method="post">
             <div class="tototo">
                 <table>
                     <tr class="llll">
                         <th width="5%"><input class="allchk" type="checkbox"></th>
-                        <td width="95%"><button>듣기</button><button>담기</button><button>좋아요 취소</button></td>
+                        <td width="95%">
+                        	<button type="button" id="listen_btn">듣기</button>
+                        	<button type="button" id="up_btn">담기</button>
+                        	<button type="button" id="dellike_btn">좋아요 취소</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -47,7 +51,7 @@ pageEncoding="UTF-8"%>
                 <table>
                 	<c:forEach items="${list }" var="p">
                     <tr class="lltr1" songNo="${p.songNo }">
-                        <th width="5%"><input class="llchk" type="checkbox"></th>
+                        <th width="5%"><input class="llchk" type="checkbox" name="songNo" value="${p.songNo }"></th>
                         <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="60%">
                             <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
@@ -55,18 +59,24 @@ pageEncoding="UTF-8"%>
                         </td>
                         <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
                         <th width="10%" class="plusimg"><i class="iconplus fas fa-plus"></i></th>
-                        
                         <th width="10%" class="heartimg"><i  class="iconheart fas fa-heart"></i></th>
-                       
-                        
                     </tr>
                     </c:forEach>
                 </table>
             </div>
+           </form> 
         </div>
     </section>
      <script>
         $(function(){
+           $("#up_btn").click(function(){
+        	  $("#form_ll").attr("action","/uPlist");
+        	  $("#form_ll").submit();
+           });
+           $("#dellike_btn").click(function(){
+        	  $("#form_ll").attr("action","/dLlist");
+        	  $("#form_ll").submit();
+           });
            $(".allchk").click(function(){
               var arr = $(".llchk");
               if($(this).prop("checked")==true){
@@ -111,15 +121,17 @@ pageEncoding="UTF-8"%>
         		 }
         		   
         	   })
-              if($(this).attr("class")=="iconheart fas fa-heart"){
-                  $(this).attr("class","iconheart far fa-heart");
-                  $(this).css("color","black");
-              }else{
-                  $(this).attr("class","iconheart fas fa-heart");
-                  $(this).css("color","red");
-              }
+        	   if($(this).attr("class")=="iconheart fas fa-heart"){
+                   $(this).attr("class","iconheart far fa-heart");
+                   $(this).css("color","black");
+               }else{
+                   $(this).attr("class","iconheart fas fa-heart");
+                   $(this).css("color","red");
+               }
            });
         });
+        
+        
     </script>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
