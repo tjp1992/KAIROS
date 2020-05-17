@@ -3,7 +3,6 @@ package playlist.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,22 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oracle.jrockit.jfr.RequestDelegate;
-
 import playlist.service.PlaylistService;
 import user.vo.User;
 
+
+
 /**
- * Servlet implementation class UPlistServlet
+ * Servlet implementation class AddOnePlistServlet
  */
-@WebServlet(name = "UPlist", urlPatterns = { "/uPlist" })
-public class UPlistServlet extends HttpServlet {
+@WebServlet(name = "AddOnePlist", urlPatterns = { "/addOnePlist" })
+public class AddOnePlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UPlistServlet() {
+    public AddOnePlistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,27 +37,13 @@ public class UPlistServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		User u = (User)session.getAttribute("user");
 		String userId = u.getUserId();
+		int songNo = Integer.parseInt(request.getParameter("songNo"));
 		
-		String arr [] = request.getParameterValues("songNo");
-//		
-//		for(String str:arr) {
-//			System.out.println(arr);
-//		}
+		int result = new PlaylistService().addOnePlist(userId,songNo);
 		
-		
-		int result = new PlaylistService().updateSongPlist(arr,userId);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		if(result>0) {
-
-			request.setAttribute("msg", "플레이리스트 추가 성공");
-			request.setAttribute("loc", "/likeList");
-			
-		}else {
-			request.setAttribute("msg", "플레이리스트 추가실패");
-			request.setAttribute("loc", "/likeList");
-			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		}
-		rd.forward(request, response);
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		out.flush();
 	}
 
 	/**

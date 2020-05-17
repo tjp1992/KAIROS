@@ -32,10 +32,10 @@ public class PlaylistService {
 		
 		
 		if(rnum==list.size()) {
-			System.out.println("1번 커밋");
+			
 			JDBCTemplate.commit(conn);			
 		}else {
-			System.out.println("1번 롤백");
+			
 			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
@@ -68,12 +68,11 @@ public class PlaylistService {
 		
 		ArrayList<Playlist> list = new PlaylistDao().myPlaylistView(conn, userId);			
 		int index = 1;
-		
 		int result = 0;
 		int unum = 0;
 		
 		for(Playlist p : list) {
-			System.out.println("제목 : "+p.getSongTitle()+", 순서 : "+p.getOrderNo());
+			
 			result = new PlaylistDao().sortOrderNo(conn, userId, p, index++);
 			if(result>0) {
 				unum++;
@@ -81,11 +80,11 @@ public class PlaylistService {
 		}
 				
 		if(unum == list.size()) {
-			System.out.println("2번  커밋");
+			
 			JDBCTemplate.commit(conn);
 			result = 1;
 		}else {
-			System.out.println("2번 롤백");
+		
 			JDBCTemplate.rollback(conn);
 			result = 0;
 		}
@@ -97,6 +96,30 @@ public class PlaylistService {
 	public int deleteOnePlaylist(Playlist p, String userId) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new PlaylistDao().deletePlaylist(conn, p, userId);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Playlist> pSearchKeyword(String userId, String keyword) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Playlist> list = new PlaylistDao().pSearchSongTitle(conn,userId,keyword);
+		list = new PlaylistDao().pSearchSongArtist(conn,userId,keyword);
+		list = new PlaylistDao().pSearchAlbumName(conn,userId,keyword);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	public int addOnePlist(String userId, int songNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new PlaylistDao().checkCountPlist(conn,userId);
+		int result = new PlaylistDao().updateSongPlist(conn, songNo, userId, count);
+		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
 		}else {

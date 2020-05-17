@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -19,6 +20,7 @@ pageEncoding="UTF-8"%>
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
         <div class="pleditoutline">
+        <form id="plEditFrm" method="post">
             <div class="pleditname">플레이리스트 순서변경</div>
             <div class="tototo">
                 <button class="upimg"><i class="iconup fas fa-angle-up"></i></button>
@@ -33,62 +35,18 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="table">
                 <table>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">1</th>
+                	<c:forEach items="${list }" var="p">
+                    <tr class="pltr1" songNo="${p.songNo }">
+                        <th width="5%"><input class="plchk" type="checkbox" value="${p.songNo }">
+                        <input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />
+                        </th>
+                        <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
+                            <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
+                            <div class="subtitle">&nbsp;&nbsp;&nbsp;${p.songArtist }<span>&nbsp;&nbsp;|&nbsp;${p.albumName }</span></div>
                         </td>
                     </tr>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">2</th>
-                        <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
-                        </td>
-                    </tr>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">3</th>
-                        <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
-                        </td>
-                    </tr>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">4</th>
-                        <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
-                        </td>
-                    </tr>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">5</th>
-                        <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
-                        </td>
-                    </tr>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">6</th>
-                        <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
-                        </td>
-                    </tr>
-                    <tr class="pltr1">
-                        <th width="5%"><input class="plchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">7</th>
-                        <td width="90%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
-                        </td>
-                    </tr>
+                    </c:forEach>
                 </table>
             </div>
             <div class="tototo">
@@ -103,13 +61,19 @@ pageEncoding="UTF-8"%>
                 </select>
             </div>
             <div class="sub">
-                <input class="plsubmit" type="submit" name="lineupsong" value="수정 완료">
+                <input class="plsubmit" type="button" name="lineupsong" value="수정 완료">
                 <input class="cancel" type="button" name="cancel" value="취소">
             </div>
+            </form>
         </div>
     </section>
     <script>
         $(function() {
+        	$(".plsubmit").click(function(){
+        		$("#plEditFrm").attr("action","/pleditPage");
+        		$("#plEditFrm").submit();
+        	});
+        	
 
             $(".upimg").click(function() {
                 var arr = $(".plchk:checked").parent().parent();
@@ -125,13 +89,7 @@ pageEncoding="UTF-8"%>
                     next.after(arr[i]);
                 }
             });
-            $(".plsubmit").click(function() {
-                var arr = $(".pltr1");
-                $.each(arr, function(index, item) {
-                    $(item).children().eq(1).html(index + 1);
-                });
-
-            });
+        
         });
 
     </script>

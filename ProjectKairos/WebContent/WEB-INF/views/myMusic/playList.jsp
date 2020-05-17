@@ -27,11 +27,11 @@
 			플레이리스트<span class="likelistname"><a href="/likeList">좋아요리스트</a></span>
 		</div>
 		<div class="psearch">
-			<form action="/psearchKeyword">
+			<form action="/psearchKeyword" >
 				<button class="psearchBtn" type="submit">
 					<img src="/src/imgs/icons/search.png">
 				</button>
-				<input type="text" name="keyword" placeholder="검색">
+				<input type="text" name="keyword" placeholder="검색" value="${keyword }">
 			</form>
 		</div>
 		<form id="form_pl" method="post">
@@ -63,7 +63,7 @@
 			<div class="table">
 				<table>
 					<c:forEach items="${list }" var="p">
-						<tr class="pltr1" songNo="${p.songNo }">
+						<tr class="pltr1" songNo="${p.songNo }" filepath="${p.filepath }" liked="${p.liked }">
 							<th width="5%">
 							<input class="plchk" type="checkbox" name="songNo" value=${p.songNo }>
 							<input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />							
@@ -95,8 +95,13 @@
 	</div>
 	</section>
 	<script>
+	
+	
 		$(function() {
-		
+			$("#pleditBtn").click(function(){
+				$("#form_pl").attr("action","/plEdit");
+				$("#form_pl").submit();
+			});
 			
 			$(".plchk").change(function(){
 			      if ($(this).prop("checked") == true) {
@@ -191,9 +196,7 @@
 			}, function() {
 				$(this).css("background-color", "white");
 			});
-			$("#pleditBtn").click(function() {
-				location.href = "/pleditPage";
-			});
+			
 		});
 	</script>
 

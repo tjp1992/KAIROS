@@ -97,6 +97,21 @@ pageEncoding="UTF-8"%>
                   $(".allchk").prop("checked",false);
               }
            });
+           
+           $(".plusimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  $.ajax({
+        		 url:"/addOnePlist",
+        		 type:"POST",
+        		 data:{songNo:songNo},
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){
+        				 alert("플레이리스트에 추가되었습니다.");
+        			 }
+        		 }
+        	  });
+           });
             
            $(".heartimg").children().click(function(){
         	   var songNo = $(this).parent().parent().attr("songNo");
