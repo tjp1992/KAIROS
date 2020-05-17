@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
-import manageMusic.model.service.AlbumService;
+import manageMusic.model.service.ManageMusicService;
 import manageMusic.model.vo.Album;
 
 /**
@@ -37,7 +37,7 @@ public class AsyncReadAlbumsServlet extends HttpServlet {
 		
 		String albumOwner = request.getParameter("albumOwner");
 		
-		ArrayList<Album> list = new AlbumService().readAlbums(albumOwner);
+		ArrayList<Album> list = new ManageMusicService().readAlbums(albumOwner);
 	
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -24,12 +25,22 @@ pageEncoding="UTF-8"%>
           id="form-album"
           enctype="multipart/form-data"
         >
-          <input
-            type="hidden"
-            name="artist"
-            value="${sessionScope.user.userNick}"
-          />
-          <input type="hidden" name="licensed" value="0" />
+          <c:if test="${sessionScope.user.userId != 'admin'}">
+            <input
+              type="hidden"
+              name="artist"
+              value="${sessionScope.user.userNick}"
+            />
+            <input type="hidden" name="licensed" value="0" />
+          </c:if>
+          <c:if test="${sessionScope.user.userId == 'admin'}">
+            <input type="hidden" name="licensed" value="1" />
+            <div class="input_artist cont">
+              <span>가수명</span>
+              <input type="text" name="artist" id="artist" readonly />
+              <button type="button" id="search_artist">검색</button>
+            </div>
+          </c:if>
           <div class="input_title cont">
             <span>곡명</span>
             <input type="text" name="title" id="title" />
@@ -63,107 +74,13 @@ pageEncoding="UTF-8"%>
         </form>
       </div>
     </section>
+    <!-- 관리자 전용 script -->
+    <c:if test="${sessionScope.user.userId == 'admin'}">
+      <script src="/src/js/manageMusic/insertMusicByAdmin.js"></script>
+    </c:if>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
-    <script>
-      $(function () {
-        readAlbums();
-      });
-
-      $("#albums").change(function () {
-        const albumNo = $(this).val();
-        $.ajax({
-          url: "/asyncReadAlbumByAlbumNo",
-          type: "post",
-          data: { albumNo: albumNo },
-          success: function (data) {
-            if (data.albumPath != null) {
-            }
-          },
-          error: function () {
-            alert("앨범 이미지 조회 실패");
-          },
-        });
-      });
-
-      function readAlbums() {
-        const albumOwner = $("input[name=artist]").val();
-
-        $.ajax({
-          url: "/asyncReadAlbums",
-          type: "post",
-          data: { albumOwner: albumOwner },
-          success: function (data) {
-            const albumList = $("#albums");
-            albumList.empty();
-
-            const defaultOption = document.createElement("option");
-            defaultOption.value = "default";
-            defaultOption.innerHTML = "앨범 선택";
-
-            albumList.append(defaultOption);
-
-            for (let i = 0; i < data.length; i++) {
-              let albumNo = data[i].albumNo;
-              let albumName = data[i].albumName;
-
-              const option = document.createElement("option");
-
-              option.value = albumNo;
-              option.innerHTML = albumName;
-
-              albumList.append(option);
-            }
-          },
-          error: function () {
-            alert("앨범 목록 조회에 실패하였습니다.");
-          },
-        });
-      }
-
-      $(".insert_album").hide();
-
-      $("#add_input_album").click(function () {
-        $(".insert_album").show();
-      });
-
-      $("#add_album_btn").click(function () {
-        const albumOwner = $("input[name=artist]").val();
-        const albumName = $("input[name=input_album]").val();
-
-        $.ajax({
-          url: "/asyncInsertAlbum",
-          type: "POST",
-          data: {
-            albumOwner: albumOwner,
-            albumName: albumName,
-          },
-          success: function (data) {
-            const result = Number(data);
-
-            switch (result) {
-              case -1: // 같은 이름의 앨범이 있을때
-                alert("이미 같은 이름의 앨범이 있습니다.");
-                break;
-
-              case 0: // 앨범 등록에 실패 했을때
-                alert(
-                  "앨범 등록에 실패하였습니다. 오류가 반복되면 관리자에게 문의하세요."
-                );
-                break;
-
-              case 1: // 앨범 등록에 성공 했을때
-                $("#input_album").val("");
-                $(".insert_album").hide();
-                readAlbums();
-                break;
-            }
-          },
-          error: function () {
-            alert("앨범 등록에 실패하였습니다.");
-          },
-        });
-      });
-    </script>
+    <script src="/src/js/manageMusic/selectAlbum.js"></script>
+    <script src="/src/js/manageMusic/insertMusic.js"></script>
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>
 </html>

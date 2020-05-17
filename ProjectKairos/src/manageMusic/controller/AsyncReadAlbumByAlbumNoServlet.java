@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import manageMusic.model.service.AlbumService;
+import manageMusic.model.service.ManageMusicService;
 import manageMusic.model.vo.Album;
 
 /**
@@ -34,7 +34,7 @@ public class AsyncReadAlbumByAlbumNoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int albumNo = Integer.parseInt(request.getParameter("albumNo"));
 		
-		Album a = new AlbumService().readOneAlbum(albumNo);
+		Album a = new ManageMusicService().readOneAlbum(albumNo);
 	
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

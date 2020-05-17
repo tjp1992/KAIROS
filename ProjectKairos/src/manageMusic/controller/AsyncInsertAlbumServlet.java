@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import manageMusic.model.service.AlbumService;
+import manageMusic.model.service.ManageMusicService;
 
 /**
  * Servlet implementation class AsyncInsertAlbumServlet
@@ -34,7 +34,7 @@ public class AsyncInsertAlbumServlet extends HttpServlet {
 		String albumOwner = request.getParameter("albumOwner");
 		String albumName = request.getParameter("albumName");
 		
-		int result = new AlbumService().insertAlbum(albumOwner, albumName);
+		int result = new ManageMusicService().insertAlbum(albumOwner, albumName);
 		
 		PrintWriter out = response.getWriter();
 		

@@ -30,7 +30,8 @@
 
 .input_title input,
 .insert_album input,
-.insert_wrapper select {
+.insert_wrapper select,
+.input_artist input {
   height: 35px;
 }
 
@@ -99,6 +100,7 @@
 
 .img_container img {
   width: 333px;
+  max-height: 333px;
 }
 
 .btn_wrapper {
@@ -108,4 +110,8 @@
 
 .btn-secondary {
   margin-left: 100px;
+}
+
+#search_artist {
+  margin-left: 5px;
 }
