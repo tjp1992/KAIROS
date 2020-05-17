@@ -52,14 +52,15 @@ public class PlaylistDao {
 		return list;
 	}
 
-	public int deletePlaylist(Connection conn, int songNo, String userId) {
+	public int deletePlaylist(Connection conn, Playlist p, String userId) {
 		PreparedStatement pstmt = null;
 		int result = 0; 
-		String query = "delete from playlist where user_id =? and listed_song_no=?";
+		String query = "delete from playlist where user_id =? and listed_song_no=? and order_no=?";
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1, userId);
-			pstmt.setInt(2, songNo);
+			pstmt.setInt(2, p.getSongNo());
+			pstmt.setInt(3, p.getOrderNo());
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -71,15 +72,16 @@ public class PlaylistDao {
 		return result;
 	}
 	
-	public int sortOrderNo(Connection conn, String userId, int songNo, int orderNo) {
+	public int sortOrderNo(Connection conn, String userId, Playlist p, int index) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "update playlist set order_no =? where listed_song_no = ? and user_id =?";
+		String query = "update playlist set order_no =? where listed_song_no = ? and user_id =? and order_no = ?";
 		try {
 			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, orderNo);
-			pstmt.setInt(2, songNo);
+			pstmt.setInt(1, index);
+			pstmt.setInt(2, p.getSongNo());
 			pstmt.setString(3, userId);
+			pstmt.setInt(4, p.getOrderNo());
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

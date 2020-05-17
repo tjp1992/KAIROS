@@ -1,6 +1,8 @@
-package likelist.controller;
+package playlist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import likelist.service.LikelistService;
+import playlist.service.PlaylistService;
+import playlist.vo.Playlist;
 import user.vo.User;
 
 /**
- * Servlet implementation class DLlistServlet
+ * Servlet implementation class DeletePlistServlet
  */
-@WebServlet(name = "DLlist", urlPatterns = { "/dLlist" })
-public class DLlistServlet extends HttpServlet {
+@WebServlet(name = "DeletePlist", urlPatterns = { "/deletePlist" })
+public class DeletePlistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DLlistServlet() {
+    public DeletePlistServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +33,19 @@ public class DLlistServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session =request.getSession(false);
 		User u = (User)session.getAttribute("user");
-		
 		String userId = u.getUserId();
+		Playlist p = new Playlist();
+		p.setSongNo(Integer.parseInt(request.getParameter("songNo")));
+		p.setOrderNo(Integer.parseInt(request.getParameter("orderNo")));
 		
-		String arr[] =request.getParameterValues("songNo");
-		int result = new LikelistService().deleteLikelist(arr,userId);
-		if(result==arr.length) {
-			request.getRequestDispatcher("/likeList").forward(request, response);
-		}else {
-			request.setAttribute("msg", "삭제실패");
-			request.setAttribute("loc", "/likeList");
-			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		}
+		int result = new PlaylistService().deleteOnePlaylist(p, userId);
+		result = new PlaylistService().sortPlaylist(userId);
+		
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		out.flush();
 	}
 
 	/**

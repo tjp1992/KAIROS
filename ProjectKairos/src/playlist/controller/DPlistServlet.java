@@ -1,6 +1,8 @@
 package playlist.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import playlist.service.PlaylistService;
+import playlist.vo.Playlist;
 import user.vo.User;
 
 /**
@@ -35,12 +38,38 @@ public class DPlistServlet extends HttpServlet {
 		
 		
 		String userId = u.getUserId();
+				
+		// 두 어레이의 순서는 같음
+		String songNo [] = request.getParameterValues("songNo"); // songNo 를 가져옴
+		String orderNo [] = request.getParameterValues("orderNo"); // orderNo을 가져옴  !!!! 못가져옴!!! 잘못 가져옴!!! 순서대로 가져옴
 		
-		String arr [] = request.getParameterValues("songNo");
+		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		
-		int result = new PlaylistService().deletePlaylist(arr,userId);
-		if(result==arr.length) {
-			request.getRequestDispatcher("/playList").forward(request, response);
+		for(int i=0; i<songNo.length; i++) {
+			System.out.println(orderNo[i]); // 이거 문제임
+			Playlist p = new Playlist();			
+			p.setOrderNo(Integer.parseInt(orderNo[i]));
+			p.setSongNo(Integer.parseInt(songNo[i]));
+			list.add(p);
+		}
+				
+		
+		System.out.println(list.size());
+		
+		int result = new PlaylistService().deletePlaylist(list,userId);
+		
+		if(result==list.size()) {
+			System.out.println("이거탐");
+			result = new PlaylistService().sortPlaylist(userId);
+			
+			if(result>0) {
+				request.getRequestDispatcher("/playList").forward(request, response);				
+			} else {
+				request.setAttribute("msg", "삭제실패");
+				request.setAttribute("loc", "/playList");
+				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			}
+			
 		}else {
 			request.setAttribute("msg", "삭제실패");
 			request.setAttribute("loc", "/playList");

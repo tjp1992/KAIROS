@@ -41,7 +41,7 @@
 						<th width="5%"><input class="allchk" type="checkbox"></th>
 						<td width="65%"><button type="button" id="listen_btn">듣기</button>
 							<button type="button" id="delete_btn">삭제</button>
-							<button type="button" id="like_btn">좋아요 ♥</button></td>
+							</td>
 						<th width="30%">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="button" id="pleditBtn">순서변경</button>
 						</th>
@@ -64,7 +64,10 @@
 				<table>
 					<c:forEach items="${list }" var="p">
 						<tr class="pltr1" songNo="${p.songNo }">
-							<th width="5%"><input class="plchk" type="checkbox" name="songNo" value=${p.songNo }></th>
+							<th width="5%">
+							<input class="plchk" type="checkbox" name="songNo" value=${p.songNo }>
+							<input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />							
+							</th>
 							<th width="5%" class="plsongNo">${p.orderNo }</th>
 							<td width="60%">
 								<div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
@@ -93,21 +96,33 @@
 	</section>
 	<script>
 		$(function() {
+		
+			
+			$(".plchk").change(function(){
+			      if ($(this).prop("checked") == true) {
+			        $(this).next().prop("checked", true);
+			      } else {
+			        $(this).next().prop("checked", false);
+			      }
+			});
 			
 			$("#delete_btn").click(function(){
-				$("#form_pl").attr("action","/dPlist");
+				$("#form_pl").attr("action","/dPlist");				
 				$("#form_pl").submit();
 			});
 			
 			$(".allchk").click(function() {
 				var arr = $(".plchk");
+				var arr2 = $(".ordChk");
 				if ($(this).prop("checked") == true) {
 					for (var i = 0; i < arr.length; i++) {
 						arr.eq(i).prop("checked", true);
+						arr2.eq(i).prop("checked", true);
 					}
 				} else {
 					for (var i = 0; i < arr.length; i++) {
 						arr.eq(i).prop("checked", false);
+						arr2.eq(i).prop("checked", false);
 					}
 				}
 			});
@@ -118,6 +133,27 @@
 				} else {
 					$(".allchk").prop("checked", false);
 				}
+			});
+			$(".deleteimg").children().click(function(){
+				var songNo = $(this).parent().parent().attr("songNo");
+				var orderNo= $(this).parent().parent().children().eq(1).html();
+				var icon = $(this);
+				$.ajax({
+					url : "/deletePlist",
+					type: "POST",
+					data: {
+						songNo:songNo,orderNo:orderNo
+					},
+					success:function(data){
+						var result = Number(data);
+						if(result>0){
+							icon.parent().parent().remove();
+							alert("삭제성공");
+						}
+						
+							
+						}
+				});
 			});
 
 			$(".heartimg").children().click(function() {
