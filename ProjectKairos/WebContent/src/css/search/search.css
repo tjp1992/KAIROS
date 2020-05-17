@@ -65,3 +65,8 @@
 .search_category a:hover {
   opacity: 0.6;
 }
+
+.selected_category {
+  opacity: 0.85;
+  font-size: 1.2em;
+}
