@@ -86,6 +86,7 @@
 							placeholder="${user.addr}" readonly>
 					</div>
 					<button type="button" class="btn btn-primary btn-lg btn-block checkout">Continue to checkout</button>
+					<a href="/player" class="btn btn-primary btn-lg">플래이어</a>
 				</form>
 			</div>
 		</div>
