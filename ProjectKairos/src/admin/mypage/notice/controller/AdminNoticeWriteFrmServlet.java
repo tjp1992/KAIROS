@@ -32,11 +32,11 @@ public class AdminNoticeWriteFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
 		Date time = new Date();
-		
 		String today = format1.format(time);
-		
+		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeWriter.jsp");
 		request.setAttribute("today", today);
+		request.setAttribute("reqPage", reqPage);
 		rd.forward(request, response);
 	}
 

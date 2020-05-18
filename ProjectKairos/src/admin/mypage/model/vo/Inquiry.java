@@ -9,7 +9,6 @@ public class Inquiry {
 	private String inqContent;
 	private Date inqDate;
 	private int inqAnsNo;
-	
 	private String inqFileName;
 	private String inqFilePath;
 	public Inquiry() {

@@ -34,9 +34,10 @@ public class AdminQuestionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int reqPage2 = Integer.parseInt(request.getParameter("reqPage2"));
 		int check = Integer.parseInt(request.getParameter("check"));
 		QuestionPageData qd = new QuestionService().selectList(reqPage);
-		QuestionPageData qd2 = new QuestionService().selectList2(reqPage);
+		QuestionPageData qd2 = new QuestionService().selectList2(reqPage2);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminQuestion.jsp");
 		request.setAttribute("check", check);
 		request.setAttribute("list2", qd2.getList());
@@ -44,6 +45,7 @@ public class AdminQuestionServlet extends HttpServlet {
 		request.setAttribute("list", qd.getList());
 		request.setAttribute("pageNavi", qd.getPageNavi());
 		request.setAttribute("req", reqPage);
+		request.setAttribute("req2", reqPage2);
 		rd.forward(request, response);
 	}
 

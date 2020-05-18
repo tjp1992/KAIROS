@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,6 +24,20 @@
 	type="text/css">
 <script>
 	$(function() {
+		var check = ${check };
+		
+		if(check == 2){
+			$('#tt2').addClass("active");
+			$('#tt1').removeClass("active");
+			$('#profile').addClass("active in");
+			$('#home').removeClass("active in");
+		}else{
+			$('#tt1').addClass("active");
+			$('#tt2').removeClass("active");
+			$('#home').addClass("active in");
+			$('#profile').removeClass("active in");
+		}
+		
 		$('#myTab').children('a').click(function(e) {
 			e.preventDefault()
 			$(this).tab('show')
@@ -42,10 +57,10 @@
 	<div class="bs-example bs-example-tabs" role="tabpanel"
 		data-example-id="togglable-tabs">
 		<ul id="myTab" class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a href="#home"
+			<li id="tt1" role="presentation" class="active"><a href="#home"
 				id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
 				aria-expanded="true"><b>이용 중 회원</b></a></li>
-			<li role="presentation" class=""><a href="#profile" role="tab"
+			<li id="tt2" role="presentation" class=""><a href="#profile" role="tab"
 				id="profile-tab" data-toggle="tab" aria-controls="profile"
 				aria-expanded="false"><b>기간 만료 회원</b></a></li>
 		</ul>
@@ -63,48 +78,20 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${list }" var="p" varStatus="i">
 						<tr class="move">
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
+							<th scope="row" class="num">${(reqPage-1)*10 + i.count }</th>
+							<td class="id">${p.userId }</td>
+							<td class="ticket">${p.voucherName }</td>
+							<td class="title">${p.beginDate } - ${p.expiredDate }</td>
+							<td class="insertdate">${p.purchaseDate }</td>
 						</tr>
-
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
+				<nav id="footNav2">
+					<ul class="pagination">${pageNavi }</ul>
+				</nav>
 			</div>
 
 			<div role="tabpanel" class="tab-pane fade" id="profile"
@@ -120,50 +107,22 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${list2 }" var="p" varStatus="i">
 						<tr class="move">
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
+							<th scope="row" class="num">${(reqPage-1)*10 + i.count }</th>
+							<td class="id">${p.userId }</td>
+							<td class="ticket">${p.voucherName }</td>
+							<td class="title">${p.beginDate } - ${p.expiredDate }</td>
+							<td class="insertdate">${p.purchaseDate }</td>
 						</tr>
-
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-							
-						</tr>
-						<tr>
-							<th scope="row" class="num">3</th>
-							<td class="id">Larry</td>
-							<td class="ticket">gd</td>
-							<td class="title"></td>
-							<td class="insertdate">2020-04-05</td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
+				<nav id="footNav">
+					<ul class="pagination">${pageNavi2 }</ul>
+				</nav>
 			</div>
-
+		
 		</div>
 	</div>
 	<div class="row">

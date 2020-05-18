@@ -1,8 +1,6 @@
 package admin.mypage.notice.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.service.TicketService;
+import admin.mypage.model.vo.TicketPageData;
+
 /**
- * Servlet implementation class AdminQuestionAnswerServlet
+ * Servlet implementation class AdminTicketServlet
  */
-@WebServlet(name = "AdminQuestionAnswer", urlPatterns = { "/adminQuestionAnswer" })
-public class AdminQuestionAnswerServlet extends HttpServlet {
+@WebServlet(name = "AdminTicket", urlPatterns = { "/adminTicket" })
+public class AdminTicketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQuestionAnswerServlet() {
+    public AdminTicketServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +31,18 @@ public class AdminQuestionAnswerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String inqNo = request.getParameter("inqNo");
+		request.setCharacterEncoding("utf-8");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		int reqPage2 = Integer.parseInt(request.getParameter("reqPage2"));
-		System.out.println(inqNo);
-		SimpleDateFormat format1 = new SimpleDateFormat ("yyyy-MM-dd");
-		Date time = new Date();
-		String today = format1.format(time);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminQuestionAnswer.jsp");
-		request.setAttribute("today", today);
-		request.setAttribute("inqNo", inqNo);
+		int check = Integer.parseInt(request.getParameter("check"));
+		TicketPageData tpa= new TicketService().listSelect(reqPage);
+		TicketPageData tpa2= new TicketService().listSelect2(reqPage2);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminTicket.jsp");
+		request.setAttribute("check", check);
+		request.setAttribute("list", tpa.getList());
+		request.setAttribute("pageNavi", tpa.getPageNavi());
+		request.setAttribute("list2", tpa2.getList());
+		request.setAttribute("pageNavi2", tpa2.getPageNavi());
 		request.setAttribute("reqPage", reqPage);
 		request.setAttribute("reqPage2", reqPage2);
 		rd.forward(request, response);

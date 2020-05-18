@@ -24,6 +24,20 @@
 	type="text/css">
 <script>
 	$(function() {
+		var check = ${check };
+		
+		if(check == 2){
+			$('#tt2').addClass("active");
+			$('#tt1').removeClass("active");
+			$('#profile').addClass("active in");
+			$('#home').removeClass("active in");
+		}else{
+			$('#tt1').addClass("active");
+			$('#tt2').removeClass("active");
+			$('#home').addClass("active in");
+			$('#profile').removeClass("active in");
+		}
+		
 		$('#myTab').children('a').click(function(e) {
 			e.preventDefault()
 			$(this).tab('show')
@@ -31,13 +45,15 @@
 		$("#back").click(function() {
 			location.href = "/adminMypage";
 		});
-		$("#move").click(function() {
-			location.href = "/adminQuestionDetailFrm";
-		});
-		$("#move2").click(function() {
-			location.href = "/adminQuestionEndDetailFrm";
-		})
+		
 	});
+	function detail(no, req){ // req 는 해당 페이지이다.
+		location.href = "/adminQuestionDetailFrm?inqNo="+no+"&reqPage="+req+"&check="+${check }+"&reqPage2="+${req2 };
+	}
+	function detail2(no, req2){
+		location.href = "/adminQuestionEndDetailFrm?inqNo="+no+"&reqPage2="+req2+"&check="+${check }+"&reqPage="+${req };
+	}
+	
 </script>
 </head>
 
@@ -48,23 +64,20 @@
 
 	<div class="bs-example bs-example-tabs" role="tabpanel"
 		data-example-id="togglable-tabs">
-		<ul id="myTab" class="nav nav-tabs" role="tablist">
-		<c:if test="${check == 1}">
-			<li role="presentation" class="active">
-			<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><b>답변 대기</b></a></li>
-			<li role="presentation" class=""><a href="#profile" role="tab"
-				id="profile-tab" data-toggle="tab" aria-controls="profile"
-				aria-expanded="false"><b>답변 완료</b></a></li>
-		</c:if>
-		<c:if test="${check == 2}">
-			<li role="presentation" class="">
-			<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false"><b>답변 대기</b></a></li>
-			<li role="presentation" class="active">
-			<a href="#profile"  role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true"><b>답변 완료</b></a></li>
-		</c:if>
-		</ul>
+		
+			<ul id="myTab" class="nav nav-tabs" role="tablist">
+				<li id="tt1" role="presentation" class="active"><a href="#home"
+					id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+					aria-expanded="true"><b>답변 대기</b></a></li>
+				<li id="tt2" role="presentation" class=""><a href="#profile" role="tab"
+					id="profile-tab" data-toggle="tab" aria-controls="profile"
+					aria-expanded="false"><b>답변 완료</b></a></li>
+
+			</ul>
+		
 		<div id="myTabContent" class="tab-content">
-			<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+			<div role="tabpanel" class="tab-pane fade active in" id="home"
+				aria-labelledby="home-tab">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -76,8 +89,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="p" varStatus="i">
-							<tr class="move" id="move"
-								onclick="detail(${n.noticeNo},${req })">
+							<tr class="move" id="move" onclick="detail(${p.inqNo },${req })">
 								<th scope="row" class="num">${(req-1)*10 + i.count }</th>
 								<td>${p.userId }</td>
 								<td class="title">${p.inqTitle }</td>
@@ -86,7 +98,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<nav id="footNav">
+				<nav id="footNav2">
 					<ul class="pagination">${pageNavi }</ul>
 				</nav>
 			</div>
@@ -99,17 +111,18 @@
 							<th class="num">번호</th>
 							<th class="id">id</th>
 							<th class="th2">제목</th>
-							<th class="th1" colspan="2">등록일</th>
+							<th class="th2">등록일</th>
+							<th class="th2">답변일</th> 
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list2 }" var="p" varStatus="i">
-							<tr class="move" id="move"
-								onclick="detail(${n.noticeNo},${req })">
-								<th scope="row" class="num">${(req-1)*10 + i.count }</th>
+							<tr class="move" id="move2" onclick="detail2(${p.inqNo },${req2 })">
+								<th scope="row" class="num">${(req2-1)*10 + i.count }</th>
 								<td>${p.userId }</td>
 								<td class="title">${p.inqTitle }</td>
 								<td class="insertdate">${p.inqDate }</td>
+								<td>${p.inqDate }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -118,7 +131,7 @@
 					<ul class="pagination">${pageNavi2 }</ul>
 				</nav>
 			</div>
-
+			
 		</div>
 	</div>
 	<div class="row">
