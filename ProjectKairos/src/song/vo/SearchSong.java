@@ -13,6 +13,7 @@ public class SearchSong {
 	private String filepath;
 	private int licensed;
 	private String albumName;
+	private int liked;
 	
 	public SearchSong() {
 		super();
@@ -20,7 +21,7 @@ public class SearchSong {
 	}
 
 	public SearchSong(int rowNum, int songNo, String songTitle, String songArtist, String songGenre, int albumNo,
-			int playCount, int likeCount, String filename, String filepath, int licensed, String albumName) {
+			int playCount, int likeCount, String filename, String filepath, int licensed, String albumName, int liked) {
 		super();
 		this.rowNum = rowNum;
 		this.songNo = songNo;
@@ -34,6 +35,7 @@ public class SearchSong {
 		this.filepath = filepath;
 		this.licensed = licensed;
 		this.albumName = albumName;
+		this.liked = liked;
 	}
 
 	public int getRowNum() {
@@ -131,7 +133,15 @@ public class SearchSong {
 	public void setAlbumName(String albumName) {
 		this.albumName = albumName;
 	}
-	
+
+	public int getLiked() {
+		return liked;
+	}
+
+	public void setLiked(int liked) {
+		this.liked = liked;
+	}
+
 	
 	
 }

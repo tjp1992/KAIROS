@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import user.vo.User;
 
 /**
  * Servlet implementation class InsertMusicFrmServlet
@@ -26,7 +29,21 @@ public class InsertMusicFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/manageMusic/insertMusic.jsp").forward(request, response);
+		
+HttpSession session = request.getSession(false);
+		
+		User user = (User) session.getAttribute("user");
+		
+		if(user == null) {
+			
+			request.getRequestDispatcher("/WEB-INF/views/login/login.jsp").forward(request, response);
+			
+		} else {
+			
+			request.getRequestDispatcher("/WEB-INF/views/manageMusic/insertMusic.jsp").forward(request, response);
+		}
+		
+		
 	}
 
 	/**

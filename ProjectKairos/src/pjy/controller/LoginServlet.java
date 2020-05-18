@@ -1,6 +1,7 @@
 package pjy.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manageMusic.model.service.SessionPlayListService;
+import playlist.vo.Playlist;
+import playlist.vo.SessionPlaylist;
 import user.service.UserService;
 import user.vo.User;
 
@@ -43,10 +47,11 @@ public class LoginServlet extends HttpServlet {
 		if(user==null) {
 			request.setAttribute("msg", "로그인 실패");
 		}else {
+			ArrayList<SessionPlaylist> list = new SessionPlayListService().readPlayList(userId);			
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 			request.setAttribute("msg", "로그인 성공");
-			System.out.println(session);
+			session.setAttribute("playList", list);
 		}
 		rd.forward(request, response);
 	}
