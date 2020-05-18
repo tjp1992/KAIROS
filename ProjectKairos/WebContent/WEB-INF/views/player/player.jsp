@@ -307,17 +307,18 @@ label.zmr:before {
 	transition: all 0.15s linear;
 }
 
-.heartClick:before{
+/* .heartClick:before{
+	content: "\f004";
 	color: #ff564c;
 	transition: all 0.15s linear;
-}
+} */
 
-/* td>#heart:checked ~ label.zmr:before {
+td>#heart:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
 	transition: all 0.15s linear;
 }
-
+/*
 td>#heart1:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
@@ -584,21 +585,10 @@ audio {
 <title>Kairos Music Player</title>
 </head>
 <body>
-	<!-- PRESS THE MENU BUTTON TO TRIGGER ANIMATION -->
-	<!-- PRESS PLAY BUTTON TO LISTEN THE DEMO SONG -->
-
-	<!-- As seen on: "https://dribbble.com/shots/2144866-Day-5-Music-Player-Rebound/" -->
-
-	<!-- THANK YOU! -->
 	<script>
+		function togglePlayPause() {
 		var audio = document.getElementById('audio');
 		var playpause = document.getElementById("play");
-
-		function togglePlayPause() {
-		}
-		$(function(){
-			var audio = $('#audio');
-			var playpause = $('#play');
 			if (audio.paused || audio.ended) {
 				playpause.title = "Pause";
 				audio.play();
@@ -606,6 +596,8 @@ audio {
 				playpause.title = "Play";
 				audio.pause();
 			}
+		}
+		$(function(){
 		});
 		$(function(){
 			$('.zmr').click(function(){
@@ -635,7 +627,7 @@ audio {
 				<td class="length"><h5>
 						3:54
 						<h5></td>
-				<td><input type="checkbox" id="heart" /><label class="zmr"
+				<td><input type="checkbox" id="heart"/><label class="zmr"
 					for="heart"></label></td>
 			</tr>
 
@@ -709,47 +701,7 @@ audio {
 					for="heart5"></label></td>
 			</tr>
 
-			<tr class="song">
-				<td class="nr"><h5>
-						7
-						<h5></td>
-				<td class="title"><h6>
-						The Judge
-						<h6></td>
-				<td class="length"><h5>
-						4:57
-						<h5></td>
-				<td><input type="checkbox" id="heart6" /><label class="zmr"
-					for="heart6"></label></td>
-			</tr>
 
-			<tr class="song">
-				<td class="nr"><h5>
-						8
-						<h5></td>
-				<td class="title"><h6>
-						Doubt
-						<h6></td>
-				<td class="length"><h5>
-						3:11
-						<h5></td>
-				<td><input type="checkbox" id="heart7" /><label class="zmr"
-					for="heart7"></label></td>
-			</tr>
-
-			<tr class="song">
-				<td class="nr"><h5>
-						9
-						<h5></td>
-				<td class="title"><h6> 
-						Polarize
-						<h6></td>
-				<td class="length"><h5>
-						3:46
-						<h5></td>
-				<td><input type="checkbox" id="heart8" /><label class="zmr"
-					for="heart8"></label></td>
-			</tr>
 		</table>
 
 		<div class="shadow"></div>
@@ -760,24 +712,25 @@ audio {
 			<h4>STRESSED OUT</h4>
 			<h3>twenty one pilots - Blurryface</h3>
 		</div>
-		<audio preload="auto" id="audio" controls>
-			<source src="/src/song/1.mp3">
+		<audio id="audio" controls>
+			<source src="/src/songs/1.mp3" type="audio/mpeg">
+			<source src="/src/songs/2.mp3" type="audio/mpeg">
 		</audio>
 		<table class="player">
 			<td><input type="checkbox" id="backward" /><label
 				class="backward" for="backward"></label></td>
 			<td><input type="checkbox" id="play" title="Play"
-				onclick="togglePlayPause()" /><label class="play" for="play"></label></td>
+				onclick="togglePlayPause();" /><label class="play" for="play"></label></td>
 			<td><input type="checkbox" id="forward" /><label
 				class="forward" for="forward"></label></td>
 		</table>
 
 		<table class="footer">
-			<td><input type="checkbox" id="love" checked /><label
+			<td><input type="checkbox" id="love" /><label
 				class="love" for="love"></label></td>
 			<td><input type="checkbox" id="shuffle" /><label
 				class="shuffle" for="shuffle"></label></td>
-			<td><input type="checkbox" id="repeat" checked /><label
+			<td><input type="checkbox" id="repeat" /><label
 				class="repeat" for="repeat"></label></td>
 			<td><input type="checkbox" id="options" /><label
 				class="options" for="options"></label></td>
