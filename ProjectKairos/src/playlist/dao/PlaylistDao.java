@@ -143,9 +143,9 @@ public class PlaylistDao {
 		ResultSet rset = null;
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		String query = "SELECT * FROM (SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked " 
-						+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S " 
-						+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) " 
-						+ "WHERE USER_ID = ? ) T) WHERE SONG_TITLE LIKE ? ";
+				+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S " 
+				+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) " 
+				+ "WHERE USER_ID = ? ) T) WHERE SONG_TITLE LIKE ? ";
 		
 		try {
 			pstmt = conn.prepareStatement(query);

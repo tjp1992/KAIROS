@@ -23,8 +23,8 @@ pageEncoding="UTF-8"%>
         <form id="plEditFrm" method="post">
             <div class="pleditname">플레이리스트 순서변경</div>
             <div class="tototo">
-                <button class="upimg"><i class="iconup fas fa-angle-up"></i></button>
-                <button class="downimg"><i class="icondown fas fa-angle-down"></i></button>
+                <button type="button" class="upimg"><i class="iconup fas fa-angle-up"></i></button>
+                <button type="button" class="downimg"><i class="icondown fas fa-angle-down"></i></button>
                 <select class="lineup">
                     <option>내 편집순</option>
                     <option>아티스트명↓(가-하)순</option>
@@ -37,10 +37,10 @@ pageEncoding="UTF-8"%>
                 <table>
                 	<c:forEach items="${list }" var="p">
                     <tr class="pltr1" songNo="${p.songNo }">
-                        <th width="5%"><input class="plchk" type="checkbox" value="${p.songNo }">
+                    
+                        <th width="5%"><input class="plchk" name="songNo" type="checkbox" value="${p.songNo }">
                         <input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />
                         </th>
-                        <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="90%">
                             <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
                             <div class="subtitle">&nbsp;&nbsp;&nbsp;${p.songArtist }<span>&nbsp;&nbsp;|&nbsp;${p.albumName }</span></div>
@@ -50,8 +50,8 @@ pageEncoding="UTF-8"%>
                 </table>
             </div>
             <div class="tototo">
-                <button class="upimg"><i class="iconup fas fa-angle-up"></i></button>
-                <button class="downimg"><i class="icondown fas fa-angle-down"></i></button>
+                <button type="button" class="upimg"><i class="iconup fas fa-angle-up"></i></button>
+                <button type="button" class="downimg"><i class="icondown fas fa-angle-down"></i></button>
                 <select class="lineup">
                     <option>내 편집순</option>
                     <option>아티스트명↓(가-하)순</option>
@@ -71,6 +71,10 @@ pageEncoding="UTF-8"%>
         $(function() {
         	$(".plsubmit").click(function(){
         		$("#plEditFrm").attr("action","/pleditPage");
+
+            	$(".plchk").prop("checked",true);
+            	$(".ordChk").prop("checked",true);
+            	
         		$("#plEditFrm").submit();
         	});
         	
@@ -81,15 +85,19 @@ pageEncoding="UTF-8"%>
                 for (var i = 0; i < arr.length; i++) {
                     prev.before(arr[i]);
                 }
+               
             });
+            
             $(".downimg").click(function() {
                 var arr = $(".plchk:checked").parent().parent();
                 var next = arr.eq(arr.length - 1).next();
                 for (var i = arr.length - 1; i >= 0; i--) {
                     next.after(arr[i]);
                 }
+               
             });
-        
+
+            
         });
 
     </script>

@@ -1,6 +1,7 @@
 package playlist.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import playlist.service.PlaylistService;
+import playlist.vo.Playlist;
+import user.vo.User;
+
+
 
 /**
  * Servlet implementation class PleditPageServlet
@@ -28,8 +36,38 @@ public class PleditPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/playList.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession(false);
+		User u = (User)session.getAttribute("user");
+		String userId = u.getUserId();
+		
+		String songNo [] = request.getParameterValues("songNo");
+		String orderNo [] =request.getParameterValues("orderNo");
+		
+		
+		ArrayList<Playlist> list = new ArrayList<Playlist>();
+		
+		for(int i=0; i<songNo.length; i++) {
+			Playlist p = new Playlist();
+			p.setOrderNo(Integer.parseInt(orderNo[i]));
+			p.setSongNo(Integer.parseInt(songNo[i]));
+			list.add(p);
+		}
+		
+		int result = new PlaylistService().sortPlaylist(list,userId);
+	
+		
+		if(result>0) {
+			RequestDispatcher rd = request.getRequestDispatcher("/playList");
+			
+			rd.forward(request, response);
+		}else {
+			RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("msg", "수정 실패");
+			request.setAttribute("loc", "/plEdit");
+			rd.forward(request, response);
+		}
+		
+
 	}
 
 	/**

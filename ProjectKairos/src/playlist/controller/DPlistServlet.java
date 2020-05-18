@@ -46,7 +46,7 @@ public class DPlistServlet extends HttpServlet {
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		
 		for(int i=0; i<songNo.length; i++) {
-			System.out.println(orderNo[i]); // 이거 문제임
+			
 			Playlist p = new Playlist();			
 			p.setOrderNo(Integer.parseInt(orderNo[i]));
 			p.setSongNo(Integer.parseInt(songNo[i]));
@@ -54,12 +54,11 @@ public class DPlistServlet extends HttpServlet {
 		}
 				
 		
-		System.out.println(list.size());
+		
 		
 		int result = new PlaylistService().deletePlaylist(list,userId);
 		
 		if(result==list.size()) {
-			System.out.println("이거탐");
 			result = new PlaylistService().sortPlaylist(userId);
 			
 			if(result>0) {
