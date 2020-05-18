@@ -7,6 +7,7 @@ public class SessionPlaylist {
 	String songTitle;
 	String filepath;
 	String albumPath;
+	String albumName;
 	int liked;
 	
 	public SessionPlaylist() {
@@ -14,8 +15,10 @@ public class SessionPlaylist {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public SessionPlaylist(int songNo, int orderNo, String songArtist, String songTitle, String filepath,
-			String albumPath, int liked) {
+			String albumPath, String albumName, int liked) {
 		super();
 		this.songNo = songNo;
 		this.orderNo = orderNo;
@@ -23,7 +26,24 @@ public class SessionPlaylist {
 		this.songTitle = songTitle;
 		this.filepath = filepath;
 		this.albumPath = albumPath;
+		this.albumName = albumName;
 		this.liked = liked;
+	}
+
+
+
+	/**
+	 * @return the albumName
+	 */
+	public String getAlbumName() {
+		return albumName;
+	}
+
+	/**
+	 * @param albumName the albumName to set
+	 */
+	public void setAlbumName(String albumName) {
+		this.albumName = albumName;
 	}
 
 	public int getSongNo() {

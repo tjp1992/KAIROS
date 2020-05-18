@@ -82,7 +82,7 @@ h6 {
 	line-height: 13px;
 	font-family: 'Open Sans';
 	font-weight: 700;
-	color: #f0f0f0;
+	color: rgb(240, 240, 240);
 }
 
 .screen {
@@ -187,6 +187,7 @@ label.main:hover:before {
 	width: 366px;
 	background: #111;
 	transition: all 0.3s ease-in;
+	overflow: auto;
 }
 
 .screen>#magicButton:checked ~ .bodyPlayer {
@@ -207,6 +208,7 @@ label.main:hover:before {
 	transform-origin: 0% 0%;
 	transform: scale(0.1, 0.1);
 	transition: all 0.3s ease-in;
+	overflow: auto;
 }
 
 .list tr {
@@ -586,17 +588,21 @@ audio {
 </head>
 <body>
 	<script>
+		// audiotrack
+		var audioTrack = 0;
+		var songNo = 0;
+		// play previous music
 		function togglePlayPause() {
-		var audio = document.getElementById('audio');
-		var playpause = document.getElementById("play");
-			if (audio.paused || audio.ended) {
-				playpause.title = "Pause";
-				audio.play();
-			} else {
-				playpause.title = "Play";
-				audio.pause();
-			}
-			console.log('${playList[2].filepath}');
+			var audio = document.getElementById('audio');
+			var playpause = document.getElementById("play");
+				if (audio.paused) {
+					playpause.title = "Pause";
+					audio.play();
+				} else {
+					playpause.title = "Play";
+					audio.pause();
+				}
+			console.log(audioTrack);
 		}
 		$(function(){
 			$('.zmr').click(function(){
@@ -605,23 +611,41 @@ audio {
 				$(this).toggleClass('heartClick');
 			});
 		});
-		// audiotrack
-		var audioTrack = 0;
-		var songCount;
-		// play previous music
+		$(function(){
+			$('.song').click(function(){
+				var audio = $('#audio')[0];
+				$('.song').each(function(){
+					$(this).find('h6').css('color','rgb(240, 240, 240)');
+				});
+				$(this).find('h6').css('color','rgb(255, 86, 76)');
+				audioTrack = $(this).index();
+				//play the track audioTrack
+				$('#audio').attr("src","/src/songs/"+$("#"+$(this).index()).val()+".mp3");
+				audio.play();
+			});
+		});
+
+
 		function prevMusic(){
+			var trackNo = document.getElementById(audioTrack);
+			var file = trackNo.value;
 			var audio = document.getElementById('audio');
-			audio.src="/src/songs/"+'${playList[audioTrack-1].filepath}'+".mp3";
+			audio.src="/src/songs/"+file+".mp3";
 			audio.play();
-			audioTrack = audioTrack -1;
+			// audioTrack -= 1;
+			audioTrack--;
 		}
 		// autoplay next music
 		function nextMusic(){
+			console.log(audioTrack);
+			var trackNo = document.getElementById(audioTrack);
+			var file = trackNo.value;
 			var audio = document.getElementById('audio');
 			// alter soundtrack
-			audio.src = '/src/songs/'+"${playList[audioTrack+1].filepath}"+'.mp3';
+			audio.src = '/src/songs/'+file+'.mp3';
 			audio.play();
 			audioTrack = audioTrack +1;
+			
 		}
 	</script>
 	<article class="screen">
@@ -632,27 +656,36 @@ audio {
 		<div class="bodyPlayer"></div>
 
 		<table class="list">
-			<tr class="song">
-				<td class="nr">
-					<h5>
-						1
+			<c:forEach items="${playList}" var='p'>
+				<tr class="song">
+					<input type="hidden" id= ${p.orderNo-1} value=${p.filepath}>
+					<td class="nr">
 						<h5>
-				</td>
-				<td class="title"><h6>
-						Heavydirtysoul
-						<h6></td>
-				<td class="length"><h5>
-						3:54
-						<h5></td>
-				<td><input type="checkbox" id="heart"/><label class="zmr"
-					for="heart"></label></td>
-			</tr>
+							${p.orderNo }
+							<h5>
+					</td>
+					<td class="title"><h6>
+							${p.songTitle}
+							<h6></td>
+					<td class="length"><h5>
+							
+							<h5></td>
+					<c:if test="${p.liked eq 1}">
+						<td><input type="checkbox" id="heart${p.orderNo}" checked/><label class="zmr"
+							for="heart"></label></td>
+					</c:if>
+					<c:if test="${p.liked eq 0}">
+						<td><input type="checkbox" id="heart${p.orderNo}"/><label class="zmr"
+							for="heart"></label></td>
+					</c:if>
+				</tr>
+			</c:forEach>
 
 			<tr class="song">
 				<td class="nr"><h5>
 						2
 						<h5></td>
-				<td class="title"><h6 style="color: #ff564c;">
+				<td class="title"><h6 style="color: rgb(255, 86, 76);">
 						StressedOut
 						<h6></td>
 				<td class="length"><h5>
@@ -661,61 +694,6 @@ audio {
 				<td><input type="checkbox" id="heart1" checked /><label
 					class="zmr" for="heart1"></label></td>
 			</tr>
-			<tr class="song">
-				<td class="nr"><h5>
-						3
-						<h5></td>
-				<td class="title"><h6>
-						Ride
-						<h6></td>
-				<td class="length"><h5>
-						3:34
-						<h5></td>
-				<td><input type="checkbox" id="heart2" /><label class="zmr"
-					for="heart2"></label></td>
-			</tr>
-
-			<tr class="song">
-				<td class="nr"><h5>
-						4
-						<h5></td>
-				<td class="title"><h6>
-						Fairy Local
-						<h6></td>
-				<td class="length"><h5>
-						3:27
-						<h5></td>
-				<td><input type="checkbox" id="heart3" checked /><label
-					class="zmr" for="heart3"></label></td>
-			</tr>
-
-			<tr class="song">
-				<td class="nr"><h5>
-						5
-						<h5></td>
-				<td class="title"><h6>
-						Tear in My Heart
-						<h6></td>
-				<td class="length"><h5>
-						3:08
-						<h5></td>
-				<td><input type="checkbox" id="heart4" /><label class="zmr"
-					for="heart4"></label></td>
-			</tr>
-
-			<tr class="song">
-				<td class="nr"><h5>
-						6
-						<h5></td>
-				<td class="title"><h6>
-						Lane Boy
-						<h6></td>
-				<td class="length"><h5>
-						4:13
-						<h5></td>
-				<td><input type="checkbox" id="heart5" /><label class="zmr"
-					for="heart5"></label></td>
-			</tr>
 		</table>
 
 		<div class="shadow"></div>
@@ -723,11 +701,11 @@ audio {
 		<div class="bar"></div>
 
 		<div class="info">
-			<h4>STRESSED OUT</h4>
-			<h3>twenty one pilots - Blurryface</h3>
+			<h4>'${playList[0].songTitle}'</h4>
+			<h3>'${playList[0].songArtist}'</h3>
 		</div>
-		<audio src="/src/songs/"+'${playList[0].filepath}'+".mp3" id="audio" controls onended="nextMusic()">
-			<!-- <source src="/src/songs/1.mp3" type="audio/mpeg"> -->
+		<audio id="audio" controls onended="nextMusic()">
+			<source src="/src/songs/1.mp3" type="audio/mpeg">
 		</audio>
 		<table class="player">
 			<td><input type="checkbox" id="backward" onclick="prevMusic();"/><label
@@ -758,7 +736,7 @@ audio {
 			</td>
 		</table>
 		<div class="current">
-			<h2>STRESSED OUT</h2>
+			<h2>'${playList[0].songTitle}'</h2>
 		</div>
 	</article>
 </body>
