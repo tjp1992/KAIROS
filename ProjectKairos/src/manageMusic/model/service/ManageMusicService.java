@@ -189,7 +189,9 @@ public class ManageMusicService {
 					uNum++;
 				}
 			}
-		}
+		} else if(list.get(0).getSongNo() == 0) {
+			uNum = list.size();
+		}		
 		
 		int result2 = new ManageMusicDao().deleteAlbum(conn, albumNo);
 		
