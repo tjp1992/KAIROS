@@ -101,12 +101,15 @@ public class SearchSongService {
 
 	public SearchPageData searchSong(ReqSearch req) {
 		
+		Connection conn = JDBCTemplate.getConnection();
 		StringBuffer sb = new StringBuffer();
+		String countQuery = null;
+		String query = null;
 		
 		sb.append("SELECT * FROM (SELECT ROWNUM AS RNUM, T.*");
 		
 		if(req.getUserId() != null) {
-			sb.append(", NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = SONG_NO AND LIKELIST.USER_ID = ?),0) AS LIKED ");
+			sb.append(", NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = SONG_NO AND LIKELIST.USER_ID = '"+req.getUserId()+"'),0) AS LIKED ");
 		}
 		
 		sb.append(" FROM(SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO) WHERE ");
@@ -119,25 +122,41 @@ public class SearchSongService {
 		
 		sb.append("'%"+req.getKeyword()+"%' ORDER BY S.LIKE_COUNT DESC)T ORDER BY ROWNUM)");
 		
-		String countQuery = null;
-		
-		if(req.getGenre() != null) {
-			sb.append(" WHERE SONG_GENRE = '"+req.getGenre()+"'");
-			countQuery = sb.toString();
-			sb.append(" AND")
-		}
-		
-		if(req.getLicensed() != 0) {
+		if(req.getGenre() != null && req.getLicensed() != 0) {
+			sb.append(" WHERE SONG_GENRE = '"+req.getGenre()+"' AND LICENSED = "+req.getLicensed());
+			countQuery = "SELECT COUNT(*) AS CNT FROM ("+sb.toString()+")";
+		} else if(req.getLicensed() != 0) {
+			if(req.getLicensed()==2) {
+				req.setLicensed(0);
+			}
 			sb.append(" WHERE LICENSED = "+req.getLicensed());
-			countQuery = sb.toString();
+			countQuery = "SELECT COUNT(*) AS CNT FROM ("+sb.toString()+")";
+			
+			if(req.getLicensed()==0) {
+				req.setLicensed(2);
+			}
+		} else if(req.getGenre() != null) {
+			sb.append(" WHERE SONG_GENRE = '"+req.getGenre()+"'");
+			countQuery = "SELECT COUNT(*) AS CNT FROM ("+sb.toString()+")";
+		} else {
+			countQuery = "SELECT COUNT(*) AS CNT FROM ("+sb.toString()+")";
+		}		
+		
+		
+		if(req.getGenre() == null || req.getLicensed()==0){
+			sb.append(" WHERE RNUM BETWEEN ? AND ?");
+			query = sb.toString(); 
+		} else {
+			sb.append(" AND RNUM BETWEEN ? AND ?");
+			query = sb.toString();
 		}
 		
+		int totalCount = new SearchSongDao().getTotalCount(conn, countQuery);
 		
+		int start = 0;
+		int end = 0;
 		
-		sb.append("WHERE RNUM BETWEEN ? AND ?");
-		
-		
-		System.out.println(sb.toString());
+		ArrayList<SearchSong> list = new SearchSongDao().searchSong(conn, query, start, end);		
 		
 		SearchPageData pd = new SearchPageData();
 		

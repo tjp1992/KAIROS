@@ -159,4 +159,69 @@ public class SearchSongDao {
 		return list;
 	}
 
+	public int getTotalCount(Connection conn, String query) {
+
+		int result = 0;
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		
+		try {
+			pst = conn.prepareStatement(query);
+			rset = pst.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pst);
+		}
+	
+		
+		return result;
+	}
+
+	public ArrayList<SearchSong> searchSong(Connection conn, String query, int start, int end) {
+		
+		ArrayList<SearchSong> list = new ArrayList<SearchSong>();
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setInt(1, start);
+			pst.setInt(2, end);
+			rset = pst.executeQuery();
+			
+			while(rset.next()) {
+				SearchSong s = new SearchSong();
+				
+				s.setAlbumName(rset.getString("album_name"));
+				s.setLicensed(rset.getInt("licensed"));
+				s.setLikeCount(rset.getInt("like_count"));
+				s.setPlayCount(rset.getInt("play_count"));
+				s.setRowNum(rset.getInt("rnum"));
+				s.setSongArtist(rset.getString("song_artist"));
+				s.setSongTitle(rset.getString("song_title"));
+				s.setSongNo(rset.getInt("song_no"));
+				if(query.contains("NVL")) {
+					s.setLiked(rset.getInt("liked"));
+				}
+				
+				list.add(s);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pst);
+		}		
+		
+		return list;
+	}
+
 }

@@ -11,7 +11,10 @@ public class TestRun {
 		
 		ReqSearch req = new ReqSearch();
 		req.setKeyword("아이유");
-		req.setUserId("user01");
+		req.setCategory("song_artist");
+		req.setGenre("kpop");
+		req.setLicensed(1);
+		req.setReSearch("밤");
 		new SearchSongService().searchSong(req);
 
 	}
