@@ -23,8 +23,7 @@ body {
 	margin: 0;
 }
 
-@
-keyframes harlem { 0% {
+@keyframes harlem { 0% {
 	transform: scale(1);
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
@@ -128,7 +127,9 @@ label.main:before {
 label.main:hover:before {
 	color: #bbb;
 }
-
+.screen>#magicButton:checked ~ .footer{
+	display: none;
+}
 .screen>#magicButton:checked ~ label.main:before {
 	color: #ff564c;
 	transition: all 0.3s ease-in;
@@ -187,11 +188,11 @@ label.main:hover:before {
 	width: 366px;
 	background: #111;
 	transition: all 0.3s ease-in;
-	overflow: auto;
+
 }
 
 .screen>#magicButton:checked ~ .bodyPlayer {
-	height: 470px;
+	height: 5000px;
 	left: 0;
 	top: 180px;
 	transition: all 0.3s ease-in;
@@ -208,7 +209,6 @@ label.main:hover:before {
 	transform-origin: 0% 0%;
 	transform: scale(0.1, 0.1);
 	transition: all 0.3s ease-in;
-	overflow: auto;
 }
 
 .list tr {
@@ -236,6 +236,56 @@ label.main:hover:before {
 	width: 210px;
 	transition: all 0.11s ease-in;
 }
+.fa-share-square:hover{
+	cursor: pointer;
+}
+
+
+
+/* .scroll {
+	border-spacing: 0px 2px;
+	width: 100%;
+	height: 470px;
+	visibility: hidden;
+	opacity: 0;
+	transform-origin: 0% 0%;
+	transform: scale(0.1, 0.1);
+	transition: all 0.3s ease-in;
+	position: absolute;
+	top: 366px;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.scroll tr {
+	transform-origin: 0% 50%;
+	height: 50px;
+	text-align: center;
+	background: #1d1d1d;
+	text-indent: 8px;
+}
+
+.scroll tr:hover {
+	background: #222;
+	cursor: pointer;
+}
+
+.title {
+	width: 215px;
+	text-align: left;
+	text-indent: 15px;
+	transition: all 0.11s ease-in;
+}
+
+.list tr:hover .title {
+	padding-left: 5px;
+	width: 210px;
+	transition: all 0.11s ease-in;
+} */
+
+
+
 
 .screen>#magicButton:checked ~ .list {
 	top: 192px;
@@ -370,7 +420,7 @@ td>#heart8:checked ~ label.zmr:before {
 } */
 
 .bar {
-	background: url('http://imgh.us/bar_3.svg') no-repeat;
+	/* background: url('http://imgh.us/bar_3.svg') no-repeat; */
 	background-size: 100%;
 	width: 320px;
 	height: 21px;
@@ -380,6 +430,7 @@ td>#heart8:checked ~ label.zmr:before {
 	transform-origin: 0% 0%;
 	transition: all 0.3s ease-in;
 }
+
 
 .screen>#magicButton:checked ~ .bar {
 	top: 119px;
@@ -477,12 +528,16 @@ td>#play:checked ~ label.play:before {
 	transition: all 0.3s ease-in;
 }
 
+body{
+	position: relative;
+}
+
 .shadow {
 	background: rgba(17, 17, 17, 0.8);
 	width: 366px;
 	height: 50px;
 	position: absolute;
-	bottom: -12px;
+	bottom: 0;
 	left: 0;
 	box-shadow: 0px -15px 40px rgba(17, 17, 17, 0.8);
 }
@@ -509,7 +564,7 @@ td>#play:checked ~ label.play:before {
 	transition: all 0.15s linear;
 }
 
-.shuffle:before {
+.share:before {
 	content: "\f074";
 	cursor: pointer;
 	transition: all 0.15s linear;
@@ -532,7 +587,7 @@ td>#play:checked ~ label.play:before {
 	transition: all 0.15s linear;
 }
 
-.shuffle:hover:before {
+.share:hover:before {
 	color: #bbb;
 	transition: all 0.15s linear;
 }
@@ -553,7 +608,7 @@ td>#love:checked ~ label.love:before {
 	transition: all 0.15s linear;
 }
 
-td>#shuffle:checked ~ label.shuffle:before {
+td>#shuffle:checked ~ label.fas:before {
 	color: #ff564c;
 	transition: all 0.15s linear;
 }
@@ -583,11 +638,26 @@ td>#repeat:checked ~ label.repeat:before {
 audio {
 	visibility: hidden;
 }
+/* .screen{
+	overflow-y: auto;
+} */
+.scrollBar{
+	overflow-y: auto;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
 </style>
 <title>Kairos Music Player</title>
 </head>
 <body>
 	<script>
+		$(function(){
+			$("#magicButton").click(function(){
+				$(".screen").toggleClass('scrollBar');
+			});
+		});
 		// audiotrack
 		var audioTrack = 0;
 		var songNo = 0;
@@ -605,13 +675,6 @@ audio {
 			console.log(audioTrack);
 		}
 		$(function(){
-			$('.zmr').click(function(){
-				// $(this).parent().parent().addClass(".checked");
-				console.log(this);
-				$(this).toggleClass('heartClick');
-			});
-		});
-		$(function(){
 			$('.song').click(function(){
 				var audio = $('#audio')[0];
 				$('.song').each(function(){
@@ -621,30 +684,59 @@ audio {
 				audioTrack = $(this).index();
 				//play the track audioTrack
 				$('#audio').attr("src","/src/songs/"+$("#"+$(this).index()).val()+".mp3");
+				$('.info').find('h3').html($(this).find('#artist').val());
+				$('.info').find('h4').html($(this).find('h6').html())
+				$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
 				audio.play();
 			});
 		});
 
 
 		function prevMusic(){
-			var trackNo = document.getElementById(audioTrack);
+			if(audioTrack == 0){
+				return;
+			}
+			var trackNo = document.getElementById(--audioTrack);
 			var file = trackNo.value;
-			var audio = document.getElementById('audio');
-			audio.src="/src/songs/"+file+".mp3";
-			audio.play();
-			// audioTrack -= 1;
-			audioTrack--;
-		}
-		// autoplay next music
-		function nextMusic(){
-			console.log(audioTrack);
-			var trackNo = document.getElementById(audioTrack);
+			var songTitle = document.getElementsByClassName('title');
+			var songArtist = document.getElementsByClassName('songArtist');
 			var file = trackNo.value;
 			var audio = document.getElementById('audio');
 			// alter soundtrack
 			audio.src = '/src/songs/'+file+'.mp3';
 			audio.play();
-			audioTrack = audioTrack +1;
+			var info = document.getElementsByClassName('info');
+
+			// update info page
+			$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
+			$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
+			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+			// update playlist highlight
+			$('.song').each(function(){
+					$(this).find('h6').css('color','rgb(240, 240, 240)');
+				});
+			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
+		}
+		// autoplay next music
+		function nextMusic(){
+			var trackNo = document.getElementById(++audioTrack);
+			var songTitle = document.getElementsByClassName('title');
+			var songArtist = document.getElementsByClassName('songArtist');
+			var file = trackNo.value;
+			var audio = document.getElementById('audio');
+			// alter soundtrack
+			audio.src = '/src/songs/'+file+'.mp3';
+			audio.play();
+			var info = document.getElementsByClassName('info');
+			// update info page
+			$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
+			$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
+			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+			// update playlist highlight
+			$('.song').each(function(){
+					$(this).find('h6').css('color','rgb(240, 240, 240)');
+				});
+			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
 			
 		}
 	</script>
@@ -653,20 +745,31 @@ audio {
 		<label class="main" for="magicButton"></label>
 
 		<div class="coverImage"></div>
-		<div class="bodyPlayer"></div>
-
+		<div class="bodyPlayer">
+			
+		</div>
 		<table class="list">
 			<c:forEach items="${playList}" var='p'>
 				<tr class="song">
-					<input type="hidden" id= ${p.orderNo-1} value=${p.filepath}>
+					<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath}>
+					<input type="hidden" id='artist' class="songArtist" value=${p.songArtist}>
+					<input type="hidden" id='albumpath' class='albumpath' value=${p.albumPath}>
 					<td class="nr">
 						<h5>
 							${p.orderNo }
 							<h5>
 					</td>
-					<td class="title"><h6>
+					<c:if test='${p.orderNo eq 1}'>
+						<td class="title" ><h6 style='color:#ff564c;'>
 							${p.songTitle}
 							<h6></td>
+					</c:if>
+					<c:if test='${p.orderNo ne 1}'>
+						<td class="title"><h6>
+								${p.songTitle}
+								<h6></td>
+
+					</c:if>
 					<td class="length"><h5>
 							
 							<h5></td>
@@ -680,29 +783,18 @@ audio {
 					</c:if>
 				</tr>
 			</c:forEach>
-
-			<tr class="song">
-				<td class="nr"><h5>
-						2
-						<h5></td>
-				<td class="title"><h6 style="color: rgb(255, 86, 76);">
-						StressedOut
-						<h6></td>
-				<td class="length"><h5>
-						3:22
-						<h5></td>
-				<td><input type="checkbox" id="heart1" checked /><label
-					class="zmr" for="heart1"></label></td>
-			</tr>
 		</table>
+		<div class='scroll'>
+			
+		</div>
 
 		<div class="shadow"></div>
 
 		<div class="bar"></div>
 
 		<div class="info">
-			<h4>'${playList[0].songTitle}'</h4>
-			<h3>'${playList[0].songArtist}'</h3>
+			<h4>${playList[0].songTitle}</h4>
+			<h3>${playList[0].songArtist}</h3>
 		</div>
 		<audio id="audio" controls onended="nextMusic()">
 			<source src="/src/songs/1.mp3" type="audio/mpeg">
@@ -724,7 +816,7 @@ audio {
 			</td>
 			<td>
 				<input type="checkbox" id="shuffle" /><label
-				class="shuffle" for="shuffle"></label>
+				class="fas fa-share-square" for="shuffle"></label>
 			</td>
 			<td>
 				<input type="checkbox" id="repeat" /><label
@@ -736,7 +828,7 @@ audio {
 			</td>
 		</table>
 		<div class="current">
-			<h2>'${playList[0].songTitle}'</h2>
+			<h2>${playList[0].songTitle}</h2>
 		</div>
 	</article>
 </body>
