@@ -11,45 +11,118 @@
 <script type="text/javascript" src="/js/bootstrap.js"></script>
 <link href="/src/css/userMypage/userInquiry.css" rel="stylesheet" type="text/css">
 </head>
+	<script>
+		$(function(){
+			$("#modify").click(function(){
+				location.href="/modifyInquiryViewFrm";
+			});
+		});
+	</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
-		<h2>1:1문의하기</h2>
+		<h2>게시글 상세보기</h2>
 		<form action="/insertInquiry" method="post" enctype="multipart/form-data" id="insertFrm">
-         <table>
+         <table style="width:800px; height:600px;">
 	          <tr>
-	             <th>제목</th>
-	             <td><input type="text" class="form-control" name="inquiryTitle" style="width:500px;" value="${i.inqTitle }"></td>
+	             <th style="width:300px;">제목</th>
+	             <td><span>${i.inqTitle }</span><input type="hidden" class="form-control" name="inquiryTitle" style="width:500px;" value="${i.inqTitle }"></td>
 	          </tr>
 	          <tr>
 		          <th>작성자</th>
-		          <td>${i.userId }
+		          <td><span>${i.userId }</span>
 		             <input type="hidden" name="inquiryWriter" value="${i.userId }"> 
 		          </td>
 	          </tr>
-	          <tr>
-	          	<th>첨부파일</th>
-	          	<td>
-	          	<c:if test="${not empty i.inqFilename }">
-							<img src="/img/file.png" width="16px">
-							<a href="javascript:fileDownload('${i.inqFilename }','${i.inqFilepath }')">${i.inqFilename }</a>
-						</c:if>
-	          	</td>
-	          </tr>
+	         
 	          <tr style="border-bottom:1px solid black;">
 	          	<th>내용</th>
-	          	<td>
-	          		<textarea name="inquiryContent" rows="10" cols="80">${i.inqContent }</textarea>
+	          	<td>${i.inqContent }
+	          		<textarea style="display:none;" name="inquiryContent" rows="10" cols="80">${i.inqContent }</textarea>
 	          	</td>
 	          </tr>
 	          <tr style="text-align : center;">
 	          	<td colspan="2">
-	          		<button type="submit">등록</button>
-	          		<button type="reset">취소</button>
+	          		<button type="button" id="modify">수정하기</button>
+	          		<button type="button" id="back">뒤로가기</button>
 	          	</td>
 	          </tr>
          </table>
       </form>
+      <c:if test="${not empty sessionScope.user }">
+		<div class="comment-write">
+			<form action="/inquiryCommentInsert" method="post">
+			<!--작성자,게시글번호,댓글레벨,댓글번호  -->
+			<input type="hidden" name="noticeCommentWriter" value="${sessionScope.member.memberId }">
+			<input type="hidden" name="noticeRef" value="${n.noticeNo }">
+			<input type="hidden" name="noticeCommentLevel" value="1">
+			<input type="hidden" name="noticeCommentRef" value="0">
+				<table class="table">
+					<tr>
+						<td width="85%">
+							<input type="text" class="form-control" name="noticeCommentContent">
+						</td>
+						<td width="15%">
+							<button type="submit" class="btn btn-primary">등록</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		</c:if>
+      <div class="comment-wrapper">
+			<c:forEach items="${list }" var="nc">
+			<c:if test="${nc.noticeCommentLevel eq 1 }">
+				<ul class="commentList">
+					<li style="width:10% ;text-align:center;">
+						<span>${nc.noticeCommentWriter }</span>
+					</li>
+					<li style="width:60%">
+						<input type="text" class="form-control" name="noticeCommentContent" value="${nc.noticeCommentContent }" style="display:none;">
+						<span>${nc.noticeCommentContent }</span>
+					</li>
+					<li style="width:10%; text-align:center;">
+						<span>${nc.noticeCommentDate }</span>
+					</li>
+					<li style="width:20%; text-align:center;">
+						<c:if test="${not empty sessionScope.member }">
+							<a href="javascript:void(0)" onclick="insertComment(this, '${nc.noticeCommentNo}','${n.noticeNo }','${sessionScope.member.memberId }')">댓글달기</a>
+							<c:if test="${sessionScope.member.memberId == nc.noticeCommentWriter }">
+								<a href="javascript:void(0)" onclick="modifyComment(this,'${nc.noticeCommentNo }','${nc.noticeRef }')">수정</a>
+								<a href="javascript:void(0)" onclick="deleteComment('${nc.noticeCommentNo}','${nc.noticeRef }')">삭제</a>
+							</c:if>
+						</c:if>
+					</li>
+				</ul>
+				</c:if>
+				<c:forEach items="${list }" var="ncc">
+					<c:if test="${ncc.noticeCommentLevel eq 2 && nc.noticeCommentNo eq ncc.noticeCommentRef}">
+						<ul class="commentList">
+							<li style="width:5%; text-align:center;">
+								<span>└─</span>
+							</li>
+							<li style="width:10%; text-align:center;">
+								<span>${ncc.noticeCommentWriter }</span>
+							</li>
+							<li style="width:55%">
+							<input type="text" class="form-control" name="noticeCommentContent" value="${ncc.noticeCommentContent }" style="display:none;">
+								<span>${ncc.noticeCommentContent }</span>
+							</li>
+							<li style="width:10%; text-align:center;">
+								<span>${ncc.noticeCommentDate }</span>
+							</li>
+							<li style="width:20%; text-align:center;">
+								<c:if test="${not empty sessionScope.member && sessionScope.member.memberId eq ncc.noticeCommentWriter }">
+									<a></a>
+									<a href="javascript:void(0)" onclick="modifyComment(this,'${ncc.noticeCommentNo }','${ncc.noticeRef }')">수정</a>
+									<a href="javascript:void(0)" onclick="deleteComment('${ncc.noticeCommentNo}','${ncc.noticeRef }')">삭제</a>
+								</c:if>
+							</li>
+						</ul>
+					</c:if>
+				</c:forEach>
+			</c:forEach>
+		</div>
 	</section>
 </body>
 </html>

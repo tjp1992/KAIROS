@@ -12,6 +12,7 @@ public class InquiryService {
 
 	public int insertInquiry(Inquiry i) {
 		Connection conn = JDBCTemplate.getConnection();
+		System.out.println(i.getUserId());
 		int result = new InquiryDao().insertInquiry(conn, i);
 		if (result > 0) {
 			JDBCTemplate.commit(conn);

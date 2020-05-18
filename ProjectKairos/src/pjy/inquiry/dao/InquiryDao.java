@@ -14,15 +14,13 @@ public class InquiryDao {
 	public int insertInquiry(Connection conn, Inquiry i) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into inquiry values(seq_inq_no.nextval,?,?,?,sysdate,0,?,?)";
+		String query = "insert into inquiry values(seq_inq_no.nextval,?,?,?,sysdate,0,null,null)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
 			pstmt.setString(index++, i.getUserId());
 			pstmt.setString(index++, i.getInqTitle());
 			pstmt.setString(index++, i.getInqContent());
-			pstmt.setString(index++, i.getInqFilename());
-			pstmt.setString(index++, i.getInqFilepath());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
