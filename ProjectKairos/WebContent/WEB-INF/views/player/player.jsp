@@ -596,6 +596,7 @@ audio {
 				playpause.title = "Play";
 				audio.pause();
 			}
+			console.log('${playList[2].filepath}');
 		}
 		$(function(){
 			$('.zmr').click(function(){
@@ -725,7 +726,7 @@ audio {
 			<h4>STRESSED OUT</h4>
 			<h3>twenty one pilots - Blurryface</h3>
 		</div>
-		<audio src="/src/songs/1.mp3"id="audio" controls onended="nextMusic()">
+		<audio src="/src/songs/"+'${playList[0].filepath}'+".mp3" id="audio" controls onended="nextMusic()">
 			<!-- <source src="/src/songs/1.mp3" type="audio/mpeg"> -->
 		</audio>
 		<table class="player">
