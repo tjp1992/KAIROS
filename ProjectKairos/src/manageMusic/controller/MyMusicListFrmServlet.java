@@ -44,16 +44,24 @@ public class MyMusicListFrmServlet extends HttpServlet {
 		User u = (User) session.getAttribute("user");
 
 		ReqMyList req = new ReqMyList();
-		req.setUserNick("아이유");
+
+		if (u == null) {
+			request.setAttribute("loc", "/login");
+			request.setAttribute("msg", "로그인이 필요한 서비스입니다.");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		}
+
+		req.setUserNick(u.getUserNick());
+
 		if (request.getParameter("numPerPage") != null) {
 			req.setNumPerPage(Integer.parseInt(request.getParameter("numPerPage")));
 		}
 		if (request.getParameter("reqPage") != null) {
 			req.setReqPage(Integer.parseInt(request.getParameter("reqPage")));
 		}
-		
+
 		if (request.getParameter("reSearch") != null) {
-			req.setReSearch(request.getParameter("reSearch"));			
+			req.setReSearch(request.getParameter("reSearch"));
 		}
 
 		MyListPageData pd = new SearchSongService().searchMyList(req);

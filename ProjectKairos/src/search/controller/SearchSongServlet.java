@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import search.model.service.SearchSongService;
+import search.model.vo.ReqSearch;
+import search.model.vo.SearchPageData;
 import search.model.vo.SearchResult;
 import song.vo.SearchSong;
 import user.vo.User;
@@ -36,25 +38,57 @@ public class SearchSongServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session =request.getSession(false); 
+				
+		User u = (User)session.getAttribute("user");
 		
+		ReqSearch req = new ReqSearch();
 		
-		User u = (User)session.getAttribute("user");		
+		// 유저가 로그인 되어있으면 검색 조건에 포함 (좋아요 여부 확인필요)
+		if(u!=null) { 
+			req.setUserId(u.getUserId());
+		}
 		
-		String category = request.getParameter("category");
-		String keyword = request.getParameter("keyword");
+		// 사용자가 검색 키워드를 입력했는지 확인
+		if(request.getParameter("keyword") != null) { 
+			req.setKeyword(request.getParameter("keyword"));
+		}
 		
-		SearchResult sResult = null;
+		// 사용자가 카테고리를 선택했는지 확인
+		if(request.getParameter("category") != null) { 
+			req.setCategory(request.getParameter("category"));
+		}
 		
-//		if(category == null) {
-//			sResult = new SearchSongService().searchByKeword(keyword,u);
-//		} else {					
-//		}
-		sResult = new SearchSongService().searchByKeword(keyword, category,u);					
+		// 사용자가 장르를 선택했는지 확인
+		if(request.getParameter("genre") != null) { 
+			req.setGenre(request.getParameter("genre"));
+		}
 		
+		// 사용자가 유료/무료 선택했는지 확인
+		if(request.getParameter("licensed") != null) { 
+			req.setLicensed(Integer.parseInt(request.getParameter("licensed")));
+		}
 		
-		request.setAttribute("keyword", keyword);
-		request.setAttribute("list", sResult.getList());
-		request.setAttribute("totalNum", sResult.getTotalResult());
+		// 사용자가 출력 건수 선택했는지 확인
+		if(request.getParameter("numPerPage") != null) {
+			req.setNumPerPage(Integer.parseInt(request.getParameter("numPerPage")));
+		} else {
+			req.setNumPerPage(25);
+		}
+		
+		// 사용자 요청 페이지번호 확인
+		if(request.getParameter("reqPage") != null) {
+			req.setReqPage(Integer.parseInt(request.getParameter("reqPage")));
+		} else { // 요청 없을시 1 페이지
+			req.setReqPage(1);
+		}
+		
+		// 결과내 재검색 했는지 여부		
+		if(request.getParameter("reSearch") != null) {
+			req.setReSearch(request.getParameter("reSearch"));
+		}		
+		
+		SearchPageData pd = new SearchSongService().searchSong(req);
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/search/search.jsp").forward(request, response);
 	}

@@ -7,58 +7,11 @@ import common.JDBCTemplate;
 import search.model.dao.SearchSongDao;
 import search.model.vo.MyListPageData;
 import search.model.vo.ReqMyList;
-import search.model.vo.SearchResult;
+import search.model.vo.ReqSearch;
+import search.model.vo.SearchPageData;
 import song.vo.SearchSong;
-import user.vo.User;
 
 public class SearchSongService {
-
-	public SearchResult searchByKeword(String keyword, User u) {
-
-		Connection conn = JDBCTemplate.getConnection();
-
-		int start = 1;
-		int end = 50;
-
-		int totalResult = new SearchSongDao().getTotalCount(conn, keyword);
-		ArrayList<SearchSong> list = new SearchSongDao().searchByKeword(conn, keyword, start, end);
-
-		JDBCTemplate.close(conn);
-
-		return new SearchResult(list, totalResult);
-	}
-
-	public SearchResult searchByKeword(String keyword, String category, User u) {
-
-		Connection conn = JDBCTemplate.getConnection();
-
-		int start = 1;
-		int end = 50;
-
-		int totalResult = new SearchSongDao().getTotalCount(conn, keyword);
-
-		if (category != null) {
-			switch (Integer.parseInt(category)) {
-			case 1:
-				category = "song_title";
-				break;
-
-			case 2:
-				category = "song_artist";
-				break;
-
-			case 3:
-				category = "album_name";
-				break;
-			}
-		}
-
-		ArrayList<SearchSong> list = new SearchSongDao().searchByKeword(conn, keyword, category, u, start, end);
-
-		JDBCTemplate.close(conn);
-
-		return new SearchResult(list, totalResult);
-	}
 
 	public MyListPageData searchMyList(ReqMyList req) {
 
@@ -144,6 +97,51 @@ public class SearchSongService {
 		}
 
 		return new MyListPageData(pageNavi.toString(), list);
+	}
+
+	public SearchPageData searchSong(ReqSearch req) {
+		
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("SELECT * FROM (SELECT ROWNUM AS RNUM, T.*");
+		
+		if(req.getUserId() != null) {
+			sb.append(", NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = SONG_NO AND LIKELIST.USER_ID = ?),0) AS LIKED ");
+		}
+		
+		sb.append(" FROM(SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO) WHERE ");
+		
+		if(req.getCategory() != null) {
+			sb.append(req.getCategory()+" LIKE ");
+		} else {
+			sb.append("SONG_TITLE LIKE '%"+req.getKeyword()+"%' OR SONG_ARTIST LIKE '%"+req.getKeyword()+"%' OR ALBUM_NAME LIKE ");
+		}
+		
+		sb.append("'%"+req.getKeyword()+"%' ORDER BY S.LIKE_COUNT DESC)T ORDER BY ROWNUM)");
+		
+		String countQuery = null;
+		
+		if(req.getGenre() != null) {
+			sb.append(" WHERE SONG_GENRE = '"+req.getGenre()+"'");
+			countQuery = sb.toString();
+			sb.append(" AND")
+		}
+		
+		if(req.getLicensed() != 0) {
+			sb.append(" WHERE LICENSED = "+req.getLicensed());
+			countQuery = sb.toString();
+		}
+		
+		
+		
+		sb.append("WHERE RNUM BETWEEN ? AND ?");
+		
+		
+		System.out.println(sb.toString());
+		
+		SearchPageData pd = new SearchPageData();
+		
+		return pd;
 	}
 
 }
