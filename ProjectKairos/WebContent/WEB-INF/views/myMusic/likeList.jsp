@@ -30,7 +30,6 @@ pageEncoding="UTF-8"%>
                         <td width="95%">
                         	<button type="button" id="listen_btn">듣기</button>
                         	<button type="button" id="up_btn">담기</button>
-                        	<button type="button" id="dellike_btn">좋아요 취소</button>
                         </td>
                     </tr>
                 </table>
@@ -131,6 +130,7 @@ pageEncoding="UTF-8"%>
         				 break;
         			 case 1:
         				 icon.parent().parent().remove();
+        				 location.href="/likeList";
         				 break;
         			 }
         		 }

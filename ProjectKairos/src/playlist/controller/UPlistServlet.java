@@ -2,6 +2,7 @@ package playlist.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.oracle.jrockit.jfr.RequestDelegate;
 
+import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
+import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 /**
@@ -49,7 +52,9 @@ public class UPlistServlet extends HttpServlet {
 		int result = new PlaylistService().updateSongPlist(arr,userId);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
-
+			
+			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+			session.setAttribute("playList", pList);
 			request.setAttribute("msg", "플레이리스트 추가 성공");
 			request.setAttribute("loc", "/likeList");
 			

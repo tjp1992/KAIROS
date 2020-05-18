@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import likelist.dao.LikelistDao;
 import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
 import playlist.vo.Playlist;
@@ -19,16 +18,16 @@ import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 /**
- * Servlet implementation class PlayListServlet
+ * Servlet implementation class PlEditArtistDescServlet
  */
-@WebServlet(name = "PlayList", urlPatterns = { "/playList" })
-public class PlayListServlet extends HttpServlet {
+@WebServlet(name = "PlEditArtistDesc", urlPatterns = { "/plEditArtistDesc" })
+public class PlEditArtistDescServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlayListServlet() {
+    public PlEditArtistDescServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,22 +36,15 @@ public class PlayListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.
-		//2.
-		HttpSession session =request.getSession(false);
+		HttpSession session = request.getSession(false);
 		User u = (User)session.getAttribute("user");
 		String userId = u.getUserId();
-		//3.
-		ArrayList<Playlist> list=new PlaylistService().myPlaylistView(userId);
 		
-		//4.
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/playList.jsp");
+		ArrayList<Playlist> list = new PlaylistService().orderArtistDesc(userId);
+		RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/myMusic/pleditPage.jsp");
 		request.setAttribute("list", list);
-		ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-		session.setAttribute("playList", pList);
-		rd.forward(request, response);
 		
+		rd.forward(request, response);
 	}
 
 	/**

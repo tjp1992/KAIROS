@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
 import playlist.vo.Playlist;
+import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 /**
@@ -62,6 +64,8 @@ public class DPlistServlet extends HttpServlet {
 			result = new PlaylistService().sortPlaylist(userId);
 			
 			if(result>0) {
+				ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+				session.setAttribute("playList", pList);
 				request.getRequestDispatcher("/playList").forward(request, response);				
 			} else {
 				request.setAttribute("msg", "삭제실패");

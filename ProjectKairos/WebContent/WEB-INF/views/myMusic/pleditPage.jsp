@@ -25,19 +25,19 @@ pageEncoding="UTF-8"%>
             <div class="tototo">
                 <button type="button" class="upimg"><i class="iconup fas fa-angle-up"></i></button>
                 <button type="button" class="downimg"><i class="icondown fas fa-angle-down"></i></button>
-                <select class="lineup">
-                    <option>내 편집순</option>
-                    <option>아티스트명↓(가-하)순</option>
-                    <option>아티스트명↑(하-가)순</option>
-                    <option>곡명↓(가-하)순</option>
-                    <option>곡명↑(하-가)순</option>
+                <select onchange="orderChange(this)">
+                	<option value="">정렬</option>
+                    <option value="myedit">내 편집순</option>
+                    <option value="artist_asc">아티스트명↓(가-하)순</option>
+                    <option value="artist_desc">아티스트명↑(하-가)순</option>
+                    <option value="title_asc">곡명↓(가-하)순</option>
+                    <option value="title_desc">곡명↑(하-가)순</option>
                 </select>
             </div>
             <div class="table">
                 <table>
                 	<c:forEach items="${list }" var="p">
                     <tr class="pltr1" songNo="${p.songNo }">
-                    
                         <th width="5%"><input class="plchk" name="songNo" type="checkbox" value="${p.songNo }">
                         <input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />
                         </th>
@@ -52,13 +52,6 @@ pageEncoding="UTF-8"%>
             <div class="tototo">
                 <button type="button" class="upimg"><i class="iconup fas fa-angle-up"></i></button>
                 <button type="button" class="downimg"><i class="icondown fas fa-angle-down"></i></button>
-                <select class="lineup">
-                    <option>내 편집순</option>
-                    <option>아티스트명↓(가-하)순</option>
-                    <option>아티스트명↑(하-가)순</option>
-                    <option>곡명↓(가-하)순</option>
-                    <option>곡명↑(하-가)순</option>
-                </select>
             </div>
             <div class="sub">
                 <input class="plsubmit" type="button" name="lineupsong" value="수정 완료">
@@ -68,6 +61,19 @@ pageEncoding="UTF-8"%>
         </div>
     </section>
     <script>
+    	function orderChange(t){
+    		if(t.value=="artist_asc"){
+    			location.href="/plEditArtistAsc";
+    		}else if(t.value=="artist_desc"){
+    			location.href="/plEditArtistDesc";
+    		}else if(t.value=="title_asc"){
+    			location.href="/plEditTitleAsc";
+    		}else if(t.value=="title_desc"){
+    			location.href="/plEditTitleDesc";
+    		}else if(t.value=="myedit"){
+    			location.href="/plEdit";
+    		}
+    	}
         $(function() {
         	$(".plsubmit").click(function(){
         		$("#plEditFrm").attr("action","/pleditPage");
@@ -85,7 +91,6 @@ pageEncoding="UTF-8"%>
                 for (var i = 0; i < arr.length; i++) {
                     prev.before(arr[i]);
                 }
-               
             });
             
             $(".downimg").click(function() {
@@ -94,12 +99,11 @@ pageEncoding="UTF-8"%>
                 for (var i = arr.length - 1; i >= 0; i--) {
                     next.after(arr[i]);
                 }
-               
             });
 
             
         });
-
+        
     </script>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->

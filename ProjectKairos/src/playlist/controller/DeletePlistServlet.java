@@ -2,6 +2,7 @@ package playlist.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
 import playlist.vo.Playlist;
+import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 /**
@@ -42,7 +45,10 @@ public class DeletePlistServlet extends HttpServlet {
 		
 		int result = new PlaylistService().deleteOnePlaylist(p, userId);
 		result = new PlaylistService().sortPlaylist(userId);
-		
+		if(result>0) {
+			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+			session.setAttribute("playList", pList);
+		}
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		out.flush();

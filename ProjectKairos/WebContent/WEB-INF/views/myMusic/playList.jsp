@@ -39,7 +39,8 @@
 				<table>
 					<tr class="pllll">
 						<th width="5%"><input class="allchk" type="checkbox"></th>
-						<td width="65%"><button type="button" id="listen_btn">듣기</button>
+						<td width="65%">
+							<button type="button" id="listen_btn">듣기</button>
 							<button type="button" id="delete_btn">삭제</button>
 							</td>
 						<th width="30%">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -98,6 +99,10 @@
 	
 	
 		$(function() {
+			$("#listen_btn").click(function(){
+				$("#form_pl").attr("action","/frontAdd");
+				$("#form_pl").submit();
+			});
 			$("#pleditBtn").click(function(){
 				$("#form_pl").attr("action","/plEdit");
 				$("#form_pl").submit();
@@ -154,6 +159,7 @@
 						if(result>0){
 							icon.parent().parent().remove();
 							alert("삭제성공");
+							location.href="/playList";
 						}
 						
 							

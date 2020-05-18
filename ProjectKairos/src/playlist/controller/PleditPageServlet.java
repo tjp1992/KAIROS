@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
 import playlist.vo.Playlist;
+import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 
@@ -58,6 +60,9 @@ public class PleditPageServlet extends HttpServlet {
 		
 		if(result>0) {
 			RequestDispatcher rd = request.getRequestDispatcher("/playList");
+			
+			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+			session.setAttribute("playList", pList);
 			
 			rd.forward(request, response);
 		}else {

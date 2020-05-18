@@ -43,7 +43,7 @@ pageEncoding="UTF-8"%>
             <div class="table">
                 <table>
                 	<c:forEach items="${list }" var="p">
-                    <tr class="pltr1" songNo="${p.songNo }">
+                    <tr class="pltr1" songNo="${p.songNo }" orderNo="${p.orderNo }" filepath="${p.filepath }" liked="${p.liked }">
                         <td width="80%">
                             <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
                             <div class="subtitle">&nbsp;&nbsp;&nbsp;${p.songArtist }<span>&nbsp;&nbsp;|&nbsp;${p.albumName }</span></div>
@@ -58,6 +58,25 @@ pageEncoding="UTF-8"%>
     </section>
     <script>
         $(function(){
+           $(".deleteimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  var orderNo = $(this).parent().parent().attr("orderNo");
+        	  var icon = $(this);
+        	  $.ajax({
+        		 url:"/deletePlist",
+        		 type:"POST",
+        		 data:{
+        			 songNo:songNo,orderNo:orderNo
+        		 },
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){
+        				 icon.parent().parent().remove();
+        				 alert("삭제성공");
+        			 }
+        		 }
+        	  });
+           });
            $(".heartimg").children().click(function(){
               if($(this).attr("class")=="iconheart far fa-heart"){
                   $(this).attr("class","iconheart fas fa-hearticonheart fas fa-heart");

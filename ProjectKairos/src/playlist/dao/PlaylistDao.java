@@ -215,20 +215,129 @@ public class PlaylistDao {
 		return list;
 	}
 
-	public ArrayList<Playlist> pSearchAlbumName(Connection conn, String userId, String keyword) {
+	public ArrayList<Playlist> orderArtistAsc(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		ResultSet rset=null;
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
-		
-		String query = "SELECT * FROM (SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked " 
-				+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S " 
-				+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) " 
-				+ "WHERE USER_ID = ? ) T) WHERE ALBUM_NAME LIKE ? ";
+		String query = "SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked " 
+					+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S "  
+					+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) "  
+					+ "WHERE USER_ID = ? ) T ORDER BY SONG_ARTIST ASC";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
-			pstmt.setString(2, "%"+keyword+"%");
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				Playlist p = new Playlist();
+				p.setOrderNo(rset.getInt("order_no"));
+				p.setSongNo(rset.getInt("song_no"));
+				p.setSongTitle(rset.getString("song_title"));
+				p.setSongArtist(rset.getString("song_artist"));
+				p.setAlbumName(rset.getString("album_name"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setLiked(rset.getInt("liked"));
+				if(p.getLiked()>0) {
+					p.setLiked(1);
+				}
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Playlist> orderArtistDesc(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		ArrayList<Playlist> list = new ArrayList<Playlist>();
+		String query = "SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked " 
+					+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S "  
+					+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) "  
+					+ "WHERE USER_ID = ? ) T ORDER BY SONG_ARTIST DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				Playlist p = new Playlist();
+				p.setOrderNo(rset.getInt("order_no"));
+				p.setSongNo(rset.getInt("song_no"));
+				p.setSongTitle(rset.getString("song_title"));
+				p.setSongArtist(rset.getString("song_artist"));
+				p.setAlbumName(rset.getString("album_name"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setLiked(rset.getInt("liked"));
+				if(p.getLiked()>0) {
+					p.setLiked(1);
+				}
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Playlist> orderTitleAsc(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		ArrayList<Playlist> list = new ArrayList<Playlist>();
+		String query = "SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked " 
+					+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S "  
+					+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) "  
+					+ "WHERE USER_ID = ? ) T ORDER BY SONG_TITLE ASC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				Playlist p = new Playlist();
+				p.setOrderNo(rset.getInt("order_no"));
+				p.setSongNo(rset.getInt("song_no"));
+				p.setSongTitle(rset.getString("song_title"));
+				p.setSongArtist(rset.getString("song_artist"));
+				p.setAlbumName(rset.getString("album_name"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setLiked(rset.getInt("liked"));
+				if(p.getLiked()>0) {
+					p.setLiked(1);
+				}
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Playlist> orderTitleDesc(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset=null;
+		ArrayList<Playlist> list = new ArrayList<Playlist>();
+		String query = "SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked " 
+					+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S "  
+					+ "ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) "  
+					+ "WHERE USER_ID = ? ) T ORDER BY SONG_TITLE DESC";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
 			rset=pstmt.executeQuery();
 			while(rset.next()) {
 				Playlist p = new Playlist();
