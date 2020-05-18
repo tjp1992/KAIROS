@@ -79,3 +79,12 @@
 		color:gray;
 		cursor: pointer;
 	}
+	#searchtwo{
+		width: 200px;
+	}
+	#seartwo{
+		font-size: 25px;
+		margin-top: 5px;
+		color:gray;
+		cursor: pointer;
+	}
