@@ -56,6 +56,12 @@ public class FileControl {
 	}
 	
 	public Boolean deleteMusic(String root, int songNo) {
+		
+		if(songNo < 21) {
+			System.out.println("default곡은 삭제를 진행하지 않습니다.");
+			return true;
+		}
+		
 		String directory = root+"src/songs/";
 		
 		File music = new File(directory+songNo+".mp3");
@@ -67,5 +73,19 @@ public class FileControl {
 			return false;
 		}
 		
+	}
+
+	public boolean deleteAlbumImg(String root, int albumNo) {
+		
+		String directory = root + "src/imgs/albumImg/";
+		
+		File albumImg = new File(directory+albumNo+".jpg");
+		
+		if(albumImg.exists()) {
+			return albumImg.delete();
+		} else {
+			System.out.println(albumNo+".jpg를 찾지 못하였습니다.");
+			return false;
+		}
 	}
 }

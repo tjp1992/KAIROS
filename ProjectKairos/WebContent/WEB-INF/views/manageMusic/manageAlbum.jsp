@@ -98,6 +98,32 @@ prefix="c" %>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script>
+      $("#del_album").click(function () {
+        const albumNo = $("#albums").val();
+        const albumName = $("#" + albumNo).html();
+        const albumOption = $("#" + albumNo);
+
+        if (
+          confirm(
+            "[" +
+              albumName +
+              "] 앨범을 삭제하시겠습니까? 앨범 내의 모든 곡이 삭제됩니다."
+          )
+        ) {
+          $.ajax({
+            url: "/asyncDeleteAlbum",
+            type: "post",
+            data: { albumNo: albumNo },
+            success: function (data) {
+              console.log(data);
+            },
+            error: function () {
+              alert("앨범 삭제에 실패하였습니다. 관리자에게 문의하세요.");
+            },
+          });
+        }
+      });
+
       // 곡 삭제 버튼을 클릭했을때
       function delSong() {
         $(".del_song").click(function () {
@@ -158,7 +184,7 @@ prefix="c" %>
             type: "POST",
             data: { albumNo: albumNo },
             success: function (data) {
-              if (data.length != 0) {
+              if (data.length != 0 && data[0].songNo != 0) {
                 $("#album_desc").empty();
 
                 for (let i = 0; i < data.length; i++) {
