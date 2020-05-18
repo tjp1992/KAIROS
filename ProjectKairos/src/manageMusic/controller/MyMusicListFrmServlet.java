@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import manageMusic.model.service.ManageMusicService;
 import search.model.service.SearchSongService;
+import search.model.vo.MyListPageData;
+import search.model.vo.ReqMyList;
 import song.vo.SearchSong;
 import user.vo.User;
 
@@ -21,34 +23,53 @@ import user.vo.User;
 @WebServlet(name = "MyMusicListFrm", urlPatterns = { "/myMusicListFrm" })
 public class MyMusicListFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MyMusicListFrmServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public MyMusicListFrmServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession(false);
+
+		User u = (User) session.getAttribute("user");
+
+		ReqMyList req = new ReqMyList();
+		req.setUserNick("아이유");
+		if (request.getParameter("numPerPage") != null) {
+			req.setNumPerPage(Integer.parseInt(request.getParameter("numPerPage")));
+		}
+		if (request.getParameter("reqPage") != null) {
+			req.setReqPage(Integer.parseInt(request.getParameter("reqPage")));
+		}
 		
-		User u = (User)session.getAttribute("user");
-		String userNick = u.getUserNick();
-		
-		ArrayList<SearchSong> list = new SearchSongService().searchMyList(userNick);
-		
+		if (request.getParameter("reSearch") != null) {
+			req.setReSearch(request.getParameter("reSearch"));			
+		}
+
+		MyListPageData pd = new SearchSongService().searchMyList(req);
+
+		request.setAttribute("req", req);
+		request.setAttribute("list", pd.getList());
+		request.setAttribute("pageNavi", pd.getPageNavi());
 		request.getRequestDispatcher("/WEB-INF/views/manageMusic/myMusicList.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

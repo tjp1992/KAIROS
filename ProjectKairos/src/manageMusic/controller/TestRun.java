@@ -1,17 +1,16 @@
 package manageMusic.controller;
 
 import manageMusic.model.vo.Album;
+import search.model.service.SearchSongService;
+import search.model.vo.ReqMyList;
 
 public class TestRun {
 
 	public static void main(String[] args) {
-		Album a = new Album();
-		a.setAlbumPath("1541550154_m.jpg");
-		a.setAlbumName("아티스트-앨범명");
-		a.setAlbumNo(0);
-		String root = "WebContent/";		
+		
+		ReqMyList req = new ReqMyList();
 				
-//		new FileControl().uploadAlbumImg(root, a);
+//		new SearchSongService().searchMyList(req);
 
 	}
 
