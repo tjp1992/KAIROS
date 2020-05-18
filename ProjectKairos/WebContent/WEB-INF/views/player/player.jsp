@@ -598,14 +598,30 @@ audio {
 			}
 		}
 		$(function(){
-		});
-		$(function(){
 			$('.zmr').click(function(){
 				// $(this).parent().parent().addClass(".checked");
 				console.log(this);
 				$(this).toggleClass('heartClick');
 			});
 		});
+		// audiotrack
+		var audioTrack = 0;
+		var songCount;
+		// play previous music
+		function prevMusic(){
+			var audio = document.getElementById('audio');
+			audio.src="/src/songs/"+'${playList[audioTrack-1].filepath}'+".mp3";
+			audio.play();
+			audioTrack = audioTrack -1;
+		}
+		// autoplay next music
+		function nextMusic(){
+			var audio = document.getElementById('audio');
+			// alter soundtrack
+			audio.src = '/src/songs/'+"${playList[audioTrack+1].filepath}"+'.mp3';
+			audio.play();
+			audioTrack = audioTrack +1;
+		}
 	</script>
 	<article class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
@@ -644,7 +660,6 @@ audio {
 				<td><input type="checkbox" id="heart1" checked /><label
 					class="zmr" for="heart1"></label></td>
 			</tr>
-
 			<tr class="song">
 				<td class="nr"><h5>
 						3
@@ -700,8 +715,6 @@ audio {
 				<td><input type="checkbox" id="heart5" /><label class="zmr"
 					for="heart5"></label></td>
 			</tr>
-
-
 		</table>
 
 		<div class="shadow"></div>
@@ -712,35 +725,40 @@ audio {
 			<h4>STRESSED OUT</h4>
 			<h3>twenty one pilots - Blurryface</h3>
 		</div>
-		<audio id="audio" controls>
-			<source src="/src/songs/1.mp3" type="audio/mpeg">
-			<source src="/src/songs/2.mp3" type="audio/mpeg">
+		<audio src="/src/songs/1.mp3"id="audio" controls onended="nextMusic()">
+			<!-- <source src="/src/songs/1.mp3" type="audio/mpeg"> -->
 		</audio>
 		<table class="player">
-			<td><input type="checkbox" id="backward" /><label
+			<td><input type="checkbox" id="backward" onclick="prevMusic();"/><label
 				class="backward" for="backward"></label></td>
+
 			<td><input type="checkbox" id="play" title="Play"
 				onclick="togglePlayPause();" /><label class="play" for="play"></label></td>
-			<td><input type="checkbox" id="forward" /><label
+
+			<td><input type="checkbox" id="forward" onclick="nextMusic();"/><label
 				class="forward" for="forward"></label></td>
 		</table>
-
 		<table class="footer">
-			<td><input type="checkbox" id="love" /><label
-				class="love" for="love"></label></td>
-			<td><input type="checkbox" id="shuffle" /><label
-				class="shuffle" for="shuffle"></label></td>
-			<td><input type="checkbox" id="repeat" /><label
-				class="repeat" for="repeat"></label></td>
-			<td><input type="checkbox" id="options" /><label
-				class="options" for="options"></label></td>
+			<td>
+				<input type="checkbox" id="love" checked/><label
+				class="love" for="love"></label>
+			</td>
+			<td>
+				<input type="checkbox" id="shuffle" /><label
+				class="shuffle" for="shuffle"></label>
+			</td>
+			<td>
+				<input type="checkbox" id="repeat" /><label
+				class="repeat" for="repeat"></label>
+			</td>
+			<td>
+				<input type="checkbox" id="options" /><label
+				class="options" for="options"></label>
+			</td>
 		</table>
-
 		<div class="current">
 			<h2>STRESSED OUT</h2>
 		</div>
-
-
 	</article>
 </body>
 </html>
