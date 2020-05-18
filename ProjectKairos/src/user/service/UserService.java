@@ -53,4 +53,42 @@ public class UserService {
 		return result;
 	}
 
+	public User idSearch(String name, String mail) {
+			Connection conn = JDBCTemplate.getConnection();
+			User user = new UserDao().idSearch(name,mail,conn);
+			JDBCTemplate.close(conn);
+		return user;
+	}
+
+	public User pwSearch(String id, String name, String phone) {
+		Connection conn = JDBCTemplate.getConnection();
+		User user = new UserDao().pwSearch(id,name,phone,conn);
+		JDBCTemplate.close(conn);
+	return user;
+	}
+
+	public int modifyUser(User u) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().modifyUser(conn,u);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteUser(User u) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().deleteUser(conn,u);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }
