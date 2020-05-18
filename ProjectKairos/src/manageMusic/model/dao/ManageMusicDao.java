@@ -13,12 +13,12 @@ import manageMusic.model.vo.LicensedArtist;
 import song.vo.Song;
 
 public class ManageMusicDao {
-public int insertSong(Connection conn, Song s) {
-		
+	public int insertSong(Connection conn, Song s) {
+
 		int result = 0;
 		PreparedStatement pst = null;
 		String query = "insert into song values(seq_song_no.nextval,?,?,?,?,0,0,?,seq_song_no.currval,?)";
-		
+
 		try {
 			pst = conn.prepareStatement(query);
 			pst.setString(1, s.getSongTitle());
@@ -27,14 +27,14 @@ public int insertSong(Connection conn, Song s) {
 			pst.setInt(4, s.getAlbumNo());
 			pst.setString(5, s.getFilename());
 			pst.setInt(6, s.getLicensed());
-			
+
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pst);
 		}
-		
+
 		return result;
 	}
 
@@ -44,25 +44,24 @@ public int insertSong(Connection conn, Song s) {
 		ResultSet rset = null;
 		int result = 0;
 		String query = "select song_no from song where album_no = ? and song_title = ?";
-		
+
 		try {
 			pst = conn.prepareStatement(query);
 			pst.setInt(1, s.getAlbumNo());
 			pst.setString(2, s.getSongTitle());
-			
+
 			rset = pst.executeQuery();
-			
-			if(rset.next()) {
+
+			if (rset.next()) {
 				result = rset.getInt("song_no");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		
+		}
+
 		return result;
 	}
-	
 
 	public int insertAlbum(Connection conn, String albumOwner, String albumName) {
 
@@ -195,9 +194,9 @@ public int insertSong(Connection conn, Song s) {
 			pst = conn.prepareStatement(query);
 			pst.setString(1, String.valueOf(a.getAlbumNo()));
 			pst.setInt(2, a.getAlbumNo());
-			
+
 			result = pst.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -208,133 +207,155 @@ public int insertSong(Connection conn, Song s) {
 	}
 
 	public ArrayList<LicensedArtist> searchArtist(Connection conn, String artistName) {
-		
+
 		ArrayList<LicensedArtist> list = new ArrayList<LicensedArtist>();
 		PreparedStatement pst = null;
 		ResultSet rset = null;
-		String query = "select * from licensed_artist where lcn_artist_name like '%"+artistName+"%'";
-		
+		String query = "select * from licensed_artist where lcn_artist_name like '%" + artistName + "%'";
+
 		try {
 			pst = conn.prepareStatement(query);
-			
+
 			rset = pst.executeQuery();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				LicensedArtist l = new LicensedArtist();
-				
+
 				l.setLcnArtistName(rset.getString("lcn_artist_name"));
 				l.setLcnCompany(rset.getString("lcn_company"));
-				
+
 				list.add(l);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pst);
 		}
-		
-		
+
 		return list;
 	}
 
 	public ArrayList<AlbumDesc> readAlbumDesc(Connection conn, int albumNo) {
-		
+
 		ArrayList<AlbumDesc> list = new ArrayList<AlbumDesc>();
 		PreparedStatement pst = null;
 		ResultSet rset = null;
-		String query = "select s.song_no,s.song_title, a.album_path from song s join album a using(album_no) where album_no = ?";
-		
+		String query = "select s.song_no,s.song_title, a.album_path from album a left join song s using(album_no) where album_no = ?";
+
 		try {
 			pst = conn.prepareStatement(query);
 			pst.setInt(1, albumNo);
-			
+
 			rset = pst.executeQuery();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				AlbumDesc ad = new AlbumDesc();
 				ad.setSongNo(rset.getInt("song_no"));
 				ad.setSongTitle(rset.getString("song_title"));
 				ad.setAlbumPath(rset.getString("album_path"));
 				list.add(ad);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pst);
 		}
-		
+
 		return list;
 	}
 
 	public int updateAlbum(Connection conn, Album a) {
-		
+
 		int result = 0;
-		
+
 		PreparedStatement pst = null;
 		String query = "update album set album_name = ? where album_no = ?";
-		
+
 		try {
 			pst = conn.prepareStatement(query);
-			
+
 			pst.setString(1, a.getAlbumName());
 			pst.setInt(2, a.getAlbumNo());
-			
+
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pst);
 		}
-		
+
 		return result;
 	}
 
 	public int updateAlbumNameAndPath(Connection conn, Album a) {
-		
+
 		int result = 0;
-		
+
 		PreparedStatement pst = null;
 		String query = "update album set album_name = ?, album_path = ? where album_no = ?";
-		
+
 		try {
 			pst = conn.prepareStatement(query);
-			
+
 			pst.setString(1, a.getAlbumName());
 			pst.setString(2, String.valueOf(a.getAlbumNo()));
 			pst.setInt(3, a.getAlbumNo());
-			
+
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pst);
 		}
-		
+
 		return result;
 	}
 
 	public int deleteSong(Connection conn, int songNo) {
-		
+
 		int result = 0;
 		PreparedStatement pst = null;
 		String query = "delete from song where song_no = ?";
-		
+
 		try {
 			pst = conn.prepareStatement(query);
 			pst.setInt(1, songNo);
-			
+
 			result = pst.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pst);
 		}
-		
+
 		return result;
 	}
+
+	public int deleteAlbum(Connection conn, int albumNo) {
+
+		int result = 0;
+		PreparedStatement pst = null;
+		String query = "delete from album where album_no = ?";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setInt(1, albumNo);
+
+			result = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pst);
+		}
+
+		return result;
+	}
+
 }

@@ -26,7 +26,8 @@ function readAlbums() {
         const option = document.createElement("option");
 
         option.value = albumNo;
-        option.setAttribute("songName", albumName);
+        option.setAttribute("albumName", albumName);
+        option.id = albumNo;
         option.innerHTML = albumName;
 
         albumList.append(option);
