@@ -27,6 +27,11 @@ prefix="c"%>
 				}
 			});
 	  });
+	  $(function(){
+		$(".player").click(function(){
+			window.open("/player","width=50","height=370");
+		});
+	  });
   </script>
   <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -47,6 +52,7 @@ prefix="c"%>
 					<p class="lead">이용권 구매를 하셔서 다양한 혜택을 같이 이용 가능합니다</p>
 					<!-- Button -->
 					<button class="btn btn-lg btn-success purchase">구매 하기</button>
+					<button class="btn btn-lg btn-success player">플래이어</button>
 				</div>
 			  
 			</div>

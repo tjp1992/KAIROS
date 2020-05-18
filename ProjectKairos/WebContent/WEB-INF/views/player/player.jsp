@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="/src/js/jquery-3.3.1.js"></script>
+<script src="https://kit.fontawesome.com/8bd2671777.js" crossorigin="anonymous"></script>
 <style>
 /* PRESS THE MENU BUTTON FOR ANIMATION */
 /* PRESS PLAY BUTTON TO LISTEN THE DEMO SONG */
@@ -31,216 +32,7 @@ keyframes harlem { 0% {
 	-ms-transform: scale(1);
 }
 
-20%
-{
-transform
-:
- 
-scale
-(1
-.03
-,
-1);
--webkit-transform
-:
- 
-scale
-(1
-.03
-,
-1);
--moz-transform
-:
- 
-scale
-(1
-.03
-,
-1);
--o-transform
-:
- 
-scale
-(1
-.03
-,
-1);
--ms-transform
-:
- 
-scale
-(1
-.03
-,
-1);
-}
-40%
-{
-transform
-:
- 
-scale
-(0
-.97
-,
-1);
--webkit-transform
-:
- 
-scale
-(0
-.97
-,
-1);
--moz-transform
-:
- 
-scale
-(0
-.97
-,
-1);
--o-transform
-:
- 
-scale
-(0
-.97
-,
-1);
--ms-transform
-:
- 
-scale
-(0
-.97
-,
-1);
-}
-60%
-{
-transform
-:
- 
-scale
-(1
-.01
-,
-1);
--webkit-transform
-:
- 
-scale
-(1
-.01
-,
-1);
--moz-transform
-:
- 
-scale
-(1
-.01
-,
-1);
--o-transform
-:
- 
-scale
-(1
-.01
-,
-1);
--ms-transform
-:
- 
-scale
-(1
-.01
-,
-1);
-}
-80%
-{
-transform
-:
- 
-scale
-(0
-.99
-,
-1);
--webkit-transform
-:
- 
-scale
-(0
-.99
-,
-1);
--moz-transform
-:
- 
-scale
-(0
-.99
-,
-1);
--o-transform
-:
- 
-scale
-(0
-.99
-,
-1);
--ms-transform
-:
- 
-scale
-(0
-.99
-,
-1);
-}
-100%
-{
-transform
-:
- 
-scale
-(1);
 
-    
--webkit-transform
-:
- 
-scale
-(1);
-
-    
--moz-transform
-:
- 
-scale
-(1);
-
-    
--o-transform
-:
- 
-scale
-(1);
-
-    
--ms-transform
-:
- 
-scale
-(1);
-
-  
-}
 }
 h2 {
 	margin: 0;
@@ -344,7 +136,7 @@ label.main:hover:before {
 
 .coverImage {
 	background:
-		url('https://angstyteenwatchingtoomuchtv.files.wordpress.com/2015/07/tumblr_nlhsir3adc1sk2qobo1_12801.gif')
+		url('/src/imgs/albumImg/아이유-Love poem.jpg')
 		no-repeat;
 	background-size: cover;
 	width: 366px;
@@ -352,6 +144,7 @@ label.main:hover:before {
 	padding: 0;
 	margin: 0;
 	position: absolute;
+	opacity: 0.5;
 	top: 0;
 	left: 0;
 	transform-origin: 0% 0%;
@@ -451,7 +244,7 @@ label.main:hover:before {
 	transition: all 0.3s ease-in;
 }
 
-.screen>#magicButton:checked ~ table tr:nth-child(1) {
+/* .screen>#magicButton:checked ~ table tr:nth-child(1) {
 	opacity: 1;
 	animation: harlem 0.3s linear forwards;
 	animation-delay: 0.185s;
@@ -495,12 +288,18 @@ label.main:hover:before {
 .screen>#magicButton:checked ~ table tr:nth-child(9) {
 	animation: harlem 0.3s linear forwards;
 	animation-delay: 0.305s;
-}
+} */
+
+/* .checked{
+	animation: harlem 0.3s linear forwards;
+	animation-delay: 0.305s;
+} */
 
 label.zmr:before {
 	font-family: FontAwesome;
 	content: "\f08a";
 	color: #777;
+	/* color: #ff564c; */
 	font-size: 15px;
 	line-height: 15px;
 	cursor: pointer;
@@ -508,7 +307,12 @@ label.zmr:before {
 	transition: all 0.15s linear;
 }
 
-td>#heart:checked ~ label.zmr:before {
+.heartClick:before{
+	color: #ff564c;
+	transition: all 0.15s linear;
+}
+
+/* td>#heart:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
 	transition: all 0.15s linear;
@@ -560,7 +364,7 @@ td>#heart8:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
 	transition: all 0.15s linear;
-}
+} */
 
 .bar {
 	background: url('http://imgh.us/bar_3.svg') no-repeat;
@@ -791,6 +595,10 @@ audio {
 		var playpause = document.getElementById("play");
 
 		function togglePlayPause() {
+		}
+		$(function(){
+			var audio = $('#audio');
+			var playpause = $('#play');
 			if (audio.paused || audio.ended) {
 				playpause.title = "Pause";
 				audio.play();
@@ -798,14 +606,20 @@ audio {
 				playpause.title = "Play";
 				audio.pause();
 			}
-		}
+		});
+		$(function(){
+			$('.zmr').click(function(){
+				// $(this).parent().parent().addClass(".checked");
+				console.log(this);
+				$(this).toggleClass('heartClick');
+			});
+		});
 	</script>
 	<article class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
 		<label class="main" for="magicButton"></label>
 
 		<div class="coverImage"></div>
-		<div class="search"></div>
 		<div class="bodyPlayer"></div>
 
 		<table class="list">
@@ -927,7 +741,7 @@ audio {
 				<td class="nr"><h5>
 						9
 						<h5></td>
-				<td class="title"><h6>
+				<td class="title"><h6> 
 						Polarize
 						<h6></td>
 				<td class="length"><h5>
@@ -947,8 +761,7 @@ audio {
 			<h3>twenty one pilots - Blurryface</h3>
 		</div>
 		<audio preload="auto" id="audio" controls>
-			<source src="http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.mp3">
-			<source src="http://www.jplayer.org/audio/mp3/Miaow-02-Hidden.ogg">
+			<source src="/src/song/1.mp3">
 		</audio>
 		<table class="player">
 			<td><input type="checkbox" id="backward" /><label
