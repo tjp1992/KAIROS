@@ -45,12 +45,14 @@ prefix="c"%>
       $("#artistName").focus();
     });
 
-    $("tr").click(function () {
-      const artistName = $(this).children().eq(1).html();
-      const input = opener.document.getElementById("artist");
-      input.value = artistName;
-      opener.readAlbums();
-      self.close();
-    });
+    $("tr")
+      .not($("thead>tr"))
+      .click(function () {
+        const artistName = $(this).children().eq(1).html();
+        const input = opener.document.getElementById("artist");
+        input.value = artistName;
+        opener.readAlbums();
+        self.close();
+      });
   </script>
 </html>

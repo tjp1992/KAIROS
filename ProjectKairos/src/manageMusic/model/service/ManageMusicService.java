@@ -160,10 +160,13 @@ public class ManageMusicService {
 	public int deleteSong(String root, int songNo) {
 
 		Connection conn = JDBCTemplate.getConnection();
+		
+		String filepath = new ManageMusicDao().readSongPath(conn, songNo);
 
 		int result = new ManageMusicDao().deleteSong(conn, songNo);
-
-		if (result > 0 && new FileControl().deleteMusic(root, songNo)) {
+		
+		
+		if (result > 0 && new FileControl().deleteMusic(root, filepath)) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
@@ -200,7 +203,7 @@ public class ManageMusicService {
 			if (list.size() != 0 && list.get(0).getSongNo() != 0) {
 				System.out.println("음원 삭제 로직 진행");
 				for (AlbumDesc a : list) {
-					if (!control.deleteMusic(root, a.getSongNo())) {
+					if (!control.deleteMusic(root, a.getFilepath())) {
 						JDBCTemplate.rollback(conn);
 						JDBCTemplate.close(conn);
 						System.out.println(a.getSongNo() + ".mp3 삭제 에러");

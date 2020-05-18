@@ -55,21 +55,24 @@ public class FileControl {
 		}
 	}
 	
-	public Boolean deleteMusic(String root, int songNo) {
+	public Boolean deleteMusic(String root, String filepath) {
 		
-		if(songNo < 21) {
+		
+		int index = Integer.parseInt(filepath);
+		
+		if(index < 21) {
 			System.out.println("default곡은 삭제를 진행하지 않습니다.");
 			return true;
 		}
 		
 		String directory = root+"src/songs/";
 		
-		File music = new File(directory+songNo+".mp3");
+		File music = new File(directory+filepath+".mp3");
 		
 		if(music.exists()) {
 			return music.delete();
 		} else {
-			System.out.println(songNo+".mp3를 찾을수 없습니다.");
+			System.out.println(filepath+".mp3를 찾을수 없습니다.");
 			return false;
 		}
 		
@@ -88,4 +91,5 @@ public class FileControl {
 			return false;
 		}
 	}
+
 }

@@ -242,7 +242,7 @@ public class ManageMusicDao {
 		ArrayList<AlbumDesc> list = new ArrayList<AlbumDesc>();
 		PreparedStatement pst = null;
 		ResultSet rset = null;
-		String query = "select s.song_no,s.song_title, a.album_path from album a left join song s using(album_no) where album_no = ?";
+		String query = "select s.song_no,s.song_title, a.album_path, s.filepath from album a left join song s using(album_no) where album_no = ?";
 
 		try {
 			pst = conn.prepareStatement(query);
@@ -255,6 +255,7 @@ public class ManageMusicDao {
 				ad.setSongNo(rset.getInt("song_no"));
 				ad.setSongTitle(rset.getString("song_title"));
 				ad.setAlbumPath(rset.getString("album_path"));
+				ad.setFilepath(rset.getString("filepath"));
 				list.add(ad);
 			}
 
@@ -358,4 +359,34 @@ public class ManageMusicDao {
 		return result;
 	}
 
+	public String readSongPath(Connection conn, int songNo) {
+		
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		String query = "select filepath from song where song_no = ?";
+		String filepath = null;
+		
+		try {
+			pst = conn.prepareStatement(query);
+			
+			pst.setInt(1, songNo);
+			
+			rset = pst.executeQuery();
+			
+			if(rset.next()) {
+				filepath = rset.getString("filepath");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pst);
+		}
+		
+		
+		
+		return filepath;
+	}
+	
 }
