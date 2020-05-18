@@ -22,13 +22,13 @@ pageEncoding="UTF-8"%>
           아티스트
         </div>
       </a>
-      <a href="/insertMusicFrm" class="link_container">
+      <a href="/manageAlbumFrm" class="link_container">
         <div>
           라이센스<br />
           앨범 관리
         </div>
       </a>
-      <a href="/myMusicListFrm" class="link_container">
+      <a href="/insertMusicFrm" class="link_container">
         <div>
           라이센스<br />
           음원 등록
