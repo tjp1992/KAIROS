@@ -1,29 +1,27 @@
-package admin.mypage.notice.controller;
+package manageMusic.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import admin.mypage.model.dao.NoticeDao;
-import admin.mypage.model.service.NoticeService;
-import admin.mypage.model.vo.Notice;
+import manageMusic.model.service.ManageMusicService;
 
 /**
- * Servlet implementation class AdminNoticeDetailFrmServlet
+ * Servlet implementation class AsyncDeleteAlbumServlet
  */
-@WebServlet(name = "AdminNoticeDetailFrm", urlPatterns = { "/adminNoticeDetailFrm" })
-public class AdminNoticeDetailFrmServlet extends HttpServlet {
+@WebServlet(name = "AsyncDeleteAlbum", urlPatterns = { "/asyncDeleteAlbum" })
+public class AsyncDeleteAlbumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeDetailFrmServlet() {
+    public AsyncDeleteAlbumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +31,17 @@ public class AdminNoticeDetailFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int noticeNum = Integer.parseInt(request.getParameter("noticeNo"));
-		int req = Integer.parseInt(request.getParameter("reqPage"));
-		Notice n = new NoticeService().noticeDetail(noticeNum);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNoticeDetail.jsp");
-		request.setAttribute("n", n);
-		request.setAttribute("req", req);
-		rd.forward(request, response);
+		int albumNo = Integer.parseInt(request.getParameter("albumNo"));
+		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		
+		int result = new ManageMusicService().deleteAlbum(root, albumNo);
+		
+		
+		PrintWriter out =  response.getWriter();
+		
+		out.print(result);
+		out.flush();
 	}
 
 	/**

@@ -58,4 +58,18 @@ public class SearchSongService {
 		return new SearchResult(list, totalResult);
 	}
 
+	public ArrayList<SearchSong> searchMyList(String userNick) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<SearchSong> list = new SearchSongDao().searchMyList(conn, userNick);
+		
+		
+		JDBCTemplate.close(conn);
+		
+		return list;
+	}
+	
+	
+
 }
