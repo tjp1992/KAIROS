@@ -155,4 +155,57 @@ public class SearchSongDao {
 		return list;
 	}
 
+	public ArrayList<SearchSong> searchMyList(Connection conn, String userNick, int start, int end) {
+		
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		
+		ArrayList<SearchSong> list = new ArrayList<SearchSong>();
+		
+		String query = "SELECT ROWNUM, T.* FROM(SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO) WHERE song_artist = ? ORDER BY S.LIKE_COUNT DESC)T WHERE ROWNUM BETWEEN ? AND ? ORDER BY ROWNUM";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, userNick);
+			pst.setInt(2, start);
+			pst.setInt(3, end);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
+
+	public int getTotalCountMyList(Connection conn, String userNick) {
+
+		int totalCount = 0;
+		
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) as cnt from(SELECT ROWNUM, T.* FROM(SELECT * FROM SONG S JOIN ALBUM A USING(ALBUM_NO) WHERE song_artist = ? ORDER BY S.LIKE_COUNT DESC)T ORDER BY ROWNUM)";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			
+			pst.setString(1, userNick);
+			
+			rset = pst.executeQuery();
+			
+			if(rset.next()) {
+				totalCount = rset.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pst);
+		}
+		
+		
+		return totalCount;
+	}
 }

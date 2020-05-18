@@ -180,3 +180,18 @@
   color: #696969;
   margin-right: 7px;
 }
+
+#search_artist {
+  margin-left: 3px;
+}
+
+#artist {
+  height: 35px;
+  width: 250px;
+  font-size: 20px;
+  text-indent: 5px;
+}
+
+.input_artist > span {
+  width: 105px;
+}

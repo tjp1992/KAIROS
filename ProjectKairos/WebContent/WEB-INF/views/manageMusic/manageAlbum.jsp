@@ -65,7 +65,7 @@ prefix="c" %>
             </div>
             <div class="insert_album" style="display: none;">
               <input type="text" name="input_album" id="input_album" />
-              <button type="button">앨범 추가</button>
+              <button type="button" id="add_album_btn">앨범 추가</button>
             </div>
           </div>
           <div class="mid_wrapper">
@@ -90,14 +90,23 @@ prefix="c" %>
           </div>
           <div class="btn_wrapper" style="display: none;">
             <button type="submit" class="btn btn-primary">수정 완료</button>
-            <button type="button" class="btn btn-secondary">취소</button>
+            <button type="button" id="cancelBtn" class="btn btn-secondary">
+              취소
+            </button>
           </div>
         </form>
       </div>
     </section>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
+    <script src="/src/js/manageMusic/inputArtist.js"></script>
     <script>
+      // 취소버튼
+      $("#cancelBtn").click(function () {
+        location.href = "/manageMusicFrm";
+      });
+
+      // 앨범 삭제 버튼
       $("#del_album").click(function () {
         const albumNo = $("#albums").val();
         const albumName = $("#" + albumNo).html();
@@ -115,7 +124,25 @@ prefix="c" %>
             type: "post",
             data: { albumNo: albumNo },
             success: function (data) {
-              console.log(data);
+              albumOption.remove();
+              controlBtn();
+
+              $("#album_desc").empty();
+
+              let desc = document.createElement("div");
+              desc.classList.add("desc");
+
+              let descNo = document.createElement("span");
+              descNo.classList.add("desc_no");
+
+              let descName = document.createElement("span");
+              descName.classList.add("desc_name");
+              descName.innerHTML = "앨범을 선택해주세요.";
+
+              desc.append(descNo);
+              desc.append(descName);
+
+              $("#album_desc").append(desc);
             },
             error: function () {
               alert("앨범 삭제에 실패하였습니다. 관리자에게 문의하세요.");
@@ -157,7 +184,7 @@ prefix="c" %>
         $(".btn_wrapper").show();
         $("#form-album").attr("action", "/modifyAlbum");
         const albumNo = $("#albums").val();
-        const albumName = $("option[value=" + albumNo + "]").attr("songName");
+        const albumName = $("option[value=" + albumNo + "]").attr("albumName");
 
         const modAlbumName = document.createElement("input");
         modAlbumName.value = albumName;

@@ -12,10 +12,10 @@
 <script>
 	$(function(){
 		$("#back").click(function(){
-			location.href = "/adminQuestion";
+			location.href = "/adminQuestion?reqPage="+${req }+"&check=1"+"&reqPage2="+${req2 };
 		});
 		$("#answer").click(function(){
-			location.href = "/adminQuestionAnswer";
+			location.href = "/adminQuestionAnswer?inqNo="+${iq.inqNo }+"&reqPage="+${req }+"&reqPage2="+${req2 };
 		});
 	});
 </script>
@@ -25,47 +25,13 @@
 	<section>
 	<h2>Q&A</h2>
 	<div class="top">
-		<span class="inner1">제목  </span>
-		<span class="inner2">작성일   </span>
+		<span class="inner1">제목 : ${iq.inqTitle }</span>
+		<span class="inner3">작성자 : ${iq.userId }</span>
+		<span class="inner2">작성일  : ${iq.inqDate }</span>
 	</div>
 	<div class="middle">
 		<p class="content">
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
+			${iq.inqContent }
 		</p>
 	</div>
 	<div class="bottom">

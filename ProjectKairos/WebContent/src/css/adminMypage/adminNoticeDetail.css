@@ -18,9 +18,12 @@ h2{
 	}
 	.inner1{
 		display:inline-block;
-		width: 800px;
+		width: 600px;
 	}
 	.inner2{
+		width: 200px;
+	}
+	.inner3{
 		width: 200px;
 	}
 	.middle{

@@ -15,20 +15,20 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/src/css/bootstrap.css" />
 <script type="text/javascript" src="/src/js/bootstrap.js"></script>
-<link href="/src/css/adminMypage/adminNotice.css" rel="stylesheet"
-	type="text/css">
+
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
+	<link href="/src/css/adminMypage/adminNotice.css" rel="stylesheet" type="text/css">
 <script>
 	$(function() {
 		$("#back").click(function() {
 			location.href = "/adminMypage";
 		});
 		$("#write").click(function() {
-			location.href = "/adminNoticeWriteFrm";
+			location.href = "/adminNoticeWriteFrm?reqPage=1";
 		});
 	})
 	function detail(no, req){ // req 는 해당 페이지이다.
@@ -63,8 +63,8 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list }" var="n" varStatus="i">
-				<tr class="move" id="move" onclick="detail(${n.noticeNo},${req })" >
-					<th scope="row" class="num">${(req-1)*10 + i.count }</th>
+				<tr class="move" id="move" onclick="detail(${n.noticeNo},${reqPage })" >
+					<th scope="row" class="num">${(reqPage-1)*10 + i.count }</th>
 					<td>${n.noticeTitle }</td>
 					<td class="td2" >${n.noticeDate }</td>
 				</tr>
