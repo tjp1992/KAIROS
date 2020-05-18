@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -44,17 +45,22 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="table">
                 <table>
-                    <tr class="lltr1">
+                	<c:forEach items="${list }" var="p">
+                    <tr class="lltr1" songNo="${p.songNo }">
                         <th width="5%"><input class="llchk" type="checkbox"></th>
-                        <th width="5%" class="plsongNo">1</th>
+                        <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="60%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
+                            <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
+                            <div class="subtitle">&nbsp;&nbsp;&nbsp;${p.songArtist }<span>&nbsp;&nbsp;|&nbsp;${p.albumName }</span></div>
                         </td>
                         <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
                         <th width="10%" class="plusimg"><i class="iconplus fas fa-plus"></i></th>
-                        <th width="10%" class="heartimg"><i class="iconheart fas fa-heart"></i></th>
+                        
+                        <th width="10%" class="heartimg"><i  class="iconheart fas fa-heart"></i></th>
+                       
+                        
                     </tr>
+                    </c:forEach>
                 </table>
             </div>
         </div>
@@ -83,6 +89,28 @@ pageEncoding="UTF-8"%>
            });
             
            $(".heartimg").children().click(function(){
+        	   var songNo = $(this).parent().parent().attr("songNo");
+        	   var icon =$(this);
+        	   $.ajax({
+        		 url:"/checkLike",
+        		 type:"POST",
+        		 data:{songNo:songNo},
+        		 success:function(data){
+        			 var result =Number(data);
+        			 switch(result){
+        			 case -1:
+        				 break;
+        			 case 0:
+        				 icon.attr("class","iconheart fas fa-heart");
+        				 icon.css("color","red");
+        				 break;
+        			 case 1:
+        				 icon.parent().parent().remove();
+        				 break;
+        			 }
+        		 }
+        		   
+        	   })
               if($(this).attr("class")=="iconheart fas fa-heart"){
                   $(this).attr("class","iconheart far fa-heart");
                   $(this).css("color","black");

@@ -104,9 +104,30 @@ public class LikelistDao {
 	public ArrayList<Playlist> likeListView(Connection conn, User u) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		ArrayList<Playlist> list= new ArrayList<Playlist>();
 		String query = "select song_title, song_artist, album_name, song_no, filepath "
-				+ "from song join album usig (album_no) where song_no in ";
-		return null;
+				+ "from song join album using (album_no) where song_no in "
+				+ "(select LIKED_SONG_NO from likelist where user_id = ?)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u.getUserId());
+			rset=pstmt.executeQuery();
+			int index=1;
+			while(rset.next()) {
+				Playlist p = new Playlist();
+				p.setSongTitle(rset.getString("song_title"));
+				p.setSongArtist(rset.getString("song_artist"));
+				p.setAlbumName(rset.getString("album_name"));
+				p.setSongNo(rset.getInt("song_no"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setOrderNo(index++);
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	
