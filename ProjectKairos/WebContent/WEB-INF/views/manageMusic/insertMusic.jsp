@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -18,27 +19,48 @@ pageEncoding="UTF-8"%>
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
       <div class="insert_wrapper">
-        <form action="#" method="POST">
+        <form
+          action="/insertMusic"
+          method="POST"
+          id="form-album"
+          enctype="multipart/form-data"
+        >
+          <c:if test="${sessionScope.user.userId != 'admin'}">
+            <input
+              type="hidden"
+              name="artist"
+              value="${sessionScope.user.userNick}"
+            />
+            <input type="hidden" name="licensed" value="0" />
+          </c:if>
+          <c:if test="${sessionScope.user.userId == 'admin'}">
+            <input type="hidden" name="licensed" value="1" />
+            <div class="input_artist cont">
+              <span>가수명</span>
+              <input type="text" name="artist" id="artist" readonly />
+              <button type="button" id="search_artist">검색</button>
+            </div>
+          </c:if>
           <div class="input_title cont">
             <span>곡명</span>
             <input type="text" name="title" id="title" />
           </div>
           <div class="select_album cont">
             <span>앨범명</span>
-            <select name="albums" id="albums">
+            <select name="albumNo" id="albums">
               <option value="default">앨범 선택</option>
             </select>
-            <button>+</button>
+            <button type="button" id="add_input_album">+</button>
             <div class="insert_album">
-              <input type="text" name="input_album" id="input_album" />
-              <button type="button">앨범 추가</button>
+              <input type="text" name="albumPath" id="input_album" />
+              <button type="button" id="add_album_btn">앨범 추가</button>
             </div>
           </div>
           <div class="upload_albumImg cont">
             <span>앨범 이미지</span>
             <input type="file" name="album_img_file" id="album_img_file" />
             <div class="img_container">
-              <img src="/src/imgs/albumImg/아이유-Love poem.jpg" alt="" />
+              <img src="" alt="" />
             </div>
           </div>
           <div class="upload_music cont">
@@ -52,8 +74,13 @@ pageEncoding="UTF-8"%>
         </form>
       </div>
     </section>
-
+    <!-- 관리자 전용 script -->
+    <c:if test="${sessionScope.user.userId == 'admin'}">
+      <script src="/src/js/manageMusic/insertMusicByAdmin.js"></script>
+    </c:if>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
+    <script src="/src/js/manageMusic/selectAlbum.js"></script>
+    <script src="/src/js/manageMusic/insertMusic.js"></script>
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>
 </html>

@@ -17,7 +17,7 @@
 .cont {
   display: flex;
   align-items: center;
-  height: 95px;
+  height: 65px;
 }
 
 .cont > span {
@@ -75,7 +75,7 @@
 }
 
 .insert_album {
-  margin-left: 50px;
+  margin-left: 106px;
 }
 
 .insert_album > button {
@@ -92,7 +92,7 @@
 }
 
 .img_container {
-  margin-left: 150px;
+  margin-left: 105px;
 }
 
 .img_container img {
@@ -118,13 +118,13 @@
 }
 
 .mid_cont {
-  margin-left: 100px;
+  margin-left: 30px;
 }
 
 .album_desc {
   width: 385px;
-  height: 335px;
-  margin-left: 60px;
+  height: 390px;
+  margin-left: 30px;
   overflow-y: scroll;
 }
 
@@ -132,10 +132,12 @@
   padding: 5px 0;
   border-bottom: 1px solid #dbdbdb;
   display: flex;
+  position: relative;
 }
 
 .desc_btn {
-  margin-left: 120px;
+  position: absolute;
+  right: 6px;
 }
 
 .desc button {
@@ -143,6 +145,38 @@
   height: 25px;
 }
 
+.desc button:last-of-type {
+  margin-left: 5px;
+}
+
 .desc_name {
   margin-left: 20px;
+}
+
+.album_btn {
+  margin-left: 5px;
+}
+
+.upload_albumImg.cont {
+  margin-left: 370px;
+}
+
+.upload_albumImg.cont span {
+  margin-left: 0;
+}
+
+.select_album span {
+  width: 105px;
+}
+.img_container img {
+  width: 390px;
+  max-height: 390px;
+}
+
+.input_mod_album {
+  width: 270px;
+  height: 35px;
+  font-size: 20px;
+  color: #696969;
+  margin-right: 7px;
 }

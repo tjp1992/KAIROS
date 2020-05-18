@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,23 +27,15 @@ $(function(){
 			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
 				bUseModeChanger : true, 
 			}, 
+			
 			fCreator: "createSEditor2"
 		});
 	
-	function submitContents(elClickedObj) {
-	    // 에디터의 내용이 textarea에 적용된다.
-	    oEditors.getById["weditor"].exec("UPDATE_CONTENTS_FIELD", [ ]);
-	 
-	    // 에디터의 내용에 대한 값 검증은 이곳에서
-	    // document.getElementById("textAreaContent").value를 이용해서 처리한다.
-	  
-	    try {
-	        elClickedObj.form.submit();
-	    } catch(e) {
-	     
-	    }
-	}
-	 
+	$("#insert").click(function(){
+        oEditors.getById["weditor"].exec("UPDATE_CONTENTS_FIELD", []);
+        $("#insertFrm").submit();
+    });    
+	
 	// textArea에 이미지 첨부
 	function pasteHTML(filepath){
 	    var sHTML = '<img src="<%=request.getContextPath()%>/editor/storage/'+filepath+'">';
@@ -63,42 +55,38 @@ $(function(){
 
 </head>
 <body>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <section>
 		<h2 class="h2">공지사항 등록</h2>
-		<form action="/insertNotice" method="post" enctype="multipart/form-data" id="insertFrm">
+		
+		<form action="/insertNotice" method="post" id="insertFrm">
 			<table class="table table-bordered">
 				<tr>
 					<th>제목</th>
 					<td>
-						<input type="text" class="form-control" name="noticeTitle">
+						<input type="text" class="form-control" name="noticeTitle" id="title">
 					</td>
 				</tr>
 				<tr>
 					<th>등록일</th>
-					<td>
-						${sessionScope.member.memberId }
-						<input type="hidden" name="noticeWriter" value="${sessionScope.member.memberId }">
-					</td>
-				</tr>
-				<tr>
-					<th>첨부파일</th>
-					<td><input type="file"></td>
+					<td>${today }</td>
 				</tr>
 				<tr>
 					<th>내용</th>
 					<td>
-						<textarea name="noticeContent" rows="5" cols="90" style="width:100%;" name="weditor" id="weditor"></textarea>
+						<textarea name="noticeContent" rows="5" cols="90" style="width:100%;" id="weditor"></textarea>
 					</td>
 				</tr>
 			</table>
 			<div class="bottom">
-				<button type="submit" class="btn btn-default bbt" id="insert">등록</button>
-				<button type="submit" class="btn btn-default bbt" id="modify">수정</button>
-				<button type="submit" class="btn btn-default bbt" id="delete">삭제</button>
+				<button type="button" class="btn btn-default bbt" id="insert">등록</button>
 				<button type="button" class="btn btn-default bbt" id="back">돌아가기</button>
 			</div>
 		</form>
+		
 	</section>
+
 </body>
+
 </html>
