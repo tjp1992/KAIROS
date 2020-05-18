@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import admin.mypage.model.vo.InquiryAnswer;
 import pjy.inquiry.service.InquiryService;
 import pjy.inquiry.vo.Inquiry;
 import pjy.inquiry.vo.InquiryPageData;

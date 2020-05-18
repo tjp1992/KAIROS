@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import admin.mypage.model.vo.InquiryAnswer;
 import common.JDBCTemplate;
 import pjy.inquiry.vo.Inquiry;
 
@@ -114,6 +115,33 @@ public class InquiryDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return i;
+	}
+
+	public InquiryAnswer inquiryAnswer(Connection conn, int inqNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		InquiryAnswer ia = new InquiryAnswer();
+		String query = "select * from inq_ans where inq_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, inqNo);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				ia.setInqAnsNo(rset.getInt("inq_ans_no"));
+				ia.setInqNo(rset.getInt("inq_no"));
+				ia.setInqAnsTitle(rset.getString("inq_ans_title"));
+				ia.setInqAnsContent(rset.getString("inq_ans_content"));
+				ia.setInqAnsDate(rset.getDate("inq_ans_date"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return ia;
 	}
 
 }

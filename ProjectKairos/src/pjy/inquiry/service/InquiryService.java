@@ -3,6 +3,7 @@ package pjy.inquiry.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import admin.mypage.model.vo.InquiryAnswer;
 import common.JDBCTemplate;
 import pjy.inquiry.dao.InquiryDao;
 import pjy.inquiry.vo.Inquiry;
@@ -70,4 +71,12 @@ public class InquiryService {
 		return i;
 		
 	}
+
+	public InquiryAnswer inquiryAnswer(int inqNo) {
+		Connection conn =JDBCTemplate.getConnection();
+		InquiryAnswer ia = new InquiryDao().inquiryAnswer(conn,inqNo);
+		JDBCTemplate.close(conn);
+		return ia;
+	}
+
 }

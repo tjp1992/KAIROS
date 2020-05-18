@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.mypage.model.vo.InquiryAnswer;
 import pjy.inquiry.service.InquiryService;
 import pjy.inquiry.vo.Inquiry;
 
@@ -33,9 +34,10 @@ public class MyInquiryViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int InqNo = Integer.parseInt(request.getParameter("inqNo"));
 		Inquiry i = new InquiryService().selectOneInquiry(InqNo);
-		
+		InquiryAnswer ia = new InquiryService().inquiryAnswer(InqNo);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inquiry/inquiryView.jsp");
 		request.setAttribute("i", i);
+		request.setAttribute("ia", ia);
 		rd.forward(request, response);
 	}
 
