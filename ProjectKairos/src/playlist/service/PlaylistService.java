@@ -203,6 +203,14 @@ public class PlaylistService {
 			
 		}
 		
+		if(unum == list2.size()) {
+			
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
 		if(unum==list2.size()) {
 			for(int i=0; i<list.size(); i++) {
 				result = new PlaylistDao().updateSongPlist(conn, list.get(i).getSongNo(), userId, i);
