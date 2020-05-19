@@ -29,7 +29,7 @@ prefix="c"%>
 	  });
 	  $(function(){
 		$(".player").click(function(){
-			window.open("/player","width=50","height=370");
+			window.open("/player","","width=366px , height=650px , resizable=false");
 		});
 	  });
   </script>

@@ -75,7 +75,8 @@ public class PaymentCompleteServlet extends HttpServlet {
 			InternetAddress to = new InternetAddress(update.getEmail());
 			msg.setRecipient(Message.RecipientType.TO, to);
 			msg.setSubject("결제완료 이메일","UTF-8");
-			msg.setContent("<h1>결제완료</h1><h3> 인증번호 ["+personalId+"]입니다</h3><h3>상점거래 아이디 ["+merchantId+"]입니다</h3><h3>결제 금액 ["+paidAmt+"]입니다</h3><h3>카드승인번호 ["+verifyNo+"]입니다","text/html;charset=UTF-8");
+			
+			msg.setContent("<table><thead><h1>결제완료</h1></thead><tbody><tr><th>인증번호</th><td>"+personalId+"</td></tr><tr><th>상점거래 아이디</th><td>"+merchantId+"</td></tr><tr><th>결제 금액</th><td>"+paidAmt+"</td></tr><tr><th>카드 승인 번호</th><td>"+verifyNo+"</td></tr></tbody></table>","text/html;charset=UTF-8");
 			Transport.send(msg);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block

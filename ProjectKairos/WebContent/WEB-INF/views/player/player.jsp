@@ -18,7 +18,7 @@
 	url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
 body {
-	background: #ff564c;
+	/* background: #ff564c; */
 	padding: 0;
 	margin: 0;
 }
@@ -95,7 +95,7 @@ h6 {
 	transform: translate(-50%, 0);
 	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
 	overflow: hidden;
-	margin: 30px 0;
+
 }
 
 .header {
@@ -129,6 +129,14 @@ label.main:hover:before {
 }
 .screen>#magicButton:checked ~ .footer{
 	display: none;
+}
+.screen>#magicButton:checked ~ .scrollPurpose{
+	top: 192px;
+	left: 12px;
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1, 1);
+	transition: all 0.3s ease-in;
 }
 .screen>#magicButton:checked ~ label.main:before {
 	color: #ff564c;
@@ -197,7 +205,18 @@ label.main:hover:before {
 	top: 180px;
 	transition: all 0.3s ease-in;
 }
-
+.scrollPurpose{
+	border-spacing: 0px 2px;
+	width: 342px;
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	top: 378px;
+	left: 12px;
+	transform-origin: 0% 0%;
+	transform: scale(0.1, 0.1);
+	transition: all 0.3s ease-in;
+}
 .list {
 	border-spacing: 0px 2px;
 	width: 342px;
@@ -365,12 +384,12 @@ label.zmr:before {
 	transition: all 0.15s linear;
 } */
 
-td>#heart:checked ~ label.zmr:before {
+td>#heart1:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
 	transition: all 0.15s linear;
 }
-/*
+
 td>#heart1:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
@@ -417,7 +436,7 @@ td>#heart8:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
 	transition: all 0.15s linear;
-} */
+}
 
 .bar {
 	/* background: url('http://imgh.us/bar_3.svg') no-repeat; */
@@ -551,7 +570,7 @@ body{
 	height: 45px;
 	width: 360px;
 	position: absolute;
-	bottom: 10px;
+	bottom: 0;
 	left: 23px;
 	z-index: 20;
 	transition: all 0.15s linear;
@@ -737,16 +756,54 @@ audio {
 					$(this).find('h6').css('color','rgb(240, 240, 240)');
 				});
 			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			
+			if($(".song").eq(audioTrack).find('#liked')==1){
+				$()
+			}
 		}
 	</script>
-	<article class="screen">
+	<div class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
 		<label class="main" for="magicButton"></label>
 
 		<div class="coverImage"></div>
 		<div class="bodyPlayer">
-			
+			<table class="list">
+				<c:forEach items="${playList}" var='p'>
+					<tr class="song">
+						<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath}>
+						<input type="hidden" id='artist' class="songArtist" value=${p.songArtist}>
+						<input type="hidden" id='albumpath' class='albumpath' value=${p.albumPath}>
+						<input type="hidden" id='liked' class="liked" value=${p.liked}>
+						<td class="nr">
+							<h5>
+								${p.orderNo }
+								<h5>
+						</td>
+						<c:if test='${p.orderNo eq 1}'>
+							<td class="title" ><h6 style='color:#ff564c;'>
+								${p.songTitle}
+								<h6></td>
+						</c:if>
+						<c:if test='${p.orderNo ne 1}'>
+							<td class="title"><h6>
+									${p.songTitle}
+									<h6></td>
+		
+						</c:if>
+						<td class="length"><h5>
+								
+								<h5></td>
+						<c:if test="${p.liked eq 1}">
+							<td><input type="checkbox" id="heart${p.orderNo}" checked/><label class="zmr"
+								for="heart"></label></td>
+						</c:if>
+						<c:if test="${p.liked eq 0}">
+							<td><input type="checkbox" id="heart${p.orderNo}"/><label class="zmr"
+								for="heart"></label></td>
+						</c:if>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 		<table class="list">
 			<c:forEach items="${playList}" var='p'>
@@ -754,6 +811,7 @@ audio {
 					<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath}>
 					<input type="hidden" id='artist' class="songArtist" value=${p.songArtist}>
 					<input type="hidden" id='albumpath' class='albumpath' value=${p.albumPath}>
+					<input type="hidden" id='liked' class="liked" value=${p.liked}>
 					<td class="nr">
 						<h5>
 							${p.orderNo }
@@ -768,7 +826,7 @@ audio {
 						<td class="title"><h6>
 								${p.songTitle}
 								<h6></td>
-
+	
 					</c:if>
 					<td class="length"><h5>
 							
@@ -784,9 +842,6 @@ audio {
 				</tr>
 			</c:forEach>
 		</table>
-		<div class='scroll'>
-			
-		</div>
 
 		<div class="shadow"></div>
 
@@ -830,6 +885,6 @@ audio {
 		<div class="current">
 			<h2>${playList[0].songTitle}</h2>
 		</div>
-	</article>
+	</div>
 </body>
 </html>
