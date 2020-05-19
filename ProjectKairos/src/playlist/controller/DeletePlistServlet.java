@@ -45,10 +45,10 @@ public class DeletePlistServlet extends HttpServlet {
 		
 		int result = new PlaylistService().deleteOnePlaylist(p, userId);
 		result = new PlaylistService().sortPlaylist(userId);
-		if(result>0) {
-			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-			session.setAttribute("playList", pList);
-		}
+//		if(result>0) {
+//			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//			session.setAttribute("playList", pList);
+//		}
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		out.flush();

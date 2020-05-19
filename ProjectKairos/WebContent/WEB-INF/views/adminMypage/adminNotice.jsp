@@ -75,10 +75,11 @@
 	<nav id="footNav">
 		<ul class="pagination">${pageNavi }</ul>
 	</nav>
-	</div>
 	<div style="text-align: right">
 		<button type="button" class="btn btn-default" id="back">돌아가기</button>
 	</div>
+	</div>
+	
 
 	</section>
 </body>

@@ -1,7 +1,7 @@
 package pjy.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,8 +35,20 @@ public class MypageFrmServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
 		HttpSession session = request.getSession();
 		User u = (User)session.getAttribute("user");
-		Date expiredDate = u.getExpiredDate();
-		request.setAttribute("play", null);
+		 Date expire = u.getExpiredDate();
+		 System.out.println("이용권 만기 날짜 : "+expire);
+		 Date today = new Date();
+		 System.out.println("오늘날짜 : "+today);
+		 if(expire==null) {
+			 request.setAttribute("date", null);
+		 }else {
+			 Long expireDate = expire.getTime();
+			 Long todayDate = today.getTime();
+			 System.out.println("이용권 만기날짜 롱형: "+expireDate);
+			 System.out.println("오늘날짜 롱형 : "+todayDate);
+			 Long gabDate = (expireDate-todayDate)/(1000*60*60*24);
+			 request.setAttribute("date", gabDate);
+		 }
 		rd.forward(request, response);
 	}
 

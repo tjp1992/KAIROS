@@ -116,8 +116,13 @@
 	
 		$(function() {
 			$("#listen_btn").click(function(){
-				$("#form_pl").attr("action","/frontAdd");
-				$("#form_pl").submit();
+				if($(".plchk:checked").length>0){
+					$("#form_pl").attr("action","/frontAdd");
+					$("#form_pl").submit();
+				}else{
+					alert("재생 할 곡을 선택해주세요!");
+					return false;
+				}
 			});
 			$("#pleditBtn").click(function(){
 				$("#form_pl").attr("action","/plEdit");
@@ -133,8 +138,14 @@
 			});
 			
 			$("#delete_btn").click(function(){
-				$("#form_pl").attr("action","/dPlist");				
-				$("#form_pl").submit();
+				if($(".plchk:checked").length>0){
+					$("#form_pl").attr("action","/dPlist");				
+					$("#form_pl").submit();
+				}else{
+					alert("삭제할 곡을 선택해주세요!");
+					return false;
+				}
+				
 			});
 			
 			$(".allchk").click(function() {

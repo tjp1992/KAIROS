@@ -1,6 +1,7 @@
 package admin.mypage.notice.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,6 +39,7 @@ public class InsertQuestionServlet extends HttpServlet {
 			iq.setInqTitle(request.getParameter("title"));
 			iq.setInqContent(request.getParameter("questionContent"));
 			iq.setInqNo(Integer.parseInt(request.getParameter("inqNo")));
+			
 			int result = new QuestionService().insertInquiryAnswer(iq);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			if(result>0) {

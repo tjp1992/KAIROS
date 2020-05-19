@@ -63,6 +63,7 @@ $(function(){
 						<input type="hidden" name="inqNo" value="${inqNo }">
 						<input type="hidden" name="reqPage" value="${reqPage }">
 						<input type="hidden" name="reqPage2" value="${reqPage2 }">
+						<input type="hidden" name="today" value="${today }">
 					</td>
 				</tr>
 				<tr>
