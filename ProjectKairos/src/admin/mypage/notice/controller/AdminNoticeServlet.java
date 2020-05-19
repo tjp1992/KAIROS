@@ -38,7 +38,7 @@ public class AdminNoticeServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminNotice.jsp");
 		request.setAttribute("list", pd.getList());
 		request.setAttribute("pageNavi", pd.getPageNavi());
-		request.setAttribute("req", reqPage);
+		request.setAttribute("reqPage", reqPage);
 		rd.forward(request, response);
 	}
 

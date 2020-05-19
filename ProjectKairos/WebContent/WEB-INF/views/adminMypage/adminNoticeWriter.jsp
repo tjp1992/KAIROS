@@ -47,7 +47,7 @@ $(function(){
 <script>
 $(function(){
 	$("#back").click(function(){
-		location.href = "/adminNotice";
+		location.href = "/adminNotice?reqPage="+${reqPage };
 	});	
 });
 

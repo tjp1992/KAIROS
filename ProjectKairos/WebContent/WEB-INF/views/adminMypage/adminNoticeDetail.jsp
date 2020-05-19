@@ -17,7 +17,7 @@
 			location.href = "/adminNotice?reqPage="+${req };
 		});
 		$("#modify").click(function(){
-			location.href = "/modifyNoticeFrm?noticeNo="+${n.noticeNo}+"&reqPage="+${req };
+			location.href = "/modifyNoticeFrm?noticeNo="+${n.noticeNo }+"&reqPage="+${req };
 		});
 	});
 	function deleteNotice(no,event,req){
@@ -34,6 +34,7 @@
 	
 	<div class="top">
 		<span class="inner1">제목  : ${n.noticeTitle }</span>
+
 		<span class="inner2">작성일  : ${n.noticeDate } </span>
 	</div>
 	<div class="middle">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +13,10 @@
 <script>
 $(function(){
 		$("#back").click(function(){
-			location.href = "/adminQuestion";
+			location.href = "/adminQuestion?reqPage=1&check=2&reqPage2="+${reqPage2 };
+		});
+		$("#modify").click(function(){
+			location.href = "/adminQuestionAnswerModify?inqAnsNo="+${iqa.inqAnsNo }+"&reqPage="+${reqPage }+"&inqNo="+${iq.inqNo }+"&reqPage2="+${reqPage2 };
 		});
 	});
 </script>
@@ -24,80 +28,33 @@ $(function(){
 	<section>
 	<h2>Q&A</h2>
 	<div class="top">
-		<span class="inner1">제목  </span>
-		<span class="inner2">작성일   </span>
+		<span class="inner1">제목 : ${iq.inqTitle }</span>
+		<span class="inner3">작성자 : ${iq.userId }</span>
+		<span class="inner2">작성일 : ${iq.inqDate }</span>
 	</div>
 	<div class="middle">
 		<p class="content">
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
+			${iq.inqContent }
 		</p>
 	</div>
 	<div class="bottom">
 	</div>
+	<c:if test="${not empty iqa }">
 	<h2>ANSWER</h2>
 	<div class="top">
-		<span class="inner1">제목  </span>
-		<span class="inner2">작성일   </span>
+		<span class="inner1">제목 : ${iqa.inqAnsTitle }</span>
+		<span class="inner2">작성일 : ${iqa.inqAnsDate } </span>
 	</div>
 	<div class="middle">
 		<p class="content">
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
-			alksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjasalksdfjlasdj;flkasdjflas;lkfjas<br>
+			${iqa.inqAnsContent }
 		</p>
 	</div>
 	<div class="bottom">
 		<button type="button" class="btn btn-default bbt" id="modify">답변 수정</button>
-		<button type="button" class="btn btn-default bbt" id="delete">답변 삭제</button>
 		<button type="button" class="btn btn-default bbt" id="back">목록으로</button>
 	</div>
+	</c:if>
 	<br>
 	</section>
 </body>
