@@ -82,12 +82,17 @@ public class SearchSongServlet extends HttpServlet {
 			req.setReqPage(1);
 		}
 		
-		// 결과내 재검색 했는지 여부		
-		if(request.getParameter("reSearch") != null) {
-			req.setReSearch(request.getParameter("reSearch"));
-		}		
+		SearchPageData pd = null;
 		
-		SearchPageData pd = new SearchSongService().searchSong(req);
+		// 결과내 재검색 했는지 여부		
+		if(request.getParameter("reSearch") != null) {			
+			req.setReSearch(request.getParameter("reSearch"));			
+			pd = new SearchSongService().reSearchSong(req);
+		} else {
+			
+			pd = new SearchSongService().searchSong(req);
+		}
+		
 		
 		request.setAttribute("list", pd.getList());
 		request.setAttribute("pageNavi", pd.getPageNavi());

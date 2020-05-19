@@ -15,8 +15,8 @@ public class LikelistService {
 		int chkResult = new LikelistDao().checkLike(conn,userId,songNo);
 		int result = 0;
 		if(chkResult>0) {//이미 좋아요 리스트에 있는거
-			 result = new LikelistDao().deleteOneLike(conn,userId,songNo);
-		}else {//조아요 리스트에 없는거
+			result = new LikelistDao().deleteOneLike(conn,userId,songNo);
+		} else {//조아요 리스트에 없는거
 			result = new LikelistDao().addOneLike(conn,userId,songNo);
 		}
 		
@@ -28,6 +28,7 @@ public class LikelistService {
 		}
 		
 		JDBCTemplate.close(conn);
+		
 		return chkResult;
 	}
 

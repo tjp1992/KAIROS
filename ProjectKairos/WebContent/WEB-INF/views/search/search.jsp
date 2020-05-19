@@ -178,8 +178,11 @@ prefix="c"%>
                 </td>
                 <td class="result_no">${s.rowNum }</td>
                 <td class="btn_container multi_cont">
-                  <i class="far fa-play-circle" songno="${s.songNo}"></i>
-                  <i class="far fa-plus-square" songno="${s.songNo}"></i>
+                  <i
+                    class="far fa-play-circle playBtn"
+                    songno="${s.songNo}"
+                  ></i>
+                  <i class="far fa-plus-square addBtn" songno="${s.songNo}"></i>
                   <span class="free_song">
                     <c:if test="${s.licensed eq 0 }">Free</c:if>
                   </span>
@@ -246,12 +249,37 @@ prefix="c"%>
           type="hidden"
           name="reSearch"
           id="reSearch"
-          value="${reSearch}"
+          value="${req.reSearch}"
         />
       </c:if>
     </form>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script>
+      setReSearch();
+      function setReSearch() {
+        const reSearch = $("#reSearch").val();
+        $("#re_search").val(reSearch);
+      }
+
+      $("#research-form").submit(function () {
+        const reSearch = $("#re_search").val();
+
+        const form = $("#search-form");
+        if ($("#reSearch").length == 0) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "reSearch";
+          input.id = "reSearch";
+          form.append(input);
+        }
+
+        $("#reSearch").val(reSearch);
+        $("#reqPage").val(1);
+        sendSearch();
+
+        return false;
+      });
+
       chkKeyword();
       function chkKeyword() {
         const keyword = $("#keyword").val();
@@ -365,8 +393,37 @@ prefix="c"%>
     </c:if>
     <c:if test="${empty sessionScope.user }">
       <script>
-        $("#addChkPlaylist").click(function () {
+        $("#addChkPlaylist,.likeBtn,.addBtn,.playBtn").click(function () {
           alert("로그인 해주세요!");
+        });
+      </script>
+    </c:if>
+    <c:if test="${not empty sessionScope.user }">
+      <script>
+        $(".likeBtn").click(function () {
+          const btn = $(this);
+          const songNo = $(this).attr("songno");
+
+          $.ajax({
+            url: "asyncSearchLike",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result == 0) {
+                btn.removeClass();
+                btn.addClass("fas fa-heart likeBtn");
+              } else if (result == 1) {
+                btn.removeClass();
+                btn.addClass("far fa-heart likeBtn");
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
         });
       </script>
     </c:if>
