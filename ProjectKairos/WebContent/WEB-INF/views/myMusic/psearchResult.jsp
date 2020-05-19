@@ -58,6 +58,26 @@ pageEncoding="UTF-8"%>
     </section>
     <script>
         $(function(){
+           $(".playimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  var orderNo = $(this).parent().parent().attr("orderNo");
+        	  $.ajax({
+        		 url:"/frontAddOne",
+        		 type:"POST",
+        		 data:{
+        			 songNo:songNo,orderNo:orderNo
+        		 },
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){
+        				 alert("재~생~중~");
+        				
+        			 }
+        			 
+        		 }
+        	  });
+           });
+           
            $(".deleteimg").children().click(function(){
         	  var songNo = $(this).parent().parent().attr("songNo");
         	  var orderNo = $(this).parent().parent().attr("orderNo");

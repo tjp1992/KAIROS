@@ -1,17 +1,15 @@
 package playlist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.sun.media.sound.RealTimeSequencerProvider;
 
 import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
@@ -20,16 +18,16 @@ import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 /**
- * Servlet implementation class FrontAddServlet
+ * Servlet implementation class FrontAddOneServlet
  */
-@WebServlet(name = "FrontAdd", urlPatterns = { "/frontAdd" })
-public class FrontAddServlet extends HttpServlet {
+@WebServlet(name = "FrontAddOne", urlPatterns = { "/frontAddOne" })
+public class FrontAddOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrontAddServlet() {
+    public FrontAddOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,38 +40,27 @@ public class FrontAddServlet extends HttpServlet {
 		User u = (User)session.getAttribute("user");
 		String userId=u.getUserId();
 		
-		ArrayList<Playlist> list = new ArrayList<Playlist>();
-		
-		String songNo[] = request.getParameterValues("songNo");
+		String songNo [] = request.getParameterValues("songNo");
 		String orderNo[]=request.getParameterValues("orderNo");
+		
+		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		
 		for(int i=0; i<songNo.length; i++) {
 			Playlist p = new Playlist();
 			
-			p.setOrderNo(Integer.parseInt(orderNo[i]));
 			p.setSongNo(Integer.parseInt(songNo[i]));
+			p.setOrderNo(Integer.parseInt(orderNo[i]));
 			list.add(p);
 		}
-		
-		int result = new PlaylistService().frontAdd(list,userId);
-		
+		int result = new PlaylistService().frontAdd(list, userId);
 		
 		if(result>0) {
-			RequestDispatcher rd= request.getRequestDispatcher("/playList");
 			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
 			session.setAttribute("playList", pList);
-			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "재생에 실패했습니다");
-			request.setAttribute("loc", "/playList");
-			rd.forward(request, response);
 		}
-		
-		
-		
-		
-		
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		out.flush();
 		
 	}
 

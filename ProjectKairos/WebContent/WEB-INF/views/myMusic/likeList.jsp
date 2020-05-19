@@ -50,7 +50,10 @@ pageEncoding="UTF-8"%>
                 <table>
                 	<c:forEach items="${list }" var="p">
                     <tr class="lltr1" songNo="${p.songNo }">
-                        <th width="5%"><input class="llchk" type="checkbox" name="songNo" value="${p.songNo }"></th>
+                        <th width="5%">
+                        	<input class="llchk" type="checkbox" name="songNo" value="${p.songNo }">
+                        	<input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />
+                        </th>
                         <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="60%">
                             <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
@@ -68,6 +71,17 @@ pageEncoding="UTF-8"%>
     </section>
      <script>
         $(function(){
+           $("#listen_btn").click(function(){
+        	  $("#form_ll").attr("action","/frontAdd");
+        	  $("#form_ll").submit();
+           });
+           $(".llchk").change(function(){
+			      if ($(this).prop("checked") == true) {
+			        $(this).next().prop("checked", true);
+			      } else {
+			        $(this).next().prop("checked", false);
+			      }
+		   });
            $("#up_btn").click(function(){
         	  $("#form_ll").attr("action","/uPlist");
         	  $("#form_ll").submit();
@@ -78,13 +92,16 @@ pageEncoding="UTF-8"%>
            });
            $(".allchk").click(function(){
               var arr = $(".llchk");
+              var arr2 = $(".ordChk");
               if($(this).prop("checked")==true){
                   for(var i=0; i<arr.length; i++){
                       arr.eq(i).prop("checked",true);
+                      arr2.eq(i).prop("checked",true);
                   }
               }else{
                   for(var i=0; i<arr.length; i++){
                       arr.eq(i).prop("checked",false);
+                      arr2.eq(i).prop("checked",false);
                   }
               }
            }); 
@@ -96,7 +113,22 @@ pageEncoding="UTF-8"%>
                   $(".allchk").prop("checked",false);
               }
            });
-           
+           $(".playimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  var orderNo = $(this).parent().parent().children().eq(1).html();
+        	  $.ajax({
+        		 url:"/frontAddOne",
+        		 type:"POST",
+        		 data:{
+        			 songNo:songNo,orderNo:orderNo
+        		 },
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){}
+        			 location.href="/playList";
+        		 }
+        	  });
+           });
            $(".plusimg").children().click(function(){
         	  var songNo = $(this).parent().parent().attr("songNo");
         	  $.ajax({

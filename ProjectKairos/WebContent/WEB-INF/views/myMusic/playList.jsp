@@ -144,6 +144,23 @@
 					$(".allchk").prop("checked", false);
 				}
 			});
+			$(".playimg").children().click(function(){
+				var songNo = $(this).parent().parent().attr("songNo");
+				var orderNo = $(this).parent().parent().children().eq(1).html();
+				$.ajax({
+					url :"/frontAddOne",
+					type:"POST",
+					data:{
+						songNo:songNo,orderNo:orderNo
+					},
+					success:function(data){
+						var result = Number(data);
+						if(result>0){
+							location.href="/playList";
+						}
+					}
+				});
+			});
 			$(".deleteimg").children().click(function(){
 				var songNo = $(this).parent().parent().attr("songNo");
 				var orderNo= $(this).parent().parent().children().eq(1).html();

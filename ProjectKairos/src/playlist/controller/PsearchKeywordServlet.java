@@ -42,7 +42,7 @@ public class PsearchKeywordServlet extends HttpServlet {
 		ArrayList<Playlist> list = new PlaylistService().pSearchKeyword(userId, keyword);
 		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/myMusic/psearchResult.jsp");
 		request.setAttribute("list", list);
-		
+		request.setAttribute("keyword", keyword);
 		rd.forward(request, response);
 	}
 

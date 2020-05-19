@@ -100,7 +100,9 @@ pageEncoding="UTF-8"%>
                     next.after(arr[i]);
                 }
             });
-
+			$(".cancel").click(function(){
+				location.href="/playList";
+			});
             
         });
         
