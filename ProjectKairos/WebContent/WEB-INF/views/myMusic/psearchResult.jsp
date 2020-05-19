@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
     <section>
         <div class="psearchoutline">
             <div class="psearch_wrapper">
-                <div class="psearchname">플레이리스트 내 검색결과
+                <div class="psearchname"><a id="plist">플레이리스트</a> 내 검색결과
                 </div>
                 <div class="plsearch">
                     <form action="/psearchKeyword">
@@ -59,7 +59,12 @@ pageEncoding="UTF-8"%>
     <script>
         $(function(){
          
+           $("#plist").click(function(){
+        	   location.href="/playList";
+           });
+
          
+           
            $(".playimg").children().click(function(){
         	  var songNo = $(this).parent().parent().attr("songNo");
         	  var orderNo = $(this).parent().parent().attr("orderNo");

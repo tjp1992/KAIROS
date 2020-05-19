@@ -49,8 +49,8 @@ public class PlayListServlet extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/playList.jsp");
 		request.setAttribute("list", list);
-		ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-		session.setAttribute("playList", pList);
+//		ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//		session.setAttribute("playList", pList);
 		rd.forward(request, response);
 		
 	}

@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
     <!--↓↓ 스타일 시트를 추가할 시 이곳에 ↓↓-->
     <link rel="stylesheet" href="/src/css/playList/pleditPage.css" />
     <script src="https://kit.fontawesome.com/8bd2671777.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <!--↑↑ 스타일 시트를 추가할 시 이곳에 ↑↑-->
     <title>KAIROS</title>
 </head>
@@ -100,7 +101,7 @@ pageEncoding="UTF-8"%>
                 }
             });
 			$(".cancel").click(function(){
-				location.href="/playList";
+				self.close();
 			});
             
         });

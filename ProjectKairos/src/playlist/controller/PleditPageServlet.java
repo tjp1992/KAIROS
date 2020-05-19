@@ -59,10 +59,10 @@ public class PleditPageServlet extends HttpServlet {
 	
 		
 		if(result>0) {
-			RequestDispatcher rd = request.getRequestDispatcher("/playList");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/myMusic/close.jsp");
 			
-			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-			session.setAttribute("playList", pList);
+//			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//			session.setAttribute("playList", pList);
 			
 			rd.forward(request, response);
 		}else {
