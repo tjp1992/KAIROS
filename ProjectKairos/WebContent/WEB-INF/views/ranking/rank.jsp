@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/src/css/voucher/voucher.css">
 <script src="/src/js/jquery-3.3.1.js"></script>
+<script src="https://kit.fontawesome.com/8bd2671777.js"
+	crossorigin="anonymous"></script>
 <title>Top Chart</title>
 </head>
 <style>
@@ -22,15 +24,6 @@
 	margin: 10px;
 }
 </style>
-<script>
-	$('#all').change(function(e) {
-		if (e.currentTarget.checked) {
-			$('.rows').find('input[type="checkbox"]').prop('checked', true);
-		} else {
-			$('.rows').find('input[type="checkbox"]').prop('checked', false);
-		}
-	});
-</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<section class="container text-center">
@@ -38,7 +31,10 @@
 		<div class="row m-4">
 			<div
 				class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
-				<h1 class="h2"><img src="/src/imgs/logo/main_logo(no).png" width="250px"> 순위차트</h1>
+				<h1 class="h2">
+					<img src="/src/imgs/logo/main_logo(no).png" width="250px">
+					순위차트
+				</h1>
 			</div>
 		</div>
 		<hr>
@@ -52,6 +48,7 @@
 					href="/rankingFrm?reqPage=1&reqType=artist" id="artist">아티스트 차트</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/rankingFrm?reqPage=1&reqType=play">플래이 차트</a></li>
+				<li class="nav-item"></li>
 			</ul>
 		</div>
 		<div class="table-responsive">
@@ -59,8 +56,8 @@
 				<c:if test="${reqType == 'song' or reqType == 'play'}">
 					<thead>
 						<tr>
-							<th width="10%"><input type="checkbox" id="checkAll"><small>전체선택</small>
-							</th>
+							<th width="10%"><input type="checkbox" id="checkAll"><small><label
+									for="checkAll">전체선택</label></small></th>
 							<th width="10%">순위</th>
 							<th width="30%">곡 제목</th>
 							<th width="20%">앨범</th>
@@ -72,13 +69,25 @@
 					<tbody class="rows">
 						<c:forEach items="${list}" var="m">
 							<tr>
-								<td><input type="checkbox" id="select"></td>
+								<td>
+								<input type="hidden" value=${m.songNo} id="songNo" name="songNo">
+								<input type="checkbox" id="select" class="check">
+								</td>
 								<td>${m.rankNo }</td>
 								<td>${m.songTitle }<br>${m.songArtist }</td>
 								<td>${m.albumName }</td>
-								<td>${m.likeCount }</td>
+								
+								<c:if test="${m.liked==0 }">
+									<th width="10%" class="heartimg"><i style="color: black;"
+										class="iconheart far fa-heart"></i>${m.likeCount }</th>
+								</c:if>
+								<c:if test="${m.liked>0 }">
+									<th width="10%" class="heartimg"><i style="color: red;"
+										class="iconheart fas fa-heart"></i>${m.likeCount}</th>
+								</c:if>
+								
 								<td>${m.playCount }</td>
-								<td><button class="btn btn-primary btn-sm">듣기</button></td>
+								<td><button class="btn btn-primary btn-sm play">듣기</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -134,5 +143,21 @@
 			</nav>
 		</div>
 	</section>
+	<script>
+		$(".play").click(function(){
+			console.log($(this).parent().parent().find('#songNo').val());
+		})
+		$('#checkAll').click(function() {
+			if ($('#checkAll').prop('checked')) {
+				$('.check').each(function() {
+					$(this).attr('checked', true);
+				});
+			} else {
+				$('.check').each(function() {
+					$(this).attr('checked', false);
+				});
+			}
+		});
+	</script>
 </body>
 </html>
