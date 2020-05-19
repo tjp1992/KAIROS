@@ -31,9 +31,12 @@
 				<button class="psearchBtn" type="submit">
 					<img src="/src/imgs/icons/search.png">
 				</button>
-				<input type="text" name="keyword" placeholder="검색" value="${keyword }">
+				<input type="text" id="keyword" name="keyword" placeholder="검색" value="${keyword }">
 			</form>
 		</div>
+		<form id="plEditFrm">
+			<input type="hidden" name="plEdit">
+		</form>
 		<form id="form_pl" method="post">
 			<div class="tototo">
 				<table>
@@ -44,11 +47,14 @@
 							<button type="button" id="delete_btn">삭제</button>
 							</td>
 						<th width="30%">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="button" id="pleditBtn">순서변경</button>
+						
+							<button type="button" onclick="plEdit();">순서변경</button>
 						</th>
 					</tr>
 				</table>
+				
 			</div>
+			
 			<div class="toto">
 				<table>
 					<tr>
@@ -96,7 +102,17 @@
 	</div>
 	</section>
 	<script>
-	
+		function plEdit(){
+			var url="/plEdit";
+			var title="plEdit";
+			var status ="left=500px, top=100px, width=800px, height=500px,menubar=no,status=no,scroll=yes";
+			var popup = window.open("",title,status);
+			
+			$("#plEditFrm").attr("action",url);
+			$("#plEditFrm").attr("method","post");
+			$("#plEditFrm").attr("target",title);
+			$("#plEditFrm").submit();
+		}
 	
 		$(function() {
 			$("#listen_btn").click(function(){

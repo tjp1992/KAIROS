@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="plsearch">
                     <form action="/psearchKeyword">
-                        <input type="text" name="keyword" value="${keyword }">
+                        <input type="text" id="keyword" name="keyword" value="${keyword }">
                         <button class="psearchBtn" type="submit"><i class="iconsearch fas fa-search"></i></button>
                     </form>
                 </div>
@@ -58,6 +58,8 @@ pageEncoding="UTF-8"%>
     </section>
     <script>
         $(function(){
+         
+         
            $(".playimg").children().click(function(){
         	  var songNo = $(this).parent().parent().attr("songNo");
         	  var orderNo = $(this).parent().parent().attr("orderNo");
