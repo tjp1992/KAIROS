@@ -37,7 +37,7 @@ public class MailSend {
 		//3.메일 계정 정보 설정
 		Session session = Session.getDefaultInstance(prop,new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("pjyub1297@gmail.com", "@@pkyu0661");
+				return new PasswordAuthentication("kairos.purchase@gmail.com", "khlove123");
 			}
 			
 		});

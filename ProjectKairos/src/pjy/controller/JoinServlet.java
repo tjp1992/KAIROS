@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
 import user.service.UserService;
 import user.vo.User;
 

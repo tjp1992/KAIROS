@@ -18,8 +18,8 @@
 					<h3 style="font-weight:bold;">아이디 찾기</h3>
 				</div>
 				<div class="pjymid" style="height:45%;">
-					<input type="text" id="id" style="width:300px;height:45px;" placeholder="이름을 입력하세요"><br><br>
-					<input type="password" id="pw" style="width:300px;height:45px;" placeholder="이메일을 입력하세요"><br><br>
+					<input type="text" id="name" name="name" style="width:300px;height:45px;" placeholder="이름을 입력하세요"><br><br>
+					<input type="text" id="mail" name="mail" style="width:300px;height:45px;" placeholder="이메일을 입력하세요"><br><br>
 					
 				</div>
 				<div class="pjybottom" style="height:30%; text-align:center;">
