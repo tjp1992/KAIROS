@@ -76,7 +76,7 @@ public class QuestionDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
-		String query = "select count(*) as cnt from inquiry where inq_ans_no=1";
+		String query = "SELECT count(*) as cnt FROM inq_ans left join inquiry on inquiry.INQ_NO = inq_ans.INQ_NO where inquiry.inq_ans_no=1";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -98,10 +98,10 @@ public class QuestionDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Inquiry> list = new ArrayList<Inquiry>();
-		String query = "select * from " + 
-				"(SELECT ROWNUM AS rnum, n.* from " + 
-				"(SELECT * FROM inquiry where inq_ans_no=1 order by inq_date desc)n) " + 
-				"where rnum between ? and ?";
+		String query = "select * from (SELECT ROWNUM AS rnum, n.* from "
+				+ "(SELECT inq_ans.inq_ans_date, inquiry.* FROM inq_ans left join inquiry on inquiry.INQ_NO = inq_ans.INQ_NO "
+				+ "where inquiry.inq_ans_no=1 order by inq_ans.inq_ans_date desc)n) "
+				+ "where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -109,6 +109,7 @@ public class QuestionDao {
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				Inquiry iq = new Inquiry();
+				iq.setInqAnsDate(rset.getDate("inq_ans_date"));
 				iq.setInqAnsNo(rset.getInt("inq_ans_no"));
 				iq.setInqContent(rset.getString("inq_content"));
 				iq.setInqDate(rset.getDate("inq_date"));
@@ -266,6 +267,125 @@ public class QuestionDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public int totalCount3(Connection conn, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(*) as cnt from inquiry where inq_ans_no=0 and user_id like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Inquiry> selectList3(Connection conn, int start, int end, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquiry> list = new ArrayList<Inquiry>();
+		String query = "select * from " + 
+				"(SELECT ROWNUM AS rnum, n.* from " + 
+				"(SELECT * FROM inquiry where inq_ans_no=0 and user_id like ? order by inq_date desc)n) " + 
+				"where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Inquiry iq = new Inquiry();
+				iq.setInqAnsNo(rset.getInt("inq_ans_no"));
+				iq.setInqContent(rset.getString("inq_content"));
+				iq.setInqDate(rset.getDate("inq_date"));
+				iq.setInqFileName(rset.getString("inq_filename"));
+				iq.setInqFilePath(rset.getString("inq_filepath"));
+				iq.setInqNo(rset.getInt("inq_no"));
+				iq.setInqTitle(rset.getString("inq_title"));
+				iq.setUserId(rset.getString("user_id"));
+				list.add(iq);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+
+	public int totalCount4(Connection conn, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "SELECT count(*) as cnt FROM inq_ans left join inquiry on inquiry.INQ_NO = inq_ans.INQ_NO where inquiry.inq_ans_no=1 and user_id like ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Inquiry> selectList4(Connection conn, int start, int end, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquiry> list = new ArrayList<Inquiry>();
+		String query = "select * from (SELECT ROWNUM AS rnum, n.* from "
+				+ "(SELECT inq_ans.inq_ans_date, inquiry.* FROM inq_ans left join inquiry on inquiry.INQ_NO = inq_ans.INQ_NO "
+				+ "where inquiry.inq_ans_no=1 and user_id like ? order by inq_ans.inq_ans_date desc)n) "
+				+ "where rnum between ? and ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Inquiry iq = new Inquiry();
+				iq.setInqAnsDate(rset.getDate("inq_ans_date"));
+				iq.setInqAnsNo(rset.getInt("inq_ans_no"));
+				iq.setInqContent(rset.getString("inq_content"));
+				iq.setInqDate(rset.getDate("inq_date"));
+				iq.setInqFileName(rset.getString("inq_filename"));
+				iq.setInqFilePath(rset.getString("inq_filepath"));
+				iq.setInqNo(rset.getInt("inq_no"));
+				iq.setInqTitle(rset.getString("inq_title"));
+				iq.setUserId(rset.getString("user_id"));
+				list.add(iq);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
 	}
 
 }

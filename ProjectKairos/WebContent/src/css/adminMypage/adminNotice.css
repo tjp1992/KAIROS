@@ -50,17 +50,18 @@
 	#footNav{
 		border-bottom: none;
 		width: 200px;
+		float: left;
 		margin : 0 auto;
 	}
 	.navheader{
 		width: 100%;
-		text-align: center;
-	
+		display: inline-block;
 	}
 	#back{
-		
 		background-color: black;
 		color : white;
+		float: right;
+		margin-top: 25px;
 	}
 	#back:hover{
 		background-color: #E2E2E2;

@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Inquiry {
 	private int inqNo;
+	private Date inqAnsDate;
 	private String userId;
 	private String inqTitle;
 	private String inqContent;
@@ -15,9 +16,10 @@ public class Inquiry {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Inquiry(int inqNo, String userId, String inqTitle, String inqContent, Date inqDate, int inqAnsNo,
+	public Inquiry(Date inqAnsDate, int inqNo, String userId, String inqTitle, String inqContent, Date inqDate, int inqAnsNo,
 			String inqFileName, String inqFilePath) {
 		super();
+		this.inqAnsDate = inqAnsDate;
 		this.inqNo = inqNo;
 		this.userId = userId;
 		this.inqTitle = inqTitle;
@@ -74,5 +76,11 @@ public class Inquiry {
 	}
 	public void setInqFilePath(String inqFilePath) {
 		this.inqFilePath = inqFilePath;
+	}
+	public Date getInqAnsDate() {
+		return inqAnsDate;
+	}
+	public void setInqAnsDate(Date inqAnsDate) {
+		this.inqAnsDate = inqAnsDate;
 	}
 }

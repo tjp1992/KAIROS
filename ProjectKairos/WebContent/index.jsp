@@ -12,11 +12,11 @@ pageEncoding="UTF-8"%>
   <body>
     <!-- header.jsp에 jquery와 jstl이 이미 추가되어 있습니다! -->
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
+	
     <!-- 우리 웹의 기본 틀이 될 구조입니다 -->
     <!-- section에 콘텐츠 작성하세요! -->
     <section>
-    
+    	<a href="/main">메인으로</a>
     </section>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
