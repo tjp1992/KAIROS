@@ -155,7 +155,6 @@ public class SearchSongDao {
 		return list;
 	}
 
-	public ArrayList<SearchSong> searchMyList(Connection conn, String userNick, int start, int end) {
 		
 		PreparedStatement pst = null;
 		ResultSet rset = null;

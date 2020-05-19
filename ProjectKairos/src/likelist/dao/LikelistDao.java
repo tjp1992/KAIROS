@@ -129,6 +129,24 @@ public class LikelistDao {
 		}
 		return list;
 	}
+
+	public int deleteLikelist(Connection conn, int songNo, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0; 
+		String query ="delete from likelist where user_id =? and liked_song_no=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, songNo);
+			result =pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
 	
 

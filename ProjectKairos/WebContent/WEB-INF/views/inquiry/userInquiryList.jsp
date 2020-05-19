@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="/src/css/bootstrap.css" />
-<script type="text/javascript" src="/js/bootstrap.js"></script>
 <link href="/src/css/userMypage/userInquiryList.css" rel="stylesheet" type="text/css">
 <script>
    $(function(){
@@ -20,6 +19,17 @@
 	});
    });
 </script>
+<style>
+	#pageNavi {
+	text-align: center;
+	width: 1000px;
+	margin: 0 auto;
+}
+
+#pageNavi>* {
+	margin: 0 auto;
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
@@ -31,31 +41,40 @@
    <table class="table table-hover">
       <thead>
         <tr>
-          <th>번호</th>
+          <th class="th2">번호</th>
           <th class="th2">제목</th>
-          <th class="th1" colspan="2">등록일</th>
-          <th>답변상태</th>
+          <th class="th2">등록일</th>
+          <th class="th2">답변상태</th>
+          <th class="th2">수정/삭제</th>
         </tr>
       </thead>
       <tbody>
       <c:if test="${empty list }">
 			<tr>
-				<th colspan="5">문의 내역이 없습니다.</th>
+				<th colspan="5" class="th1">문의 내역이 없습니다.</th>
 			</tr>
 		</c:if>
       <c:if test="${not empty list }">
-        	<c:forEach items="${list }" var="n">
+        	<c:forEach items="${list }" var="i" varStatus="status">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${status.count }</td>
+					<td><a href="/myInquiryView?inqNo=${i.inqNo }">${i.inqTitle }</a></td>
+					<td>${i.inqDate }</td>
+					<td>
+						<c:if test="${i.inqAnsNo == 0 }">
+						<span style="color:red;">답변대기</span>
+						</c:if>
+						<c:if test="${i.inqAnsNo != 0 }">
+						<span style="color:green;">답변완료</span>
+						</c:if>
+					</td>
 					<td><button>수정</button><button>삭제</button></td>
 				</tr>
 			</c:forEach>
 		</c:if>
       </tbody>
     </table>
+    	<div id="pageNavi">${pageNavi }</div>
           <div style="text-align: right">
             <button type="button" class="btn btn-default" id="back">돌아가기</button>
          </div>

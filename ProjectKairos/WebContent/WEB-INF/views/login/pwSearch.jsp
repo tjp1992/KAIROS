@@ -12,15 +12,15 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<section class="cantainer">
-		<form action="/pwSearch">
+		<form action="/pwSearch" method="post">
 			<div class="wrapper">
 				<div class="pjytop" style="height:15%; text-align:center; padding-top:20px;" >
 					<h3 style="font-weight:bold;">비밀번호 찾기</h3>
 				</div>
 				<div class="pjymid" style="height:65%;">
-					<input type="text" id="id" style="width:300px;height:45px;" placeholder="아이디를 입력하세요"><br><br>
-					<input type="password" id="pw" style="width:300px;height:45px;" placeholder="이름을 입력하세요"><br><br>
-					<input type="text" id="phone"style="width:300px;height:45px;" placeholder="휴대폰번호를 입력하세요">
+					<input type="text" id="id" name="id" style="width:300px;height:45px;" placeholder="아이디를 입력하세요"><br><br>
+					<input type="text" id="name" name="name" style="width:300px;height:45px;" placeholder="이름을 입력하세요"><br><br>
+					<input type="text" id="phone" name="phone" style="width:300px;height:45px;" placeholder="휴대폰번호를 입력하세요">
 					
 				</div>
 				<div class="pjybottom" style="height:20%; text-align:center;">
