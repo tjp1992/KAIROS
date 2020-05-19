@@ -36,7 +36,7 @@ public class RankingFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		User user = (User)session.getAttribute("user");
 		RankingPageData pd = null;
 		String reqType = request.getParameter("reqType");

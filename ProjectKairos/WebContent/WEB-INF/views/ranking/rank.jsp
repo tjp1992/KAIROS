@@ -38,7 +38,7 @@
 			</div>
 		</div>
 		<hr>
-		<div class="row">
+		<div class="row m-2">
 			<ul class="nav">
 				<li class="nav-item"><a class="nav-link"
 					href="/rankingFrm?reqPage=1&reqType=song" id="song">음악 차트</a></li>
@@ -48,7 +48,6 @@
 					href="/rankingFrm?reqPage=1&reqType=artist" id="artist">아티스트 차트</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="/rankingFrm?reqPage=1&reqType=play">플래이 차트</a></li>
-				<li class="nav-item"></li>
 			</ul>
 		</div>
 		<div class="table-responsive">
@@ -58,6 +57,15 @@
 						<tr>
 							<th width="10%"><input type="checkbox" id="checkAll"><small><label
 									for="checkAll">전체선택</label></small></th>
+							<th width="10%"><a class="btn btn-primary">선택 듣기</a></th>
+							<th width="30%"></th>
+							<th width="20%"></th>
+							<th width="10%"></th>
+							<th width="10%"></th>
+							<th width="10%"></th>
+						</tr>
+						<tr>
+							<th width="10%"></th>
 							<th width="10%">순위</th>
 							<th width="30%">곡 제목</th>
 							<th width="20%">앨범</th>
@@ -69,14 +77,13 @@
 					<tbody class="rows">
 						<c:forEach items="${list}" var="m">
 							<tr>
-								<td>
-								<input type="hidden" value=${m.songNo} id="songNo" name="songNo">
-								<input type="checkbox" id="select" class="check">
-								</td>
+								<td><input type="hidden" value=${m.songNo } id="songNo"
+									name="songNo"> <input type="checkbox" id="select"
+									class="check"></td>
 								<td>${m.rankNo }</td>
 								<td>${m.songTitle }<br>${m.songArtist }</td>
 								<td>${m.albumName }</td>
-								
+
 								<c:if test="${m.liked==0 }">
 									<th width="10%" class="heartimg"><i style="color: black;"
 										class="iconheart far fa-heart"></i>${m.likeCount }</th>
@@ -85,7 +92,7 @@
 									<th width="10%" class="heartimg"><i style="color: red;"
 										class="iconheart fas fa-heart"></i>${m.likeCount}</th>
 								</c:if>
-								
+
 								<td>${m.playCount }</td>
 								<td><button class="btn btn-primary btn-sm play">듣기</button></td>
 							</tr>
@@ -144,7 +151,7 @@
 		</div>
 	</section>
 	<script>
-		$(".play").click(function(){
+		$(".play").click(function() {
 			console.log($(this).parent().parent().find('#songNo').val());
 		})
 		$('#checkAll').click(function() {

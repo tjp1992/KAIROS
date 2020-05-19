@@ -53,7 +53,7 @@ public class RankingDao {
 		ArrayList<RankingSong> list = new ArrayList<RankingSong>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, n.*,NVL((SELECT LIKED_SONG_NO FROM LIKED_SONG_NO = n.SONG_NO),0)as liked from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n) where rnum between ? and ?  order by rnum asc";
+		String query = "select * from (select rownum as rnum, n.* from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n) where rnum between ? and ?  order by rnum asc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
@@ -89,7 +89,7 @@ public class RankingDao {
 		ArrayList<RankingSong> list = new ArrayList<RankingSong>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, n.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE USER_ID = ? AND LIKED_SONG_NO = n.SONG_NO),0)as liked from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n) where rnum between ? and ? order by rnum asc";
+		String query = "select * from (select rownum as rnum, n.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE USER_ID = ? AND LIKED_SONG_NO = n.SONG_NO),0)as liked from(select * from song join album on (song.album_no = album.album_no) order by play_count desc)n) where rnum between ? and ? order by rnum asc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
@@ -186,7 +186,7 @@ public class RankingDao {
 		ArrayList<RankingSong> list = new ArrayList<RankingSong>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String query = "select * from (select rownum as rnum, n.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST LIKED_SONG_NO = n.SONG_NO),0)as liked from(select * from song join album on (song.album_no = album.album_no) order by like_count desc)n) where rnum between ? and ? order by rnum asc";
+		String query = "select * from (select rownum as rnum, n.* from(select * from song join album on (song.album_no = album.album_no) order by play_count desc)n) where rnum between ? and ? order by rnum asc";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, start);
