@@ -158,10 +158,10 @@ public class SearchSongDao {
 
 		return list;
 	}
-
 	public int getTotalCount(Connection conn, String query) {
 
 		int result = 0;
+		
 		PreparedStatement pst = null;
 		ResultSet rset = null;
 		

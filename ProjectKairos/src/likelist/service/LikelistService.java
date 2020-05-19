@@ -39,4 +39,24 @@ public class LikelistService {
 		return list;
 	}
 
+	public int deleteLikelist(String[] arr, String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = 0;
+		int rnum = 0;
+		
+		for(String str : arr) {
+			result = new LikelistDao().deleteLikelist(conn,Integer.parseInt(str),userId);
+			rnum++;
+		}
+		if(rnum ==arr.length) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+
+
 }

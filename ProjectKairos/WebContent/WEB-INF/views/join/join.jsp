@@ -23,6 +23,14 @@
 	console.log(result);
 	$(function() {
 		var myVar;
+		$("#id").keydown(function(){
+			result[0]='false';
+			$("#idMsg").css("color", "red");
+			$("#idMsg").html("아이디 중복확인 해주세요");
+			$("#id").removeClass();
+			$("#id").addClass("border border-danger");
+				console.log(result);
+		});
 		$("#overLapId").click(function() {
 			var userId = $("#id").val();
 			var idExp = /[A-Za-z0-9]{4,12}/;
@@ -60,7 +68,6 @@
 			});
 		});
 		
-
 		$("#pw").focusout(function() {
 			var pw = $("#pw").val();
 			var pwExp = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])(?=.*[0-9]).{8,16}$/;
@@ -98,7 +105,29 @@
 				console.log(result);
 			}
 		});
+		$("#mail1").keydown(function(){
+			result[3]='false';
+			$("#mailMsg").css("color", "red");
+			$("#mailMsg").html("메일인증 해주세요");
+			$("#mail1").removeClass();
+			$("#mail1").addClass("border border-danger");
+				console.log(result);
+		});
+		$("#mail2").keydown(function(){
+			result[3]='false';
+			$("#mailMsg").css("color", "red");
+			$("#mailMsg").html("아이디 중복확인 해주세요");
+			$("#mail2").removeClass();
+			$("#mail2").addClass("border border-danger");
+				console.log(result);
+		});
 		$('#selectEmail').change(function() {
+			result[3]='false';
+			$("#mailMsg").css("color", "red");
+			$("#mail2").removeClass();
+			$("#mail2").addClass("border border-danger");
+			$("#mailMsg").html("이메일 인증을 해주세요");
+			console.log(result);
 			$("#selectEmail option:selected").each(function() {
 				if ($(this).val() == '1') {
 					$("#mail2").val('');
@@ -217,9 +246,17 @@
 				console.log(result);
 			}
 		});
+		$("#nick").keydown(function(){
+			result[6]='false';
+			$("#nick").removeClass();
+			$("#nick").addClass("border border-danger");
+			$("#nickMsg").css("color", "red");
+			$("#nickMsg").html("중복체크 해주세요");
+				console.log(result);
+		});
 		$("#overLapNick").click(function() {
 			var userNick = $("#nick").val();
-			var nickExp = /[A-Za-z0-9]{3,15}/;
+			var nickExp = /[A-Za-z0-9가-힣]{2,16}/;
 			$.ajax({
 				url : "/overLapNick",
 				type : "get",
@@ -231,7 +268,7 @@
 						if (!nickExp.test(userNick)) {
 							$("#nick").removeClass();
 							$("#nick").addClass("border border-danger");
-							$("#nickMsg").html("영어 대/소문자 숫자로 3~15글자");
+							$("#nickMsg").html("영어 대/소문자 숫자로 2~16글자 한글1~8글자");
 							$("#nickMsg").css("color", "red");
 							result[6]='false';
 							console.log(result);
@@ -282,6 +319,7 @@
 				}
 			}).open();
 		});
+
 		$("#detailAddr").change(function(){
 			if($(this).val()==''){
 				$(this).removeClass();
@@ -298,24 +336,46 @@
 				console.log(result);
 			}
 		});
-		$("#submit").click(function(){
-			for(var i=0;i<result.length();i++){
-				if(result[i]=='false'){
-					return;
-				}
-			}
-			location.href="/join";
-		});
 		$("#reset").click(function(){
 			$("input").removeClass();
 			$("input").addClass("border border-warning");
 			$("span").html("");
 			$("#input").removeClass();
+			for(var i=0;i<result.length;i++){
+				result[i]='false';
+			}
+			console.log(result);
 		});
 		$("#cancel").click(function(){
 			location.href="/loginFrm"
 		});
 	});
+	function check(){
+		if(result[0]=='false'){
+			return false;
+		}else if(result[1]=='false'){
+			return false;
+		}else if(result[2]=='false'){
+			return false;
+		}else if(result[3]=='false'){
+			return false;
+		}else if(result[4]=='false'){
+			return false;
+		}else if(result[5]=='false'){
+			return false;
+		}else if(result[6]=='false'){
+			return false;
+		}else if(result[7]=='false'){
+			return false;
+		}else if(result[8]=='false'){
+			return false;
+		}else if(result[9]=='false'){
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -324,7 +384,7 @@
 		<div id="title">
 			<h1>회원가입</h1>
 		</div>
-		<form action="/join" name="join" id="join">
+		<form action="/join" name="join" id="join" method="post" onsubmit='return check()'>
 			<table>
 				<tr>
 					<th>아이디</th>

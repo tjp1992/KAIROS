@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="/js/bootstrap.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -27,13 +26,22 @@
 <script>
 	$(function() {
 		$("#userInquiryList").click(function() {
-			location.href = "/userInquiryListFrm";
+			location.href = "/userInquiryList?reqPage=1";
 		});
 		$("#userInquiry").click(function() {
 			location.href = "/userInquiryFrm";
 		});
 		$("#userModify").click(function(){
-			location.href = "/userModifyFrm";
+			window.open("/confirmPwFrm","confirmPw","width=300,height=300,left=600");
+		});
+		$("#userDelete").click(function(){
+			var result = confirm("탈퇴하시겠습니까?");
+			if(result){
+				location.href="/userDelete";	
+			}else{
+				location.href="/mypageFrm";
+			}
+			
 		});
 	});
 </script>
@@ -42,9 +50,9 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
 	<h2 class="h2">
-		마이페이지 <span class="span1">로그인계정 : </span></h2>
+		마이페이지 <span class="span1">${sessionScope.user.userName } 님 환영합니다 </span></h2>
 		<c:if test="${empty play }">
-			<span>이용권이 없습니다.<a href="#">이용권 구매</a></span>
+			<span>이용권이 없습니다.<a href="/voucherFrm">이용권 구매</a></span>
 		</c:if>
 		<c:if test="${not empty play }">
 			<span>일 남았습니다.</span>
