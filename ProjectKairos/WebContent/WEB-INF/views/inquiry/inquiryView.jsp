@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="/src/css/bootstrap.css" />
-<script type="text/javascript" src="/js/bootstrap.js"></script>
 <link href="/src/css/userMypage/userInquiryView.css" rel="stylesheet" type="text/css">
 </head>
 	<script>
@@ -22,14 +21,12 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
 		<h2>게시글 상세보기</h2>
-		<form action="/modifyInquiryViewFrm" method="post" enctype="multipart/form-data" id="insertFrm">
-		<input type="hidden" name="inqNo" value="${i.inqNo }">
-		<input type="hidden" name="inqCon" value="${i.inqContent }">
-		<input type="hidden" name="inqTitle" value="${i.inqTitle }">
-         <table style="width:800px; height:600px;">
+		<form action="/modifyInquiryViewFrm" method="post" id="insertFrm">
+		<input type="hidden" name="inqNo" value=${i.inqNo }>
+         <table>
 	          <tr>
-	             <th style="width:300px;">제목</th>
-	             <td><span id="span">${i.inqTitle }</span><input type="hidden" class="form-control" name="inquiryTitle" style="width:500px;" value="${i.inqTitle }"></td>
+	             <th style="width:150px;">제목</th>
+	             <td><span id="span">${i.inqTitle }</span><input type="hidden" class="form-control" name="inqTitle" style="width:500px;" value=${i.inqTitle }></td>
 	          </tr>
 	          <tr>
 		          <th>작성자</th>
@@ -41,7 +38,7 @@
 	          <tr style="border-bottom:1px solid black;">
 	          	<th>내용</th>
 	          	<td>${i.inqContent }
-	          		<textarea style="display:none;" name="inquiryContent" rows="10" cols="80">${i.inqContent }</textarea>
+	          		<textarea style="display:none;" name="inqCon" rows="10" cols="80">${i.inqContent }</textarea>
 	          	</td>
 	          </tr>
 	          <tr style="text-align : center;">

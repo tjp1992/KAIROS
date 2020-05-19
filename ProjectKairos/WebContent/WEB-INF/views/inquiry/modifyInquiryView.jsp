@@ -40,7 +40,10 @@
 	      $("#save").click(function(){
 	          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 	          $("#frm").submit();
-	      });    
+	      });
+	      $("#back").click(function(){
+	    	 location.href="/myInquiryView?inqNo=${inqNo}"; 
+	      });
 	});
 	</script>
 	<style>
@@ -48,30 +51,31 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
-		<h2>1:1문의하기</h2>
-		<form action="/modifyInquiryViewFrm" method="post" enctype="multipart/form-data" id="frm">
+		<h2>수정하기</h2>
+		<form action="/modifyInquiryView" method="post" id="frm">
+		<input type="hidden" name="inqNo" value=${inqNo }>
          <table>
 	          <tr>
 	             <th style="width:100px;">제목</th>
-	             <td style="width:700px;"><input type="text" class="form-control" name="inquiryTitle" style="width:580px;" value="${title }"></td>
+	             <td style="width:700px;"><input type="text" class="form-control" name="modifyInquiryTitle" style="width:580px;" value="${title }"></td>
 	          </tr>
 	          <tr>
 		          <th>작성자</th>
 		          <td>${sessionScope.user.userId }
-		             <input type="hidden" name="inquiryWriter" value="${sessionScope.user.userId }"> 
+		             <input type="hidden" name="modifyInquiryWriter" value="${sessionScope.user.userId }"> 
 		          </td>
 	          </tr>
 	          
 	          <tr style="border-bottom:1px solid black;">
 	          	<th>내용</th>
 	          	<td>
-	          		<textarea name="inquiryContent" id="ir1" style="width:610px; height:600px;">${content }</textarea>
+	          		<textarea name="modifyInquiryContent" id="ir1" style="width:610px; height:600px;">${content }</textarea>
 	          	</td>
 	          </tr>
 	          <tr style="text-align : center;">
 	          	<td colspan="2">
-	          		<button type="submit" id="save">등록</button>
-	          		<button type="reset">취소</button>
+	          		<button type="submit" id="save">수정</button>
+	          		<button type="button" id="back">취소</button>
 	          	</td>
 	          </tr>
          </table>

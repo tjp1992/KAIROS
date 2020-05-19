@@ -139,15 +139,13 @@ public class PlaylistService {
 		int index=1;
 		int result =0;
 		for(Playlist p:list) {
-			System.out.println(p.getOrderNo());
-			System.out.println("index : "+index);
+			
 			result = new PlaylistDao().sortOrderNo(conn, userId, p, index++);
 			if(result>0) {
 				unum++;
 				
 			}
 		}
-		System.out.println(unum);
 		if(unum==list.size()) {
 			JDBCTemplate.commit(conn);
 			result=1;
@@ -204,6 +202,14 @@ public class PlaylistService {
 			}
 			
 		}
+		
+		if(unum == list2.size()) {
+			
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
 		
 		if(unum==list2.size()) {
 			for(int i=0; i<list.size(); i++) {

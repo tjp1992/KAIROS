@@ -105,7 +105,7 @@
 		function plEdit(){
 			var url="/plEdit";
 			var title="plEdit";
-			var status ="left=500px, top=100px, width=800px, height=500px,menubar=no,status=no,scroll=yes";
+			var status ="left=300px, top=50px, width=700px, height=500px, menubar=no,status=no,scroll=yes";
 			var popup = window.open("",title,status);
 			
 			$("#plEditFrm").attr("action",url);
@@ -116,8 +116,13 @@
 	
 		$(function() {
 			$("#listen_btn").click(function(){
-				$("#form_pl").attr("action","/frontAdd");
-				$("#form_pl").submit();
+				if($(".plchk:checked").length>0){
+					$("#form_pl").attr("action","/frontAdd");
+					$("#form_pl").submit();
+				}else{
+					alert("재생 할 곡을 선택해주세요!");
+					return false;
+				}
 			});
 			$("#pleditBtn").click(function(){
 				$("#form_pl").attr("action","/plEdit");
@@ -133,8 +138,14 @@
 			});
 			
 			$("#delete_btn").click(function(){
-				$("#form_pl").attr("action","/dPlist");				
-				$("#form_pl").submit();
+				if($(".plchk:checked").length>0){
+					$("#form_pl").attr("action","/dPlist");				
+					$("#form_pl").submit();
+				}else{
+					alert("삭제할 곡을 선택해주세요!");
+					return false;
+				}
+				
 			});
 			
 			$(".allchk").click(function() {

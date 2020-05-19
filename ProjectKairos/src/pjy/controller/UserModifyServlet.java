@@ -1,6 +1,7 @@
 package pjy.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,21 +34,22 @@ public class UserModifyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User u = new User();
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		Date expiredDate = user.getExpiredDate();
+		System.out.println("수정완료전 이용권 기간  : "+expiredDate);
 		u.setUserId(request.getParameter("userId"));
 		u.setUserPw(request.getParameter("userPw"));
 		u.setUserName(request.getParameter("userName"));
 		u.setUserNick(request.getParameter("userNick"));
 		u.setPhone(request.getParameter("phone"));
-//		String email1 = request.getParameter("mail1");
-//		String email2 = request.getParameter("mail2");
-//		System.out.println(email2);
-//		String email = email1+"@"+email2;
 		u.setEmail(request.getParameter("modifyFullMail"));
 		String addr1 = request.getParameter("postCode");
 		String addr2 = request.getParameter("roadAddr");
 		String addr3 = request.getParameter("detailAddr");
 		String addr = addr1+"/"+addr2+"/"+addr3;
 		u.setAddr(addr);
+		u.setExpiredDate(expiredDate);
 		System.out.println(u.getUserId());
 		System.out.println(u.getUserPw());
 		System.out.println(u.getUserName());
@@ -55,13 +57,13 @@ public class UserModifyServlet extends HttpServlet {
 		System.out.println(u.getPhone());
 		System.out.println(u.getEmail());
 		System.out.println(u.getAddr());
+		System.out.println(u.getExpiredDate());
 		int result = new UserService().modifyUser(u);
 		System.out.println(result);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		request.setAttribute("loc", "/mypageFrm");
 		if(result>0) {
 			request.setAttribute("msg", "수정완료");
-			HttpSession session = request.getSession();
 			session.setAttribute("user", u);
 		}else {
 			request.setAttribute("msg", "수정실패");

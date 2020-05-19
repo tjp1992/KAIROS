@@ -35,16 +35,29 @@ public class AdminTicketServlet extends HttpServlet {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		int reqPage2 = Integer.parseInt(request.getParameter("reqPage2"));
 		int check = Integer.parseInt(request.getParameter("check"));
-		TicketPageData tpa= new TicketService().listSelect(reqPage);
-		TicketPageData tpa2= new TicketService().listSelect2(reqPage2);
+		TicketPageData tpa = null;
+		TicketPageData tpa2= null;
+		String search = null;
+		
+		if(!(request.getParameter("search") == null || request.getParameter("search").equals(""))) {
+			search = request.getParameter("search");
+			tpa = new TicketService().listSelect3(reqPage,search);
+			tpa2 = new TicketService().listSelect4(reqPage2,search);
+		}else {
+			tpa = new TicketService().listSelect(reqPage);
+			tpa2 = new TicketService().listSelect2(reqPage2);
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/adminMypage/adminTicket.jsp");
 		request.setAttribute("check", check);
 		request.setAttribute("list", tpa.getList());
 		request.setAttribute("pageNavi", tpa.getPageNavi());
+		request.setAttribute("reqPage", reqPage);
+		
 		request.setAttribute("list2", tpa2.getList());
 		request.setAttribute("pageNavi2", tpa2.getPageNavi());
-		request.setAttribute("reqPage", reqPage);
 		request.setAttribute("reqPage2", reqPage2);
+		request.setAttribute("search", search);
 		rd.forward(request, response);
 	}
 
