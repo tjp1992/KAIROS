@@ -39,7 +39,7 @@
 		<h2>비밀번호 확인</h2><br>
 		<form action="/confirmPw" method="post">
 			<input type="password" name="pw" id="pw">
-			<button type="button" id="submit">확인</button><br>
+			<button type="submit" id="submit">확인</button><br>
 			<span id="pwMsg"></span>
 		</form>
 	</div>

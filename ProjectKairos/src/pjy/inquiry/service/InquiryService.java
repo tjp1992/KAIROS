@@ -79,4 +79,28 @@ public class InquiryService {
 		return ia;
 	}
 
+	public int modifyInquiryView(Inquiry inq) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new InquiryDao().modifyInquiryView(conn,inq);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int inquiryDelete(int inqNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new InquiryDao().inquiryDelete(conn,inqNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

@@ -56,9 +56,11 @@
 		</c:if>
       <c:if test="${not empty list }">
         	<c:forEach items="${list }" var="i" varStatus="status">
+        	<form action="/inquiryDelete" method="post">
 				<tr>
 					<td>${status.count }</td>
-					<td><a href="/myInquiryView?inqNo=${i.inqNo }">${i.inqTitle }</a></td>
+					<td><input type="hidden" name="inqNo" value=${i.inqNo }>
+						<a href="/myInquiryView?inqNo=${i.inqNo }">${i.inqTitle }</a></td>
 					<td>${i.inqDate }</td>
 					<td>
 						<c:if test="${i.inqAnsNo == 0 }">
@@ -68,8 +70,9 @@
 						<span style="color:green;">답변완료</span>
 						</c:if>
 					</td>
-					<td><button>수정</button><button>삭제</button></td>
+					<td><button type="submit" id="delete">삭제</button></td>
 				</tr>
+			</form>
 			</c:forEach>
 		</c:if>
       </tbody>
