@@ -20,7 +20,7 @@ prefix="c" %>
     <section>
       <div class="insert_wrapper">
         <form
-          action="/insertMusic"
+          action="/modifyMusic"
           method="POST"
           id="form-album"
           enctype="multipart/form-data"
@@ -37,13 +37,24 @@ prefix="c" %>
             <input type="hidden" name="licensed" value="1" />
             <div class="input_artist cont">
               <span>가수명</span>
-              <input type="text" name="artist" id="artist" readonly />
-              <button type="button" id="search_artist">검색</button>
+              <input
+                type="text"
+                name="artist"
+                id="artist"
+                value="${song.songArtist}"
+                readonly
+              />
             </div>
           </c:if>
+          <input type="hidden" name="songNo" value="${song.songNo}" />
           <div class="input_title cont">
             <span>곡명</span>
-            <input type="text" name="title" id="title" />
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value="${song.songTitle}"
+            />
           </div>
           <div class="select_album cont">
             <span>앨범명</span>
@@ -58,7 +69,6 @@ prefix="c" %>
           </div>
           <div class="upload_albumImg cont">
             <span>앨범 이미지</span>
-            <input type="file" name="album_img_file" id="album_img_file" />
             <div class="img_container">
               <img src="" alt="" />
             </div>
@@ -77,9 +87,6 @@ prefix="c" %>
       </div>
     </section>
     <!-- 관리자 전용 script -->
-    <c:if test="${sessionScope.user.userId == 'admin'}">
-      <script src="/src/js/manageMusic/insertMusicByAdmin.js"></script>
-    </c:if>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script>
       $("#cancelBtn").click(function () {
@@ -87,7 +94,7 @@ prefix="c" %>
       });
     </script>
     <script src="/src/js/manageMusic/selectAlbum.js"></script>
-    <script src="/src/js/manageMusic/insertMusic.js"></script>
+    <script src="/src/js/manageMusic/modifyMusic.js"></script>
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>
 </html>

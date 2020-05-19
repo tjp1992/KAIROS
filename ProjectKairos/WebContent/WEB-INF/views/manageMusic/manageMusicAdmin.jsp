@@ -34,7 +34,7 @@ pageEncoding="UTF-8"%>
           음원 등록
         </div>
       </a>
-      <a href="/myMusicListFrm" class="link_container">
+      <a href="/adminMusicListFrm" class="link_container">
         <div>
           전체 음원
         </div>

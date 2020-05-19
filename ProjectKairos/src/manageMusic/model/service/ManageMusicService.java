@@ -9,6 +9,7 @@ import manageMusic.model.dao.ManageMusicDao;
 import manageMusic.model.vo.Album;
 import manageMusic.model.vo.AlbumDesc;
 import manageMusic.model.vo.LicensedArtist;
+import song.vo.SearchSong;
 import song.vo.Song;
 
 public class ManageMusicService {
@@ -233,5 +234,70 @@ public class ManageMusicService {
 		JDBCTemplate.close(conn);
 
 		return result2;
+	}
+
+	public SearchSong readOneSong(int songNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		SearchSong s = new ManageMusicDao().readOneSong(conn, songNo);
+				
+		JDBCTemplate.close(conn);
+		
+		return s;
+	}
+
+	public int modifySong(String root, Song s) {
+
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new ManageMusicDao().modifySong(conn, s);
+
+		if (result > 0 && new FileControl().uploadMusic(root, s)) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int modifySong(Song s) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		int result = new ManageMusicDao().modifySong(conn, s);
+
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public static int updateLcnArtist(LicensedArtist l) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new ManageMusicDao().readOneLcnArtist(conn, l);
+		
+		if(result>0) {
+			result = new ManageMusicDao().updateLcnArtist(conn,l);
+		} else {
+			result = new ManageMusicDao().insertLcnArtist(conn,l);
+		}		
+				
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+				
+		JDBCTemplate.close(conn);
+				
+		return result;
 	}
 }

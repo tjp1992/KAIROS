@@ -65,7 +65,7 @@ prefix="c"%>
                 <td class="result_no">${s.rowNum }</td>
                 <td class="btn_container multi_cont">
                   <button
-                    class="btn btn-sm btn-outline-primary"
+                    class="btn btn-sm btn-outline-primary mod_song"
                     songNo="${s.songNo}"
                   >
                     수정
@@ -114,6 +114,14 @@ prefix="c"%>
     </section>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script>
+      $(".mod_song").click(function () {
+        const songNo = $(this).attr("songno");
+        const songName = $(this).parent().next().html();
+        if (confirm("[" + songName + "]곡을 수정하시겠습니까?")) {
+          location.href = "/modifyMusicFrm?songNo=" + songNo;
+        }
+      });
+
       $(".del_song").click(function () {
         const songDesc = $(this).parent().parent();
         const songName = $(this).parent().next().html();
