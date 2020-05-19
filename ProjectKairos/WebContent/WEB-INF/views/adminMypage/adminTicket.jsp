@@ -141,7 +141,9 @@
 			</div>
 
 		</div>
-		<div class="row">
+		
+	</div>
+<div class="row">
 					<div class="col-lg-6">
 						<div class="input-group">
 							<div class="input-group-btn">
@@ -162,10 +164,8 @@
 						<!-- /input-group -->
 					</div>
 				</div>
-	</div>
-
 	<!-- /.col-lg-6 -->
-	<div style="text-align: right">
+	<div id="sel">
 		<button type="button" class="btn btn-default" id="back">돌아가기</button>
 	</div>
 

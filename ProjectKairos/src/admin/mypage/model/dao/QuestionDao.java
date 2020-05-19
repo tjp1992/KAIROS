@@ -357,7 +357,7 @@ public class QuestionDao {
 		ArrayList<Inquiry> list = new ArrayList<Inquiry>();
 		String query = "select * from (SELECT ROWNUM AS rnum, n.* from "
 				+ "(SELECT inq_ans.inq_ans_date, inquiry.* FROM inq_ans left join inquiry on inquiry.INQ_NO = inq_ans.INQ_NO "
-				+ "where inquiry.inq_ans_no=1 and user_id = ? order by inq_ans.inq_ans_date desc)n) "
+				+ "where inquiry.inq_ans_no=1 and user_id like ? order by inq_ans.inq_ans_date desc)n) "
 				+ "where rnum between ? and ?";
 		try {
 			pstmt = conn.prepareStatement(query);

@@ -67,6 +67,8 @@
 		color : white;
 		width: 90px;
 		height: 40px;
+		float : right;
+		margin-top : 20px;
 	}
 	#back:hover{
 		background-color: #E2E2E2;
@@ -77,9 +79,17 @@
 	}
 	#footNav2{
 		border-bottom: none;
+		width : 300px;
+		float : left;
+		padding-top: none;
+		margin-right: 200px;
 	}
 	#footNav{
 		border-bottom: none;
+		width : 300px;
+		float : left;
+		padding-top: none;
+		margin-right: 200px;
 	}
 	#sear{
 		font-size: 25px;
@@ -87,7 +97,19 @@
 		color:gray;
 		cursor: pointer;
 	}
-	.td{
-		
+	.row{
+		width: 400px;
+		float : left;
+		padding-top: 20px;
+	}
+	.col-lg-6{
+		width: 400px;
+	}
+	.input-group{
+		width: 400px;
+	}
+	#sel{
+		float : right;
+		width: 300px;
 	}
 	

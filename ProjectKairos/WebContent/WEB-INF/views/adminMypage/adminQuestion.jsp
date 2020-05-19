@@ -166,7 +166,7 @@
 		</div>
 	</div>
 	<!-- /.col-lg-6 -->
-	<div style="text-align: right">
+	<div id="sel">
 		<button type="button" class="btn btn-default" id="back">돌아가기</button>
 	</div>
 
