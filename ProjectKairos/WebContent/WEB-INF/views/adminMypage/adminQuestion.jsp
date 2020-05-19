@@ -45,13 +45,21 @@
 		$("#back").click(function() {
 			location.href = "/adminMypage";
 		});
-		
+		$("#sear").click(function() {
+			var search = $("#search").val();
+			location.href = "/adminQuestion?reqPage="+${reqPage }+"&check="+${check }+"&reqPage2="+${reqPage2 }+"&search="+search;
+		});
+		$("#search").keydown(function(key){
+			if(key.keyCode == 13){
+				$("#sear").click();	
+			}
+		});
 	});
-	function detail(no, req){ // req 는 해당 페이지이다.
-		location.href = "/adminQuestionDetailFrm?inqNo="+no+"&reqPage="+req+"&check="+${check }+"&reqPage2="+${req2 };
+	function detail(no, reqPage){ // req 는 해당 페이지이다.
+		location.href = "/adminQuestionDetailFrm?inqNo="+no+"&reqPage="+reqPage+"&check="+${check }+"&reqPage2="+${reqPage2 };
 	}
-	function detail2(no, req2){
-		location.href = "/adminQuestionEndDetailFrm?inqNo="+no+"&reqPage2="+req2+"&check="+${check }+"&reqPage="+${req };
+	function detail2(no, reqPage2){
+		location.href = "/adminQuestionEndDetailFrm?inqNo="+no+"&reqPage2="+reqPage2+"&check="+${check }+"&reqPage="+${reqPage };
 	}
 	
 </script>
@@ -89,8 +97,8 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="p" varStatus="i">
-							<tr class="move" id="move" onclick="detail(${p.inqNo },${req })">
-								<th scope="row" class="num">${(req-1)*10 + i.count }</th>
+							<tr class="move" id="move" onclick="detail(${p.inqNo },${reqPage })">
+								<th scope="row" class="num">${(reqPage-1)*10 + i.count }</th>
 								<td>${p.userId }</td>
 								<td class="title">${p.inqTitle }</td>
 								<td class="insertdate">${p.inqDate }</td>
@@ -117,12 +125,12 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${list2 }" var="p" varStatus="i">
-							<tr class="move" id="move2" onclick="detail2(${p.inqNo },${req2 })">
-								<th scope="row" class="num">${(req2-1)*10 + i.count }</th>
+							<tr class="move" id="move2" onclick="detail2(${p.inqNo },${reqPage2 })">
+								<th scope="row" class="num">${(reqPage2-1)*10 + i.count }</th>
 								<td>${p.userId }</td>
 								<td class="title">${p.inqTitle }</td>
 								<td class="insertdate">${p.inqDate }</td>
-								<td>${p.inqDate }</td>
+								<td>${p.inqAnsDate }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -146,9 +154,12 @@
 
 				</div>
 				<!-- /btn-group -->
-				<input type="text" class="form-control " aria-label="..."
-					id="search"> <span class="glyphicon glyphicon-search"
-					id="sear"></span>
+				<c:if test="${not empty search }">
+						<input type="text" class="form-control " aria-label="..." id="search" value="${search }"> <span class="glyphicon glyphicon-search" id="sear"></span>
+				</c:if>
+				<c:if test="${empty search }">
+						<input type="text" class="form-control " aria-label="..." id="search"> <span class="glyphicon glyphicon-search" id="sear"></span>
+				</c:if>
 			</div>
 			<!-- /input-group -->
 
