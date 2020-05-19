@@ -57,7 +57,7 @@
 						<tr>
 							<th width="10%"><input type="checkbox" id="checkAll"><small><label
 									for="checkAll">전체선택</label></small></th>
-							<th width="10%"><a class="btn btn-primary">선택 듣기</a></th>
+							<th width="10%"><a class="btn btn-primary" id="chkPlayNow">선택 듣기</a></th>
 							<th width="30%"></th>
 							<th width="20%"></th>
 							<th width="10%"></th>
@@ -78,23 +78,23 @@
 						<c:forEach items="${list}" var="m">
 							<tr>
 								<td><input type="hidden" value=${m.songNo } id="songNo"
-									name="songNo"> <input type="checkbox" id="select"
-									class="check"></td>
+									name="songNo"> <input type="checkbox" id="select" value="${m.songNo}"
+									class="check chkBox"></td>
 								<td>${m.rankNo }</td>
 								<td>${m.songTitle }<br>${m.songArtist }</td>
 								<td>${m.albumName }</td>
 
 								<c:if test="${m.liked==0 }">
 									<th width="10%" class="heartimg"><i style="color: black;"
-										class="iconheart far fa-heart"></i>${m.likeCount }</th>
+										class="iconheart far fa-heart likeBtn"></i>${m.likeCount }</th>
 								</c:if>
 								<c:if test="${m.liked>0 }">
 									<th width="10%" class="heartimg"><i style="color: red;"
-										class="iconheart fas fa-heart"></i>${m.likeCount}</th>
+										class="iconheart fas fa-heart likeBtn"></i>${m.likeCount}</th>
 								</c:if>
 
 								<td>${m.playCount }</td>
-								<td><button class="btn btn-primary btn-sm play">듣기</button></td>
+								<td><button class="btn btn-primary btn-sm playBtn" songNo="${m.songNo}">듣기</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -150,6 +150,7 @@
 			</nav>
 		</div>
 	</section>
+	<!-- 버튼 기능 -->
 	<script>
 		$(".play").click(function() {
 			console.log($(this).parent().parent().find('#songNo').val());
@@ -165,6 +166,98 @@
 				});
 			}
 		});
+	</script>
+	<script>
+		
+        // 플레이 나우
+        $("#chkPlayNow").click(function () {
+          let songNo = "";
+          const chks = $(".chkBox:checked");
+
+          for (let i = 0; i < chks.length; i++) {
+            songNo += chks[i].value;
+            if (i != chks.length - 1) {
+              songNo += ",";
+            }
+          }
+
+          $.ajax({
+            url: "/asyncAddPlayNow",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                alert(chks.length + "곡을 추가 완료");
+              } else {
+                alert("추가를 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 연결에 실패하엿습니다.");
+            },
+          });
+        });
+
+
+        // 한곡 플레이
+        $(".playBtn").click(function () {
+          const songNo = $(this).attr("songno");
+
+          $.ajax({
+            url: "/asyncAddPlayFirst",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                location.href = "";
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
+        });
+
+
+        $(".likeBtn").click(function () {
+          // click된 element가 i 태그가 아니면 수정필요
+          const btn = $(this);
+
+          const songNo = $(this).attr("songno");
+
+          // countSpan은 좋아요 카운트를 출력해주는 element
+          const countSpan = $(this).next();
+          const count = Number(countSpan.html());
+
+          $.ajax({
+            url: "/asyncSearchLike",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result == 0) {
+                btn.removeClass();
+                btn.addClass("fas fa-heart likeBtn");
+                btn.css("color", "red");
+                countSpan.html(count + 1);
+              } else if (result == 1) {
+                btn.removeClass();
+                btn.addClass("far fa-heart likeBtn");
+                btn.css("color", "black");
+                countSpan.html(count - 1);
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
+        });
 	</script>
 </body>
 </html>
