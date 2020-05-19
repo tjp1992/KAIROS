@@ -1,8 +1,9 @@
-package playlist.controller;
+package search.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,23 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import manageMusic.model.service.SessionPlayListService;
 import playlist.service.PlaylistService;
 import playlist.vo.Playlist;
-import playlist.vo.SessionPlaylist;
 import user.vo.User;
 
 /**
- * Servlet implementation class FrontAddOneServlet
+ * Servlet implementation class AsyncAddPlayNowServlet
  */
-@WebServlet(name = "FrontAddOne", urlPatterns = { "/frontAddOne" })
-public class FrontAddOneServlet extends HttpServlet {
+@WebServlet(name = "AsyncAddPlayNow", urlPatterns = { "/asyncAddPlayNow" })
+public class AsyncAddPlayNowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrontAddOneServlet() {
+    public AsyncAddPlayNowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,28 +35,24 @@ public class FrontAddOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		User u = (User)session.getAttribute("user");
-		String userId=u.getUserId();
 		
-		String songNo [] = request.getParameterValues("songNo");
-		String orderNo[] = request.getParameterValues("orderNo");
+		HttpSession session = request.getSession(false);
+		User u = (User) session.getAttribute("user");		
+		
+		String songNoStr = request.getParameter("songNo");
+		
+		StringTokenizer sT = new StringTokenizer(songNoStr,",");
 		
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		
-		for(int i=0; i<songNo.length; i++) {
+		while(sT.hasMoreTokens()) {
 			Playlist p = new Playlist();
-			
-			p.setSongNo(Integer.parseInt(songNo[i]));
-			p.setOrderNo(Integer.parseInt(orderNo[i]));
-			list.add(p);
+			p.setSongNo(Integer.parseInt(sT.nextToken()));
 		}
-		int result = new PlaylistService().frontAdd(list, userId);
 		
-		if(result>0) {
-			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-			session.setAttribute("playList", pList);
-		}
+		// 요기 수정
+		int result = new PlaylistService().frontAdd(list, u.getUserId());
+		
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		out.flush();

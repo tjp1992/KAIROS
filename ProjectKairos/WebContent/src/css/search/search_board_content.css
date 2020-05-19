@@ -12,7 +12,7 @@ table tr:first-of-type {
 
 .result_subject,
 .result {
-  height: 45px;
+  min-height: 45px;
 }
 
 tr {

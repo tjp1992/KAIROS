@@ -143,6 +143,7 @@ prefix="c"%>
             </form>
           </div>
           <div>
+            <button type="button" id="chkPlayNow">선택 재생</button>
             <button type="button" id="addChkPlaylist">플레이리스트 추가</button>
             <select name="pageViewNum" id="pageViewNum">
               <option value="25">한 페이지 출력 수</option>
@@ -385,14 +386,93 @@ prefix="c"%>
     </c:if>
     <c:if test="${not empty sessionScope.user }">
       <script>
+        // 플레이 나우
+        $("#chkPlayNow").click(function () {
+          let songNo = "";
+          const chks = $(".chkBox:checked");
+
+          for (let i = 0; i < chks.length; i++) {
+            songNo += chks[i].value;
+            if (i != chks.length - 1) {
+              songNo += ",";
+            }
+          }
+
+          $.ajax({
+            url: "/asyncAddPlayNow",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                alert(chks.length + "곡을 추가 완료");
+              } else {
+                alert("추가를 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 연결에 실패하엿습니다.");
+            },
+          });
+        });
+
+        // 선택곡 추가
+
+        $("#addChkPlaylist").click(function () {
+          let songNo = "";
+          const chks = $(".chkBox:checked");
+
+          for (let i = 0; i < chks.length; i++) {
+            songNo += chks[i].value;
+            if (i != chks.length - 1) {
+              songNo += ",";
+            }
+          }
+
+          $.ajax({
+            url: "/asyncAddPlayList",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                alert(chks.length + "곡을 추가 완료");
+              } else {
+                alert("추가를 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 연결에 실패하엿습니다.");
+            },
+          });
+        });
+
+        // 한곡 플레이
         $(".playBtn").click(function () {
           const songNo = $(this).attr("songno");
+
+          $.ajax({
+            url: "/asyncAddPlayFirst",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                location.href = "";
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
         });
 
         $(".addBtn").click(function () {
           const songNo = $(this).attr("songno");
 
-          //
+          // 노래제목 가져오는 시블링
           const songName = $(this).parent().next().html();
 
           $.ajax({
@@ -414,8 +494,12 @@ prefix="c"%>
         });
 
         $(".likeBtn").click(function () {
+          // click된 element가 i 태그가 아니면 수정필요
           const btn = $(this);
+
           const songNo = $(this).attr("songno");
+
+          // countSpan은 좋아요 카운트를 출력해주는 element
           const countSpan = $(this).next();
           const count = Number(countSpan.html());
 
