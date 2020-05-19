@@ -89,7 +89,10 @@ public class SearchSongServlet extends HttpServlet {
 		
 		SearchPageData pd = new SearchSongService().searchSong(req);
 		
-		
+		request.setAttribute("list", pd.getList());
+		request.setAttribute("pageNavi", pd.getPageNavi());
+		request.setAttribute("totalCount", pd.getTotalCount());
+		request.setAttribute("req", req);
 		request.getRequestDispatcher("/WEB-INF/views/search/search.jsp").forward(request, response);
 	}
 
