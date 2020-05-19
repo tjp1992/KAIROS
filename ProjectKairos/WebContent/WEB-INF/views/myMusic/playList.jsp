@@ -27,27 +27,34 @@
 			플레이리스트<span class="likelistname"><a href="/likeList">좋아요리스트</a></span>
 		</div>
 		<div class="psearch">
-			<form action="/psearchKeyword">
+			<form action="/psearchKeyword" >
 				<button class="psearchBtn" type="submit">
 					<img src="/src/imgs/icons/search.png">
 				</button>
-				<input type="text" name="keyword" placeholder="검색">
+				<input type="text" id="keyword" name="keyword" placeholder="검색" value="${keyword }">
 			</form>
 		</div>
+		<form id="plEditFrm">
+			<input type="hidden" name="plEdit">
+		</form>
 		<form id="form_pl" method="post">
 			<div class="tototo">
 				<table>
 					<tr class="pllll">
 						<th width="5%"><input class="allchk" type="checkbox"></th>
-						<td width="65%"><button type="button" id="listen_btn">듣기</button>
+						<td width="65%">
+							<button type="button" id="listen_btn">듣기</button>
 							<button type="button" id="delete_btn">삭제</button>
-							<button type="button" id="like_btn">좋아요 ♥</button></td>
+							</td>
 						<th width="30%">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="button" id="pleditBtn">순서변경</button>
+						
+							<button type="button" onclick="plEdit();">순서변경</button>
 						</th>
 					</tr>
 				</table>
+				
 			</div>
+			
 			<div class="toto">
 				<table>
 					<tr>
@@ -63,8 +70,11 @@
 			<div class="table">
 				<table>
 					<c:forEach items="${list }" var="p">
-						<tr class="pltr1" songNo="${p.songNo }">
-							<th width="5%"><input class="plchk" type="checkbox" name="songNo" value=${p.songNo }></th>
+						<tr class="pltr1" songNo="${p.songNo }" filepath="${p.filepath }" liked="${p.liked }">
+							<th width="5%">
+							<input class="plchk" type="checkbox" name="songNo" value=${p.songNo }>
+							<input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />							
+							</th>
 							<th width="5%" class="plsongNo">${p.orderNo }</th>
 							<td width="60%">
 								<div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
@@ -92,21 +102,64 @@
 	</div>
 	</section>
 	<script>
+		function plEdit(){
+			var url="/plEdit";
+			var title="plEdit";
+			var status ="left=300px, top=50px, width=700px, height=500px, menubar=no,status=no,scroll=yes";
+			var popup = window.open("",title,status);
+			
+			$("#plEditFrm").attr("action",url);
+			$("#plEditFrm").attr("method","post");
+			$("#plEditFrm").attr("target",title);
+			$("#plEditFrm").submit();
+		}
+	
 		$(function() {
-			$("#delete_btn").click(function(){
-				$("#form_pl").attr("action","/dPlist");
+			$("#listen_btn").click(function(){
+				if($(".plchk:checked").length>0){
+					$("#form_pl").attr("action","/frontAdd");
+					$("#form_pl").submit();
+				}else{
+					alert("재생 할 곡을 선택해주세요!");
+					return false;
+				}
+			});
+			$("#pleditBtn").click(function(){
+				$("#form_pl").attr("action","/plEdit");
 				$("#form_pl").submit();
+			});
+			
+			$(".plchk").change(function(){
+			      if ($(this).prop("checked") == true) {
+			        $(this).next().prop("checked", true);
+			      } else {
+			        $(this).next().prop("checked", false);
+			      }
+			});
+			
+			$("#delete_btn").click(function(){
+				if($(".plchk:checked").length>0){
+					$("#form_pl").attr("action","/dPlist");				
+					$("#form_pl").submit();
+				}else{
+					alert("삭제할 곡을 선택해주세요!");
+					return false;
+				}
+				
 			});
 			
 			$(".allchk").click(function() {
 				var arr = $(".plchk");
+				var arr2 = $(".ordChk");
 				if ($(this).prop("checked") == true) {
 					for (var i = 0; i < arr.length; i++) {
 						arr.eq(i).prop("checked", true);
+						arr2.eq(i).prop("checked", true);
 					}
 				} else {
 					for (var i = 0; i < arr.length; i++) {
 						arr.eq(i).prop("checked", false);
+						arr2.eq(i).prop("checked", false);
 					}
 				}
 			});
@@ -117,6 +170,45 @@
 				} else {
 					$(".allchk").prop("checked", false);
 				}
+			});
+			$(".playimg").children().click(function(){
+				var songNo = $(this).parent().parent().attr("songNo");
+				var orderNo = $(this).parent().parent().children().eq(1).html();
+				$.ajax({
+					url :"/frontAddOne",
+					type:"POST",
+					data:{
+						songNo:songNo,orderNo:orderNo
+					},
+					success:function(data){
+						var result = Number(data);
+						if(result>0){
+							location.href="/playList";
+						}
+					}
+				});
+			});
+			$(".deleteimg").children().click(function(){
+				var songNo = $(this).parent().parent().attr("songNo");
+				var orderNo= $(this).parent().parent().children().eq(1).html();
+				var icon = $(this);
+				$.ajax({
+					url : "/deletePlist",
+					type: "POST",
+					data: {
+						songNo:songNo,orderNo:orderNo
+					},
+					success:function(data){
+						var result = Number(data);
+						if(result>0){
+							icon.parent().parent().remove();
+							alert("삭제성공");
+							location.href="/playList";
+						}
+						
+							
+						}
+				});
 			});
 
 			$(".heartimg").children().click(function() {
@@ -154,9 +246,7 @@
 			}, function() {
 				$(this).css("background-color", "white");
 			});
-			$("#pleditBtn").click(function() {
-				location.href = "/pleditPage";
-			});
+			
 		});
 	</script>
 

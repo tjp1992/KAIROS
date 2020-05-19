@@ -22,12 +22,15 @@ pageEncoding="UTF-8"%>
     <section>
         <div class="likelistoutline">
             <div class="llistname">좋아요리스트<span class="plistname"><a href="/playList">플레이리스트</a></span></div>
-           
+           	<form id="form_ll" method="post">
             <div class="tototo">
                 <table>
                     <tr class="llll">
                         <th width="5%"><input class="allchk" type="checkbox"></th>
-                        <td width="95%"><button>듣기</button><button>담기</button><button>좋아요 취소</button></td>
+                        <td width="95%">
+                        	<button type="button" id="listen_btn">듣기</button>
+                        	<button type="button" id="up_btn">담기</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -47,7 +50,10 @@ pageEncoding="UTF-8"%>
                 <table>
                 	<c:forEach items="${list }" var="p">
                     <tr class="lltr1" songNo="${p.songNo }">
-                        <th width="5%"><input class="llchk" type="checkbox"></th>
+                        <th width="5%">
+                        	<input class="llchk" type="checkbox" name="songNo" value="${p.songNo }">
+                        	<input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />
+                        </th>
                         <th width="5%" class="plsongNo">${p.orderNo }</th>
                         <td width="60%">
                             <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
@@ -55,27 +61,57 @@ pageEncoding="UTF-8"%>
                         </td>
                         <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
                         <th width="10%" class="plusimg"><i class="iconplus fas fa-plus"></i></th>
-                        
                         <th width="10%" class="heartimg"><i  class="iconheart fas fa-heart"></i></th>
-                       
-                        
                     </tr>
                     </c:forEach>
                 </table>
             </div>
+           </form> 
         </div>
     </section>
      <script>
         $(function(){
+           $("#listen_btn").click(function(){
+        	  
+        	  if($(".llchk:checked").length>0){
+        		  $("#form_ll").attr("action","/frontAdd");
+            	  $("#form_ll").submit();
+        	  }else{
+        		  alert("재생할 곡을 선택해 주세요!");
+        		  return false;
+        	  }
+        	 
+           });
+           $(".llchk").change(function(){
+			      if ($(this).prop("checked") == true) {
+			        $(this).next().prop("checked", true);
+			      } else {
+			        $(this).next().prop("checked", false);
+			      }
+		   });
+           $("#up_btn").click(function(){
+        	  if($(".llchk:checked").length>0){
+        		  $("#form_ll").attr("action","/uPlist");
+            	  $("#form_ll").submit();
+        	  }else{
+        		  alert("플레이리스트에 추가할 곡을 선택해 주세요!!");
+        		  return false;
+        	  }
+        	 
+           });
+          
            $(".allchk").click(function(){
               var arr = $(".llchk");
+              var arr2 = $(".ordChk");
               if($(this).prop("checked")==true){
                   for(var i=0; i<arr.length; i++){
                       arr.eq(i).prop("checked",true);
+                      arr2.eq(i).prop("checked",true);
                   }
               }else{
                   for(var i=0; i<arr.length; i++){
                       arr.eq(i).prop("checked",false);
+                      arr2.eq(i).prop("checked",false);
                   }
               }
            }); 
@@ -86,6 +122,36 @@ pageEncoding="UTF-8"%>
               }else{
                   $(".allchk").prop("checked",false);
               }
+           });
+           $(".playimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  var orderNo = $(this).parent().parent().children().eq(1).html();
+        	  $.ajax({
+        		 url:"/frontAddOne",
+        		 type:"POST",
+        		 data:{
+        			 songNo:songNo,orderNo:orderNo
+        		 },
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){}
+        			 location.href="/playList";
+        		 }
+        	  });
+           });
+           $(".plusimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  $.ajax({
+        		 url:"/addOnePlist",
+        		 type:"POST",
+        		 data:{songNo:songNo},
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){
+        				 alert("플레이리스트에 추가되었습니다.");
+        			 }
+        		 }
+        	  });
            });
             
            $(".heartimg").children().click(function(){
@@ -106,20 +172,23 @@ pageEncoding="UTF-8"%>
         				 break;
         			 case 1:
         				 icon.parent().parent().remove();
+        				 location.href="/likeList";
         				 break;
         			 }
         		 }
         		   
         	   })
-              if($(this).attr("class")=="iconheart fas fa-heart"){
-                  $(this).attr("class","iconheart far fa-heart");
-                  $(this).css("color","black");
-              }else{
-                  $(this).attr("class","iconheart fas fa-heart");
-                  $(this).css("color","red");
-              }
+        	   if($(this).attr("class")=="iconheart fas fa-heart"){
+                   $(this).attr("class","iconheart far fa-heart");
+                   $(this).css("color","black");
+               }else{
+                   $(this).attr("class","iconheart fas fa-heart");
+                   $(this).css("color","red");
+               }
            });
         });
+        
+        
     </script>
 
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->

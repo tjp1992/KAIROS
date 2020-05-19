@@ -105,7 +105,7 @@ public class UserDao {
 	public int insertUser(Connection conn, User u) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into web_user values (?,?,?,?,?,?,?,sysdate,'1')";
+		String query = "insert into web_user values (?,?,?,?,?,?,?,null,'0')";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, u.getUserId());

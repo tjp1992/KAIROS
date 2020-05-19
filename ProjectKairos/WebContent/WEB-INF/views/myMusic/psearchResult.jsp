@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -21,43 +22,88 @@ pageEncoding="UTF-8"%>
     <section>
         <div class="psearchoutline">
             <div class="psearch_wrapper">
-                <div class="psearchname">플레이리스트 내 검색결과
+                <div class="psearchname"><a id="plist">플레이리스트</a> 내 검색결과
                 </div>
                 <div class="plsearch">
                     <form action="/psearchKeyword">
-                        <input type="text" name="psearchkeyword">
-                        <button class="psearchBtn"><i class="iconsearch fas fa-search"></i></button>
-
+                        <input type="text" id="keyword" name="keyword" value="${keyword }">
+                        <button class="psearchBtn" type="submit"><i class="iconsearch fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
             <div class="toto">
                 <table>
                     <tr>
-                        <td width="70%">&nbsp;곡정보</td>
+                        <td width="80%">&nbsp;곡정보</td>
                         <th width="10%">듣기</th>
                         <th width="10%">삭제</th>
-                        <th width="10%">좋아요</th>
                     </tr>
                 </table>
             </div>
             <div class="table">
                 <table>
-                    <tr class="pltr1">
-                        <td width="70%">
-                            <div class="stitle_dhg">&nbsp;&nbsp;곡며여어어어어어어어어어어어엉</div>
-                            <div class="subtitle">&nbsp;&nbsp;&nbsp;가수명<span>&nbsp;&nbsp;|&nbsp;앨범명</span></div>
+                	<c:forEach items="${list }" var="p">
+                    <tr class="pltr1" songNo="${p.songNo }" orderNo="${p.orderNo }" filepath="${p.filepath }" liked="${p.liked }">
+                        <td width="80%">
+                            <div class="stitle_dhg">&nbsp;&nbsp;${p.songTitle }</div>
+                            <div class="subtitle">&nbsp;&nbsp;&nbsp;${p.songArtist }<span>&nbsp;&nbsp;|&nbsp;${p.albumName }</span></div>
                         </td>
                         <th width="10%" class="playimg"><i class="iconplay far fa-play-circle"></i></th>
                         <th width="10%" class="deleteimg"><i class="icondelete far fa-trash-alt"></i></th>
-                        <th width="10%" class="heartimg"><i class="iconheart far fa-heart"></i></th>
                     </tr>
+                    </c:forEach>
                 </table>
             </div>
         </div>
     </section>
     <script>
         $(function(){
+         
+           $("#plist").click(function(){
+        	   location.href="/playList";
+           });
+
+         
+           
+           $(".playimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  var orderNo = $(this).parent().parent().attr("orderNo");
+        	  $.ajax({
+        		 url:"/frontAddOne",
+        		 type:"POST",
+        		 data:{
+        			 songNo:songNo,orderNo:orderNo
+        		 },
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){
+        				 alert("재~생~중~");
+        				
+        			 }
+        			 
+        		 }
+        	  });
+           });
+           
+           $(".deleteimg").children().click(function(){
+        	  var songNo = $(this).parent().parent().attr("songNo");
+        	  var orderNo = $(this).parent().parent().attr("orderNo");
+        	  var icon = $(this);
+        	  $.ajax({
+        		 url:"/deletePlist",
+        		 type:"POST",
+        		 data:{
+        			 songNo:songNo,orderNo:orderNo
+        		 },
+        		 success:function(data){
+        			 var result = Number(data);
+        			 if(result>0){
+        				 icon.parent().parent().remove();
+        				 alert("삭제성공");
+        			 }
+        		 }
+        	  });
+           });
            $(".heartimg").children().click(function(){
               if($(this).attr("class")=="iconheart far fa-heart"){
                   $(this).attr("class","iconheart fas fa-hearticonheart fas fa-heart");

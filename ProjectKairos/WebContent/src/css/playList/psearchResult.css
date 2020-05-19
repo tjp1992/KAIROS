@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+.text-blue{
+	color:#31B5DB;
+}
 .psearchoutline {
     width: 80%;
     margin: 0 auto;
@@ -23,6 +25,7 @@
     width: 47%;
     border-bottom: 2px solid darkgray;
 }
+
 .plsearch input{
     width: 400px;
     height: 25px;

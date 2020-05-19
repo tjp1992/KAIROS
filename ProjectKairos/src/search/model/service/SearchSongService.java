@@ -62,12 +62,12 @@ public class SearchSongService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<SearchSong> list = new SearchSongDao().searchMyList(conn, userNick);
+//		ArrayList<SearchSong> list = new SearchSongDao().searchMyList(conn, userNick);
 		
 		
 		JDBCTemplate.close(conn);
 		
-		return list;
+		return null;
 	}
 	
 	
