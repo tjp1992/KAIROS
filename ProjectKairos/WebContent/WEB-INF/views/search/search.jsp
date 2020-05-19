@@ -371,21 +371,6 @@ prefix="c"%>
     </script>
     <c:if test="${not empty sessionScope.user }">
       <script>
-        $(".likeBtn").click(function () {
-          const songNo = $(this).attr("songno");
-          $.ajax({
-            url: "/checkLike",
-            data: {
-              songNo: songNo,
-            },
-            type: "post",
-            success: function () {},
-            error: function () {
-              console.log("서버 연결 실패");
-            },
-          });
-        });
-
         $("#addChkPlaylist").click(function () {
           $("#chkForm").submit();
         });
@@ -400,12 +385,42 @@ prefix="c"%>
     </c:if>
     <c:if test="${not empty sessionScope.user }">
       <script>
+        $(".playBtn").click(function () {
+          const songNo = $(this).attr("songno");
+        });
+
+        $(".addBtn").click(function () {
+          const songNo = $(this).attr("songno");
+
+          //
+          const songName = $(this).parent().next().html();
+
+          $.ajax({
+            url: "/addOnePlist",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                alert("[" + songName + "] 곡을 플레이리스트에 추가하였습니다.");
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
+        });
+
         $(".likeBtn").click(function () {
           const btn = $(this);
           const songNo = $(this).attr("songno");
+          const countSpan = $(this).next();
+          const count = Number(countSpan.html());
 
           $.ajax({
-            url: "asyncSearchLike",
+            url: "/asyncSearchLike",
             type: "POST",
             data: { songNo: songNo },
             success: function (data) {
@@ -413,9 +428,13 @@ prefix="c"%>
               if (result == 0) {
                 btn.removeClass();
                 btn.addClass("fas fa-heart likeBtn");
+                btn.css("color", "red");
+                countSpan.html(count + 1);
               } else if (result == 1) {
                 btn.removeClass();
                 btn.addClass("far fa-heart likeBtn");
+                btn.css("color", "black");
+                countSpan.html(count - 1);
               } else {
                 alert("서버 접속에 실패하였습니다.");
               }

@@ -38,16 +38,11 @@ public class AsyncSearchLikeServlet extends HttpServlet {
 		String userId = u.getUserId();
 		int songNo = Integer.parseInt(request.getParameter("songNo"));
 		
-		System.out.println(userId+", "+songNo);
-		
 		int result = new LikelistService().addOneLike(userId, songNo);
-		
-		System.out.println(result);
 		
 		PrintWriter out = response.getWriter();		
 		out.print(result);
-		out.flush();		
-		
+		out.flush();				
 	}
 
 	/**
