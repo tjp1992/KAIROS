@@ -6,9 +6,10 @@
 }
 
 .h2{
-   font-size : 30px;
+   font-size : 35px;
    margin-top: 30px;
    margin-bottom: 30px;
+   font-weight: bold;
 }
 
 .PHJup {
@@ -23,7 +24,15 @@
    margin-bottom: 30px;
    font-weight: bold;
 }
-
+#topName{
+	font-size : 18px;
+}
+#voucher{
+	font-size : 16px;
+}
+#onvoucher{
+	font-size : 16px;
+}
 .t1 {
    width: 500px;
    margin: 0 auto;
@@ -42,7 +51,10 @@ td>span{
 .move{
    cursor: pointer;
 }
-
+#vouA{
+	color : black;
+	font-weight: bold;
+}
 .div1 {
    width: 50%;
    margin: 0 auto;
