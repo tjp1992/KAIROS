@@ -144,4 +144,42 @@ public class InquiryDao {
 		return ia;
 	}
 
+	public int modifyInquiryView(Connection conn, Inquiry inq) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update inquiry set inq_title=?,inq_content=? where inq_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, inq.getInqTitle());
+			pstmt.setString(2, inq.getInqContent());
+			pstmt.setInt(3, inq.getInqNo());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int inquiryDelete(Connection conn, int inqNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from inquiry where inq_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, inqNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return result;
+	}
+
 }

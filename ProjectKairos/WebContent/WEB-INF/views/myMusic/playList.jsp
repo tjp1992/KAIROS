@@ -105,7 +105,7 @@
 		function plEdit(){
 			var url="/plEdit";
 			var title="plEdit";
-			var status ="left=500px, top=100px, width=800px, height=500px,menubar=no,status=no,scroll=yes";
+			var status ="left=300px, top=50px, width=700px, height=500px, menubar=no,status=no,scroll=yes";
 			var popup = window.open("",title,status);
 			
 			$("#plEditFrm").attr("action",url);
