@@ -40,7 +40,10 @@
 	      $("#save").click(function(){
 	          oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 	          $("#frm").submit();
-	      });    
+	      });
+	      $("#back").click(function(){
+		    	 location.href="/mypageFrm"; 
+		 });
 	});
 	</script>
 	<style>
@@ -71,7 +74,7 @@
 	          <tr style="text-align : center;">
 	          	<td colspan="2">
 	          		<button type="submit" id="save">등록</button>
-	          		<button type="reset">취소</button>
+	          		<button type="button" id="back">취소</button>
 	          	</td>
 	          </tr>
          </table>

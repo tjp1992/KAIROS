@@ -30,7 +30,10 @@ public class ModifyInquiryViewFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int inqNo = Integer.parseInt(request.getParameter("inqNo"));
 		String inqTitle = request.getParameter("inqTitle");
-		String inqContent = request.getParameter("inqContent");
+		String inqContent = request.getParameter("inqCon");
+		System.out.println(inqNo);
+		System.out.println(inqTitle);
+		System.out.println(inqContent);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/inquiry/modifyInquiryView.jsp");
 		request.setAttribute("inqNo", inqNo);
 		request.setAttribute("title", inqTitle);
