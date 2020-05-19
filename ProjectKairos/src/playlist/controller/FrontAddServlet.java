@@ -53,7 +53,7 @@ public class FrontAddServlet extends HttpServlet {
 			p.setOrderNo(Integer.parseInt(orderNo[i]));
 			p.setSongNo(Integer.parseInt(songNo[i]));
 			
-			System.out.println("songNO : "+p.getSongNo()+", orderNo : "+p.getOrderNo());
+			
 			
 			list.add(p);
 		}

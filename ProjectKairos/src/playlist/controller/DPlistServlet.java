@@ -65,8 +65,8 @@ public class DPlistServlet extends HttpServlet {
 			result = new PlaylistService().sortPlaylist(userId);
 			
 			if(result>0) {
-				ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-				session.setAttribute("playList", pList);
+//				ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//				session.setAttribute("playList", pList);
 				request.getRequestDispatcher("/playList").forward(request, response);				
 			} else {
 				request.setAttribute("msg", "삭제실패");

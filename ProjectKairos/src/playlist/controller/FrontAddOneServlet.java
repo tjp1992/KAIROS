@@ -54,10 +54,10 @@ public class FrontAddOneServlet extends HttpServlet {
 		}
 		int result = new PlaylistService().frontAdd(list, userId);
 		
-		if(result>0) {
-			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-			session.setAttribute("playList", pList);
-		}
+//		if(result>0) {
+//			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//			session.setAttribute("playList", pList);
+//		}
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		out.flush();

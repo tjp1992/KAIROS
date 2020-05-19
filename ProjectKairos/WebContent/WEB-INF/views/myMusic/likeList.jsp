@@ -72,8 +72,15 @@ pageEncoding="UTF-8"%>
      <script>
         $(function(){
            $("#listen_btn").click(function(){
-        	  $("#form_ll").attr("action","/frontAdd");
-        	  $("#form_ll").submit();
+        	  
+        	  if($(".llchk:checked").length>0){
+        		  $("#form_ll").attr("action","/frontAdd");
+            	  $("#form_ll").submit();
+        	  }else{
+        		  alert("재생할 곡을 선택해 주세요!");
+        		  return false;
+        	  }
+        	 
            });
            $(".llchk").change(function(){
 			      if ($(this).prop("checked") == true) {
@@ -83,13 +90,16 @@ pageEncoding="UTF-8"%>
 			      }
 		   });
            $("#up_btn").click(function(){
-        	  $("#form_ll").attr("action","/uPlist");
-        	  $("#form_ll").submit();
+        	  if($(".llchk:checked").length>0){
+        		  $("#form_ll").attr("action","/uPlist");
+            	  $("#form_ll").submit();
+        	  }else{
+        		  alert("플레이리스트에 추가할 곡을 선택해 주세요!!");
+        		  return false;
+        	  }
+        	 
            });
-           $("#dellike_btn").click(function(){
-        	  $("#form_ll").attr("action","/dLlist");
-        	  $("#form_ll").submit();
-           });
+          
            $(".allchk").click(function(){
               var arr = $(".llchk");
               var arr2 = $(".ordChk");

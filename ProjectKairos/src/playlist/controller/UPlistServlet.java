@@ -53,8 +53,8 @@ public class UPlistServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
 			
-			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-			session.setAttribute("playList", pList);
+//			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//			session.setAttribute("playList", pList);
 			request.setAttribute("msg", "플레이리스트 추가 성공");
 			request.setAttribute("loc", "/likeList");
 			

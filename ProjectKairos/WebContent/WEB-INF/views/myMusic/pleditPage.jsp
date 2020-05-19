@@ -101,7 +101,7 @@ pageEncoding="UTF-8"%>
                 }
             });
 			$(".cancel").click(function(){
-				location.href="/playList";
+				self.close();
 			});
             
         });
