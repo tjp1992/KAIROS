@@ -685,10 +685,19 @@ table{
 		// audiotrack
 		var audioTrack = 0;
 		var songNo = 0;
+		$(function(){
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+					$("#love").attr('checked',false);
+				}else{
+					$("#love").attr('checked',true);
+				}
+		});
 		// play previous music
 		function togglePlayPause() {
 			var audio = document.getElementById('audio');
 			var playpause = document.getElementById("play");
+			var song = document.getElementsByClassName('song');
+			audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
 				if (audio.paused) {
 					playpause.title = "Pause";
 					audio.play();
@@ -696,6 +705,7 @@ table{
 					playpause.title = "Play";
 					audio.pause();
 				}
+				$('.song').eq(audioTrack).css('color','rgb(255, 86, 76)');
 			console.log(audioTrack);
 		}
 		$(function(){
@@ -711,6 +721,11 @@ table{
 				$('.info').find('h3').html($(this).find('#artist').val());
 				$('.info').find('h4').html($(this).find('h6').html())
 				$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+				if($(".song").eq(audioTrack).find('#liked').val()==0){
+					$("#love").attr('checked',false);
+				}else{
+					$("#love").attr('checked',true);
+				}
 				audio.play();
 			});
 		});
@@ -740,6 +755,11 @@ table{
 					$(this).find('h6').css('color','rgb(240, 240, 240)');
 				});
 			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+				$("#love").attr('checked',false);
+			}else{
+				$("#love").attr('checked',true);
+			}
 		}
 		// autoplay next music
 		function nextMusic(){
@@ -761,9 +781,18 @@ table{
 					$(this).find('h6').css('color','rgb(240, 240, 240)');
 				});
 			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			if($(".song").eq(audioTrack).find('#liked')==1){
-				$()
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+				$("#love").attr('checked',false);
+			}else{
+				$("#love").attr('checked',true);
 			}
+		}
+		function audioLength(){
+			$('.songLength').each(function(){
+				$(this).on('canplay',function(){
+					console.log(this.duration);
+				});
+			});
 		}
 	</script>
 	<div class="screen">
@@ -834,8 +863,11 @@ table{
 	
 					</c:if>
 					<td class="length" width="100px"><h5>
-							
-							<h5></td>
+						<audio onload="audioLength(e);" class="songLength" preload="auto">
+							<source src="/src/songs/${p.filepath}.mp3">
+						</audio>
+
+							<h5 id="length"></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -849,21 +881,21 @@ table{
 			<h3>${playList[0].songArtist}</h3>
 		</div>
 		<audio id="audio" controls onended="nextMusic()">
-			<source src="/src/songs/1.mp3" type="audio/mpeg">
+
 		</audio>
 		<table class="player">
 			<td><input type="checkbox" id="backward" onclick="prevMusic();"/><label
 				class="backward" for="backward"></label></td>
 
 			<td><input type="checkbox" id="play" title="Play"
-				onclick="togglePlayPause();" /><label class="play" for="play"></label></td>
+				onclick="togglePlayPause();"/><label class="play" for="play"></label></td>
 
 			<td><input type="checkbox" id="forward" onclick="nextMusic();"/><label
 				class="forward" for="forward"></label></td>
 		</table>
 		<table class="footer">
 			<td>
-				<input type="checkbox" id="love" checked/><label
+				<input type="checkbox" id="love"/><label
 				class="love" for="love"></label>
 			</td>
 			<td>
