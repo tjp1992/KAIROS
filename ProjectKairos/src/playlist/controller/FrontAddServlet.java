@@ -45,30 +45,33 @@ public class FrontAddServlet extends HttpServlet {
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		
 		String songNo[] = request.getParameterValues("songNo");
-		String orderNo[]=request.getParameterValues("orderNo");
+		String orderNo[] = request.getParameterValues("orderNo");
 		
 		for(int i=0; i<songNo.length; i++) {
 			Playlist p = new Playlist();
 			
 			p.setOrderNo(Integer.parseInt(orderNo[i]));
 			p.setSongNo(Integer.parseInt(songNo[i]));
+			
+			System.out.println("songNO : "+p.getSongNo()+", orderNo : "+p.getOrderNo());
+			
 			list.add(p);
 		}
 		
-		int result = new PlaylistService().frontAdd(list,userId);
-		
-		
-		if(result>0) {
-			RequestDispatcher rd= request.getRequestDispatcher("/playList");
-			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-			session.setAttribute("playList", pList);
-			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("msg", "재생에 실패했습니다");
-			request.setAttribute("loc", "/playList");
-			rd.forward(request, response);
-		}
+//		int result = new PlaylistService().frontAdd(list,userId);
+//		
+//		
+//		if(result>0) {
+//			RequestDispatcher rd= request.getRequestDispatcher("/playList");
+//			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
+//			session.setAttribute("playList", pList);
+//			rd.forward(request, response);
+//		}else {
+//			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+//			request.setAttribute("msg", "재생에 실패했습니다");
+//			request.setAttribute("loc", "/playList");
+//			rd.forward(request, response);
+//		}
 		
 		
 		
