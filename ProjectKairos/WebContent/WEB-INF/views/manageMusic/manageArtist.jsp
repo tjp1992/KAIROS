@@ -40,13 +40,21 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="btn_wrapper">
             <button type="submit" class="btn btn-primary">작성 완료</button>
-            <button type="button" class="btn btn-secondary">취소</button>
+            <button type="button" id="cancelBtn" class="btn btn-secondary">
+              취소
+            </button>
           </div>
         </div>
       </form>
     </section>
-
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
+
+    <script>
+      $("#cancelBtn").click(function () {
+        location.href = "/manageMusicFrm";
+      });
+    </script>
     <script>
       $("#search_artist").click(function () {
         const url = "/searchArtist";

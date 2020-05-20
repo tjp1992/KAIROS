@@ -232,5 +232,24 @@ public class UserDao {
 		}
 		return result;
 	}
+
+	public int updatePurchaseLog(Connection conn, String personalId, String userId) {
+		PreparedStatement pstmt =null;
+		int result = 0;
+		String query = "insert into purchase_log values(?, 1, ?,sysdate,sysdate,sysdate+30)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, personalId);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }

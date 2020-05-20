@@ -69,6 +69,7 @@ pageEncoding="UTF-8"%>
            </form> 
         </div>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
      <script>
         $(function(){
            $("#listen_btn").click(function(){
@@ -134,8 +135,16 @@ pageEncoding="UTF-8"%>
         		 },
         		 success:function(data){
         			 var result = Number(data);
-        			 if(result>0){}
-        			 location.href="/playList";
+        			 if(result>0){
+                     
+                        window.open(
+                        "/player",
+                        "",
+                        "width=366px , height=650px , resizable=false"
+                        );
+
+        		    	location.href="/playList";
+                     }
         		 }
         	  });
            });

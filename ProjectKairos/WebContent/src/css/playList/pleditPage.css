@@ -1,111 +1,111 @@
 @charset "UTF-8";
 
 .pleditoutline {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .pleditname {
-    padding: 30px;
-    padding-left: 0;
-    font-size: 28px;
-    font-weight: 700;
-    border: 1px solid white;
+  padding: 30px;
+  padding-left: 0;
+  font-size: 28px;
+  font-weight: 700;
+  border: 1px solid white;
 
-    padding-bottom: 25px;
+  padding-bottom: 25px;
 }
 
 .tototo {
-    width: 100%;
-    margin: 0 auto;
-    height: 50px;
-    background-color: #C5D5DD;
-    margin-bottom: 20px;
+  width: 100%;
+  margin: 0 auto;
+  height: 50px;
+  background-color: #c5d5dd;
+  margin-bottom: 20px;
 }
 
 .tototo > button {
-    margin-left: 10px;
-    margin-top: 12.5px;
-    background-color: #C5D5DD;
-    border: none;
+  margin-left: 10px;
+  margin-top: 12.5px;
+  background-color: #c5d5dd;
+  border: none;
 }
 
 .tototo > select {
-    width: 150px;
-    height: 25px;
-/*    margin-left: 380px;*/
-    float:right;
-    margin-right: 10px;
-    margin-top: 12.5px;
-    margin-bottom: 10px;
-
+  width: 150px;
+  height: 25px;
+  /*    margin-left: 380px;*/
+  float: right;
+  margin-right: 10px;
+  margin-top: 12.5px;
+  margin-bottom: 10px;
 }
 
 .table {
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 20px;
-
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .table > table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .pltr1 > th {
-
-    border-top: 2px solid #dbdbdb;
-    border-bottom: 2px solid #dbdbdb;
-    border-spacing: 0;
+  border-top: 2px solid #dbdbdb;
+  border-bottom: 2px solid #dbdbdb;
+  border-spacing: 0;
 }
 
 .pltr1 > td {
-    height: 50px;
-    border-top: 2px solid #dbdbdb;
-    border-bottom: 2px solid #dbdbdb;
-    border-spacing: 0;
+  height: 50px;
+  border-top: 2px solid #dbdbdb;
+  border-bottom: 2px solid #dbdbdb;
+  border-spacing: 0;
 }
 
 .stitle_dhg {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .subtitle {
-    font-size: 13px;
-    color: darkgray;
+  font-size: 13px;
+  color: darkgray;
 }
 
 .plsongNo {
-    font-size: 27px;
-    color: darkgray;
+  font-size: 27px;
+  color: darkgray;
 }
 
-input[type=checkbox] {
-    width: 20px;
-    height: 20px;
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
 }
 
 .iconup {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .icondown {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .sub {
-
-    text-align: center;
+  text-align: center;
 }
 
 .sub > input {
-    width: 80px;
-    height: 35px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 5px;
-    border: none;
-    background-color: #C5D5DD;
+  width: 80px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  border: none;
+  background-color: #c5d5dd;
+}
 
+i:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }

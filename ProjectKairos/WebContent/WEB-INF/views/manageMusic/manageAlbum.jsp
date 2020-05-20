@@ -88,7 +88,7 @@ prefix="c" %>
               <img src="" alt="" />
             </div>
           </div>
-          <div class="btn_wrapper" style="display: none;">
+          <div class="btn_wrapper">
             <button type="submit" class="btn btn-primary">수정 완료</button>
             <button type="button" id="cancelBtn" class="btn btn-secondary">
               취소
@@ -97,7 +97,7 @@ prefix="c" %>
         </form>
       </div>
     </section>
-
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script src="/src/js/manageMusic/deleteSongBtn.js"></script>
     <script src="/src/js/manageMusic/inputArtist.js"></script>

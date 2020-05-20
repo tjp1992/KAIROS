@@ -145,7 +145,7 @@ label.main:hover:before {
 
 .coverImage {
 	background:
-		url('/src/imgs/albumImg/아이유-Love poem.jpg')
+		url('/src/imgs/albumImg/songIcon.jpg')
 		no-repeat;
 	background-size: cover;
 	width: 366px;
@@ -691,23 +691,29 @@ table{
 				}else{
 					$("#love").attr('checked',true);
 				}
+			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
 		});
+		
+		
 		// play previous music
 		function togglePlayPause() {
+			audioTrack--;			
 			var audio = document.getElementById('audio');
 			var playpause = document.getElementById("play");
 			var song = document.getElementsByClassName('song');
 			audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
-				if (audio.paused) {
-					playpause.title = "Pause";
-					audio.play();
-				} else {
-					playpause.title = "Play";
-					audio.pause();
-				}
-				$('.song').eq(audioTrack).css('color','rgb(255, 86, 76)');
-			console.log(audioTrack);
+			console.log(playpause.title);
+			if (playpause.title == "Play") {
+				playpause.title = "Pause";
+				audio.play();
+			} else {
+				playpause.title = "Play";
+				audio.pause();
+			}
+			$('.song').eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
 		}
+
+		// 플레이리스트에서 음원 선택시
 		$(function(){
 			$('.song').click(function(){
 				var audio = $('#audio')[0];
@@ -726,16 +732,18 @@ table{
 				}else{
 					$("#love").attr('checked',true);
 				}
+				$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
 				audio.play();
 			});
 		});
 
-
+		// 이전 버튼
 		function prevMusic(){
 			if(audioTrack == 0){
 				return;
 			}
-			var trackNo = document.getElementById(--audioTrack);
+			audioTrack--;
+			var trackNo = document.getElementById(audioTrack);
 			var file = trackNo.value;
 			var songTitle = document.getElementsByClassName('title');
 			var songArtist = document.getElementsByClassName('songArtist');
@@ -759,11 +767,15 @@ table{
 				$("#love").attr('checked',false);
 			}else{
 				$("#love").attr('checked',true);
+				console.log('nope');
 			}
+			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+			
 		}
-		// autoplay next music
+		// next music
 		function nextMusic(){
-			var trackNo = document.getElementById(++audioTrack);
+			audioTrack++;
+			var trackNo = document.getElementById(audioTrack);
 			var songTitle = document.getElementsByClassName('title');
 			var songArtist = document.getElementsByClassName('songArtist');
 			var file = trackNo.value;
@@ -784,8 +796,10 @@ table{
 			if($(".song").eq(audioTrack).find('#liked').val()==0){
 				$("#love").attr('checked',false);
 			}else{
+				console.log('nope');
 				$("#love").attr('checked',true);
 			}
+			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
 		}
 		function audioLength(){
 			$('.songLength').each(function(){
@@ -806,7 +820,7 @@ table{
 			<table class="list">
 				<c:forEach items="${playList}" var='p'>
 					<tr class="song">
-						<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath}>
+						<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath} songNo = ${p.songNo}>
 						<input type="hidden" id='artist' class="songArtist" value=${p.songArtist}>
 						<input type="hidden" id='albumpath' class='albumpath' value=${p.albumPath}>
 						<input type="hidden" id='liked' class="liked" value=${p.liked}>
@@ -897,8 +911,8 @@ table{
 		</table>
 		<table class="footer">
 			<td>
-				<input type="checkbox" id="love"/><label
-				class="love likeBtn" for="love"></label>
+				<input type="checkbox" id="love" songno = ""/><label
+				class="love likeBtn" for="love" ></label>
 			</td>
 			<td>
 				<input type="checkbox" id="shuffle" /><label
@@ -910,7 +924,7 @@ table{
 			</td>
 			<td>
 				<input type="checkbox" id="options" /><label
-				class="options" for="options" songNo=""></label>
+				class="options" for="options"></label>
 			</td>
 		</table>
 		<div class="current">
@@ -919,11 +933,11 @@ table{
 	</div>
 </body>
 <script>
-	$(".likeBtn").click(function () {
+	$("#love").click(function () {
           // click된 element가 i 태그가 아니면 수정필요
           const btn = $(this);
 
-          const songNo = $(this).attr("songNo");
+          const songNo = $(this).attr("songno");
 
           // countSpan은 좋아요 카운트를 출력해주는 element
 
@@ -934,15 +948,9 @@ table{
             success: function (data) {
               const result = Number(data);
               if (result == 0) {
-                btn.removeClass();
-                btn.addClass("fas fa-heart likeBtn");
-                btn.css("color", "red");
-                countSpan.html(count + 1);
+            	  $("#love").attr('checked',true);
               } else if (result == 1) {
-                btn.removeClass();
-                btn.addClass("far fa-heart likeBtn");
-                btn.css("color", "black");
-                countSpan.html(count - 1);
+            	  $('#love').attr('checked',false);
               } else {
                 alert("서버 접속에 실패하였습니다.");
               }

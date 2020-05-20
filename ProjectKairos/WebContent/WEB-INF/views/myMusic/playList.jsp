@@ -70,7 +70,7 @@
 			<div class="table">
 				<table>
 					<c:forEach items="${list }" var="p">
-						<tr class="pltr1" songNo="${p.songNo }" filepath="${p.filepath }" liked="${p.liked }">
+						<tr class="pltr1" songNo="${p.songNo }" filepath="${p.filepath }" liked="${p.liked }" userId="${userId}">
 							<th width="5%">
 							<input class="plchk" type="checkbox" name="songNo" value=${p.songNo }>
 							<input style="display:none;" type="checkbox" name="orderNo" value=${p.orderNo } class="ordChk" />							
@@ -101,6 +101,7 @@
 		</form>
 	</div>
 	</section>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	<script>
 		function plEdit(){
 			var url="/plEdit";
@@ -212,12 +213,11 @@
 			});
 			$(".playimg").children().click(function(){
 				var songNo = $(this).parent().parent().attr("songNo");
-				var orderNo = $(this).parent().parent().children().eq(1).html();
 				$.ajax({
 					url :"/frontAddOne",
 					type:"POST",
 					data:{
-						songNo:songNo,orderNo:orderNo
+						songNo:songNo
 					},
 					success:function(data){
 						var result = Number(data);
@@ -288,9 +288,6 @@
 			
 		});
 	</script>
-
-	<!-- ↓↓ JS 파일 추가시 이곳에 ↓↓
-    <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
 </body>
 
 </html>

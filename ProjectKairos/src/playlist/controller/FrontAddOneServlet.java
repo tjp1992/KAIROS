@@ -41,7 +41,6 @@ public class FrontAddOneServlet extends HttpServlet {
 		String userId=u.getUserId();
 		
 		String songNo [] = request.getParameterValues("songNo");
-		String orderNo[] = request.getParameterValues("orderNo");
 		
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		
@@ -49,15 +48,10 @@ public class FrontAddOneServlet extends HttpServlet {
 			Playlist p = new Playlist();
 			
 			p.setSongNo(Integer.parseInt(songNo[i]));
-			p.setOrderNo(Integer.parseInt(orderNo[i]));
 			list.add(p);
 		}
 		int result = new PlaylistService().frontAdd(list, userId);
 		
-//		if(result>0) {
-//			ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(userId);
-//			session.setAttribute("playList", pList);
-//		}
 		PrintWriter out = response.getWriter();
 		out.print(result);
 		out.flush();

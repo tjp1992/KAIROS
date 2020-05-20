@@ -81,6 +81,7 @@
           <div style="text-align: right">
             <button type="button" class="btn btn-default" id="back">돌아가기</button>
          </div>
-    </section>
+	</section>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

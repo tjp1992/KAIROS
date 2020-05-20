@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 
 public class SearchSongDao {
 	

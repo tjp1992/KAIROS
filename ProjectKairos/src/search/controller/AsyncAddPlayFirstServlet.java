@@ -3,6 +3,7 @@ package search.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,13 +41,15 @@ public class AsyncAddPlayFirstServlet extends HttpServlet {
 		
 		String userId = u.getUserId();
 		
-		String songNo[] = request.getParameterValues("songNo");
+		String songNoStr = request.getParameter("songNo");
+		
+		StringTokenizer sT = new StringTokenizer(songNoStr,",");
 		
 		ArrayList<Playlist> list = new ArrayList<Playlist>(); 
 		
-		for(String str : songNo) {
+		while(sT.hasMoreTokens()) {
 			Playlist p = new Playlist();
-			p.setSongNo(Integer.parseInt(str));
+			p.setSongNo(Integer.parseInt(sT.nextToken()));
 			
 			list.add(p);
 		}

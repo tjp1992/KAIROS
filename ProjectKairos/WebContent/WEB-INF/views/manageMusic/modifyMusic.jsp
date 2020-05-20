@@ -86,6 +86,7 @@ prefix="c" %>
         </form>
       </div>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- 관리자 전용 script -->
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script>

@@ -36,8 +36,7 @@ public class AsyncDeleteAlbumServlet extends HttpServlet {
 		String root = request.getSession().getServletContext().getRealPath("/");
 		
 		int result = new ManageMusicService().deleteAlbum(root, albumNo);
-		
-		
+				
 		PrintWriter out =  response.getWriter();
 		
 		out.print(result);

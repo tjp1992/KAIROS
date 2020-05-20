@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import manageMusic.model.service.ManageMusicService;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 import song.vo.Song;
 
 /**

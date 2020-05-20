@@ -55,7 +55,7 @@ public class PleditPageServlet extends HttpServlet {
 			list.add(p);
 		}
 		
-		int result = new PlaylistService().sortPlaylist(list,userId);
+		int result = new PlaylistService().sortPlaylist(list, userId);
 	
 		
 		if(result>0) {

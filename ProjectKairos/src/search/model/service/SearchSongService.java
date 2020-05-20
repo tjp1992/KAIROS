@@ -9,7 +9,7 @@ import search.model.vo.MyListPageData;
 import search.model.vo.ReqMyList;
 import search.model.vo.ReqSearch;
 import search.model.vo.SearchPageData;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 
 public class SearchSongService {
 
