@@ -119,6 +119,7 @@
 				if($(".plchk:checked").length>0){
 					$("#form_pl").attr("action","/frontAdd");
 					$("#form_pl").submit();
+					
 				}else{
 					alert("재생 할 곡을 선택해주세요!");
 					return false;
