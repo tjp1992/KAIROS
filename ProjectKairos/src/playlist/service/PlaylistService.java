@@ -137,15 +137,24 @@ public class PlaylistService {
 		Connection conn = JDBCTemplate.getConnection();
 		int unum = 0;
 		int index=1;
-		int result =0;
-		for(Playlist p:list) {
+		int result = new PlaylistDao().deletePlaylist(conn, userId);	
+		
+		
+		if(result>0) {
 			
-			result = new PlaylistDao().sortOrderNo(conn, userId, p, index++);
-			if(result>0) {
-				unum++;
+			for(Playlist p:list) {
 				
+				result = new PlaylistDao().sortOrderNo(conn, userId, p, index++);
+				if(result>0) {
+					unum++;
+					
+				}
 			}
+		} else {
+			JDBCTemplate.rollback(conn);
+			return result;
 		}
+		
 		if(unum==list.size()) {
 			JDBCTemplate.commit(conn);
 			result=1;

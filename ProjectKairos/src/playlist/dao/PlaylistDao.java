@@ -100,14 +100,15 @@ public class PlaylistDao {
 	public int sortOrderNo(Connection conn, String userId, Playlist p, int index) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = "update playlist set order_no =? where listed_song_no = ? and user_id =?  and order_no = ?";
+//		String query = "update playlist set order_no =? where listed_song_no = ? and user_id =?  and order_no = ?";
 
+		String query = "insert into playlist values(?,?,?)";
+		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, index);
+			pstmt.setString(1, userId);
 			pstmt.setInt(2, p.getSongNo());
-			pstmt.setString(3, userId);
-			pstmt.setInt(4, p.getOrderNo());
+			pstmt.setInt(3, index);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
