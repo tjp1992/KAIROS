@@ -55,7 +55,7 @@ public class TicketDao {
 				pl.setBeginDate(rset.getDate("purchase_date"));
 				pl.setExpiredDate(rset.getDate("expired_date"));
 				pl.setPurchaseDate(rset.getDate("purchase_date"));
-				pl.setPurchaseNo(rset.getInt("purchase_no"));
+				pl.setPurchaseNo(rset.getString("purchase_no"));
 				pl.setUserId(rset.getString("user_id"));
 				pl.setVoucherName(rset.getString("voucher_name"));
 				pl.setVoucherNo(rset.getInt("voucher_no"));
@@ -114,7 +114,7 @@ public class TicketDao {
 				pl.setBeginDate(rset.getDate("purchase_date"));
 				pl.setExpiredDate(rset.getDate("expired_date"));
 				pl.setPurchaseDate(rset.getDate("purchase_date"));
-				pl.setPurchaseNo(rset.getInt("purchase_no"));
+				pl.setPurchaseNo(rset.getString("purchase_no"));
 				pl.setUserId(rset.getString("user_id"));
 				pl.setVoucherName(rset.getString("voucher_name"));
 				pl.setVoucherNo(rset.getInt("voucher_no"));
@@ -176,7 +176,7 @@ public class TicketDao {
 				pl.setBeginDate(rset.getDate("purchase_date"));
 				pl.setExpiredDate(rset.getDate("expired_date"));
 				pl.setPurchaseDate(rset.getDate("purchase_date"));
-				pl.setPurchaseNo(rset.getInt("purchase_no"));
+				pl.setPurchaseNo(rset.getString("purchase_no"));
 				pl.setUserId(rset.getString("user_id"));
 				pl.setVoucherName(rset.getString("voucher_name"));
 				pl.setVoucherNo(rset.getInt("voucher_no"));
@@ -237,7 +237,7 @@ public class TicketDao {
 				pl.setBeginDate(rset.getDate("purchase_date"));
 				pl.setExpiredDate(rset.getDate("expired_date"));
 				pl.setPurchaseDate(rset.getDate("purchase_date"));
-				pl.setPurchaseNo(rset.getInt("purchase_no"));
+				pl.setPurchaseNo(rset.getString("purchase_no"));
 				pl.setUserId(rset.getString("user_id"));
 				pl.setVoucherName(rset.getString("voucher_name"));
 				pl.setVoucherNo(rset.getInt("voucher_no"));

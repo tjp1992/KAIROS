@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class PurchaseLog {
 	private String voucherName;
-	private int purchaseNo;
+	private String purchaseNo;
 	private int voucherNo;
 	private String userId;
 	private Date purchaseDate;
@@ -14,23 +14,37 @@ public class PurchaseLog {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public PurchaseLog(int purchaseNo, int voucherNo, String userId, Date purchaseDate, Date beginDate,
-			Date expiredDate, String voucherName) {
+	
+	
+	public PurchaseLog(String voucherName, String purchaseNo, int voucherNo, String userId, Date purchaseDate,
+			Date beginDate, Date expiredDate) {
 		super();
+		this.voucherName = voucherName;
 		this.purchaseNo = purchaseNo;
 		this.voucherNo = voucherNo;
 		this.userId = userId;
 		this.purchaseDate = purchaseDate;
 		this.beginDate = beginDate;
 		this.expiredDate = expiredDate;
-		this.voucherName = voucherName;
 	}
-	public int getPurchaseNo() {
+
+
+	/**
+	 * @return the purchaseNo
+	 */
+	public String getPurchaseNo() {
 		return purchaseNo;
 	}
-	public void setPurchaseNo(int purchaseNo) {
+
+
+	/**
+	 * @param purchaseNo the purchaseNo to set
+	 */
+	public void setPurchaseNo(String purchaseNo) {
 		this.purchaseNo = purchaseNo;
 	}
+
+
 	public int getVoucherNo() {
 		return voucherNo;
 	}

@@ -236,7 +236,7 @@ public class UserDao {
 	public int updatePurchaseLog(Connection conn, String personalId, String userId) {
 		PreparedStatement pstmt =null;
 		int result = 0;
-		String query = "insert into purchase_log values(seq_pur_no.nextval, ?,?,sysdate,sysdate,sysdate+30)";
+		String query = "insert into purchase_log values(?, 1, ?,sysdate,sysdate,sysdate+30)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, personalId);
