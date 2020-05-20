@@ -24,7 +24,6 @@ footer {
   color: #999999;
 
   margin-left: 60px;
-  margin-top: 20px;
   font-size: 12px;
   width: 100%;
   margin-bottom: 20px;
@@ -33,4 +32,8 @@ footer {
   list-style: none;
   float: left;
   margin-left: 10px;
+}
+
+.footer a {
+  font-size: 12px;
 }
