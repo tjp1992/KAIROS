@@ -145,7 +145,7 @@ label.main:hover:before {
 
 .coverImage {
 	background:
-		url('/src/imgs/albumImg/songIcon.png')
+		url('/src/imgs/albumImg/songIcon.jpg')
 		no-repeat;
 	background-size: cover;
 	width: 366px;
