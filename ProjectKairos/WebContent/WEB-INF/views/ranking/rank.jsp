@@ -95,7 +95,13 @@
 								</c:if>
 
 								<td>${m.playCount }</td>
-								<td><button class="btn btn-primary btn-sm playBtn" songNo="${m.songNo}">듣기</button></td>
+								<c:if test="${empty sessionScope.user }">
+									<td><a href="/loginFrm" class="btn btn-primary btn-sm">듣기</a></td>								
+								</c:if>
+								<c:if test="${not empty sessionScope.user }">
+									<td><button class="btn btn-primary btn-sm playBtn" songNo="${m.songNo}">듣기</button></td>
+								
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>
