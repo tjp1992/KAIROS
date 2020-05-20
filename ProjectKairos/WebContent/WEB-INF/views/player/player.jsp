@@ -694,20 +694,29 @@ table{
 		});
 		// play previous music
 		function togglePlayPause() {
+			console.log("토글")
 			var audio = document.getElementById('audio');
+			console.log(audio);
 			var playpause = document.getElementById("play");
+			console.log(playpause);
 			var song = document.getElementsByClassName('song');
+			console.log(song);
 			audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
-				if (audio.paused) {
-					playpause.title = "Pause";
-					audio.play();
-				} else {
-					playpause.title = "Play";
-					audio.pause();
-				}
-				$('.song').eq(audioTrack).css('color','rgb(255, 86, 76)');
+			console.log(playpause.title);
+			if (playpause.title == "Play") {
+				console.log("1번 조건");
+				playpause.title = "Pause";
+				audio.play();
+			} else {
+				console.log("2번 조건");
+				playpause.title = "Play";
+				audio.pause();
+			}
+			$('.song').eq(audioTrack).css('color','rgb(255, 86, 76)');
 			console.log(audioTrack);
 		}
+
+		// 플레이리스트에서 음원 선택시
 		$(function(){
 			$('.song').click(function(){
 				var audio = $('#audio')[0];
@@ -730,7 +739,7 @@ table{
 			});
 		});
 
-
+		// 이전 버튼
 		function prevMusic(){
 			if(audioTrack == 0){
 				return;
