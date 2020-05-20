@@ -91,4 +91,15 @@ public class UserService {
 		return result;
 	}
 
+	public int voucherUpdate(String personalId, String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().updatePurchaseLog(conn,personalId,userId);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		return result;
+	}
+
 }
