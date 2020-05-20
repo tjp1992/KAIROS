@@ -212,12 +212,11 @@
 			});
 			$(".playimg").children().click(function(){
 				var songNo = $(this).parent().parent().attr("songNo");
-				var orderNo = $(this).parent().parent().children().eq(1).html();
 				$.ajax({
 					url :"/frontAddOne",
 					type:"POST",
 					data:{
-						songNo:songNo,orderNo:orderNo
+						songNo:songNo
 					},
 					success:function(data){
 						var result = Number(data);

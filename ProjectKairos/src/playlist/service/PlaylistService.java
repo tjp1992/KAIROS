@@ -195,21 +195,24 @@ public class PlaylistService {
 		int result =0;
 		int unum=0;
 		int inum = 0;
-		for(Playlist p :list2) {
-			result = new PlaylistDao().sortOrderNo(conn, userId, p, nextnum++);
-			if(result >0) {
-				unum++;
+		
+		result = new PlaylistDao().deletePlaylist(conn, userId);
+		
+		
+		
+		if(result == list2.size()) {
+						
+			for(Playlist p :list2) {
+				
+				result = new PlaylistDao().insertPlaylist(conn, userId, p, nextnum++);
+				
+//				result = new PlaylistDao().sortOrderNo(conn, userId, p, nextnum++);
+				if(result >0) {
+					unum++;
+				}
+				
 			}
-			
-		}
-		
-		if(unum == list2.size()) {
-			
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		
+		}				
 		
 		if(unum==list2.size()) {
 			for(int i=0; i<list.size(); i++) {
