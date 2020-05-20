@@ -69,6 +69,7 @@ pageEncoding="UTF-8"%>
            </form> 
         </div>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
      <script>
         $(function(){
            $("#listen_btn").click(function(){

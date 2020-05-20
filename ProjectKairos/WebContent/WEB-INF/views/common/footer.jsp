@@ -2,7 +2,7 @@
 pageEncoding="UTF-8"%>
 
 <footer>
-  <div class="wrapper">
+  <div class="footer_wrapper">
     <div class="footer">
       <ul class="ul1">
         <li><a href="#">회사소개</a></li>

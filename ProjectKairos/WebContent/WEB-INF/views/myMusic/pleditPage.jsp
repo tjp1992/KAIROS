@@ -60,6 +60,7 @@ pageEncoding="UTF-8"%>
             </form>
         </div>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <script>
     	function orderChange(t){
     		if(t.value=="artist_asc"){

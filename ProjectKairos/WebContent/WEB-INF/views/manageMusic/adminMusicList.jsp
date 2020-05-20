@@ -205,6 +205,7 @@ prefix="c"%>
         <div class="page_nav">${pageNavi}</div>
       </div>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <form action="/adminMusicListFrm" method="GET" id="search-form">
       <input type="hidden" name="keyword" id="keyword" value="${req.keyword}" />
       <input type="hidden" name="reqPage" id="reqPage" value="${req.reqPage}" />

@@ -4,6 +4,11 @@ footer {
   height: 200px;
 }
 
+.footer_wrapper {
+  width: 1260px;
+  margin: 0 auto;
+}
+
 .ul1 > li {
   float: left;
   margin-top: 10px;

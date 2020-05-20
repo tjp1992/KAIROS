@@ -45,7 +45,7 @@ pageEncoding="UTF-8"%>
         </div>
       </form>
     </section>
-
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
     <script>
       $("#search_artist").click(function () {

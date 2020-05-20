@@ -76,6 +76,7 @@ prefix="c" %>
         </form>
       </div>
     </section>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     <!-- 관리자 전용 script -->
     <c:if test="${sessionScope.user.userId == 'admin'}">
       <script src="/src/js/manageMusic/insertMusicByAdmin.js"></script>

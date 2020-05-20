@@ -22,12 +22,13 @@ public class PlaylistDao {
 //				+ "where song_no in (select LISTED_SONG_NO from playlist where user_id =?) "
 //				+ "order by order_no";
 
-		String query = "SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO),0)as liked "
+		String query = "SELECT T.*,NVL((SELECT LIKED_SONG_NO FROM LIKELIST WHERE LIKED_SONG_NO = LISTED_SONG_NO AND USER_ID = ?),0)as liked "
 				+ "FROM (SELECT * FROM PLAYLIST P JOIN SONG S ON (LISTED_SONG_NO = SONG_NO) JOIN ALBUM A USING(ALBUM_NO) WHERE USER_ID = ?) "
 				+ "T ORDER BY ORDER_NO ASC";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
+			pstmt.setString(2, userId);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				Playlist p = new Playlist();
