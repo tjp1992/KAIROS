@@ -676,141 +676,7 @@ table{
 <title>Kairos Music Player</title>
 </head>
 <body>
-	<script>
-		$(function(){
-			$("#magicButton").click(function(){
-				$(".screen").toggleClass('scrollBar');
-			});
-		});
-		// audiotrack
-		var audioTrack = 0;
-		var songNo = 0;
-		$(function(){
-			if($(".song").eq(audioTrack).find('#liked').val()==0){
-					$("#love").attr('checked',false);
-				}else{
-					$("#love").attr('checked',true);
-				}
-			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
-		});
-		
-		
-		// play previous music
-		function togglePlayPause() {
-			audioTrack--;			
-			var audio = document.getElementById('audio');
-			var playpause = document.getElementById("play");
-			var song = document.getElementsByClassName('song');
-			audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
-			console.log(playpause.title);
-			if (playpause.title == "Play") {
-				playpause.title = "Pause";
-				audio.play();
-			} else {
-				playpause.title = "Play";
-				audio.pause();
-			}
-			$('.song').eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-		}
-
-		// 플레이리스트에서 음원 선택시
-		$(function(){
-			$('.song').click(function(){
-				var audio = $('#audio')[0];
-				$('.song').each(function(){
-					$(this).find('h6').css('color','rgb(240, 240, 240)');
-				});
-				$(this).find('h6').css('color','rgb(255, 86, 76)');
-				audioTrack = $(this).index();
-				//play the track audioTrack
-				$('#audio').attr("src","/src/songs/"+$("#"+$(this).index()).val()+".mp3");
-				$('.info').find('h3').html($(this).find('#artist').val());
-				$('.info').find('h4').html($(this).find('h6').html())
-				$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
-				if($(".song").eq(audioTrack).find('#liked').val()==0){
-					$("#love").attr('checked',false);
-				}else{
-					$("#love").attr('checked',true);
-				}
-				$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
-				audio.play();
-			});
-		});
-
-		// 이전 버튼
-		function prevMusic(){
-			if(audioTrack == 0){
-				return;
-			}
-			audioTrack--;
-			var trackNo = document.getElementById(audioTrack);
-			var file = trackNo.value;
-			var songTitle = document.getElementsByClassName('title');
-			var songArtist = document.getElementsByClassName('songArtist');
-			var file = trackNo.value;
-			var audio = document.getElementById('audio');
-			// alter soundtrack
-			audio.src = '/src/songs/'+file+'.mp3';
-			audio.play();
-			var info = document.getElementsByClassName('info');
-
-			// update info page
-			$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
-			$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
-			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
-			// update playlist highlight
-			$('.song').each(function(){
-					$(this).find('h6').css('color','rgb(240, 240, 240)');
-				});
-			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			if($(".song").eq(audioTrack).find('#liked').val()==0){
-				$("#love").attr('checked',false);
-			}else{
-				$("#love").attr('checked',true);
-				console.log('nope');
-			}
-			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
-			
-		}
-		// next music
-		function nextMusic(){
-			audioTrack++;
-			var trackNo = document.getElementById(audioTrack);
-			var songTitle = document.getElementsByClassName('title');
-			var songArtist = document.getElementsByClassName('songArtist');
-			var file = trackNo.value;
-			var audio = document.getElementById('audio');
-			// alter soundtrack
-			audio.src = '/src/songs/'+file+'.mp3';
-			audio.play();
-			var info = document.getElementsByClassName('info');
-			// update info page
-			$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
-			$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
-			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
-			// update playlist highlight
-			$('.song').each(function(){
-					$(this).find('h6').css('color','rgb(240, 240, 240)');
-				});
-			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			if($(".song").eq(audioTrack).find('#liked').val()==0){
-				$("#love").attr('checked',false);
-			}else{
-				console.log('nope');
-				$("#love").attr('checked',true);
-			}
-			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
-		}
-		function audioLength(){
-			$('.songLength').each(function(){
-				$(this).on('canplay',function(){
-					console.log(this.duration);
-				});
-			});
-		}
-
-		
-	</script>
+	
 	<div class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
 		<label class="main" for="magicButton"></label>
@@ -829,17 +695,11 @@ table{
 								${p.orderNo }
 								<h5>
 						</td>
-						<c:if test='${p.orderNo eq 1}'>
 							<td class="title" ><h6 style='color:#ff564c;'>
 								${p.songTitle}
 								<h6></td>
-						</c:if>
-						<c:if test='${p.orderNo ne 1}'>
-							<td class="title"><h6>
-									${p.songTitle}
-									<h6></td>
-		
-						</c:if>
+						
+						
 						<td class="length"><h5>
 								
 								<h5></td>
@@ -932,6 +792,148 @@ table{
 		</div>
 	</div>
 </body>
+<script>
+	$(function(){
+		$("#magicButton").click(function(){
+			$(".screen").toggleClass('scrollBar');
+		});
+	});
+	// audiotrack
+	var audioTrack = 0;
+	var songNo = 0;
+	var trackLength = $('#trackLength').val();
+	$(function(){
+		if($(".song").eq(audioTrack).find('#liked').val()==0){
+				$("#love").attr('checked',false);
+			}else{
+				$("#love").attr('checked',true);
+			}
+		$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+	});
+	
+	
+	// play previous music
+	function togglePlayPause() {
+		audioTrack--;			
+		var audio = document.getElementById('audio');
+		var playpause = document.getElementById("play");
+		var song = document.getElementsByClassName('song');
+		audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
+		console.log(playpause.title);
+		if (playpause.title == "Play") {
+			playpause.title = "Pause";
+			audio.play();
+		} else {
+			playpause.title = "Play";
+			audio.pause();
+		}
+		$('.song').eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
+	}
+
+	// 플레이리스트에서 음원 선택시
+	$(function(){
+		$('.song').click(function(){
+			var audio = $('#audio')[0];
+			$('.song').each(function(){
+				$(this).find('h6').css('color','rgb(240, 240, 240)');
+			});
+			$(this).find('h6').css('color','rgb(255, 86, 76)');
+			audioTrack = $(this).index();
+			//play the track audioTrack
+			$('#audio').attr("src","/src/songs/"+$("#"+$(this).index()).val()+".mp3");
+			$('.info').find('h3').html($(this).find('#artist').val());
+			$('.info').find('h4').html($(this).find('h6').html())
+			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+				$("#love").attr('checked',false);
+			}else{
+				$("#love").attr('checked',true);
+			}
+			$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+			audio.play();
+		});
+	});
+
+	// 이전 버튼
+	function prevMusic(){
+		if(audioTrack == 0){
+			return;
+		}
+		audioTrack--;
+		var trackNo = document.getElementById(audioTrack);
+		var file = trackNo.value;
+		var songTitle = document.getElementsByClassName('title');
+		var songArtist = document.getElementsByClassName('songArtist');
+		var file = trackNo.value;
+		var audio = document.getElementById('audio');
+		// alter soundtrack
+		audio.src = '/src/songs/'+file+'.mp3';
+		audio.play();
+		var info = document.getElementsByClassName('info');
+		// update info page
+		$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
+		$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
+		$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+		// update playlist highlight
+
+		$('.song').each(function(){
+				$(this).find('h6').css('color','rgb(240, 240, 240)');
+			});
+
+		$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
+
+		if($(".song").eq(audioTrack).find('#liked').val()==0){
+			$("#love").attr('checked',false);
+		}else{
+			$("#love").attr('checked',true);
+			console.log('nope');
+		}
+		$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+		
+	}
+	// next music
+	function nextMusic(){
+		audioTrack = audioTrack+1;
+		var trackNo = document.getElementById(audioTrack);
+		var songTitle = document.getElementsByClassName('title');
+		var songArtist = document.getElementsByClassName('songArtist');
+		var file = trackNo.value;
+		var audio = document.getElementById('audio');
+		// alter soundtrack
+		audio.src = '/src/songs/'+file+'.mp3';
+		audio.play();
+		var info = document.getElementsByClassName('info');
+		// update info page
+		$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
+		$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
+		$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+		// update playlist highlight
+		console.log(audioTrack);
+
+
+		$('.song').each(function(){
+				$(this).find('h6').css('color','rgb(240, 240, 240)');
+			});
+		$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
+
+		if($(".song").eq(audioTrack).find('#liked').val()==0){
+			$("#love").attr('checked',false);
+		}else{
+			console.log('nope');
+			$("#love").attr('checked',true);
+		}
+		$('#love').attr('songNo',$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+	}
+	function audioLength(){
+		$('.songLength').each(function(){
+			$(this).on('canplay',function(){
+				console.log(this.duration);
+			});
+		});
+	}
+
+	
+</script>
 <script>
 	$("#love").click(function () {
           // click된 element가 i 태그가 아니면 수정필요
