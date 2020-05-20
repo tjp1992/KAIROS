@@ -43,7 +43,7 @@ public class InsertInquiryServlet extends HttpServlet {
 			return;
 		}
 		String root = getServletContext().getRealPath("/");//webcontent를 가져오겠다는 의미
-		String saveDirectory = root+"upload/inquiry";
+		String saveDirectory = root+"src/upload/inquiry";
 		System.out.println(saveDirectory);
 		int maxSize = 10*1024*1024;
 		MultipartRequest mRequest = new MultipartRequest(request, saveDirectory/*파일저장 경로*/ , maxSize/*파일 최대크기*/, "UTF-8", new DefaultFileRenamePolicy()/*파일중복가능*/);
