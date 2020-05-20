@@ -88,7 +88,7 @@ prefix="c" %>
               <img src="" alt="" />
             </div>
           </div>
-          <div class="btn_wrapper" style="display: none;">
+          <div class="btn_wrapper">
             <button type="submit" class="btn btn-primary">수정 완료</button>
             <button type="button" id="cancelBtn" class="btn btn-secondary">
               취소
