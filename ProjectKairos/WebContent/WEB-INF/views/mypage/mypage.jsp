@@ -54,13 +54,13 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<section>
 	<h2 class="h2">
-		마이페이지 <span class="span1">${sessionScope.user.userName } 님
+		마이페이지 <span id="topName">${sessionScope.user.userName } 님
 			환영합니다 </span>
 	</h2>
 	<c:if test="${empty date }">
-		<span>이용권이 없습니다.<a href="/voucherFrm">이용권 구매</a></span>
+		<span id="voucher">이용권이 없습니다.-><a href="/voucherFrm" id="vouA">이용권 구매페이지로 이동</a></span>
 	</c:if> <c:if test="${not empty date }">
-		<span>${date }일 남았습니다.</span>
+		<span id="onvoucher">${date }일 남았습니다.</span>
 	</c:if>
 	<div class="PHJup">
 		<h3>메뉴</h3>

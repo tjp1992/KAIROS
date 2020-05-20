@@ -365,7 +365,7 @@ function check(){
 							<th><label for="phone">전화번호</label></th>
 							<td>
 								<input type="text" id="phone" name="phone" style="height: 35px;" value="${sessionScope.user.phone }"required>
-								<button type="button" id="phoneResult" style="height: 35px;">인증번호 받기</button><br><span id="phoneMsg"></span></td>
+								<br><span id="phoneMsg"></span></td>
 							</td>
 						</tr>
 						<tr>
