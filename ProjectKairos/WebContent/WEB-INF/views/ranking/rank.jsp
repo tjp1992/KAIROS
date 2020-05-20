@@ -190,9 +190,9 @@
           }
 
           $.ajax({
-            url: "/asyncAddPlayList",
+            url: "/asyncAddPlayFirst",
             type: "POST",
-            data: { songNo: songNo },
+            data: { songNo : songNo },
             success: function (data) {
               const result = Number(data);
               if (result > 0) {
