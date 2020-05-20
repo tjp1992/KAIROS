@@ -11,7 +11,7 @@ import manageMusic.model.vo.Album;
 import manageMusic.model.vo.AlbumDesc;
 import manageMusic.model.vo.LicensedArtist;
 import oracle.net.aso.a;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 import song.vo.Song;
 
 public class ManageMusicDao {

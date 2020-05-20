@@ -1,4 +1,4 @@
-package song.vo;
+package search.model.vo;
 
 public class SearchSong {
 	private int rowNum;

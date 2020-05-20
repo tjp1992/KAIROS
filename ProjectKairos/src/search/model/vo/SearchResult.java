@@ -2,8 +2,6 @@ package search.model.vo;
 
 import java.util.ArrayList;
 
-import song.vo.SearchSong;
-
 public class SearchResult {
 	private ArrayList<SearchSong> list;
 	private int totalResult;

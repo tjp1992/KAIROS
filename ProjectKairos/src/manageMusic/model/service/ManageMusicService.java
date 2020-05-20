@@ -9,7 +9,7 @@ import manageMusic.model.dao.ManageMusicDao;
 import manageMusic.model.vo.Album;
 import manageMusic.model.vo.AlbumDesc;
 import manageMusic.model.vo.LicensedArtist;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 import song.vo.Song;
 
 public class ManageMusicService {

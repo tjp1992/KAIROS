@@ -60,7 +60,7 @@ prefix="c"%>
       <span><a href="/adminNotice?reqPage=1">공지사항</a></span>
       <!-- 랭킹차트 서블릿 /rankingFrm 작성 필요 -->
       <span><a href="/rankingFrm?reqPage=1&reqType=song">차트</a></span>
-      <form action="/searchFrm" method="GET" class="ld-search">
+      <form action="/searchSong" method="GET" class="ld-search">
         <c:if test="${empty keyword }">
           <input type="text" name="keyword" id="ld-keyword" />
         </c:if>

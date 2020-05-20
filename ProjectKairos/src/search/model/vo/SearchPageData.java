@@ -2,8 +2,6 @@ package search.model.vo;
 
 import java.util.ArrayList;
 
-import song.vo.SearchSong;
-
 public class SearchPageData {
 	int totalCount;
 	String pageNavi;

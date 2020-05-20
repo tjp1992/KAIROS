@@ -14,7 +14,7 @@ import search.model.service.SearchSongService;
 import search.model.vo.ReqSearch;
 import search.model.vo.SearchPageData;
 import search.model.vo.SearchResult;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 import user.vo.User;
 
 /**

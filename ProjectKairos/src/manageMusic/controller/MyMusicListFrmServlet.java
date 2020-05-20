@@ -14,7 +14,7 @@ import manageMusic.model.service.ManageMusicService;
 import search.model.service.SearchSongService;
 import search.model.vo.MyListPageData;
 import search.model.vo.ReqMyList;
-import song.vo.SearchSong;
+import search.model.vo.SearchSong;
 import user.vo.User;
 
 /**
