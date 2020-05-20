@@ -14,3 +14,8 @@
 .jumbotron img{
   
 }
+
+.page_nav_wrapper nav{
+  display: flex;
+  justify-content: center;
+}

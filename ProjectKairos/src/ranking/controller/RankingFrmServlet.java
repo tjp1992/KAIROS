@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ranking.service.RankingService;
 import song.vo.RankingPageData;
 import song.vo.RankingSong;
 import song.vo.Song;
+import user.vo.User;
 
 /**
  * Servlet implementation class RankingFrmServlet
@@ -34,9 +36,20 @@ public class RankingFrmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		RankingPageData pd = new RankingService().getRankBySong(reqPage);
+		HttpSession session = request.getSession(false);
+		User user = (User)session.getAttribute("user");
+		RankingPageData pd = null;
+		String reqType = request.getParameter("reqType");
+		
+		if(user == null) {
+			pd = new RankingService().getRankBySong(reqPage,reqType);
+		} else {			
+			String userId = user.getUserId();
+			pd = new RankingService().getRankBySong(reqPage,reqType,userId);
+		}
 		request.setAttribute("list", pd.getList());
 		request.setAttribute("pageNavi", pd.getPageNavi());
+		request.setAttribute("reqType", reqType);
 		request.getRequestDispatcher("/WEB-INF/views/ranking/rank.jsp").forward(request, response);
 	}
 

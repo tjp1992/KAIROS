@@ -113,17 +113,56 @@
 			$("#plEditFrm").attr("target",title);
 			$("#plEditFrm").submit();
 		}
+
+
+		// 듣기버튼 ajax 펑션
+		$("#listen_btn").click(function () {
+          let songNo = "";
+          const chks = $(".plchk:checked");
+
+          for (let i = 0; i < chks.length; i++) {
+            songNo += chks[i].value;
+            if (i != chks.length - 1) {
+              songNo += ",";
+            }
+          }
+
+          $.ajax({
+            url: "/asyncAddPlayNow",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result > 0) {
+                window.open(
+                  "/player",
+                  "",
+                  "width=366px , height=650px , resizable=false"
+                );
+              } else {
+                alert("추가를 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 연결에 실패하엿습니다.");
+            },
+          });
+        });
 	
 		$(function() {
-			$("#listen_btn").click(function(){
-				if($(".plchk:checked").length>0){
-					$("#form_pl").attr("action","/frontAdd");
-					$("#form_pl").submit();
-				}else{
-					alert("재생 할 곡을 선택해주세요!");
-					return false;
-				}
-			});
+			// $("#listen_btn").click(function(){
+			// 	if($(".plchk:checked").length>0){
+			// 		$("#form_pl").attr("action","/frontAdd");
+			// 		$("#form_pl").submit();					
+			// 		window.open("/player","","width=366px , height=650px , resizable=false");
+			// 	}else{
+			// 		alert("재생 할 곡을 선택해주세요!");
+			// 		return false;
+			// 	}
+			// });
+
+			
+			
 			$("#pleditBtn").click(function(){
 				$("#form_pl").attr("action","/plEdit");
 				$("#form_pl").submit();
@@ -183,7 +222,7 @@
 					success:function(data){
 						var result = Number(data);
 						if(result>0){
-							location.href="/playList";
+							window.open("/player","","width=366px , height=650px , resizable=false");
 						}
 					}
 				});

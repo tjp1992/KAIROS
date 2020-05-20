@@ -28,7 +28,7 @@
 
 		<div class="content">
 			<div class="firstcontent">
-				<a href="practice8_4_2.html"><img id="fir" src="/src/imgs/mainimg/boy.PNG"></a>
+				<a href="practice8_4_2.html"><img id="fir" src="/src/imgs/mainimg/111.jpg"></a>
 				<h1>당신의 모든 움직임을 응원합니다.</h1>
 				<p>코리아 저스트 두잇 남성 컬렉션과 함께 언제 어디서나 스포츠의 힘을 믿어보세요</p>
 				<div>
@@ -36,12 +36,30 @@
 				</div>
 			</div>
 			<div class="firstcontent">
-				<a class="b1" href="practice8_4_3.html"><img src="/src/imgs/mainimg/girl.PNG">
+				<a class="b1" href="practice8_4_3.html"><img src="/src/imgs/mainimg/redface.jpg">
 				</a>
 				<h1>당신의 모든 행동을 응원합니다.</h1>
 				<p>코리아 저스트 두잇 여성 컬렉션과 함께 언제 어디서나 스포츠의 힘을 믿어보세요</p>
 				<div>
 					<a href="practice8_4_3.html">여성컬렉션</a>
+				</div>
+			</div>
+			<div class="firstcontent">
+				<a class="b1" href="practice8_4_4.html"><img src="/src/imgs/mainimg/bts.jfif">
+				</a>
+				<h1>아이들의 꿈과 희망을 응원합니다.</h1>
+				<p>코리아 저스트 두잇 키즈 컬렉션과 함께 꿈과 희망을 키워보세요</p>
+				<div>
+					<a class="b1" href="practice8_4_4.html">키즈컬렉션</a>
+				</div>
+			</div>
+			<div class="firstcontent">
+				<a class="b1" href="practice8_4_4.html"><img src="/src/imgs/mainimg/kids.PNG">
+				</a>
+				<h1>아이들의 꿈과 희망을 응원합니다.</h1>
+				<p>코리아 저스트 두잇 키즈 컬렉션과 함께 꿈과 희망을 키워보세요</p>
+				<div>
+					<a class="b1" href="practice8_4_4.html">키즈컬렉션</a>
 				</div>
 			</div>
 			<div class="firstcontent">

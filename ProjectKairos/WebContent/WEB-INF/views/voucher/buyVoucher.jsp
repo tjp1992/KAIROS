@@ -54,12 +54,14 @@
 				</form>
 			</div>
 			<div class="col-md-8 order-md-1">
-			<form class="needs-validation" action="/paymentComplete" id="payment" novalidate>
-				<h4 class="mb-3">결제 상세</h4>
+				<form class="needs-validation" action="/paymentComplete"
+					id="payment" novalidate>
+					<h4 class="mb-3">결제 상세</h4>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="성">이름 입력</label> <input type="text"
-								class="form-control" id="성" value="${sessionScope.user.userName}" required>
+								class="form-control" id="성"
+								value="${sessionScope.user.userName}" required>
 							<div class="invalid-feedback">성 입력 필수</div>
 						</div>
 					</div>
@@ -85,41 +87,53 @@
 							type="text" class="form-control" id="addr"
 							placeholder="${user.addr}" readonly>
 					</div>
-					<button type="button" class="btn btn-primary btn-lg btn-block checkout">Continue to checkout</button>
+					<button type="button"
+						class="btn btn-primary btn-lg btn-block checkout">Continue
+						to checkout</button>
+
 				</form>
 			</div>
 		</div>
 	</section>
 	<script>
-		$(".checkout").click(function(){
-			var price = $(".price").html();
-			console.log(price);
-			var d = new Date();
-			var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			IMP.init("imp57751904");
-			IMP.request_pay({
-				merchant_uid : 'Kairos_'+date,
-				name: '한달 이용권',
-				amount: '9900',
-				buyer_email : '${sessionScope.user.email}',
-				buyer_name : '${sessionScope.user.userName}',
-				buyer_tel : '${sessionScope.user.phone}',
-				buyer_addr: 'Kairos.co',
-				buyer_postcode : '01234'
-			},function(rsp){
-				if(rsp.success){
-					var r1 = $("<input name='personalId' type='hidden' value='"+rsp.imp_uid+"'>");
-					var r2 = $("<input name='merchantId' type='hidden' value='"+rsp.merchant_uid+"'>");
-					var r3 = $("<input name='amount' type='hidden' value='"+rsp.paid_amount+"'>");
-					var r4 = $("<input name='verifyNo' type='hidden' value='"+rsp.apply_num+"'>");
-					$("#payment").append(r1,r2,r3,r4);
-					$("#payment").submit();
-// 					$("#paymentResult").html(msg+"<br>"+r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
-				}else{
-					console.log("에러 내용: "+rsp.error_msg);
-				}
-			});
-		});
+		$(".checkout")
+				.click(
+						function() {
+							var price = $(".price").html();
+							console.log(price);
+							var d = new Date();
+							var date = d.getFullYear() + ""
+									+ (d.getMonth() + 1) + "" + d.getHours()
+									+ "" + d.getMinutes() + "" + d.getSeconds();
+							IMP.init("imp57751904");
+							IMP
+									.request_pay(
+											{
+												merchant_uid : 'Kairos_' + date,
+												name : '한달 이용권',
+												amount : '9900',
+												buyer_email : '${sessionScope.user.email}',
+												buyer_name : '${sessionScope.user.userName}',
+												buyer_tel : '${sessionScope.user.phone}',
+												buyer_addr : 'Kairos.co',
+												buyer_postcode : '01234'
+											},
+											function(rsp) {
+												if (rsp.success) {
+													var r1 = $("<input name='personalId' type='hidden' value='"+rsp.imp_uid+"'>");
+													var r2 = $("<input name='merchantId' type='hidden' value='"+rsp.merchant_uid+"'>");
+													var r3 = $("<input name='amount' type='hidden' value='"+rsp.paid_amount+"'>");
+													var r4 = $("<input name='verifyNo' type='hidden' value='"+rsp.apply_num+"'>");
+													$("#payment").append(r1,
+															r2, r3, r4);
+													$("#payment").submit();
+													// 					$("#paymentResult").html(msg+"<br>"+r1+"<br>"+r2+"<br>"+r3+"<br>"+r4);
+												} else {
+													console.log("에러 내용: "
+															+ rsp.error_msg);
+												}
+											});
+						});
 	</script>
 </body>
 </html>

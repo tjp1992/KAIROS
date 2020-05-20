@@ -85,7 +85,7 @@ prefix="c" %>
               </div>
             </div>
             <div class="img_container">
-              <img src="/src/imgs/albumImg/아이유-Love poem.jpg" alt="" />
+              <img src="" alt="" />
             </div>
           </div>
           <div class="btn_wrapper" style="display: none;">
@@ -211,6 +211,7 @@ prefix="c" %>
                   descBtn1.classList.add("btn");
                   descBtn1.classList.add("btn-sm");
                   descBtn1.classList.add("btn-primary");
+                  descBtn1.classList.add("mod_song");
                   descBtn1.innerHTML = "수정";
 
                   let descBtn2 = document.createElement("button");
@@ -232,6 +233,13 @@ prefix="c" %>
                   $("#album_desc").append(desc);
                 }
 
+                $(".mod_song").click(function () {
+                  const songNo = $(this).val();
+                  const songName = $(this).parent().prev().html();
+                  if (confirm("[" + songName + "]곡을 수정하시겠습니까?")) {
+                    location.href = "/modifyMusicFrm?songNo=" + songNo;
+                  }
+                });
                 delSong();
               } else {
                 let desc = document.createElement("div");

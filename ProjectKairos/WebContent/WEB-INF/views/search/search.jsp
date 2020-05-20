@@ -405,7 +405,11 @@ prefix="c"%>
             success: function (data) {
               const result = Number(data);
               if (result > 0) {
-                alert(chks.length + "곡을 추가 완료");
+                window.open(
+                  "/player",
+                  "",
+                  "width=366px , height=650px , resizable=false"
+                );
               } else {
                 alert("추가를 실패하였습니다.");
               }
@@ -458,7 +462,11 @@ prefix="c"%>
             success: function (data) {
               const result = Number(data);
               if (result > 0) {
-                location.href = "";
+                window.open(
+                  "/player",
+                  "",
+                  "width=366px , height=650px , resizable=false"
+                );
               } else {
                 alert("서버 접속에 실패하였습니다.");
               }
