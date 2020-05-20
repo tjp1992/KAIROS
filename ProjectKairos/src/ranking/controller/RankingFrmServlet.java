@@ -43,7 +43,7 @@ public class RankingFrmServlet extends HttpServlet {
 		
 		if(user == null) {
 			pd = new RankingService().getRankBySong(reqPage,reqType);
-		} else {
+		} else {			
 			String userId = user.getUserId();
 			pd = new RankingService().getRankBySong(reqPage,reqType,userId);
 		}

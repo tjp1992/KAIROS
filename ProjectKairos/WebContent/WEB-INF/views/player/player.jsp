@@ -794,6 +794,8 @@ table{
 				});
 			});
 		}
+
+		
 	</script>
 	<div class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
@@ -896,7 +898,7 @@ table{
 		<table class="footer">
 			<td>
 				<input type="checkbox" id="love"/><label
-				class="love" for="love"></label>
+				class="love likeBtn" for="love"></label>
 			</td>
 			<td>
 				<input type="checkbox" id="shuffle" /><label
@@ -908,7 +910,7 @@ table{
 			</td>
 			<td>
 				<input type="checkbox" id="options" /><label
-				class="options" for="options"></label>
+				class="options" for="options" songNo=""></label>
 			</td>
 		</table>
 		<div class="current">
@@ -916,4 +918,39 @@ table{
 		</div>
 	</div>
 </body>
+<script>
+	$(".likeBtn").click(function () {
+          // click된 element가 i 태그가 아니면 수정필요
+          const btn = $(this);
+
+          const songNo = $(this).attr("songNo");
+
+          // countSpan은 좋아요 카운트를 출력해주는 element
+
+          $.ajax({
+            url: "/asyncSearchLike",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result == 0) {
+                btn.removeClass();
+                btn.addClass("fas fa-heart likeBtn");
+                btn.css("color", "red");
+                countSpan.html(count + 1);
+              } else if (result == 1) {
+                btn.removeClass();
+                btn.addClass("far fa-heart likeBtn");
+                btn.css("color", "black");
+                countSpan.html(count - 1);
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
+        });
+</script>
 </html>
