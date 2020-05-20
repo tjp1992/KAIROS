@@ -18,3 +18,7 @@ section {
   margin: 0 auto;
   width: 1200px;
 }
+
+a:hover {
+  text-decoration: none;
+}
