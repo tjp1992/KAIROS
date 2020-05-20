@@ -12,6 +12,7 @@ public class RankingSong {
 	private String filename;
 	private String filepath;
 	private int licensed;
+	private int liked;
 	
 	
 	
@@ -19,8 +20,12 @@ public class RankingSong {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	
 	public RankingSong(int rankNo, int songNo, String songTitle, String songArtist, String songGenre, String albumName,
-			int playCount, int likeCount, String filename, String filepath, int licensed) {
+			int playCount, int likeCount, String filename, String filepath, int licensed, int liked) {
 		super();
 		this.rankNo = rankNo;
 		this.songNo = songNo;
@@ -33,7 +38,26 @@ public class RankingSong {
 		this.filename = filename;
 		this.filepath = filepath;
 		this.licensed = licensed;
+		this.liked = liked;
 	}
+
+
+
+
+	/**
+	 * @return the liked
+	 */
+	public int getLiked() {
+		return liked;
+	}
+
+	/**
+	 * @param liked the liked to set
+	 */
+	public void setLiked(int liked) {
+		this.liked = liked;
+	}
+
 	/**
 	 * @return the rankNo
 	 */
