@@ -28,7 +28,7 @@
 
 		<div class="content">
 			<div class="firstcontent">
-				<a href="practice8_4_2.html"><img id="fir" src="/src/imgs/mainimg/boy.PNG"></a>
+				<a href="practice8_4_2.html"><img id="fir" src="/src/imgs/mainimg/redface.jpg"></a>
 				<h1>당신의 모든 움직임을 응원합니다.</h1>
 				<p>코리아 저스트 두잇 남성 컬렉션과 함께 언제 어디서나 스포츠의 힘을 믿어보세요</p>
 				<div>
