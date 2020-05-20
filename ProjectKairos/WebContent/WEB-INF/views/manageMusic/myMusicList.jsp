@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -20,7 +21,7 @@ pageEncoding="UTF-8"%>
       <div class="search_board">
         <div class="search_board_top_wrapper">
           <div>
-            <form action="" method="get">
+            <form id="research-form">
               <input
                 type="text"
                 name="re_search_keyword"
@@ -49,59 +50,124 @@ pageEncoding="UTF-8"%>
               <th class="chk_box">
                 <input type="checkbox" name="chkAll" id="chkAll" />
               </th>
-              <th class="result_no">
-                <span>번호</span>
-              </th>
-              <th class="title">
-                <span>제목</span>
-              </th>
-              <th class="artist">
-                <span>아티스트</span>
-              </th>
-              <th class="album_name">
-                <span>앨범명</span>
-              </th>
-              <th class="like_count">
-                <span>Likes</span>
-              </th>
-              <th>
-                <span>재생횟수</span>
-              </th>
+              <th class="result_no"><span>번호</span></th>
+              <th class="title"><span>제목</span></th>
+              <th class="artist"><span>아티스트</span></th>
+              <th class="album_name"><span>앨범명</span></th>
+              <th class="like_count"><span>Likes</span></th>
+              <th><span>재생횟수</span></th>
             </tr>
-            <tr class="result">
-              <td class="chk_box">
-                <input type="checkbox" name="chkAll" id="chkAll" />
-              </td>
-              <td class="result_no">1</td>
-              <td class="btn_container multi_cont">
-                <button class="btn btn-sm btn-primary">삭제</button>
-                <button class="btn btn-sm btn-danger">수정</button>
-              </td>
-              <td class="title">삐삐</td>
-              <td class="artist">아이유</td>
-              <td class="album_name">삐삐</td>
-              <td class="like_count multi_cont">
-                <span>248,468</span>
-              </td>
-              <td class="play_count">0</td>
-              <td class="report_container"></td>
-            </tr>
+            <c:forEach items="${list }" var="s">
+              <tr class="result">
+                <td class="chk_box">
+                  <input type="checkbox" name="chkSong" id="${s.songNo }" />
+                </td>
+                <td class="result_no">${s.rowNum }</td>
+                <td class="btn_container multi_cont">
+                  <button
+                    class="btn btn-sm btn-outline-primary mod_song"
+                    songNo="${s.songNo}"
+                  >
+                    수정
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-danger del_song"
+                    songNo="${s.songNo}"
+                  >
+                    삭제
+                  </button>
+                </td>
+                <td class="title">${s.songTitle }</td>
+                <td class="artist">${s.songArtist }</td>
+                <td class="album_name">${s.albumName }</td>
+                <td class="like_count multi_cont">
+                  <span>${s.likeCount }</span>
+                </td>
+                <td class="play_count">${s.playCount }</td>
+                <td class="report_container"></td>
+              </tr>
+            </c:forEach>
           </table>
         </div>
-        <div class="page_nav">
-          <button><i class="fas fa-angle-double-left"></i></button>
-          <button><i class="fas fa-angle-left"></i></button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>4</button>
-          <button>5</button>
-          <button><i class="fas fa-angle-right"></i></button>
-          <button><i class="fas fa-angle-double-right"></i></button>
-        </div>
+        <div class="page_nav">${pageNavi }</div>
       </div>
+      <form id="req-form" action="/myMusicListFrm">
+        <input
+          type="hidden"
+          name="reqPage"
+          id="reqPage"
+          value="${req.reqPage}"
+        />
+        <input
+          type="hidden"
+          name="numPerPage"
+          id="numPerPage"
+          value="${req.numPerPage}"
+        />
+        <input
+          type="hidden"
+          name="reSearch"
+          id="reSearch"
+          value="${req.reSearch}"
+        />
+      </form>
     </section>
     <!-- ↓↓ JS 파일 추가시 이곳에 ↓↓-->
+    <script>
+      $(".mod_song").click(function () {
+        const songNo = $(this).attr("songno");
+        const songName = $(this).parent().next().html();
+        if (confirm("[" + songName + "]곡을 수정하시겠습니까?")) {
+          location.href = "/modifyMusicFrm?songNo=" + songNo;
+        }
+      });
+
+      $(".del_song").click(function () {
+        const songDesc = $(this).parent().parent();
+        const songName = $(this).parent().next().html();
+        const songNo = $(this).attr("songno");
+        if (confirm("[" + songName + "] 곡을 정말 삭제하시겠습니까?")) {
+          $.ajax({
+            url: "/asyncDeleteSong",
+            type: "post",
+            data: { songNo: songNo },
+            success: function (data) {
+              if (data > 0) {
+                $("#req-form").submit();
+                // songDesc.remove();
+              } else {
+                alert("음원 삭제에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("음원 삭제에 실패하였습니다.");
+            },
+          });
+        }
+      });
+
+      $(".page_btn").click(function () {
+        const reqPage = $(this).val();
+        $("#reqPage").val(reqPage);
+
+        $("#req-form").submit();
+      });
+
+      $("#pageViewNum").change(function () {
+        const numPerPage = $(this).val();
+        $("#numPerPage").val(numPerPage);
+
+        $("#req-form").submit();
+      });
+
+      $("#research-form").submit(function () {
+        const reSearch = $("#re_search").val();
+        $("#reSearch").val(reSearch);
+        $("#reqPage").val(1);
+        $("#req-form").submit();
+        return false;
+      });
+    </script>
     <!-- ↑↑ JS 파일 추가시 이곳에 ↑↑-->
   </body>
 </html>

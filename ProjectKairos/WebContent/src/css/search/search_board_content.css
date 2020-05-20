@@ -10,8 +10,9 @@ table tr:first-of-type {
   justify-content: center;
 }
 
-.result_subject {
-  height: 30px;
+.result_subject,
+.result {
+  min-height: 45px;
 }
 
 tr {
@@ -56,7 +57,7 @@ td:not(.multi_cont) {
 }
 
 .like_count {
-  width: 100px;
+  width: 138px;
 }
 
 td.like_count span {
@@ -70,25 +71,13 @@ td.like_count {
 }
 
 th.like_count {
-  padding-left: 30px;
+  padding-left: 71px;
 }
 
-.result_subject th:nth-child(7) {
-  width: 148px;
+.play_count {
+  width: 110px;
   display: flex;
-}
-
-.result_subject th:nth-child(7) span,
-.play_count {
-  margin-left: 30px;
-}
-
-.play_count {
-  width: 64px;
-}
-
-.report_container {
-  margin-left: 20px;
+  justify-content: center;
 }
 
 .btn_container {
@@ -97,11 +86,11 @@ th.like_count {
 
 .likeBtn {
   width: 15px;
-  margin-right: 10px;
+  margin-left: 30px;
 }
 
 i {
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -119,4 +108,8 @@ i {
 
 .btn_container i {
   margin-right: 10px;
+}
+
+.free_song {
+  width: 25px;
 }

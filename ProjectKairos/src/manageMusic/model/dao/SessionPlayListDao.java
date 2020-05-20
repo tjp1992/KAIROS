@@ -31,7 +31,8 @@ public class SessionPlayListDao {
 				sp.setSongArtist(rset.getString("song_artist"));
 				sp.setFilepath(rset.getString("filepath"));
 				sp.setAlbumPath(rset.getString("album_path"));
-				sp.setLiked(rset.getInt("liked"));				
+				sp.setLiked(rset.getInt("liked"));		
+				sp.setAlbumName(rset.getString("album_name"));
 				if(sp.getLiked()>0) {
 					sp.setLiked(1);
 				}

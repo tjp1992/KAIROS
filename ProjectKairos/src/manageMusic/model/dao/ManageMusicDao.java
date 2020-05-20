@@ -10,6 +10,8 @@ import common.JDBCTemplate;
 import manageMusic.model.vo.Album;
 import manageMusic.model.vo.AlbumDesc;
 import manageMusic.model.vo.LicensedArtist;
+import oracle.net.aso.a;
+import song.vo.SearchSong;
 import song.vo.Song;
 
 public class ManageMusicDao {
@@ -223,7 +225,9 @@ public class ManageMusicDao {
 
 				l.setLcnArtistName(rset.getString("lcn_artist_name"));
 				l.setLcnCompany(rset.getString("lcn_company"));
-
+				l.setLcnAgentPhone(rset.getString("lcn_agent_phone"));
+				l.setLcnAgentName(rset.getString("lcn_agent_name"));
+				
 				list.add(l);
 			}
 
@@ -387,6 +391,144 @@ public class ManageMusicDao {
 		
 		
 		return filepath;
+	}
+
+	public SearchSong readOneSong(Connection conn, int songNo) {
+		
+		SearchSong s = null;
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		String query = "select * from song join album using(album_no) where song_no = ?";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setInt(1, songNo);
+			
+			rset = pst.executeQuery();
+			
+			if(rset.next()) {
+				s = new SearchSong();
+				
+				s.setAlbumPath(rset.getString("album_path"));
+				s.setAlbumName(rset.getString("album_name"));
+				s.setAlbumNo(rset.getInt("album_no"));
+				s.setFilename(rset.getString("filename"));
+				s.setFilepath(rset.getString("filepath"));
+				s.setLicensed(rset.getInt("licensed"));
+				s.setLikeCount(rset.getInt("like_count"));
+				s.setPlayCount(rset.getInt("play_count"));
+				s.setSongArtist(rset.getString("song_artist"));
+				s.setSongGenre(rset.getString("song_genre"));
+				s.setSongNo(rset.getInt("song_no"));
+				s.setSongTitle(rset.getString("song_title"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pst);
+		}
+		
+		
+		return s;
+	}
+
+	public int modifySong(Connection conn, Song s) {
+		
+		int result = 0;
+		PreparedStatement pst = null;
+		String query = "update song set song_title = ?, album_no = ?, filename = ? where song_no = ?";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, s.getSongTitle());
+			pst.setInt(2, s.getAlbumNo());
+			pst.setString(3, s.getFilename());
+			pst.setInt(4, s.getSongNo());
+			
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pst);
+		}		
+		
+		return result;
+	}
+
+	public int readOneLcnArtist(Connection conn, LicensedArtist l) {
+
+		int result = 0;
+		
+		PreparedStatement pst = null;
+		ResultSet rset = null;
+		String query = "select * from licensed_artist where lcn_artist_name = ?";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, l.getLcnArtistName());
+			
+			rset = pst.executeQuery();
+			
+			if(rset.next()) {
+				result = 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pst);
+		}
+		
+		
+		return result;
+	}
+
+	public int updateLcnArtist(Connection conn, LicensedArtist l) {
+		
+		int result = 0;
+		PreparedStatement pst = null;
+		String query = "update licensed_artist set lcn_company = ?, lcn_agent_name = ?, lcn_agent_phone = ? where lcn_artist_name = ?";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, l.getLcnCompany());
+			pst.setString(2, l.getLcnAgentName());
+			pst.setString(3, l.getLcnAgentPhone());
+			pst.setString(4, l.getLcnArtistName());
+			
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pst);
+		}
+		
+		return result;
+	}
+
+	public int insertLcnArtist(Connection conn, LicensedArtist l) {
+		
+		int result = 0;
+		PreparedStatement pst = null;
+		String query = "insert into licensed_artist values(?,?,?,?)";
+		
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, l.getLcnArtistName());
+			pst.setString(2, l.getLcnCompany());
+			pst.setString(3, l.getLcnAgentName());
+			pst.setString(4, l.getLcnAgentPhone());
+			
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pst);
+		}		
+		
+		return result;
 	}
 	
 }

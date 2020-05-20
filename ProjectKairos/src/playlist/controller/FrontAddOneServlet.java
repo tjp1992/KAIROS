@@ -41,7 +41,7 @@ public class FrontAddOneServlet extends HttpServlet {
 		String userId=u.getUserId();
 		
 		String songNo [] = request.getParameterValues("songNo");
-		String orderNo[]=request.getParameterValues("orderNo");
+		String orderNo[] = request.getParameterValues("orderNo");
 		
 		ArrayList<Playlist> list = new ArrayList<Playlist>();
 		

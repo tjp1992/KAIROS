@@ -12,8 +12,6 @@ import user.vo.User;
 
 public class LikelistDao {
 
-
-
 	public int checkLike(Connection conn, String userId, int songNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rset=null;

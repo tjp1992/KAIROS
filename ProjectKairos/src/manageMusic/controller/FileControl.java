@@ -50,8 +50,9 @@ public class FileControl {
 			return true;
 		} else {
 			System.out.println("사용자가 업로드한 tempMp3를 찾을수 없습니다.");
+			orgFile.delete();
+			
 			return false;
-
 		}
 	}
 	
