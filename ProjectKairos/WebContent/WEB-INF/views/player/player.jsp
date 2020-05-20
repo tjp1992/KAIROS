@@ -145,7 +145,7 @@ label.main:hover:before {
 
 .coverImage {
 	background:
-		url('/src/imgs/albumImg/아이유-Love poem.jpg')
+		url('/src/imgs/albumImg/songIcon.png')
 		no-repeat;
 	background-size: cover;
 	width: 366px;
