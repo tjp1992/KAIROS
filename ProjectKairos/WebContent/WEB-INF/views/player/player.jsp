@@ -685,10 +685,19 @@ table{
 		// audiotrack
 		var audioTrack = 0;
 		var songNo = 0;
+		$(function(){
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+					$("#love").attr('checked',false);
+				}else{
+					$("#love").attr('checked',true);
+				}
+		});
 		// play previous music
 		function togglePlayPause() {
 			var audio = document.getElementById('audio');
 			var playpause = document.getElementById("play");
+			var song = document.getElementsByClassName('song');
+			audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
 				if (audio.paused) {
 					playpause.title = "Pause";
 					audio.play();
@@ -696,6 +705,7 @@ table{
 					playpause.title = "Play";
 					audio.pause();
 				}
+				$('.song').eq(audioTrack).css('color','rgb(255, 86, 76)');
 			console.log(audioTrack);
 		}
 		$(function(){
@@ -711,6 +721,11 @@ table{
 				$('.info').find('h3').html($(this).find('#artist').val());
 				$('.info').find('h4').html($(this).find('h6').html())
 				$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
+				if($(".song").eq(audioTrack).find('#liked').val()==0){
+					$("#love").attr('checked',false);
+				}else{
+					$("#love").attr('checked',true);
+				}
 				audio.play();
 			});
 		});
@@ -740,6 +755,11 @@ table{
 					$(this).find('h6').css('color','rgb(240, 240, 240)');
 				});
 			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+				$("#love").attr('checked',false);
+			}else{
+				$("#love").attr('checked',true);
+			}
 		}
 		// autoplay next music
 		function nextMusic(){
@@ -761,10 +781,21 @@ table{
 					$(this).find('h6').css('color','rgb(240, 240, 240)');
 				});
 			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			if($(".song").eq(audioTrack).find('#liked')==1){
-				$()
+			if($(".song").eq(audioTrack).find('#liked').val()==0){
+				$("#love").attr('checked',false);
+			}else{
+				$("#love").attr('checked',true);
 			}
 		}
+		function audioLength(){
+			$('.songLength').each(function(){
+				$(this).on('canplay',function(){
+					console.log(this.duration);
+				});
+			});
+		}
+
+		
 	</script>
 	<div class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
@@ -834,8 +865,11 @@ table{
 	
 					</c:if>
 					<td class="length" width="100px"><h5>
-							
-							<h5></td>
+						<audio onload="audioLength(e);" class="songLength" preload="auto">
+							<source src="/src/songs/${p.filepath}.mp3">
+						</audio>
+
+							<h5 id="length"></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -849,22 +883,22 @@ table{
 			<h3>${playList[0].songArtist}</h3>
 		</div>
 		<audio id="audio" controls onended="nextMusic()">
-			<source src="/src/songs/1.mp3" type="audio/mpeg">
+
 		</audio>
 		<table class="player">
 			<td><input type="checkbox" id="backward" onclick="prevMusic();"/><label
 				class="backward" for="backward"></label></td>
 
 			<td><input type="checkbox" id="play" title="Play"
-				onclick="togglePlayPause();" /><label class="play" for="play"></label></td>
+				onclick="togglePlayPause();"/><label class="play" for="play"></label></td>
 
 			<td><input type="checkbox" id="forward" onclick="nextMusic();"/><label
 				class="forward" for="forward"></label></td>
 		</table>
 		<table class="footer">
 			<td>
-				<input type="checkbox" id="love" checked/><label
-				class="love" for="love"></label>
+				<input type="checkbox" id="love"/><label
+				class="love likeBtn" for="love"></label>
 			</td>
 			<td>
 				<input type="checkbox" id="shuffle" /><label
@@ -876,7 +910,7 @@ table{
 			</td>
 			<td>
 				<input type="checkbox" id="options" /><label
-				class="options" for="options"></label>
+				class="options" for="options" songNo=""></label>
 			</td>
 		</table>
 		<div class="current">
@@ -884,4 +918,39 @@ table{
 		</div>
 	</div>
 </body>
+<script>
+	$(".likeBtn").click(function () {
+          // click된 element가 i 태그가 아니면 수정필요
+          const btn = $(this);
+
+          const songNo = $(this).attr("songNo");
+
+          // countSpan은 좋아요 카운트를 출력해주는 element
+
+          $.ajax({
+            url: "/asyncSearchLike",
+            type: "POST",
+            data: { songNo: songNo },
+            success: function (data) {
+              const result = Number(data);
+              if (result == 0) {
+                btn.removeClass();
+                btn.addClass("fas fa-heart likeBtn");
+                btn.css("color", "red");
+                countSpan.html(count + 1);
+              } else if (result == 1) {
+                btn.removeClass();
+                btn.addClass("far fa-heart likeBtn");
+                btn.css("color", "black");
+                countSpan.html(count - 1);
+              } else {
+                alert("서버 접속에 실패하였습니다.");
+              }
+            },
+            error: function () {
+              alert("서버 접속에 실패하였습니다.");
+            },
+          });
+        });
+</script>
 </html>

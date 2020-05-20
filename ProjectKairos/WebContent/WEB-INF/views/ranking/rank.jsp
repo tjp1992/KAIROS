@@ -79,18 +79,19 @@
 							<tr>
 								<td><input type="hidden" value=${m.songNo } id="songNo"
 									name="songNo"> <input type="checkbox" id="select" value="${m.songNo}"
-									class="check chkBox"></td>
+									class="check chkBox">
+								</td>
 								<td>${m.rankNo }</td>
 								<td>${m.songTitle }<br>${m.songArtist }</td>
 								<td>${m.albumName }</td>
 
 								<c:if test="${m.liked==0 }">
 									<th width="10%" class="heartimg"><i style="color: black;"
-										class="iconheart far fa-heart likeBtn"></i>${m.likeCount }</th>
+										class="iconheart far fa-heart likeBtn" songNo="${m.songNo}"></i>${m.likeCount }</th>
 								</c:if>
 								<c:if test="${m.liked>0 }">
 									<th width="10%" class="heartimg"><i style="color: red;"
-										class="iconheart fas fa-heart likeBtn"></i>${m.likeCount}</th>
+										class="iconheart fas fa-heart likeBtn" songNo="${m.songNo}"></i>${m.likeCount}</th>
 								</c:if>
 
 								<td>${m.playCount }</td>
@@ -152,6 +153,7 @@
 	</section>
 	<!-- 버튼 기능 -->
 	<script>
+		
 		$(".play").click(function() {
 			console.log($(this).parent().parent().find('#songNo').val());
 		})
@@ -182,7 +184,7 @@
           }
 
           $.ajax({
-            url: "/asyncAddPlayNow",
+            url: "/asyncAddPlayList",
             type: "POST",
             data: { songNo: songNo },
             success: function (data) {
@@ -202,7 +204,7 @@
 
         // 한곡 플레이
         $(".playBtn").click(function () {
-          const songNo = $(this).attr("songno");
+          const songNo = $(this).attr("songNo");
 
           $.ajax({
             url: "/asyncAddPlayFirst",
@@ -227,7 +229,7 @@
           // click된 element가 i 태그가 아니면 수정필요
           const btn = $(this);
 
-          const songNo = $(this).attr("songno");
+          const songNo = $(this).attr("songNo");
 
           // countSpan은 좋아요 카운트를 출력해주는 element
           const countSpan = $(this).next();

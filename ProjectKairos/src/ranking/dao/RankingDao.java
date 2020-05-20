@@ -37,6 +37,7 @@ public class RankingDao {
 				s.setSongGenre(rset.getString("song_genre"));
 				s.setSongNo(rset.getInt("song_no"));
 				s.setSongTitle(rset.getString("song_title"));
+				s.setLiked(Integer.parseInt(rset.getString("liked")));
 				list.add(s);
 			}
 		} catch (SQLException e) {
