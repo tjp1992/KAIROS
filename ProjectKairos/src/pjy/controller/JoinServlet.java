@@ -51,7 +51,7 @@ public class JoinServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if (result > 0) {
 			request.setAttribute("msg", "회원가입 성공");
-			request.setAttribute("loc", "/loginFrm");
+			request.setAttribute("loc", "/index.jsp");
 		} else {
 			request.setAttribute("msg", "회원가입 실패");
 			request.setAttribute("loc", "/");

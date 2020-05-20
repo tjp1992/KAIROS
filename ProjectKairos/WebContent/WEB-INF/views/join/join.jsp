@@ -434,9 +434,7 @@
 					<th>전화번호</th>
 					<td><input type="text" id="phone" name="phone"
 						style="width: 300px; height: 35px;" class="border border-warning" required>
-						<button type="button" id="phoneResult"
-							class="btn btn-warning px-3" style="height: 35px;">인증번호
-							받기</button><br><span id="phoneMsg"></span></td>
+						<br><span id="phoneMsg"></span></td>
 				</tr>
 				<tr>
 					<th>이름</th>
