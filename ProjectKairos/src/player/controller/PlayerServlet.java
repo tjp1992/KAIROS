@@ -1,4 +1,4 @@
-package song.vo;
+package player.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,13 +33,11 @@ public class PlayerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session = request.getSession(false);
-		
-		User u = (User)session.getAttribute("user");		
+
+		User u = (User) session.getAttribute("user");
 		ArrayList<SessionPlaylist> pList = new SessionPlayListService().readPlayList(u.getUserId());		
-        session.setAttribute("playList", pList);
-        
+		session.setAttribute("playList", pList);
 		request.getRequestDispatcher("/WEB-INF/views/player/player.jsp").forward(request, response);
 	}
 

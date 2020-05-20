@@ -48,6 +48,7 @@ public class AsyncAddPlayNowServlet extends HttpServlet {
 		while(sT.hasMoreTokens()) {
 			Playlist p = new Playlist();
 			p.setSongNo(Integer.parseInt(sT.nextToken()));
+			list.add(p);
 		}
 		
 		// 요기 수정
