@@ -14,6 +14,13 @@
             margin-bottom: 50px;
             margin-top : 50px;
         }
+        .firstcontent>.b3>img{
+        	width: 600px;
+            margin-bottom: 50px;
+            margin-top : 50px;
+            margin-left: none;
+            height: 900px;
+        }
         .firstcontent>a>#fir{
          	margin-top: 0px;
         }
@@ -51,6 +58,9 @@
         }
         .b1{
         	width: 100px;
+        }
+        .b3{
+        	width : 50%;
         }
         @keyframes ani2{
             0%{
