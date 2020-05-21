@@ -29,8 +29,21 @@ prefix="c"%>
         align-items: center;
       }
 
-      section > div {
+      section > div table {
         width: 1000px;
+      }
+
+      .viewTbl tr:not(:nth-child(3)) {
+        height: 40px;
+      }
+
+      .viewTbl tr:nth-child(3) p {
+        margin: 10px 0;
+      }
+
+      .viewTbl tr:nth-child(3) {
+        padding: 20px 0;
+        min-height: 500px;
       }
     </style>
   </head>
@@ -48,7 +61,7 @@ prefix="c"%>
       <div>
         <form action="/modifyInquiryViewFrm" method="post" id="insertFrm">
           <input type="hidden" name="inqNo" value="${i.inqNo}" } />
-          <table>
+          <table class="viewTbl">
             <tr>
               <th style="width: 150px;">제목</th>
               <td>
@@ -92,7 +105,7 @@ ${i.inqContent }</textarea
             </tr>
           </table>
         </form>
-        <table style="width: 500px;">
+        <table class="ansTbl">
           <tr style="border-bottom: 1px solid black;">
             <td colspan="3" style="font-size: 25pt;">답변</td>
           </tr>

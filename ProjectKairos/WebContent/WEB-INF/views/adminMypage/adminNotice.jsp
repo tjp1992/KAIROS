@@ -30,15 +30,29 @@ prefix="c"%>
       rel="stylesheet"
       type="text/css"
     />
+
+    <c:if test="${sessionScope.user.userId == 'admin'}">
+      <script>
+        $(function () {
+          $("#back").click(function () {
+            location.href = "/adminMypage";
+          });
+          $("#write").click(function () {
+            location.href = "/adminNoticeWriteFrm?reqPage=1";
+          });
+        });
+      </script>
+    </c:if>
+    <c:if test="${sessionScope.user.userId != 'admin'}">
+      <script>
+        $(function () {
+          $("#back").click(function () {
+            location.href = "/";
+          });
+        });
+      </script>
+    </c:if>
     <script>
-      $(function () {
-        $("#back").click(function () {
-          location.href = "/adminMypage";
-        });
-        $("#write").click(function () {
-          location.href = "/adminNoticeWriteFrm?reqPage=1";
-        });
-      });
       function detail(no, req) {
         // req 는 해당 페이지이다.
         location.href =

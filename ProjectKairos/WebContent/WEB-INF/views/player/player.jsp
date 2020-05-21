@@ -678,44 +678,11 @@ table {
 
 		<div class="coverImage"></div>
 		<div class="bodyPlayer">
-			<table class="list">
-				<c:forEach items="${playList}" var='p'>
-					<tr class="song">
-						<input type="hidden" id=${p.orderNo-1 } class="orderNo"
-							value=${p.filepath } songNo=${p.songNo}>
-						<input type="hidden" id='artist' class="songArtist"
-							value=${p.songArtist}>
-						<input type="hidden" id='albumpath' class='albumpath'
-							value=${p.albumPath}>
-						<input type="hidden" id='liked' class="liked" value=${p.liked}>
-						<td class="nr">
-							<h5>
-								${p.orderNo }
-								<h5>
-						</td>
-						<td class="title"><h6 style='color: #ff564c;'>
-								${p.songTitle}
-								<h6></td>
-
-
-						<td class="length"><h5>
-
-								<h5></td>
-						<c:if test="${p.liked eq 1}">
-							<td><input type="checkbox" id="heart${p.orderNo}" checked /><label
-								class="zmr" for="heart"></label></td>
-						</c:if>
-						<c:if test="${p.liked eq 0}">
-							<td><input type="checkbox" id="heart${p.orderNo}" /><label
-								class="zmr" for="heart"></label></td>
-						</c:if>
-					</tr>
-				</c:forEach>
-			</table>
 		</div>
 		<table class="list">
 			<c:forEach items="${playList}" var='p'>
 				<tr class="song">
+					<input type="hidden" name="songNo" id="songNo" value="${p.songNo}">
 					<input type="hidden" name="lcn" value="${p.licensed}">
 					<input type="hidden" id="${p.orderNo-1 }" class="orderNo"
 						value=${p.filepath} >
@@ -839,6 +806,17 @@ table {
 			if(chkUserStat()){
 			audio.play();
 			playpause.title = "Pause";
+			var songNo = $('.song').eq(audioTrack).find("#songNo").val();
+			$.ajax({
+				url : "/addPlayCount",
+				type : "POST",
+				data : {songNo : songNo},
+				success : function(data){
+
+				}	
+
+			});
+
 			} else {
 			$('#play').prop('checked',false);
 

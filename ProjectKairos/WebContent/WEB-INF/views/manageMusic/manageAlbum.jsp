@@ -20,7 +20,7 @@ prefix="c" %>
     <section>
       <div class="insert_wrapper">
         <form
-          action="#"
+          action="/modifyAlbum"
           method="POST"
           enctype="multipart/form-data"
           id="form-album"
@@ -102,6 +102,30 @@ prefix="c" %>
     <script src="/src/js/manageMusic/deleteSongBtn.js"></script>
     <script src="/src/js/manageMusic/inputArtist.js"></script>
     <script>
+      $("#form-album").submit(function () {
+        const albumNo = $("#albums").val();
+        const inputAlbum = $(".input_mod_album");
+
+        if ($("#artist").val() == "") {
+          alert("가수명을 선택하세요");
+          return false;
+        }
+
+        if ($("albums").val() == "default") {
+          alert("앨범을 선택하세요");
+          return false;
+        }
+
+        if (inputAlbum.length == 0) {
+          const input = document.createElement("input");
+          input.name = "albumName";
+          input.value = albumName;
+          $("#form-album").append(input);
+        }
+
+        return true;
+      });
+
       // 취소버튼
       $("#cancelBtn").click(function () {
         location.href = "/manageMusicFrm";
