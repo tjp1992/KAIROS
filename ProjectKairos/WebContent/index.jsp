@@ -30,59 +30,61 @@ pageEncoding="UTF-8"%>
       <div class="wrapper">
         <div class="content">
           <div class="firstcontent">
-            <a href="practice8_4_2.html"
+            <a href="/voucherFrm"
               ><img id="fir" src="/src/imgs/mainimg/111.jpg"
             /></a>
             <h1>당신의 모든 움직임을 응원합니다.</h1>
             <p>
-              코리아 저스트 두잇 남성 컬렉션과 함께 언제 어디서나 스포츠의 힘을
+              카이로스 이용권과 함께 언제 어디서나 음악의 힘을
               믿어보세요
             </p>
             <div>
-              <a href="practice8_4_2.html">남성컬렉션</a>
+              <a href="/voucherFrm">이용권 구매</a>
             </div>
           </div>
           <div class="firstcontent">
-            <a class="b1" href="practice8_4_3.html"
-              ><img src="/src/imgs/mainimg/redface.jpg" />
+            <a class="b1" href="/rankingFrm?reqPage=1&reqType=song"
+              ><img src="/src/imgs/mainimg/twice2.jpg" />
             </a>
-            <h1>당신의 모든 행동을 응원합니다.</h1>
+            <h1>당신의 모든 행동을 응원합니다</h1>
             <p>
-              코리아 저스트 두잇 여성 컬렉션과 함께 언제 어디서나 스포츠의 힘을
-              믿어보세요
+              카이로스 음악차트와 함께 음악의 행복을 누려 보세요 
             </p>
             <div>
-              <a href="practice8_4_3.html">여성컬렉션</a>
+              <a href="/rankingFrm?reqPage=1&reqType=song">음악차트</a>
             </div>
           </div>
           <div class="firstcontent">
-            <a class="b1" href="practice8_4_4.html"
+            <a class="b1" href="/rankingFrm?reqPage=1&reqType=album"
               ><img src="/src/imgs/mainimg/bts.jfif" />
             </a>
-            <h1>아이들의 꿈과 희망을 응원합니다.</h1>
-            <p>코리아 저스트 두잇 키즈 컬렉션과 함께 꿈과 희망을 키워보세요</p>
+            <h1>당신의 감성을 느껴보세요</h1>
+            <p>카이로스 앨범차트와 함께 좋아하는 가수의 목소리를 누려 보세요</p>
             <div>
-              <a class="b1" href="practice8_4_4.html">키즈컬렉션</a>
+              <a class="b1" href="/rankingFrm?reqPage=1&reqType=album">앨범차트</a>
             </div>
           </div>
           <div class="firstcontent">
-            <a class="b1" href="practice8_4_4.html"
-              ><img src="/src/imgs/mainimg/kids.PNG" />
+            <a class="b1" href="/rankingFrm?reqPage=1&reqType=artist"
+              ><img src="/src/imgs/mainimg/iu.jpg" />
             </a>
-            <h1>아이들의 꿈과 희망을 응원합니다.</h1>
-            <p>코리아 저스트 두잇 키즈 컬렉션과 함께 꿈과 희망을 키워보세요</p>
+            <h1>여러분의 꿈과 희망을 응원합니다.</h1>
+            <p>카이로스 아티스트 차트와 함께 꿈과 희망을 키워보세요</p>
             <div>
-              <a class="b1" href="practice8_4_4.html">키즈컬렉션</a>
+              <a class="b1" href="/rankingFrm?reqPage=1&reqType=artist" style="width: 150px" >아티스트차트</a>
             </div>
           </div>
           <div class="firstcontent">
-            <a class="b1" href="practice8_4_4.html"
-              ><img src="/src/imgs/mainimg/kids.PNG" />
+            <a class="b3" href="/rankingFrm?reqPage=1&reqType=play">
+            	<img src="/src/imgs/mainimg/redbelvet.jpeg" />
             </a>
-            <h1>아이들의 꿈과 희망을 응원합니다.</h1>
-            <p>코리아 저스트 두잇 키즈 컬렉션과 함께 꿈과 희망을 키워보세요</p>
+            <a class="b3" href="/rankingFrm?reqPage=1&reqType=play">
+            	<img src="/src/imgs/mainimg/blackpink2.jfif" />
+            </a>
+            <h1>당신의 성공을 응원합니다.</h1>
+            <p>카이로스 플레이차트와 함께 자신만의 세계로 빠져보세요</p>
             <div>
-              <a class="b1" href="practice8_4_4.html">키즈컬렉션</a>
+              <a class="b1" href="/rankingFrm?reqPage=1&reqType=play">플레이차트</a>
             </div>
           </div>
         </div>
