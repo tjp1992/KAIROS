@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <script src="/src/js/jquery-3.3.1.js"></script>
-<script src="https://kit.fontawesome.com/8bd2671777.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/8bd2671777.js"
+	crossorigin="anonymous"></script>
 <style>
 /* PRESS THE MENU BUTTON FOR ANIMATION */
 /* PRESS PLAY BUTTON TO LISTEN THE DEMO SONG */
@@ -30,7 +31,6 @@ body {
 	-o-transform: scale(1);
 	-ms-transform: scale(1);
 }
-
 
 }
 h2 {
@@ -95,7 +95,6 @@ h6 {
 	transform: translate(-50%, 0);
 	box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
 	overflow: hidden;
-
 }
 
 .header {
@@ -127,10 +126,12 @@ label.main:before {
 label.main:hover:before {
 	color: #bbb;
 }
-.screen>#magicButton:checked ~ .footer{
+
+.screen>#magicButton:checked ~ .footer {
 	display: none;
 }
-.screen>#magicButton:checked ~ .scrollPurpose{
+
+.screen>#magicButton:checked ~ .scrollPurpose {
 	top: 192px;
 	left: 12px;
 	opacity: 1;
@@ -138,15 +139,14 @@ label.main:hover:before {
 	transform: scale(1, 1);
 	transition: all 0.3s ease-in;
 }
+
 .screen>#magicButton:checked ~ label.main:before {
 	color: #ff564c;
 	transition: all 0.3s ease-in;
 }
 
 .coverImage {
-	background:
-		url('/src/imgs/albumImg/songIcon.jpg')
-		no-repeat;
+	background: url('/src/imgs/albumImg/songIcon.jpg') no-repeat;
 	background-size: cover;
 	width: 366px;
 	height: 366px;
@@ -196,7 +196,6 @@ label.main:hover:before {
 	width: 366px;
 	background: #111;
 	transition: all 0.3s ease-in;
-
 }
 
 .screen>#magicButton:checked ~ .bodyPlayer {
@@ -205,7 +204,8 @@ label.main:hover:before {
 	top: 180px;
 	transition: all 0.3s ease-in;
 }
-.scrollPurpose{
+
+.scrollPurpose {
 	border-spacing: 0px 2px;
 	width: 342px;
 	visibility: hidden;
@@ -217,6 +217,7 @@ label.main:hover:before {
 	transform: scale(0.1, 0.1);
 	transition: all 0.3s ease-in;
 }
+
 .list {
 	border-spacing: 0px 2px;
 	width: 342px;
@@ -237,7 +238,8 @@ label.main:hover:before {
 	background: #1d1d1d;
 	text-indent: 8px;
 }
-.list tbody{
+
+.list tbody {
 	width: 400px;
 }
 
@@ -258,11 +260,10 @@ label.main:hover:before {
 	width: 210px;
 	transition: all 0.11s ease-in;
 }
-.fa-share-square:hover{
+
+.fa-share-square:hover {
 	cursor: pointer;
 }
-
-
 
 /* .scroll {
 	border-spacing: 0px 2px;
@@ -305,10 +306,6 @@ label.main:hover:before {
 	width: 210px;
 	transition: all 0.11s ease-in;
 } */
-
-
-
-
 .screen>#magicButton:checked ~ .list {
 	top: 192px;
 	left: 12px;
@@ -368,7 +365,6 @@ label.main:hover:before {
 	animation: harlem 0.3s linear forwards;
 	animation-delay: 0.305s;
 } */
-
 label.zmr:before {
 	font-family: FontAwesome;
 	content: "\f08a";
@@ -386,7 +382,6 @@ label.zmr:before {
 	color: #ff564c;
 	transition: all 0.15s linear;
 } */
-
 td>#heart1:checked ~ label.zmr:before {
 	content: "\f004";
 	color: #ff564c;
@@ -452,7 +447,6 @@ td>#heart8:checked ~ label.zmr:before {
 	transform-origin: 0% 0%;
 	transition: all 0.3s ease-in;
 }
-
 
 .screen>#magicButton:checked ~ .bar {
 	top: 119px;
@@ -550,7 +544,7 @@ td>#play:checked ~ label.play:before {
 	transition: all 0.3s ease-in;
 }
 
-body{
+body {
 	position: relative;
 }
 
@@ -664,148 +658,20 @@ audio {
 	overflow-y: auto;
 } */
 ::-webkit-scrollbar {
-    width: 0px;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+	width: 0px; /* Remove scrollbar space */
+	background: transparent; /* Optional: just make scrollbar invisible */
 }
-table{
+
+table {
 	display: block;
-	height:430px;
+	height: 430px;
 	overflow-y: scroll;
 }
 </style>
 <title>Kairos Music Player</title>
 </head>
 <body>
-	<script>
-		$(function(){
-			$("#magicButton").click(function(){
-				$(".screen").toggleClass('scrollBar');
-			});
-		});
-		// audiotrack
-		var audioTrack = 0;
-		var songNo = 0;
-		$(function(){
-			if($(".song").eq(audioTrack).find('#liked').val()==0){
-					$("#love").attr('checked',false);
-				}else{
-					$("#love").attr('checked',true);
-				}
-		});
-		// play previous music
-		function togglePlayPause() {
-			console.log("토글")
-			var audio = document.getElementById('audio');
-			console.log(audio);
-			var playpause = document.getElementById("play");
-			console.log(playpause);
-			var song = document.getElementsByClassName('song');
-			console.log(song);
-			audio.src = "/src/songs/"+$('.song').eq(audioTrack).find('.orderNo').val()+".mp3";
-			console.log(playpause.title);
-			if (playpause.title == "Play") {
-				console.log("1번 조건");
-				playpause.title = "Pause";
-				audio.play();
-			} else {
-				console.log("2번 조건");
-				playpause.title = "Play";
-				audio.pause();
-			}
-			$('.song').eq(audioTrack).css('color','rgb(255, 86, 76)');
-			console.log(audioTrack);
-		}
 
-		// 플레이리스트에서 음원 선택시
-		$(function(){
-			$('.song').click(function(){
-				var audio = $('#audio')[0];
-				$('.song').each(function(){
-					$(this).find('h6').css('color','rgb(240, 240, 240)');
-				});
-				$(this).find('h6').css('color','rgb(255, 86, 76)');
-				audioTrack = $(this).index();
-				//play the track audioTrack
-				$('#audio').attr("src","/src/songs/"+$("#"+$(this).index()).val()+".mp3");
-				$('.info').find('h3').html($(this).find('#artist').val());
-				$('.info').find('h4').html($(this).find('h6').html())
-				$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
-				if($(".song").eq(audioTrack).find('#liked').val()==0){
-					$("#love").attr('checked',false);
-				}else{
-					$("#love").attr('checked',true);
-				}
-				audio.play();
-			});
-		});
-
-		// 이전 버튼
-		function prevMusic(){
-			if(audioTrack == 0){
-				return;
-			}
-			var trackNo = document.getElementById(--audioTrack);
-			var file = trackNo.value;
-			var songTitle = document.getElementsByClassName('title');
-			var songArtist = document.getElementsByClassName('songArtist');
-			var file = trackNo.value;
-			var audio = document.getElementById('audio');
-			// alter soundtrack
-			audio.src = '/src/songs/'+file+'.mp3';
-			audio.play();
-			var info = document.getElementsByClassName('info');
-
-			// update info page
-			$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
-			$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
-			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
-			// update playlist highlight
-			$('.song').each(function(){
-					$(this).find('h6').css('color','rgb(240, 240, 240)');
-				});
-			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			if($(".song").eq(audioTrack).find('#liked').val()==0){
-				$("#love").attr('checked',false);
-			}else{
-				$("#love").attr('checked',true);
-			}
-		}
-		// autoplay next music
-		function nextMusic(){
-			var trackNo = document.getElementById(++audioTrack);
-			var songTitle = document.getElementsByClassName('title');
-			var songArtist = document.getElementsByClassName('songArtist');
-			var file = trackNo.value;
-			var audio = document.getElementById('audio');
-			// alter soundtrack
-			audio.src = '/src/songs/'+file+'.mp3';
-			audio.play();
-			var info = document.getElementsByClassName('info');
-			// update info page
-			$(".info").find('h4').html($('.title').eq(audioTrack).find('h6').html());
-			$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
-			$('.current').children().html($('.title').eq(audioTrack).find('h6').html());
-			// update playlist highlight
-			$('.song').each(function(){
-					$(this).find('h6').css('color','rgb(240, 240, 240)');
-				});
-			$(".song").eq(audioTrack).find('h6').css('color','rgb(255, 86, 76)');
-			if($(".song").eq(audioTrack).find('#liked').val()==0){
-				$("#love").attr('checked',false);
-			}else{
-				$("#love").attr('checked',true);
-			}
-		}
-		function audioLength(){
-			$('.songLength').each(function(){
-				$(this).on('canplay',function(){
-					console.log(this.duration);
-				});
-			});
-		}
-
-		
-	</script>
 	<div class="screen">
 		<input type="checkbox" value="None" id="magicButton" name="check" />
 		<label class="main" for="magicButton"></label>
@@ -815,36 +681,33 @@ table{
 			<table class="list">
 				<c:forEach items="${playList}" var='p'>
 					<tr class="song">
-						<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath}>
-						<input type="hidden" id='artist' class="songArtist" value=${p.songArtist}>
-						<input type="hidden" id='albumpath' class='albumpath' value=${p.albumPath}>
+						<input type="hidden" id=${p.orderNo-1 } class="orderNo"
+							value=${p.filepath } songNo=${p.songNo}>
+						<input type="hidden" id='artist' class="songArtist"
+							value=${p.songArtist}>
+						<input type="hidden" id='albumpath' class='albumpath'
+							value=${p.albumPath}>
 						<input type="hidden" id='liked' class="liked" value=${p.liked}>
 						<td class="nr">
 							<h5>
 								${p.orderNo }
 								<h5>
 						</td>
-						<c:if test='${p.orderNo eq 1}'>
-							<td class="title" ><h6 style='color:#ff564c;'>
+						<td class="title"><h6 style='color: #ff564c;'>
 								${p.songTitle}
 								<h6></td>
-						</c:if>
-						<c:if test='${p.orderNo ne 1}'>
-							<td class="title"><h6>
-									${p.songTitle}
-									<h6></td>
-		
-						</c:if>
+
+
 						<td class="length"><h5>
-								
+
 								<h5></td>
 						<c:if test="${p.liked eq 1}">
-							<td><input type="checkbox" id="heart${p.orderNo}" checked/><label class="zmr"
-								for="heart"></label></td>
+							<td><input type="checkbox" id="heart${p.orderNo}" checked /><label
+								class="zmr" for="heart"></label></td>
 						</c:if>
 						<c:if test="${p.liked eq 0}">
-							<td><input type="checkbox" id="heart${p.orderNo}"/><label class="zmr"
-								for="heart"></label></td>
+							<td><input type="checkbox" id="heart${p.orderNo}" /><label
+								class="zmr" for="heart"></label></td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -853,30 +716,27 @@ table{
 		<table class="list">
 			<c:forEach items="${playList}" var='p'>
 				<tr class="song">
-					<input type="hidden" id= ${p.orderNo-1} class="orderNo" value=${p.filepath}>
-					<input type="hidden" id='artist' class="songArtist" value=${p.songArtist}>
-					<input type="hidden" id='albumpath' class='albumpath' value=${p.albumPath}>
+					<input type="hidden" id=${p.orderNo-1 } class="orderNo"
+						value=${p.filepath}>
+					<input type="hidden" id='artist' class="songArtist"
+						value=${p.songArtist}>
+					<input type="hidden" id='albumpath' class='albumpath'
+						value=${p.albumPath}>
 					<input type="hidden" id='liked' class="liked" value=${p.liked}>
-					<td class="nr"width="100px">
+					<td class="nr" width="100px">
 						<h5>
 							${p.orderNo }
 							<h5>
 					</td>
-					<c:if test='${p.orderNo eq 1}'>
-						<td class="title" width="200px"><h6 style='color:#ff564c;'>
+
+					<td class="title" width="200px"><h6>
 							${p.songTitle}
 							<h6></td>
-					</c:if>
-					<c:if test='${p.orderNo ne 1}'>
-						<td class="title" width="200px"><h6>
-								${p.songTitle}
-								<h6></td>
-	
-					</c:if>
+
 					<td class="length" width="100px"><h5>
-						<audio onload="audioLength(e);" class="songLength" preload="auto">
-							<source src="/src/songs/${p.filepath}.mp3">
-						</audio>
+							<audio onload="audioLength(e);" class="songLength" preload="auto">
+								<source src="/src/songs/${p.filepath}.mp3">
+							</audio>
 
 							<h5 id="length"></td>
 				</tr>
@@ -895,32 +755,24 @@ table{
 
 		</audio>
 		<table class="player">
-			<td><input type="checkbox" id="backward" onclick="prevMusic();"/><label
+			<td><input type="checkbox" id="backward" onclick="prevMusic();" /><label
 				class="backward" for="backward"></label></td>
 
 			<td><input type="checkbox" id="play" title="Play"
-				onclick="togglePlayPause();"/><label class="play" for="play"></label></td>
+				onclick="togglePlayPause();" /><label class="play" for="play"></label></td>
 
-			<td><input type="checkbox" id="forward" onclick="nextMusic();"/><label
+			<td><input type="checkbox" id="forward" onclick="nextMusic();" /><label
 				class="forward" for="forward"></label></td>
 		</table>
 		<table class="footer">
-			<td>
-				<input type="checkbox" id="love"/><label
-				class="love likeBtn" for="love"></label>
-			</td>
-			<td>
-				<input type="checkbox" id="shuffle" /><label
-				class="fas fa-share-square" for="shuffle"></label>
-			</td>
-			<td>
-				<input type="checkbox" id="repeat" /><label
-				class="repeat" for="repeat"></label>
-			</td>
-			<td>
-				<input type="checkbox" id="options" /><label
-				class="options" for="options" songNo=""></label>
-			</td>
+			<td><input type="checkbox" id="love" songno="" /><label
+				class="love likeBtn" for="love"></label></td>
+			<td><input type="checkbox" id="shuffle" /><label
+				class="fas fa-share-square" for="shuffle"></label></td>
+			<td><input type="checkbox" id="repeat" /><label class="repeat"
+				for="repeat"></label></td>
+			<td><input type="checkbox" id="options" /><label
+				class="options" for="options"></label></td>
 		</table>
 		<div class="current">
 			<h2>${playList[0].songTitle}</h2>
@@ -928,38 +780,187 @@ table{
 	</div>
 </body>
 <script>
-	$(".likeBtn").click(function () {
-          // click된 element가 i 태그가 아니면 수정필요
-          const btn = $(this);
+	$(function() {
+		$("#magicButton").click(function() {
+			$(".screen").toggleClass('scrollBar');
+		});
+	});
+	// audiotrack
+	var audioTrack = 0;
+	var songNo = 0;
+	var trackLength = $('#trackLength').val();
+	$(function() {
+		if ($(".song").eq(audioTrack).find('#liked').val() == 0) {
+			$("#love").attr('checked', false);
+		} else {
+			$("#love").attr('checked', true);
+		}
+		$('#love').attr('songNo',
+				$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+	});
 
-          const songNo = $(this).attr("songNo");
+	// play 
+	function togglePlayPause() {
+		var audio = document.getElementById('audio');
+		var playpause = document.getElementById("play");
+		var song = document.getElementsByClassName('song');
+		audio.src = "/src/songs/"
+				+ $('.song').eq(audioTrack).find('.orderNo').val() + ".mp3";
+		console.log(playpause.title);
+		if (playpause.title == "Play") {
+			playpause.title = "Pause";
+			audio.play();
+		} else {
+			playpause.title = "Play";
+			audio.pause();
+		}
+		console.log($('.title').eq(audioTrack).html());
+		$('.title').eq(audioTrack).children().css('color', 'rgb(255, 86, 76)');
+	}
 
-          // countSpan은 좋아요 카운트를 출력해주는 element
+	// 플레이리스트에서 음원 선택시
+	$(function() {
+		$('.song').click(
+				function() {
+					var audio = $('#audio')[0];
+					$('.song').each(function() {
+						$(this).find('h6').css('color', 'rgb(240, 240, 240)');
+					});
+					$(this).find('h6').css('color', 'rgb(255, 86, 76)');
+					audioTrack = $(this).index();
+					//play the track audioTrack
+					$('#audio').attr(
+							"src",
+							"/src/songs/" + $("#" + $(this).index()).val()
+									+ ".mp3");
+					$('.info').find('h3').html($(this).find('#artist').val());
+					$('.info').find('h4').html($(this).find('h6').html())
+					$('.current').children().html(
+							$('.title').eq(audioTrack).find('h6').html());
+					if ($(".song").eq(audioTrack).find('#liked').val() == 0) {
+						$("#love").attr('checked', false);
+					} else {
+						$("#love").attr('checked', true);
+					}
+					$('#love').attr(
+							'songNo',
+							$('.song').eq(audioTrack).find('.orderNo').attr(
+									'songNo'));
+					audio.play();
+				});
+	});
 
-          $.ajax({
-            url: "/asyncSearchLike",
-            type: "POST",
-            data: { songNo: songNo },
-            success: function (data) {
-              const result = Number(data);
-              if (result == 0) {
-                btn.removeClass();
-                btn.addClass("fas fa-heart likeBtn");
-                btn.css("color", "red");
-                countSpan.html(count + 1);
-              } else if (result == 1) {
-                btn.removeClass();
-                btn.addClass("far fa-heart likeBtn");
-                btn.css("color", "black");
-                countSpan.html(count - 1);
-              } else {
-                alert("서버 접속에 실패하였습니다.");
-              }
-            },
-            error: function () {
-              alert("서버 접속에 실패하였습니다.");
-            },
-          });
-        });
+	// 이전 버튼
+	function prevMusic() {
+		if (audioTrack == 0) {
+			return;
+		}
+		--audioTrack;
+		var trackNo = document.getElementById(audioTrack);
+		var file = trackNo.value;
+		var songTitle = document.getElementsByClassName('title');
+		var songArtist = document.getElementsByClassName('songArtist');
+		var file = trackNo.value;
+		var audio = document.getElementById('audio');
+		// alter soundtrack
+		audio.src = '/src/songs/' + file + '.mp3';
+		audio.play();
+		var info = document.getElementsByClassName('info');
+		// update info page
+		$(".info").find('h4')
+				.html($('.title').eq(audioTrack).find('h6').html());
+		$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
+		$('.current').children().html(
+				$('.title').eq(audioTrack).find('h6').html());
+		// update playlist highlight
+
+		$('.song').each(function() {
+			$(this).find('h6').css('color', 'rgb(240, 240, 240)');
+		});
+
+		$('.song').eq(audioTrack).find('h6').css('color', 'rgb(255, 86, 76)');
+
+		if ($(".song").eq(audioTrack).find('#liked').val() == 0) {
+			$("#love").attr('checked', false);
+		} else {
+			$("#love").attr('checked', true);
+			console.log('nope');
+		}
+		$('#love').attr('songNo',
+				$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+
+	}
+	// next music
+	function nextMusic() {
+		audioTrack++;
+		var trackNo = document.getElementById(audioTrack);
+		var songTitle = document.getElementsByClassName('title');
+		var songArtist = document.getElementsByClassName('songArtist');
+		var file = trackNo.value;
+		var audio = document.getElementById('audio');
+		// alter soundtrack
+		audio.src = '/src/songs/' + file + '.mp3';
+		audio.play();
+		var info = document.getElementsByClassName('info');
+		// update info page
+		$(".info").find('h4')
+				.html($('.title').eq(audioTrack).find('h6').html());
+		$('.info').find('h3').html($('.songArtist').eq(audioTrack).val());
+		$('.current').children().html(
+				$('.title').eq(audioTrack).find('h6').html());
+		// update playlist highlight
+
+		$('.song').each(function() {
+			$(this).find('h6').css('color', 'rgb(240, 240, 240)');
+		});
+		$(".song").eq(audioTrack).find('h6').css('color', 'rgb(255, 86, 76)');
+
+		if ($(".song").eq(audioTrack).find('#liked').val() == 0) {
+			$("#love").attr('checked', false);
+		} else {
+			console.log('nope');
+			$("#love").attr('checked', true);
+		}
+		$('#love').attr('songNo',
+				$('.song').eq(audioTrack).find('.orderNo').attr('songNo'));
+	}
+	function audioLength() {
+		$('.songLength').each(function() {
+			$(this).on('canplay', function() {
+				console.log(this.duration);
+			});
+		});
+	}
+</script>
+<script>
+	$("#love").click(function() {
+		// click된 element가 i 태그가 아니면 수정필요
+		const btn = $(this);
+
+		const songNo = $(this).attr("songno");
+
+		// countSpan은 좋아요 카운트를 출력해주는 element
+
+		$.ajax({
+			url : "/asyncSearchLike",
+			type : "POST",
+			data : {
+				songNo : songNo
+			},
+			success : function(data) {
+				const result = Number(data);
+				if (result == 0) {
+					$("#love").attr('checked', true);
+				} else if (result == 1) {
+					$('#love').attr('checked', false);
+				} else {
+					alert("서버 접속에 실패하였습니다.");
+				}
+			},
+			error : function() {
+				alert("서버 접속에 실패하였습니다.");
+			}
+		});
+	});
 </script>
 </html>
