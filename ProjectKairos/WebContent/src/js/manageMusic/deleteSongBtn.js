@@ -1,5 +1,6 @@
 // 곡 삭제 버튼을 클릭했을때
 function delSong() {
+  // alert("현재 비활성화된 기능입니다.");
   $(".del_song").click(function () {
     const songDesc = $(this).parent().parent();
     const songName = $(this).parent().prev().html();
