@@ -33,7 +33,7 @@ prefix="c"%>
     <script>
       $(function () {
         $("#back").click(function () {
-          location.href = "/index.jsp";
+          location.href = "/adminMypage";
         });
         $("#write").click(function () {
           location.href = "/adminNoticeWriteFrm?reqPage=1";

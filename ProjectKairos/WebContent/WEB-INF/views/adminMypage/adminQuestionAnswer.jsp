@@ -42,7 +42,13 @@ pageEncoding="UTF-8"%>
 
         $("#insert").click(function () {
           oEditors.getById["weditor"].exec("UPDATE_CONTENTS_FIELD", []);
-          $("#insertFrm").submit();
+          if($("#title").val() !=""){
+        	  $("#insertFrm").submit();  
+          }else{
+        	  alert("제목을 입력해주세요");
+        	  return false;
+          }
+          
         });
 
         // textArea에 이미지 첨부
@@ -72,7 +78,7 @@ pageEncoding="UTF-8"%>
           <tr>
             <th>제목</th>
             <td>
-              <input type="text" class="form-control" name="title" />
+              <input type="text" class="form-control" name="title" id="title">
               <input type="hidden" name="inqNo" value="${inqNo }" />
               <input type="hidden" name="reqPage" value="${reqPage }" />
               <input type="hidden" name="reqPage2" value="${reqPage2 }" />
