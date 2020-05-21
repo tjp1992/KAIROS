@@ -9,16 +9,15 @@ public class SessionPlaylist {
 	String albumPath;
 	String albumName;
 	int liked;
-	
+	int licensed;
+
 	public SessionPlaylist() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public SessionPlaylist(int songNo, int orderNo, String songArtist, String songTitle, String filepath,
-			String albumPath, String albumName, int liked) {
+			String albumPath, String albumName, int liked, int licensed) {
 		super();
 		this.songNo = songNo;
 		this.orderNo = orderNo;
@@ -28,22 +27,7 @@ public class SessionPlaylist {
 		this.albumPath = albumPath;
 		this.albumName = albumName;
 		this.liked = liked;
-	}
-
-
-
-	/**
-	 * @return the albumName
-	 */
-	public String getAlbumName() {
-		return albumName;
-	}
-
-	/**
-	 * @param albumName the albumName to set
-	 */
-	public void setAlbumName(String albumName) {
-		this.albumName = albumName;
+		this.licensed = licensed;
 	}
 
 	public int getSongNo() {
@@ -94,12 +78,28 @@ public class SessionPlaylist {
 		this.albumPath = albumPath;
 	}
 
+	public String getAlbumName() {
+		return albumName;
+	}
+
+	public void setAlbumName(String albumName) {
+		this.albumName = albumName;
+	}
+
 	public int getLiked() {
 		return liked;
 	}
 
 	public void setLiked(int liked) {
 		this.liked = liked;
+	}
+
+	public int getLicensed() {
+		return licensed;
+	}
+
+	public void setLicensed(int licensed) {
+		this.licensed = licensed;
 	}
 
 	

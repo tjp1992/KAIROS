@@ -38,11 +38,16 @@ prefix="c"%>
           </div>
           <div class="pjybottom" style="height: 30%; text-align: center;">
             <button type="submit">아이디 조회</button>
-            <button id="cancel">취소</button>
+            <button type="button" id="cancel">취소</button>
           </div>
         </div>
       </form>
     </section>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
   </body>
+  <script>
+    $("#cancel").click(function () {
+      location.href = "/loginFrm";
+    });
+  </script>
 </html>

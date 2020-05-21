@@ -223,6 +223,7 @@
 						var result = Number(data);
 						if(result>0){
 							window.open("/player","","width=366px , height=650px , resizable=false");
+							location.href="/myMusic"
 						}
 					}
 				});

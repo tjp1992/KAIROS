@@ -716,8 +716,9 @@ table {
 		<table class="list">
 			<c:forEach items="${playList}" var='p'>
 				<tr class="song">
-					<input type="hidden" id=${p.orderNo-1 } class="orderNo"
-						value=${p.filepath}>
+					<input type="hidden" name="lcn" value="${p.licensed}">
+					<input type="hidden" id="${p.orderNo-1 }" class="orderNo"
+						value=${p.filepath} >
 					<input type="hidden" id='artist' class="songArtist"
 						value=${p.songArtist}>
 					<input type="hidden" id='albumpath' class='albumpath'
@@ -779,12 +780,37 @@ table {
 		</div>
 	</div>
 </body>
+
 <script>
+
+<c:if test="${not empty sessionScope.user.expiredDate }">
+	const userStat = 1;
+</c:if>
+<c:if test="${empty sessionScope.user.expiredDate }">
+	const userStat = 0;
+</c:if>
+
+	function chkUserStat(){
+		const lcn = Number($("input[name=lcn]").eq(audioTrack).val());
+		console.log("유저 : "+userStat);
+		console.log("유료 여부 : " + lcn);
+
+		if(lcn==userStat){
+			return true;
+		} else if (lcn == 0){
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+
 	$(function() {
 		$("#magicButton").click(function() {
 			$(".screen").toggleClass('scrollBar');
 		});
 	});
+
 	// audiotrack
 	var audioTrack = 0;
 	var songNo = 0;
@@ -804,19 +830,28 @@ table {
 		var audio = document.getElementById('audio');
 		var playpause = document.getElementById("play");
 		var song = document.getElementsByClassName('song');
+		var lcnStat = 
+
 		audio.src = "/src/songs/"
 				+ $('.song').eq(audioTrack).find('.orderNo').val() + ".mp3";
 		console.log(playpause.title);
 		if (playpause.title == "Play") {
-			playpause.title = "Pause";
+			if(chkUserStat()){
 			audio.play();
+			playpause.title = "Pause";
+			} else {
+			$('#play').prop('checked',false);
+
+				opener.alert("이용권 구매가 필요한 곡입니다.");
+				
+			}
 		} else {
 			playpause.title = "Play";
 			audio.pause();
 		}
 		console.log($('.title').eq(audioTrack).html());
 		$('.title').eq(audioTrack).children().css('color', 'rgb(255, 86, 76)');
-	}
+	}	
 
 	// 플레이리스트에서 음원 선택시
 	$(function() {

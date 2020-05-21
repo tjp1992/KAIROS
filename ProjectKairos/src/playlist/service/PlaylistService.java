@@ -68,8 +68,9 @@ public class PlaylistService {
 		
 		ArrayList<Playlist> list = new PlaylistDao().myPlaylistView(conn, userId);			
 		int index = 1;
-		int result = 0;
-		int unum = 0;
+		
+		int unum = 0;		
+		int result = new PlaylistDao().deletePlaylist(conn, userId);	
 		
 		for(Playlist p : list) {
 			
