@@ -37,7 +37,7 @@ public class PwSearchServlet extends HttpServlet {
 		User user = new UserService().pwSearch(id, name, phone);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		request.setAttribute("loc", "/loginFrm");
-		if(user.getUserPw()==null) {
+		if(user==null) {
 			request.setAttribute("msg", "비밀번호를 찾을 수 없습니다.");
 		}else {
 			request.setAttribute("msg", user.getUserPw());

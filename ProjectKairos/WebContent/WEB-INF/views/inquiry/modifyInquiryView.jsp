@@ -61,7 +61,7 @@ prefix="c"%>
     <section>
       <h2>수정하기</h2>
       <form action="/modifyInquiryView" method="post" id="frm">
-        <input type="hidden" name="inqNo" value="${inqNo" } />
+        <input type="hidden" name="inqNo" value="${inqNo}" />
         <table>
           <tr>
             <th style="width: 100px;">제목</th>

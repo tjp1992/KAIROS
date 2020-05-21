@@ -254,6 +254,7 @@ prefix="c"%>
       });
 
       $(".del_song").click(function () {
+        // alert("현재 비활성화된 기능입니다.");
         const songDesc = $(this).parent().parent();
         const songName = $(this).parent().next().html();
         const songNo = $(this).attr("songno");

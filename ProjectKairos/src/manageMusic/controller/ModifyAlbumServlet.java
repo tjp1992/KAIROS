@@ -6,12 +6,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import manageMusic.model.service.ManageMusicService;
 import manageMusic.model.vo.Album;
+import user.vo.User;
 
 /**
  * Servlet implementation class ModifyAlbumServlet
@@ -53,6 +55,7 @@ public class ModifyAlbumServlet extends HttpServlet {
 		a.setAlbumNo(Integer.parseInt(mRequest.getParameter("albums")));
 		a.setAlbumName(mRequest.getParameter("albumName"));
 		
+		
 		if(mRequest.getFilesystemName("album_img_file") != null) {
 			a.setAlbumPath(mRequest.getFilesystemName("album_img_file"));
 			
@@ -61,7 +64,9 @@ public class ModifyAlbumServlet extends HttpServlet {
 			result = new ManageMusicService().updateAlbum(a);
 		}
 		
-		request.setAttribute("loc", "/manageAlbumFrm");
+		
+		request.setAttribute("loc", "/manageAlbumFrm");	
+		
 		if(result>0) {
 			request.setAttribute("msg", "수정 완료");
 		} else {

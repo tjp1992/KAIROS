@@ -85,7 +85,7 @@ prefix="c"%>
         if (!pwExp.test(pw)) {
           $(this).removeClass();
           $(this).addClass("border border-danger");
-          $(this).next().next().html("양어 대/소문자 특수문자 8~16자리");
+          $(this).next().next().html("영어 대/소문자 특수문자 8~16자리");
           $(this).next().next().css("color", "red");
           result[1] = "false";
           console.log(result);

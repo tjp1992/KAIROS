@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
           <input type="hidden" id="update" name="update" value="0" />
           <div class="input_artist cont">
             <span>가수명</span>
-            <input type="text" name="artist" id="artist" readonly />
+            <input type="text" name="artist" id="artist" />
             <button type="button" id="search_artist">검색</button>
           </div>
           <div class="input_company cont">

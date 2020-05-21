@@ -37,7 +37,7 @@ public class IdSearchServlet extends HttpServlet {
 		User user = new UserService().idSearch(name,mail);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		request.setAttribute("loc", "/loginFrm");
-		if(user.getUserId()==null) {
+		if(user == null) {
 			request.setAttribute("msg", "아이디를 찾을 수 없습니다.");
 		}else {
 			request.setAttribute("msg", user.getUserId());

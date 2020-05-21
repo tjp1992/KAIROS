@@ -300,4 +300,23 @@ public class ManageMusicService {
 				
 		return result;
 	}
+
+	public int addPlayCount(int songNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int count = new ManageMusicDao().readPlayCount(conn, songNo);
+		
+		int result = new ManageMusicDao().addPlayCount(conn, songNo, count);
+		
+		if(result >0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return 0;
+	}
 }

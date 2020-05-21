@@ -39,13 +39,6 @@ CREATE TABLE DEL_WEB_USER(
     EXPIRED_DATE DATE ,
     CON_AGREE NUMBER
 );
-insert into web_user values ('pjyub1379','@@pkyu0662','¹ÚÁ¾¿±','¿±1','01022222222','pjyub1379@naver.com','·¿ÀÕ°í',sysdate+30,'1');
-insert into web_user values ('pjyub1379','@@pkyu0662','¹ÚÁ¾¿±','¿±1','01022222222','pjyub1379@naver.com','·¿ÀÕ°í',sysdate,'1');
-select * from DEL_web_user;
-select * from web_user;
-update web_user set user_id='pjyub1379',user_pw='@@pkyu0662',user_name='¹ÚÁ¾Çù' where user_id='pjyub1379';
-select * from web_user where user_name='¹ÚÁ¾¿±' and email='pjyub1379@naver.com';
-delete from web_user where user_id='pjyub1379';
 
 CREATE OR REPLACE TRIGGER USER_DEL_TRG
 AFTER DELETE  -- Æ®¸®°Å µ¿ÀÛ ½ÃÁ¡(SELECT½ÃÁ¡¿¡´Â ¾µ ¼ö ¾ø´Ù.)
@@ -58,7 +51,6 @@ BEGIN
     );
 END;
 /
-commit;
 ----------------------------------------
 -- ¾Ù¹ü Å×ÀÌºí »ý¼º
 ----------------------------------------
@@ -199,16 +191,7 @@ CREATE TABLE INQUIRY(
     INQ_FILENAME VARCHAR2(300),
     INQ_FILEPATH VARCHAR2(300)
 );
-select * from inquiry where inq_no=1;
-select*from(select rownum as rnum, n.* from (select*from inquiry where user_id='user01' order by inq_no desc)n)where rnum between 1 and 10;
-select count(*)as cnt from inquiry where user_id='user01';
-ALTER TABLE INQUIRY
-MODIFY INQ_ANS_NO DEFAULT 0;
-select*from inquiry;
-DROP SEQUENCE SEQ_INQ_NO;
-CREATE SEQUENCE SEQ_INQ_NO;
-delete from INQUIRY where user_id='user01';
-COMMIT;
+
 ----------------------------------------
 -- ¹®ÀÇ ´äº¯ Å×ÀÌºí ÀÛ¼º
 ----------------------------------------

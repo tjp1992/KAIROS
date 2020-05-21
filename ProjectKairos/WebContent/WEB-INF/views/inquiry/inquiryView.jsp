@@ -16,6 +16,36 @@ prefix="c"%>
       rel="stylesheet"
       type="text/css"
     />
+    <style>
+      h2 {
+        margin: 0 auto;
+
+        margin-top: 60px;
+      }
+      section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      section > div table {
+        width: 1000px;
+      }
+
+      .viewTbl tr:not(:nth-child(3)) {
+        height: 40px;
+      }
+
+      .viewTbl tr:nth-child(3) p {
+        margin: 10px 0;
+      }
+
+      .viewTbl tr:nth-child(3) {
+        padding: 20px 0;
+        min-height: 500px;
+      }
+    </style>
   </head>
   <script>
     $(function () {
@@ -28,55 +58,54 @@ prefix="c"%>
     <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     <section>
       <h2>게시글 상세보기</h2>
-      <form action="/modifyInquiryViewFrm" method="post" id="insertFrm">
-        <input type="hidden" name="inqNo" value="${i.inqNo" } />
-        <table>
-          <tr>
-            <th style="width: 150px;">제목</th>
-            <td>
-              <span id="span">${i.inqTitle }</span
-              ><input
-                type="hidden"
-                class="form-control"
-                name="inqTitle"
-                style="width: 500px;"
-                value="${i.inqTitle"
-                }
-              />
-            </td>
-          </tr>
-          <tr>
-            <th>작성자</th>
-            <td>
-              <span id="span">${i.userId }</span>
-              <input type="hidden" name="inquiryWriter" value="${i.userId" } />
-            </td>
-          </tr>
-
-          <tr style="border-bottom: 1px solid black;">
-            <th>내용</th>
-            <td>
-              ${i.inqContent }
-              <textarea
-                style="display: none;"
-                name="inqCon"
-                rows="10"
-                cols="80"
-              >
-${i.inqContent }</textarea
-              >
-            </td>
-          </tr>
-          <tr style="text-align: center;">
-            <td colspan="2">
-              <button type="submit" id="modify">수정하기</button>
-              <button type="button" id="back">뒤로가기</button>
-            </td>
-          </tr>
-        </table>
-      </form>
       <div>
-        <table style="width: 500px;">
+        <form action="/modifyInquiryViewFrm" method="post" id="insertFrm">
+          <input type="hidden" name="inqNo" value="${i.inqNo}" } />
+          <table class="viewTbl">
+            <tr>
+              <th style="width: 150px;">제목</th>
+              <td>
+                <span id="span">${i.inqTitle }</span
+                ><input
+                  type="hidden"
+                  class="form-control"
+                  name="inqTitle"
+                  style="width: 500px;"
+                  value="${i.inqTitle}"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>작성자</th>
+              <td>
+                <span id="span">${i.userId }</span>
+                <input type="hidden" name="inquiryWriter" value="${i.userId}" />
+              </td>
+            </tr>
+
+            <tr style="border-bottom: 1px solid black;">
+              <th>내용</th>
+              <td>
+                ${i.inqContent }
+                <textarea
+                  style="display: none;"
+                  name="inqCon"
+                  rows="10"
+                  cols="80"
+                >
+${i.inqContent }</textarea
+                >
+              </td>
+            </tr>
+            <tr style="text-align: center;">
+              <td colspan="2">
+                <button type="submit" id="modify">수정하기</button>
+                <button type="button" id="back">뒤로가기</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+        <table class="ansTbl">
           <tr style="border-bottom: 1px solid black;">
             <td colspan="3" style="font-size: 25pt;">답변</td>
           </tr>

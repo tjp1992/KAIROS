@@ -218,7 +218,7 @@ prefix="c"%>
       </div>
     </section>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-    <form action="/searchFrm" method="GET" id="search-form">
+    <form action="/searchSong" method="GET" id="search-form">
       <input type="hidden" name="keyword" id="keyword" value="${req.keyword}" />
       <input type="hidden" name="reqPage" id="reqPage" value="${req.reqPage}" />
       <input
@@ -371,13 +371,6 @@ prefix="c"%>
         }
       });
     </script>
-    <c:if test="${not empty sessionScope.user }">
-      <script>
-        $("#addChkPlaylist").click(function () {
-          $("#chkForm").submit();
-        });
-      </script>
-    </c:if>
     <c:if test="${empty sessionScope.user }">
       <script>
         $("#addChkPlaylist,.likeBtn,.addBtn,.playBtn").click(function () {
